@@ -3,16 +3,17 @@ from streamlit_option_menu import option_menu
 
 st.set_page_config(layout="wide")
 
-if 'page' not in st.session_state:
-    st.session_state['page'] = None
+if 'topic' not in st.session_state:
+    st.session_state['topic'] = None
 
+#topic - chapter - section
 topics = {
     "파이썬 기초": {
         "대단원 01": ["소단원01", "소단원02"],
         "대단원 02": ["소단원01"],
         "대단원 03": ["소단원01", "소단원02", "소단원03"]
     },
-    "pandas 기초": {
+    "Pandas 기초": {
         "대단원 01": ["소단원01", "소단원02", "소단원03"],
         "대단원 02": ["소단원01", "소단원02"],
         "대단원 03": ["소단원01"],
@@ -40,31 +41,31 @@ with st.sidebar:
 
 #사이드바 -> 대단원
 if selected :
-    st.session_state['page'] = selected
+    st.session_state['topic'] = selected
 
 
 placeholder = st.empty()
 
-if st.session_state['page']:
+if st.session_state['topic']:
     with placeholder.container():
-        st.title(st.session_state['page'])
+        st.title(st.session_state['topic'])
         st.info('파이썬 기초 문법을 제공합니다')
         
         # 대단원
-        middletopics = topics[st.session_state['page']]
-        table = [st.columns(3)] * ((len(middletopics) + 2) // 3)
+        chapter = topics[st.session_state['topic']]
+        table = [st.columns(3)] * ((len(chapter) + 2) // 3)
         
-        for i, title in enumerate(middletopics):
+        for i, title in enumerate(chapter):
             with table[i // 3][i % 3]:
                 tile = st.container(height=200, border=True)
                 subtile = tile.container(height=110, border=False)
                 subtile.subheader(title)
 
                 if tile.button("학습하기", key=f"btn_{i}", use_container_width=True):
-                    st.session_state['page'] = f"btn_{i}"
+                    st.session_state['topic'] = f"btn_{i}"
 
 # 대단원 페이지
-if st.session_state['page'] and st.session_state['page'].startswith('btn_'):
+if st.session_state['topic'] and st.session_state['topic'].startswith('btn_'):
     with placeholder.container():
         st.header("대단원01")
         # 소단원
@@ -83,4 +84,4 @@ if st.session_state['page'] and st.session_state['page'].startswith('btn_'):
         st.divider()
         
         if st.button("돌아가기"):
-            st.session_state['page'] = selected
+            st.session_state['topic'] = selected
