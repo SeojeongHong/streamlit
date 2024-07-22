@@ -20,12 +20,8 @@ with st.sidebar:
     )
 
 #사이드바 -> 대단원
-if selected == "파이썬 기초":
-    st.session_state['page'] = "파이썬 기초"
-elif selected == "pandas 기초":
-    st.session_state['page'] = "pandas 기초"
-elif selected == "Matplotlib 기초":
-    st.session_state['page'] = "Matplotlib 기초"
+if selected :
+    st.session_state['page'] = selected
 
 
 placeholder = st.empty()
