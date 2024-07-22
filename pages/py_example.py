@@ -40,12 +40,9 @@ if st.session_state['page'] == "파이썬 기초":
         # 대단원
         topics = ["대단원01", "대단원02", "대단원03", "대단원04", "대단원05", "대단원06"]
         table = [st.columns(3)] * ((len(topics) + 2) // 3)
-
-        row1 = st.columns(3)
-        row2 = st.columns(3)
-
+        
         for i, title in enumerate(topics):
-            with (row1[i] if i < 3 else row2[i-3]):
+            with table[i // 3][i % 3]:
                 tile = st.container(height=200, border=True)
                 tile.subheader(title)
                 if tile.button("학습하기", key=f"btn_{i}"):
