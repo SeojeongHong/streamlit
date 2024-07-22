@@ -40,8 +40,11 @@ if st.session_state['page'] == "파이썬 기초":
         for i, title in enumerate(topics):
             with table[i // 3][i % 3]:
                 tile = st.container(height=200, border=True)
-                tile.subheader(title)
-                if tile.button("학습하기", key=f"btn_{i}"):
+                subtile = tile.container(height=110, border=False)
+                subtile.subheader(title)
+
+
+                if tile.button("학습하기", key=f"btn_{i}", use_container_width=True):
                     st.session_state['page'] = f"btn_{i}"
 
 # 대단원 페이지
@@ -63,8 +66,8 @@ if st.session_state['page'] and st.session_state['page'].startswith('btn_'):
             df = pd.DataFrame()
         st.divider()
         
-        # if st.button("돌아가기"):
-        #     st.session_state['page'] = "파이썬 기초"
+        if st.button("돌아가기"):
+            st.session_state['page'] = selected
 
 # pandas 기초 페이지
 if st.session_state['page'] == "pandas 기초":
