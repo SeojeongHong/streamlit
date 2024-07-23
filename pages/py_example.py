@@ -66,15 +66,27 @@ def show_topic():
 
             if card.button("학습하기", key=f"btn_{i}", use_container_width=True):
                 st.session_state['chapter'] = title
+                st.session_state['template'] = 'chapter'
                 st.rerun()
 
 
 
 def show_chapter():
-    st.write("챕터")
+    topic = st.session_state['topic']
+    chapter = st.session_state['chapter']
+
+    st.title(chapter)
+    section = st.selectbox("Choose a section:", 
+                               contents[topic][chapter], label_visibility="hidden")
+    
+    if st.button("돌아가기"):
+        st.session_state['template'] = 'topic'
+        st.rerun()
 
 def show_section():
     st.write("섹션")
 
 if st.session_state['template'] == 'topic':
     show_topic()
+elif st.session_state['template'] == 'chapter':
+    show_chapter()
