@@ -6,6 +6,9 @@ st.set_page_config(layout="wide")
 if 'topic' not in st.session_state:
     st.session_state['topic'] = None
 
+if 'chapter' not in st.session_state:
+    st.session_state['chapter'] = None
+
 #topic - chapter - section
 topics = {
     "파이썬 기초": {
@@ -42,7 +45,7 @@ with st.sidebar:
 #사이드바 -> 대단원
 if selected :
     st.session_state['topic'] = selected
-
+    st.session_state['chapter'] = None
 
 placeholder = st.empty()
 if st.session_state['topic']:
@@ -58,30 +61,26 @@ if st.session_state['topic']:
         st.info(info_txt[topic])
         
         # 대단원
-        chapter = topics[topic]
-        table = [st.columns(3)] * ((len(chapter) + 2) // 3)
+        chapters = topics[topic]
+        table = [st.columns(3)] * ((len(chapters) + 2) // 3)
         
-        for i, title in enumerate(chapter):
+        for i, title in enumerate(chapters):
             with table[i // 3][i % 3]:
                 tile = st.container(height=200, border=True)
                 subtile = tile.container(height=110, border=False)
                 subtile.subheader(title)
 
                 if tile.button("학습하기", key=f"btn_{i}", use_container_width=True):
-                    st.session_state['topic'] = f"btn_{i}"
+                    st.session_state['chapter'] = title
 
 # 대단원 페이지
-if st.session_state['topic'] and st.session_state['topic'].startswith('btn_'):
+if st.session_state['topic'] and st.session_state['chapter']:
+    chapter = st.session_state['chapter']
     with placeholder.container():
-        st.header("대단원01")
+        st.header(st.session_state['chapter'])
         # 소단원
-        section = st.selectbox("Choose a topic:", [
-            '소단원1',
-            '소단원2',
-            '소단원3',
-            '소단원4',
-            '소단원5'
-        ], label_visibility="hidden")
+        section = st.selectbox("Choose a topic:", 
+                               topics[topic][chapter], label_visibility="hidden")
         
         st.subheader("예시코드01")
         with st.echo():
@@ -91,3 +90,4 @@ if st.session_state['topic'] and st.session_state['topic'].startswith('btn_'):
         
         if st.button("돌아가기"):
             st.session_state['topic'] = selected
+            st.session_state['chapter'] = None
