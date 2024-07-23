@@ -45,14 +45,20 @@ if selected :
 
 
 placeholder = st.empty()
-
 if st.session_state['topic']:
+    topic = st.session_state['topic']
     with placeholder.container():
-        st.title(st.session_state['topic'])
-        st.info('파이썬 기초 문법을 제공합니다')
+        st.title(topic)
+
+        info_txt = {
+            "파이썬 기초" : "파이썬 기초 문법을 제공합니다.",
+            "Pandas 기초" : "Pandas 기초 문법을 제공합니다.",
+            "Matplotlib 기초" : "Matplotlib 기초 문법을 제공합니다.",
+        }
+        st.info(info_txt[topic])
         
         # 대단원
-        chapter = topics[st.session_state['topic']]
+        chapter = topics[topic]
         table = [st.columns(3)] * ((len(chapter) + 2) // 3)
         
         for i, title in enumerate(chapter):
@@ -69,7 +75,7 @@ if st.session_state['topic'] and st.session_state['topic'].startswith('btn_'):
     with placeholder.container():
         st.header("대단원01")
         # 소단원
-        topic = st.selectbox("Choose a topic:", [
+        section = st.selectbox("Choose a topic:", [
             '소단원1',
             '소단원2',
             '소단원3',
