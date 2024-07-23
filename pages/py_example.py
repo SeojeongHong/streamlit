@@ -69,8 +69,6 @@ def show_topic():
                 st.session_state['template'] = 'chapter'
                 st.rerun()
 
-
-
 def show_chapter():
     topic = st.session_state['topic']
     chapter = st.session_state['chapter']
@@ -79,12 +77,17 @@ def show_chapter():
     section = st.selectbox("Choose a section:", 
                                contents[topic][chapter], label_visibility="hidden")
     
+    show_section(topic, chapter, section)
     if st.button("돌아가기"):
         st.session_state['template'] = 'topic'
         st.rerun()
 
-def show_section():
-    st.write("섹션")
+def show_section(topic, chapter, section):
+    st.write("path : "+topic +" / "+ chapter +" / "+ section)
+    with st.echo():
+        import pandas as pd
+        df = pd.DataFrame()
+    st.divider()
 
 if st.session_state['template'] == 'topic':
     show_topic()
