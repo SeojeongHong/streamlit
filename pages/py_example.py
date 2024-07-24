@@ -49,6 +49,9 @@ with st.sidebar:
         }
     )
 if selected :
+    #topic 변경 시
+    if st.session_state['topic'] !=selected :
+        st.session_state['template'] = 'topic'
     st.session_state['topic'] = selected
 
 def show_topic():
@@ -91,6 +94,13 @@ def show_chapter():
 
 def show_section(topic, chapter, section):
     st.write("path : "+topic +" / "+ chapter +" / "+ section)
+    st.write("예시코드 1")
+    with st.echo():
+        import pandas as pd
+        df = pd.DataFrame()
+    st.divider()
+
+    st.write("예시코드 2")
     with st.echo():
         import pandas as pd
         df = pd.DataFrame()
