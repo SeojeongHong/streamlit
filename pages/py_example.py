@@ -56,6 +56,13 @@ def show_topic():
     chapters = contents[topic]
 
     st.title(topic)
+    info_txt = {
+            "파이썬 기초" : "파이썬 기초 문법을 제공합니다.",
+            "Pandas 기초" : "Pandas 기초 문법을 제공합니다.",
+            "Matplotlib 기초" : "Matplotlib 기초 문법을 제공합니다.",
+            }
+    st.info(info_txt[topic])
+    
     table = [st.columns(3)] * ((len(chapters) + 2) // 3)
         
     for i, title in enumerate(chapters):
