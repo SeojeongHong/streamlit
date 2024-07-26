@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 @st.cache_data
-def load_data() :
+def load_contents() :
     #topic - chapter - section
     contents = {
         "파이썬 기초": {
@@ -23,15 +23,15 @@ def load_data() :
         }
     }
     return contents
-contents = load_data()
-topics = list(contents.keys())
+CONTENTS = load_contents()
+TOPICS = list(CONTENTS.keys())
 
-def main() :
+def init_session_state() :
     if 'template' not in st.session_state:
         st.session_state['template'] = 'topic'
         
     if 'topic' not in st.session_state:
-        st.session_state['topic'] = topics[0]
+        st.session_state['topic'] = TOPICS[0]
 
     if 'chapter' not in st.session_state:
         st.session_state['chapter'] = None
@@ -39,28 +39,16 @@ def main() :
     if 'section' not in st.session_state:
         st.session_state['section'] = None
 
-    with st.sidebar:
-        option_menu(
-            "데이터 분석 역량 강화", 
-            topics,
-            manual_select = topics.index(st.session_state['topic']),
-            key = "topicChange",
-            on_change=change_topic,
-            styles={
-                "menu-title": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-                "nav-link": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-                "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
-            }
-        )
+def change_topic(key) :
+    st.session_state['template'] = 'topic'
+    st.session_state['topic'] = st.session_state[key]
+    st.session_state['chapter'] = None
+    st.session_state['section'] = None
 
-    if st.session_state['template'] == 'topic':
-        show_topic()
-    elif st.session_state['template'] == 'chapter':
-        show_chapter()
 
 def show_topic():
     topic = st.session_state['topic']
-    chapters = contents[topic]
+    chapters = CONTENTS[topic]
 
     st.title(topic)
     info_txt = {
@@ -86,11 +74,14 @@ def show_topic():
 def show_chapter():
     topic = st.session_state['topic']
     chapter = st.session_state['chapter']
+    sections = CONTENTS[topic][chapter]
 
     st.title(chapter)
+    
     st.session_state['section'] = st.selectbox("Choose a section:", 
-                               contents[topic][chapter], label_visibility="hidden")
+                               sections, label_visibility="hidden")
     section = st.session_state['section']
+
     show_section(topic, chapter, section)
     if st.button("돌아가기"):
         st.session_state['template'] = 'topic'
@@ -111,11 +102,28 @@ def show_section(topic, chapter, section):
         import pandas as pd
         df = pd.DataFrame()
     st.divider()
-def change_topic(key) :
-    st.session_state['template'] = 'topic'
-    st.session_state['topic'] = st.session_state[key]
-    st.session_state['chapter'] = None
-    st.session_state['section'] = None
+
+def main() :
+    init_session_state()
+        
+    with st.sidebar:
+        option_menu(
+            "데이터 분석 역량 강화", 
+            TOPICS,
+            manual_select = TOPICS.index(st.session_state['topic']),
+            key = "topicChange",
+            on_change=change_topic,
+            styles={
+                "menu-title": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+                "nav-link": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+                "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
+            }
+        )
+
+    if st.session_state['template'] == 'topic':
+        show_topic()
+    elif st.session_state['template'] == 'chapter':
+        show_chapter()
 
 if __name__ == "__main__":
     main()
