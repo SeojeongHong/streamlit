@@ -43,7 +43,6 @@ def main() :
         option_menu(
             "데이터 분석 역량 강화", 
             topics,
-            manual_select = topics.index(st.session_state['topic']),
             key = "topicChange",
             on_change=change_topic,
             styles={
