@@ -43,7 +43,6 @@ def main() :
         selected = option_menu(
             "데이터 분석 역량 강화", 
             topics,
-            default_index=topics.index(st.session_state['topic']),
             styles={
                 "menu-title": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
                 "nav-link": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
@@ -103,7 +102,7 @@ def show_chapter():
         st.rerun()
 
 def show_section(topic, chapter, section):
-    st.write("path : "+topic +" / "+ chapter +" / "+ section)
+    st.write(f"path : {topic}  / {chapter} / {section}")
     st.write("예시코드 1")
     with st.echo():
         import pandas as pd
