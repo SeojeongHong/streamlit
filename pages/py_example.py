@@ -40,21 +40,18 @@ def main() :
         st.session_state['section'] = None
 
     with st.sidebar:
-        selected = option_menu(
+        option_menu(
             "데이터 분석 역량 강화", 
             topics,
+            manual_select = topics.index(st.session_state['topic']),
+            key = "topicChange",
+            on_change=change_topic,
             styles={
                 "menu-title": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
                 "nav-link": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
                 "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
             }
         )
-
-    if st.session_state['topic'] !=selected :
-        st.session_state['template'] = 'topic'
-        st.session_state['chapter'] = None
-        st.session_state['section'] = None
-    st.session_state['topic'] = selected
 
     if st.session_state['template'] == 'topic':
         show_topic()
@@ -114,6 +111,11 @@ def show_section(topic, chapter, section):
         import pandas as pd
         df = pd.DataFrame()
     st.divider()
+def change_topic(key) :
+    st.session_state['template'] = 'topic'
+    st.session_state['chapter'] = None
+    st.session_state['section'] = None
+    st.session_state['topic'] = st.session_state[key]
 
 if __name__ == "__main__":
     main()
