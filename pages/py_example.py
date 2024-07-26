@@ -43,6 +43,7 @@ def main() :
         option_menu(
             "데이터 분석 역량 강화", 
             topics,
+            manual_select = topics.index(st.session_state['topic']),
             key = "topicChange",
             on_change=change_topic,
             styles={
@@ -112,9 +113,9 @@ def show_section(topic, chapter, section):
     st.divider()
 def change_topic(key) :
     st.session_state['template'] = 'topic'
+    st.session_state['topic'] = st.session_state[key]
     st.session_state['chapter'] = None
     st.session_state['section'] = None
-    st.session_state['topic'] = st.session_state[key]
 
 if __name__ == "__main__":
     main()
