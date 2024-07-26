@@ -1,35 +1,40 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-#topic - chapter - section
-contents = {
-    "파이썬 기초": {
-        "대단원 01": ["소단원01", "소단원02"],
-        "대단원 02": ["소단원01"],
-        "대단원 03": ["소단원01", "소단원02", "소단원03"]
-    },
-    "Pandas 기초": {
-        "대단원 01": ["소단원01", "소단원02", "소단원03"],
-        "대단원 02": ["소단원01", "소단원02"],
-        "대단원 03": ["소단원01"],
-        "대단원 04": ["소단원01", "소단원02", "소단원03", "소단원04"],
-        "대단원 05": ["소단원01", "소단원02"]
-    },
-    "Matplotlib 기초": {
-        "대단원 01": ["소단원01", "소단원02", "소단원03"],
-        "대단원 02": ["소단원01", "소단원02"]
+@st.cache_data
+def load_data() :
+    #topic - chapter - section
+    contents = {
+        "파이썬 기초": {
+            "대단원 01": ["소단원01", "소단원02"],
+            "대단원 02": ["소단원01"],
+            "대단원 03": ["소단원01", "소단원02", "소단원03"]
+        },
+        "Pandas 기초": {
+            "대단원 01": ["소단원01", "소단원02", "소단원03"],
+            "대단원 02": ["소단원01", "소단원02"],
+            "대단원 03": ["소단원01"],
+            "대단원 04": ["소단원01", "소단원02", "소단원03", "소단원04"],
+            "대단원 05": ["소단원01", "소단원02"]
+        },
+        "Matplotlib 기초": {
+            "대단원 01": ["소단원01", "소단원02", "소단원03"],
+            "대단원 02": ["소단원01", "소단원02"]
+        }
     }
-}
+    return contents
+contents = load_data()
+topics = list(contents.keys())
 
 def main() :
-    st.set_page_config(layout="wide")
+    # st.set_page_config(layout="wide")
 
     # 전역 상태
     if 'template' not in st.session_state:
         st.session_state['template'] = 'topic'
 
     if 'topic' not in st.session_state:
-        st.session_state['topic'] = None
+        st.session_state['topic'] = topics[0]
 
     if 'chapter' not in st.session_state:
         st.session_state['chapter'] = None
@@ -37,23 +42,23 @@ def main() :
     if 'section' not in st.session_state:
         st.session_state['section'] = None
 
-    topics = list(contents.keys())
     with st.sidebar:
         selected = option_menu(
             "데이터 분석 역량 강화", 
             topics, 
-            default_index=0,
+            default_index=topics.index(st.session_state['topic']),
             styles={
                 "menu-title": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
                 "nav-link": {"font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
                 "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
             }
         )
-    if selected :
-        #topic 변경 시
-        if st.session_state['topic'] !=selected :
-            st.session_state['template'] = 'topic'
-        st.session_state['topic'] = selected
+    #topic 변경 시
+    if st.session_state['topic'] !=selected :
+        st.session_state['template'] = 'topic'
+        st.session_state['chapter'] = None
+        st.session_state['section'] = None
+    st.session_state['topic'] = selected
     
     if st.session_state['template'] == 'topic':
         show_topic()
@@ -90,12 +95,15 @@ def show_chapter():
     chapter = st.session_state['chapter']
 
     st.title(chapter)
-    section = st.selectbox("Choose a section:", 
+    st.session_state['section'] = st.selectbox("Choose a section:", 
                                contents[topic][chapter], label_visibility="hidden")
     
+    section = st.session_state['section']
     show_section(topic, chapter, section)
     if st.button("돌아가기"):
         st.session_state['template'] = 'topic'
+        st.session_state['chapter'] = None
+        st.session_state['section'] = None
         st.rerun()
 
 def show_section(topic, chapter, section):
