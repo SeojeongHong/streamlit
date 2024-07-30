@@ -110,17 +110,40 @@ def show_chapter(topic, chapter):
 
 def show_section(topic, chapter, section):
     st.write(f"path : {topic}  / {chapter} / {section}")
-    st.write("예시코드 1")
-    with st.echo():
-        import pandas as pd
-        df = pd.DataFrame()
-    st.divider()
+    path = (topic, chapter, section)
 
-    st.write("예시코드 2")
-    with st.echo():
-        import pandas as pd
-        df = pd.DataFrame()
-    st.divider()
+    ### 컨텐츠 작성
+    if path == ("파이썬 기초", "대단원 01", "소단원01") :
+        st.write("예시코드 1")
+    
+        with st.echo():
+            import pandas as pd
+            df = pd.DataFrame()
+        st.divider()
+
+        st.write("예시코드 1")
+        with st.echo():
+            import pandas as pd
+            df = pd.DataFrame()
+        st.divider()
+
+    ### 컨텐츠 작성
+    elif path == ("Pandas 기초", "대단원 01", "소단원01") :
+        st.write("예시코드 2")
+    
+        with st.echo():
+            import pandas as pd
+            df = pd.DataFrame()
+        st.divider()
+
+        st.write("예시코드 2")
+        with st.echo():
+            import pandas as pd
+            df = pd.DataFrame()
+        st.divider()
+    
+    else :
+        st.error("Content Not Found !")
 
 def main() :
     page, topic, chapter, section = init_session_state()
