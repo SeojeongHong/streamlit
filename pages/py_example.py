@@ -22,9 +22,9 @@ def load_contents() :
             "대단원 02": ["소단원01", "소단원02"]
         }
     }
-    return contents
-CONTENTS = load_contents()
-TOPICS = list(CONTENTS.keys())
+    topics = list(contents.keys())
+    return contents, topics
+CONTENTS , TOPICS = load_contents()
 
 def init_session_state() :
     if 'template' not in st.session_state:
@@ -38,6 +38,11 @@ def init_session_state() :
 
     if 'section' not in st.session_state:
         st.session_state['section'] = None
+    
+    #(template, topic, chapter, section)
+    return (st.session_state['template'], st.session_state['topic'], 
+            st.session_state['chapter'], st.session_state['section'])
+
 
 def change_topic(key) :
     st.session_state['template'] = 'topic'
@@ -46,8 +51,7 @@ def change_topic(key) :
     st.session_state['section'] = None
 
 
-def show_topic():
-    topic = st.session_state['topic']
+def show_topic(topic):
     chapters = CONTENTS[topic]
 
     st.title(topic)
@@ -71,9 +75,7 @@ def show_topic():
                 st.session_state['template'] = 'chapter'
                 st.rerun()
 
-def show_chapter():
-    topic = st.session_state['topic']
-    chapter = st.session_state['chapter']
+def show_chapter(topic, chapter):
     sections = CONTENTS[topic][chapter]
 
     st.title(chapter)
@@ -104,13 +106,13 @@ def show_section(topic, chapter, section):
     st.divider()
 
 def main() :
-    init_session_state()
-        
+    template, topic, chapter, section = init_session_state()
+    
     with st.sidebar:
         option_menu(
             "데이터 분석 역량 강화", 
             TOPICS,
-            manual_select = TOPICS.index(st.session_state['topic']),
+            manual_select = TOPICS.index(topic),
             key = "topicChange",
             on_change=change_topic,
             styles={
@@ -119,11 +121,11 @@ def main() :
                 "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
             }
         )
-
-    if st.session_state['template'] == 'topic':
-        show_topic()
-    elif st.session_state['template'] == 'chapter':
-        show_chapter()
+    
+    if template == 'topic':
+        show_topic(topic)
+    elif template == 'chapter':
+        show_chapter(topic, chapter)
 
 if __name__ == "__main__":
     main()
