@@ -24,7 +24,7 @@ def load_contents() :
         },
         "Matplotlib 기초": {
             "Matplotlib 기본" : ["기본 사용", "숫자 입력하기", "타이틀"],
-            "Matplotlib 스타일": ["단일/다중 그래프", "여러개의 Plot을 그리는 방법(Subplot)", "주요 스타일 옵션", "축 레이블(Label) 설정하기", "범례(Legend) 설정", "축 범위 지정하기", "스타일 세부 설정 - 선 종류 지정", "스타일 세부 설정 - 마커 지정", "스타일 세부 설정 - 색상 지정", "그리드(Grid)", "Annotate 설정"],
+            "Matplotlib 스타일": ["단일/다중 그래프", "여러개의 Plot을 그리는 방법(Subplot)", "축 레이블(Label) 설정하기", "범례(Legend) 설정", "축 범위 지정하기", "스타일 세부 설정 - 선 종류 지정", "스타일 세부 설정 - 마커 지정", "스타일 세부 설정 - 색상 지정", "그리드(Grid)", "Annotate 설정"],
             "Matplotlib 그래프": ["Scatterplot", "컬러맵 그리기", "막대 그래프 그리기", "수평 막대 그래프 그리기", "Line Plot", "Areaplot(Filled Area)", "Histogram", "Pie Chart", "Box Plot", "3D 그래프", "Text 삽입"]
         }
     }
@@ -2940,19 +2940,6 @@ Graph Title'''
 
             plt.tight_layout()
             plt.show()
-        st.pyplot(plt)
-        plt.close()
-
-    elif path == ("Matplotlib 기초", "Matplotlib 스타일", "주요 스타일 옵션"):
-        st.header("주요 스타일 옵션")
-        st.write("subplot(row, column, index)")
-        with st.echo():
-            import matplotlib.pyplot as plt
-            from IPython.display import Image
-
-            # 출처: matplotlib.org
-            Image('https://matplotlib.org/_images/anatomy.png')
-
         st.pyplot(plt)
         plt.close()
     
