@@ -71,6 +71,7 @@ def show_topic(topic):
                         use_container_width=True)
 
 def show_chapter(topic, chapter):
+    path = (topic, chapter)
     st.title(chapter)
 
     ### 컨텐츠 작성
