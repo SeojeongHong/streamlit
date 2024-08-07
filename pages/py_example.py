@@ -72,7 +72,6 @@ def show_topic(topic):
 
 def show_chapter(topic, chapter):
     st.title(chapter)
-    path = (topic, chapter)
 
     ### 컨텐츠 작성
     if path == ("파이썬 기초", "대단원1") :
