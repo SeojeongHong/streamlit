@@ -5,6 +5,20 @@ plt.rcParams['font.family'] ='Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] =False
 import numpy as np
 
+class allocateIdx:
+    def __init__(self):
+        self.firstIdx = 0
+        self.secondIdx = 0
+        
+    def printIdx(self):
+        self.secondIdx += 1
+        return f"{self.firstIdx}.{self.secondIdx} "
+    
+    def newSection(self):
+        self.firstIdx += 1
+        self.secondIdx = 0
+idx = allocateIdx()  
+
 @st.cache_data
 def load_contents() :
     #topic - chapter - section
@@ -147,7 +161,8 @@ def show_section(topic, chapter, section):
 
     ### Python 컨텐츠 작성
     if path == ("파이썬 기초", "자료형", "숫자형") :
-        st.subheader("숫자형이란")
+        idx.newSection()
+        st.subheader(f"{idx.printIdx()}숫자형이란")
         st.write("숫자형에는 정수형(Integer)과 실수형(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
         st.code('''
                 #정수형(Integer)
@@ -160,7 +175,7 @@ def show_section(topic, chapter, section):
                 ''')
         st.divider()
 
-        st.subheader("숫자형의 연산 - 산술 연산자")
+        st.subheader(f"{idx.printIdx()}숫자형의 연산 - 산술 연산자")
         st.write('''
                 |연산자	|의미	|
                 |----------|-----------|
@@ -200,7 +215,7 @@ def show_section(topic, chapter, section):
                 ''')
         st.divider()
 
-        st.subheader("숫자형의 연산 - 복합 연산자")
+        st.subheader(f"{idx.printIdx()}숫자형의 연산 - 복합 연산자")
         st.write("복합 연산자는 앞서 살펴본 +, - 와 같은 산술 연산자와 대입 연산자(=)를 합쳐 놓은 것입니다. 복합 연산자를 사용하면 코드를 더욱 간결하고 가독성 있게 작성할 수 있습니다.")
         st.write('''
                 | 연산자        | 동치              | 의미               |
@@ -257,6 +272,8 @@ def show_section(topic, chapter, section):
                 ''')
         st.divider()
     elif path == ("파이썬 기초", "자료형", "문자열") :
+        
+        idx.newSection()
         st.subheader("문자열이란")
         st.write('''문자열(string)이란 연속된 문자들의 나열을 말합니다. 큰따옴표("") 또는 작은따옴표('')로 묶어서 정의합니다.''')
         st.code('''
@@ -269,7 +286,7 @@ def show_section(topic, chapter, section):
                 #출력 : Python is Easy
                 ''')
         st.divider()
-        st.subheader("문자열 길이 구하기")
+        st.subheader(f"{idx.printIdx()}문자열 길이 구하기")
         st.write("문자열의 길이는 다음과 같이 len 함수를 사용하면 구할 수 있습니다.")
         st.code('''
                 a = "Life is too short"
@@ -277,7 +294,8 @@ def show_section(topic, chapter, section):
                 #출력 : 17
                 ''')
         st.divider()
-        st.subheader("문자열 인덱싱")
+        idx.newSection()
+        st.subheader(f"{idx.printIdx()}문자열 인덱싱")
         st.write("인덱싱이란 문자열에서 문자를 추출하는 것입니다. 문자열의 문자에 접급하기 위해서 '문자열[인덱스]' 형식으로 접든할 수 있습니다. 이때 인덱스는 0부터 시작합니다.")
         st.code('''
                 str = "Hello World"
@@ -290,7 +308,7 @@ def show_section(topic, chapter, section):
         st.write("인덱스의 (-) 는 문자열을 뒤에서부터 읽기 위해 사용합니다. 즉, str[-1]은 뒤에서 첫 번째가 되는 문자를 의미하며, str[-5]는 뒤에서 5번째 문자를 의미합니다.")
         st.divider()
 
-        st.subheader("문자열 슬라이싱")
+        st.subheader(f"{idx.printIdx()}문자열 슬라이싱")
         st.write('''슬라이싱은 문자열의 일부분을 추출하는 것입니다. 문자열의 슬라이싱은 아래와 같은 형식으로 수행할 수 있습니다.
                  
                         문자열[start : end : step]
@@ -318,8 +336,8 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 출력 : Python
                 ''')
         st.divider()
-
-        st.subheader("문자열 관련 함수")
+        idx.newSection()
+        st.subheader(f"{idx.printIdx()}문자열 관련 함수")
         st.write('''
                 - **count()** : 문자 개수 세기
                  ''')
