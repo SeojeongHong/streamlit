@@ -3,24 +3,11 @@ from streamlit_option_menu import option_menu
 
 @st.cache_data
 def load_contents() :
-    #topic - chapter - section
+    #topic - chapter
     contents = {
-        "파이썬 기초": {
-            "대단원 01": ["소단원01", "소단원02"],
-            "대단원 02": ["소단원01"],
-            "대단원 03": ["소단원01", "소단원02", "소단원03"]
-        },
-        "Pandas 기초": {
-            "대단원 01": ["소단원01", "소단원02", "소단원03"],
-            "대단원 02": ["소단원01", "소단원02"],
-            "대단원 03": ["소단원01"],
-            "대단원 04": ["소단원01", "소단원02", "소단원03", "소단원04"],
-            "대단원 05": ["소단원01", "소단원02"]
-        },
-        "Matplotlib 기초": {
-            "대단원 01": ["소단원01", "소단원02", "소단원03"],
-            "대단원 02": ["소단원01", "소단원02"]
-        }
+        "파이썬 기초": ["대단원1", "대단원2"],
+        "Pandas 기초": ["대단원1", "대단원2"],
+        "Matplotlib 기초": ["대단원1", "대단원2"],
     }
     topics = list(contents.keys())
     return contents, topics
@@ -36,12 +23,9 @@ def init_session_state() :
     if 'chapter' not in st.session_state:
         st.session_state['chapter'] = None
 
-    if 'section' not in st.session_state:
-        st.session_state['section'] = None
-
-    #(page, topic, chapter, section)
+    #(page, topic, chapter)
     return (st.session_state['page'], st.session_state['topic'], 
-            st.session_state['chapter'], st.session_state['section'])
+            st.session_state['chapter'])
 
 def update_session_state(*args) :
     key = args[0]
@@ -51,22 +35,16 @@ def update_session_state(*args) :
         st.session_state['page'] = 'page_topic'
         st.session_state['topic'] = st.session_state['change_topic']
         st.session_state['chapter'] = None
-        st.session_state['section'] = None
     
     #chapter 변경(학습하기)
     elif key == 'change_chapter' :
         st.session_state['page'] = 'page_chapter'
         st.session_state['chapter'] = args[1]['chapter']
     
-    #section 변경(셀렉트박스)
-    elif key == 'change_section' :
-        st.session_state['section'] = st.session_state['change_section']
-    
     #돌아가기
     elif key == 'go_back' :
         st.session_state['page'] = 'page_topic'
         st.session_state['chapter'] = None
-        st.session_state['section'] = None
 
 def show_topic(topic):
     chapters = CONTENTS[topic]
@@ -93,60 +71,19 @@ def show_topic(topic):
                         use_container_width=True)
 
 def show_chapter(topic, chapter):
-    sections = CONTENTS[topic][chapter]
-
     st.title(chapter)
-    
-    st.session_state['section'] = st.selectbox("Choose a section:",
-                                               sections,
-                                               key = 'change_section',
-                                               on_change = update_session_state,
-                                               args=('change_section',),
-                                               label_visibility="hidden")
-    section = st.session_state['section']
-    show_section(topic, chapter, section)
-
-    st.button("돌아가기", on_click=update_session_state, args=('go_back',))
-
-def show_section(topic, chapter, section):
-    st.write(f"path : {topic}  / {chapter} / {section}")
-    path = (topic, chapter, section)
+    path = (topic, chapter)
 
     ### 컨텐츠 작성
-    if path == ("파이썬 기초", "대단원 01", "소단원01") :
+    if path == ("파이썬 기초", "대단원1") :
         st.write("예시코드 1")
-    
-        with st.echo():
-            import pandas as pd
-            df = pd.DataFrame()
-        st.divider()
-
-        st.write("예시코드 1")
-        with st.echo():
-            import pandas as pd
-            df = pd.DataFrame()
-        st.divider()
-
-    ### 컨텐츠 작성
-    elif path == ("Pandas 기초", "대단원 01", "소단원01") :
-        st.write("예시코드 2")
-    
-        with st.echo():
-            import pandas as pd
-            df = pd.DataFrame()
-        st.divider()
-
-        st.write("예시코드 2")
-        with st.echo():
-            import pandas as pd
-            df = pd.DataFrame()
-        st.divider()
-    
     else :
         st.error("Content Not Found !")
 
+    st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+
 def main() :
-    page, topic, chapter, section = init_session_state()
+    page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
         show_topic(topic)
