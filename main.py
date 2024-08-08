@@ -13,7 +13,10 @@ class IndexAllocater:
     def nextSection(self):
         self.parentIdx += 1
         self.childIdx = 0
-
+        
+    def getSectionIdx(self) :
+        return f"{self.parentIdx}. "
+    
     def getIdx(self):
         self.childIdx += 1
         #format : 1.1 / 1.2 ...
@@ -162,6 +165,7 @@ def show_section(topic, chapter, section):
     ### Python 컨텐츠 작성
     if path == ("파이썬 기초", "자료형", "자료형") :
         idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}숫자형")
         st.subheader(f"{idx.getIdx()}숫자형이란")
         st.write("숫자형에는 정수형(Integer)과 실수형(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
         st.code('''
@@ -273,6 +277,7 @@ def show_section(topic, chapter, section):
         st.divider()
         
         idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}문자열")
         st.subheader(f"{idx.getIdx()}문자열이란")
         st.write('''문자열(string)이란 연속된 문자들의 나열을 말합니다. 큰따옴표("") 또는 작은따옴표('')로 묶어서 정의합니다.''')
         st.code('''
@@ -335,7 +340,6 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 출력 : Python
                 ''')
         st.divider()
-        idx.nextSection()
         st.subheader(f"{idx.getIdx()}문자열 관련 함수")
         st.write('''
                 - **count()** : 문자 개수 세기
@@ -450,6 +454,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         
         idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}불")
         st.subheader(f"{idx.getIdx()}불이란")
         st.write('''
                 불(bool)이란 참(True)과 거짓(False)을 나타내는 자료형입니다. 불 자료형은 다음 2가지 값만을 가질 수 있습니다.
@@ -493,6 +498,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         
         idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}리스트")
         st.subheader(f"{idx.getIdx()}리스트란")
         st.write("리스트는 데이터들을 편리하게 관리하기 위해 묶어서 관리하는 자료형 중의 하나 입니다. 리스트 안에는 어떠한 자료형도 포함할 수 있습니다.")
         st.code('''
@@ -737,6 +743,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         
         idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}튜플")
         st.subheader(f"{idx.getIdx()}튜플이란")
         st.write('''
                 튜플(Tuple)은 몇 가지 점을 재외하곤 리스트와 거의 비슷하며 리스트와 다른 점은 다름과 같습니다.
@@ -789,6 +796,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         
         idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}딕셔너리")
         st.subheader("딕셔너리란")
         st.write('''
                 딕셔너리(dictionary)란 단어 그대로 '사전'이라는 뜻입니다. 딕셔너리의 기본 구조는 아래와 같이 Key와 Value를 한 쌍으로 가지며, 리스트나 튜플처럼 순차적으로 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는 특징을 가집니다.
@@ -893,6 +901,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         
         idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}집합")
         st.subheader(f"{idx.getIdx()}집합이란")
         st.write("집합(set)은 집합에 관련된 것을 쉽게 처리하기 위해 만든 자료형입니다.")
         st.code('''
