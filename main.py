@@ -1711,13 +1711,13 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('seoul_transportation.xlsx', 
+            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name='철도')
             excel.head()
         
         
         import pandas as pd
-        excel = pd.read_excel('seoul_transportation.xlsx', 
+        excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name='철도')
         st.write(excel.head())
 
@@ -1727,10 +1727,10 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('seoul_transportation.xlsx', 
+            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
             excel.head()
-        excel = pd.read_excel('seoul_transportation.xlsx', 
+        excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
         st.write(excel.head())
         st.divider()
@@ -1739,7 +1739,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('가지고 올 때는 OrderedDict로 가져오며, :blue-background[keys()]로 시트명을 조회할 수 있습니다.')
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('seoul_transportation.xlsx', 
+            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name=None, engine='openpyxl')
             excel
 
@@ -1760,7 +1760,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('seoul_transportation.xlsx', sheet_name='철도', engine='openpyxl')
+            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', sheet_name='철도', engine='openpyxl')
             excel.head()
         st.write(excel.head())
             
