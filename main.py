@@ -273,7 +273,7 @@ def show_section(topic, chapter, section):
         st.divider()
         
         idx.nextSection()
-        st.subheader("문자열이란")
+        st.subheader(f"{idx.getIdx()}문자열이란")
         st.write('''문자열(string)이란 연속된 문자들의 나열을 말합니다. 큰따옴표("") 또는 작은따옴표('')로 묶어서 정의합니다.''')
         st.code('''
                 str1 = "Hello World !"
@@ -293,7 +293,7 @@ def show_section(topic, chapter, section):
                 #출력 : 17
                 ''')
         st.divider()
-        idx.nextSection()
+        
         st.subheader(f"{idx.getIdx()}문자열 인덱싱")
         st.write("인덱싱이란 문자열에서 문자를 추출하는 것입니다. 문자열의 문자에 접급하기 위해서 '문자열[인덱스]' 형식으로 접든할 수 있습니다. 이때 인덱스는 0부터 시작합니다.")
         st.code('''
