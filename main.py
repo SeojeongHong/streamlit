@@ -5,26 +5,26 @@ plt.rcParams['font.family'] ='Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] =False
 import numpy as np
 
-class allocateIdx:
+class IndexAllocater:
     def __init__(self):
-        self.firstIdx = 0
-        self.secondIdx = 0
+        self.parentIdx = 0
+        self.childIdx = 0
         
-    def printIdx(self):
-        self.secondIdx += 1
-        return f"{self.firstIdx}.{self.secondIdx} "
-    
-    def newSection(self):
-        self.firstIdx += 1
-        self.secondIdx = 0
-idx = allocateIdx()  
+    def nextSection(self):
+        self.parentIdx += 1
+        self.childIdx = 0
+
+    def getIdx(self):
+        self.childIdx += 1
+        #format : 1.1 / 1.2 ...
+        return f"{self.parentIdx}.{self.childIdx} " 
 
 @st.cache_data
 def load_contents() :
     #topic - chapter - section
     contents = {
         "파이썬 기초": {
-            "자료형": ["숫자형", "문자열", "불", "리스트", "튜플", "딕셔너리", "집합"],
+            "자료형": ["자료형"],
             "제어문": ["if문", "while문", "for문"],
             "고급": ["함수", "클래스", "모듈", "패키지"]
         },
@@ -156,13 +156,13 @@ def pandas_dataset():
         st.divider()
 
 def show_section(topic, chapter, section):
-    st.write(f"path : {topic}  / {chapter} / {section}")
     path = (topic, chapter, section)
+    idx = IndexAllocater()
 
     ### Python 컨텐츠 작성
-    if path == ("파이썬 기초", "자료형", "숫자형") :
-        idx.newSection()
-        st.subheader(f"{idx.printIdx()}숫자형이란")
+    if path == ("파이썬 기초", "자료형", "자료형") :
+        idx.nextSection()
+        st.subheader(f"{idx.getIdx()}숫자형이란")
         st.write("숫자형에는 정수형(Integer)과 실수형(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
         st.code('''
                 #정수형(Integer)
@@ -175,7 +175,7 @@ def show_section(topic, chapter, section):
                 ''')
         st.divider()
 
-        st.subheader(f"{idx.printIdx()}숫자형의 연산 - 산술 연산자")
+        st.subheader(f"{idx.getIdx()}숫자형의 연산 - 산술 연산자")
         st.write('''
                 |연산자	|의미	|
                 |----------|-----------|
@@ -215,7 +215,7 @@ def show_section(topic, chapter, section):
                 ''')
         st.divider()
 
-        st.subheader(f"{idx.printIdx()}숫자형의 연산 - 복합 연산자")
+        st.subheader(f"{idx.getIdx()}숫자형의 연산 - 복합 연산자")
         st.write("복합 연산자는 앞서 살펴본 +, - 와 같은 산술 연산자와 대입 연산자(=)를 합쳐 놓은 것입니다. 복합 연산자를 사용하면 코드를 더욱 간결하고 가독성 있게 작성할 수 있습니다.")
         st.write('''
                 | 연산자        | 동치              | 의미               |
@@ -271,9 +271,8 @@ def show_section(topic, chapter, section):
                 #출력 : 4
                 ''')
         st.divider()
-    elif path == ("파이썬 기초", "자료형", "문자열") :
         
-        idx.newSection()
+        idx.nextSection()
         st.subheader("문자열이란")
         st.write('''문자열(string)이란 연속된 문자들의 나열을 말합니다. 큰따옴표("") 또는 작은따옴표('')로 묶어서 정의합니다.''')
         st.code('''
@@ -286,7 +285,7 @@ def show_section(topic, chapter, section):
                 #출력 : Python is Easy
                 ''')
         st.divider()
-        st.subheader(f"{idx.printIdx()}문자열 길이 구하기")
+        st.subheader(f"{idx.getIdx()}문자열 길이 구하기")
         st.write("문자열의 길이는 다음과 같이 len 함수를 사용하면 구할 수 있습니다.")
         st.code('''
                 a = "Life is too short"
@@ -294,8 +293,8 @@ def show_section(topic, chapter, section):
                 #출력 : 17
                 ''')
         st.divider()
-        idx.newSection()
-        st.subheader(f"{idx.printIdx()}문자열 인덱싱")
+        idx.nextSection()
+        st.subheader(f"{idx.getIdx()}문자열 인덱싱")
         st.write("인덱싱이란 문자열에서 문자를 추출하는 것입니다. 문자열의 문자에 접급하기 위해서 '문자열[인덱스]' 형식으로 접든할 수 있습니다. 이때 인덱스는 0부터 시작합니다.")
         st.code('''
                 str = "Hello World"
@@ -308,7 +307,7 @@ def show_section(topic, chapter, section):
         st.write("인덱스의 (-) 는 문자열을 뒤에서부터 읽기 위해 사용합니다. 즉, str[-1]은 뒤에서 첫 번째가 되는 문자를 의미하며, str[-5]는 뒤에서 5번째 문자를 의미합니다.")
         st.divider()
 
-        st.subheader(f"{idx.printIdx()}문자열 슬라이싱")
+        st.subheader(f"{idx.getIdx()}문자열 슬라이싱")
         st.write('''슬라이싱은 문자열의 일부분을 추출하는 것입니다. 문자열의 슬라이싱은 아래와 같은 형식으로 수행할 수 있습니다.
                  
                         문자열[start : end : step]
@@ -336,8 +335,8 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 출력 : Python
                 ''')
         st.divider()
-        idx.newSection()
-        st.subheader(f"{idx.printIdx()}문자열 관련 함수")
+        idx.nextSection()
+        st.subheader(f"{idx.getIdx()}문자열 관련 함수")
         st.write('''
                 - **count()** : 문자 개수 세기
                  ''')
@@ -448,8 +447,10 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : ['a', 'b', 'c', 'd']
                 ''')
         st.write("split 함수는 a.split()처럼 괄호 안에 아무 값도 넣어 주지 않으면 공백([Space], [Tab], [Enter])을 기준으로 문자열을 나누어 줍니다. 만약 b.split(':')처럼 괄호 안에 특정 값이 있을 경우에는 괄호 안의 값을 구분자로 해서 문자열을 나누어 줍니다.")    
-    elif path == ("파이썬 기초", "자료형", "불") :
-        st.subheader("불이란")
+        st.divider()
+        
+        idx.nextSection()
+        st.subheader(f"{idx.getIdx()}불이란")
         st.write('''
                 불(bool)이란 참(True)과 거짓(False)을 나타내는 자료형입니다. 불 자료형은 다음 2가지 값만을 가질 수 있습니다.
 
@@ -459,7 +460,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 True나 False는 파이썬의 예약어로, true, false와 같이 작성하면 안 되고 첫 문자를 항상 대문자로 작성해야 합니다.
                  ''')
         st.divider()
-        st.subheader("불 자료형 사용법")
+        st.subheader(f"{idx.getIdx()}불 자료형 사용법")
         st.write("불 자료형은 조건문의 리턴값으로도 사용됩니다.")
         st.code('''
                 a = 5 > 3
@@ -471,7 +472,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : False
                 ''')
         st.divider()
-        st.subheader("자료형의 참과 거짓")
+        st.subheader(f"{idx.getIdx()}자료형의 참과 거짓")
         st.write('''
                 문자열, 리스트, 튜플, 딕셔너리 등의 값이 비어 있으면("", [], (), {}) 거짓(False)이 되고 비어 있지 않으면 참(True)이 됩니다. 숫자에서는 그 값이 0일 때 거짓이 됩니다.
                  
@@ -489,8 +490,10 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 |0	        |False       |
                  
                  ''')
-    elif path == ("파이썬 기초", "자료형", "리스트") :
-        st.subheader("리스트란")
+        st.divider()
+        
+        idx.nextSection()
+        st.subheader(f"{idx.getIdx()}리스트란")
         st.write("리스트는 데이터들을 편리하게 관리하기 위해 묶어서 관리하는 자료형 중의 하나 입니다. 리스트 안에는 어떠한 자료형도 포함할 수 있습니다.")
         st.code('''
                 a = []  #값이 없는 리스트
@@ -514,7 +517,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : [1, 2, ['P', 3]]
                 ''')
         st.divider()
-        st.subheader("리스트의 인덱싱")
+        st.subheader(f"{idx.getIdx()}리스트의 인덱싱")
         st.write("리스트 역시 문자열처럼 인덱싱을 적용할 수 있습니다.")
         st.code('''
                 a = [1, 2, 3]
@@ -544,7 +547,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("리스트의 슬라이싱")
+        st.subheader(f"{idx.getIdx()}리스트의 슬라이싱")
         st.write("문자열과 마찬가지로 리스트에서도 슬라이싱 기법을 적용할 수 있습니다.")
         st.code('''
                 a = [1, 2, 3, 4, 5]
@@ -558,7 +561,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : [3, 4, 5]
                 ''')
         st.divider()
-        st.subheader("리스트 길이 구하기")
+        st.subheader(f"{idx.getIdx()}리스트 길이 구하기")
         st.write("리스트 길이를 구하기 위해서는 다음처럼 len 함수를 사용해야 합니다.")
         st.code('''
                 a = [1, 2, 3]
@@ -568,7 +571,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write("len은 문자열, 리스트 외에 앞으로 배울 튜플과 딕셔너리에도 사용할 수 있는 함수입니다.")
         
         st.divider()
-        st.subheader("리스트 값 수정하기")
+        st.subheader(f"{idx.getIdx()}리스트 값 수정하기")
         st.write("리스트의 인덱스를 통해 요소에 접근하고 값을 수정할 수 있습니다.")
         st.code('''
                 a = [1, 2, 3]
@@ -578,7 +581,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : [1, 2, 4]
                 ''')
         st.divider()
-        st.subheader("리스트 요소 삭제하기")
+        st.subheader(f"{idx.getIdx()}리스트 요소 삭제하기")
         st.write("del 함수를 사용해 리스트의 요소를 삭제할 수 있습니다. 삭제 또한 인덱스를 통해 요소에 접근합니다.")
         st.code('''
                 a = [1, 2, 3]
@@ -596,7 +599,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : [1, 2]
                 ''')
         st.divider()
-        st.subheader("리스트 관련 함수")
+        st.subheader(f"{idx.getIdx()}리스트 관련 함수")
         st.write('''
                 - **append()** : 리스트에 요소 추가하기
                  ''')
@@ -731,8 +734,10 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : [1, 2, 3, 4, 5, 6, 7]
                 ''')
         st.write("extend(x)에서 x에는 리스트만 올 수 있으며 원래의 a 리스트에 x 리스트를 더하게 됩니다.") 
-    elif path == ("파이썬 기초", "자료형", "튜플") :
-        st.subheader("튜플이란")
+        st.divider()
+        
+        idx.nextSection()
+        st.subheader(f"{idx.getIdx()}튜플이란")
         st.write('''
                 튜플(Tuple)은 몇 가지 점을 재외하곤 리스트와 거의 비슷하며 리스트와 다른 점은 다름과 같습니다.
                 
@@ -753,7 +758,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                  ''')
         st.divider()
 
-        st.subheader("튜플의 인덱싱")
+        st.subheader(f"{idx.getIdx()}튜플의 인덱싱")
         st.write("문자열, 리스트와 마찬가지로 튜플 또한 인덱싱이 가능합니다.")
         st.code('''
                 t1 = (1, 2, 'a', 'b')
@@ -766,7 +771,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("튜플의 슬라이싱")
+        st.subheader(f"{idx.getIdx()}튜플의 슬라이싱")
         st.code('''
                 t1 = (1, 2, 'a', 'b')
 
@@ -775,13 +780,15 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("튜플 길이 구하기")
+        st.subheader(f"{idx.getIdx()}튜플 길이 구하기")
         st.code('''
                 t1 = (1, 2, 'a', 'b')
                 print(len(t1))
                 #출력 : 4
                 ''')   
-    elif path == ("파이썬 기초", "자료형", "딕셔너리") :
+        st.divider()
+        
+        idx.nextSection()
         st.subheader("딕셔너리란")
         st.write('''
                 딕셔너리(dictionary)란 단어 그대로 '사전'이라는 뜻입니다. 딕셔너리의 기본 구조는 아래와 같이 Key와 Value를 한 쌍으로 가지며, 리스트나 튜플처럼 순차적으로 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는 특징을 가집니다.
@@ -791,7 +798,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("딕셔너리 생성하기")
+        st.subheader(f"{idx.getIdx()}딕셔너리 생성하기")
         st.write('''
                 |Key	|Value	|
                 |----------|-----------|
@@ -819,7 +826,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : 30
                 ''')
         st.divider()
-        st.subheader("딕셔너리 쌍 추가, 삭제하기")
+        st.subheader(f"{idx.getIdx()}딕셔너리 쌍 추가, 삭제하기")
         st.code('''
                 #쌍 추가하기
                 person["job"] = "Chef"
@@ -833,7 +840,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("딕셔너리 관련 함수")
+        st.subheader(f"{idx.getIdx()}딕셔너리 관련 함수")
         st.write('''
                 - **keys()** : Key 리스트 만들기
                  ''')
@@ -883,8 +890,10 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 print(person.clear())
                 #출력 : None
                 ''')
-    elif path == ("파이썬 기초", "자료형", "집합") :
-        st.subheader("집합이란")
+        st.divider()
+        
+        idx.nextSection()
+        st.subheader(f"{idx.getIdx()}집합이란")
         st.write("집합(set)은 집합에 관련된 것을 쉽게 처리하기 위해 만든 자료형입니다.")
         st.code('''
                 #set 키워드 사용해서 집합 만들기
@@ -902,7 +911,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                  set은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하기 위한 필터로 종종 사용됩니다. 또한, 리스트나 튜플은 순서가 있기(ordered) 때문에 인덱싱을 통해 요솟값을 얻을 수 있지만, set 자료형은 순서가 없기(unordered) 때문에 인덱싱을 통해 요솟값을 얻을 수 없습니다.
                  ''')
-        st.subheader("집합의 연산")
+        st.subheader(f"{idx.getIdx()}집합의 연산")
         st.code('''
                 # 연산에 사용할 2개의 set 생성
                 s1 = set([1, 2, 3, 4, 5, 6])
@@ -949,7 +958,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("집합 관련 함수")
+        st.subheader(f"{idx.getIdx()}집합 관련 함수")
         st.write('''
                 - **add()** : 값 1개 추가하기
                  ''')
