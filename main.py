@@ -5,7 +5,7 @@ plt.rcParams['font.family'] ='Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] =False
 import numpy as np
 
-class IndexAllocater:
+class IndexAllocator:
     def __init__(self):
         self.parentIdx = 0
         self.childIdx = 0
@@ -15,6 +15,7 @@ class IndexAllocater:
         self.childIdx = 0
         
     def getSectionIdx(self) :
+        #format : 1. / 2. / 3. ...
         return f"{self.parentIdx}. "
     
     def getIdx(self):
@@ -160,7 +161,7 @@ def pandas_dataset():
 
 def show_section(topic, chapter, section):
     path = (topic, chapter, section)
-    idx = IndexAllocater()
+    idx = IndexAllocator()
 
     ### Python 컨텐츠 작성
     if path == ("파이썬 기초", "자료형", "자료형") :
