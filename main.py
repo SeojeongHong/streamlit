@@ -23,6 +23,7 @@ class IndexAllocator:
         
         #format : 1.1 / 1.2 ...
         return f"{self.parentIdx}.{self.childIdx} "
+idx = IndexAllocator()
 
 @st.cache_data
 def load_contents() :
@@ -142,13 +143,13 @@ def show_chapter(topic, chapter):
 
 ### pandas에서 사용할 타이타닉 데이터셋
 def pandas_dataset():
-        st.subheader('실습에 사용할 데이터셋')
+        st.subheader(f"{idx.getSubIdx()}실습에 사용할 데이터셋")
         with st.echo():
             import seaborn as sns
             df = sns.load_dataset('titanic')
             df
 
-        st.subheader('**컬럼(columns) 설명**')
+        st.subheader(f"{idx.getSubIdx()}**컬럼(columns) 설명**")
         st.markdown('- survived: 생존여부 (1: 생존, 0: 사망)\n'
                     '- pclass: 좌석 등급 (1등급, 2등급, 3등급)\n'
                     '- sex: 성별\n'
@@ -168,7 +169,6 @@ def pandas_dataset():
 
 def show_section(topic, chapter, section):
     path = (topic, chapter, section)
-    idx = IndexAllocator()
 
     ### Python 컨텐츠 작성
     if path == ("파이썬 기초", "자료형", "자료형") :
