@@ -1688,36 +1688,49 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         
         st.header(f"{idx.getHeadIdx()}Excel") ## 소단원01
         st.subheader(f"{idx.getSubIdx()}Excel-불러오기") ## 소단원01 - 세부01
-
+        
 
         st.write('- Excel 데이터를 바로 읽어들일 수 있습니다. sheet_name 지정시 해당 sheet를 가져옵니다.\n'
                     '''- [참고] :blue-background[pd.read_excel()]로 데이터 로드시 에러 발생한다면 engine='openpyxl'을 추가합니다.''' 
                     )
+        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
+        
+        with open('data/서울시대중교통/seoul_transportation.xlsx', "rb") as template_file:
+            template_byte = template_file.read()
+
+        st.download_button(label="download data",
+                            type="primary",
+                            data=template_byte,
+                           file_name = "seoul_transportation.xlsx"
+        )
+        st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
+
         st.divider()
+        
         st.write('**철도 Sheet의 데이터 불러오기**')
 
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+            excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name='철도')
             excel.head()
         
         
         import pandas as pd
-        excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+        excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name='철도')
         st.write(excel.head())
 
-        st.divider()
+        # st.divider()
 
         st.write('**버스 Sheet의 데이터 불러오기**')
 
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+            excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
             excel.head()
-        excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+        excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
         st.write(excel.head())
         st.divider()
@@ -1726,7 +1739,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('가지고 올 때는 OrderedDict로 가져오며, :blue-background[keys()]로 시트명을 조회할 수 있습니다.')
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+            excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name=None, engine='openpyxl')
             excel
 
@@ -1747,12 +1760,11 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         with st.echo():
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', sheet_name='철도', engine='openpyxl')
+            excel = pd.read_excel('seoul_transportation.xlsx', sheet_name='철도', engine='openpyxl')
             excel.head()
         st.write(excel.head())
             
         st.divider()
-        
 
         st.write('**시트명 없이 저장**')
         code = '''excel.to_excel('sample.xlsx', index=True)'''
@@ -1770,7 +1782,19 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.write('한 줄이 한 개의 행에 해당하며, 열 사이에는 **쉼표(,)를 넣어 구분**합니다.\n')
         st.write('Excel보다 훨씬 가볍고 **차지하는 용량이 적기 때문에 대부분의 파일 데이터는 csv 형태**로 제공됩니다.')
+        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
+        
+        with open('data/서울시주민등록인구/seoul_population.csv', "rb") as template_file:
+            template_byte = template_file.read()
 
+        st.download_button(label="download data",
+                            data=template_byte,
+                            type="primary",
+                           file_name = "seoul_population.csv")
+
+        st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
+        st.divider()
+        
         st.subheader(f"{idx.getSubIdx()}CSV-불러오기") ## 소단원02- 세부01
         with st.echo():
             import pandas as pd
