@@ -27,32 +27,11 @@ idx = IndexAllocator()
 
 @st.cache_data
 def load_contents() :
-    #topic - chapter - section
+    #topic - chapter
     contents = {
-        "파이썬 기초": {
-            "자료형": ["자료형"],
-            "제어문": ["제어문"],
-            "고급": ["고급"]
-        },
-        "Pandas 기초": {
-            "DataFrame": ["데이터프레임 생성", "데이터프레임 속성", "데이터프레임 조회",
-                          "데이터프레임 정렬", "Indexing, Slicing, 조건 필터링"],
-            "Excel/CSV": ["Excel", "CSV"],
-            "Data 전처리": ["데이터 복사", "데이터 결측치", "column 추가", "데이터 삭제", "column 연산", "데이터 변환"],
-            "Data 연결과 병합": ["데이터 연결", "데이터 병합"],
-            "Static" : ["기술 통계", "고급 통계"]
-        },
-        "Matplotlib 기초": {
-            "Matplotlib 기본" : ["기본 사용"],
-            "그래프 그리기?":["그래프 그리기"],
-            "그래프에 text" : ["title, text"],
-            "그래프" : ["label, legend, 축 범위"],
-            "스타일 세부 설정" : ["선,마커,색상"],
-            "Grid, Annotate" : ["grid, annotate"],
-            "Plot" : ["Scatter, line, area, box"],
-            "막대 그래프" : ["막대, 수평막대, histogram"],
-            "이외?" : ["piechart, 3d"]
-        }
+        "파이썬 기초": ["자료형", "제어문", "고급"],
+        "Pandas 기초": ["DataFrame", "Excel/CSV", "Data 전처리", "Data 연결과 병합", "Static"],
+        "Matplotlib 기초":["Matplotlib 기본", "그래프 그리기?", "그래프에 text", "그래프", "스타일 세부 설정", "Grid, Annotate", "Plot", "막대 그래프", "이외?"]
     }
     topics = list(contents.keys())
     return contents, topics
@@ -68,12 +47,9 @@ def init_session_state() :
     if 'chapter' not in st.session_state:
         st.session_state['chapter'] = None
 
-    if 'section' not in st.session_state:
-        st.session_state['section'] = None
-
-    #(page, topic, chapter, section)
+    #(page, topic, chapter)
     return (st.session_state['page'], st.session_state['topic'], 
-            st.session_state['chapter'], st.session_state['section'])
+            st.session_state['chapter'])
 
 def update_session_state(*args) :
     key = args[0]
@@ -83,23 +59,17 @@ def update_session_state(*args) :
         st.session_state['page'] = 'page_topic'
         st.session_state['topic'] = st.session_state['change_topic']
         st.session_state['chapter'] = None
-        st.session_state['section'] = None
     
     #chapter 변경(학습하기)
     elif key == 'change_chapter' :
         st.session_state['page'] = 'page_chapter'
         st.session_state['chapter'] = args[1]['chapter']
     
-    #section 변경(셀렉트박스)
-    elif key == 'change_section' :
-        st.session_state['section'] = st.session_state['change_section']
-    
     #돌아가기
     elif key == 'go_back' :
         st.session_state['page'] = 'page_topic'
         st.session_state['chapter'] = None
-        st.session_state['section'] = None
-
+    
 def show_topic(topic):
     chapters = CONTENTS[topic]
 
@@ -125,22 +95,6 @@ matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을
                         args=('change_chapter', {'chapter':title}),
                         use_container_width=True)
 
-def show_chapter(topic, chapter):
-    sections = CONTENTS[topic][chapter]
-
-    st.title(chapter)
-    
-    st.session_state['section'] = st.selectbox("Choose a section:",
-                                               sections,
-                                               key = 'change_section',
-                                               on_change = update_session_state,
-                                               args=('change_section',),
-                                               label_visibility="hidden")
-    section = st.session_state['section']
-    show_section(topic, chapter, section)
-
-    st.button("돌아가기", on_click=update_session_state, args=('go_back',))
-
 ### pandas에서 사용할 타이타닉 데이터셋
 def pandas_dataset():
         st.subheader(f"{idx.getSubIdx()}실습에 사용할 데이터셋")
@@ -149,7 +103,7 @@ def pandas_dataset():
             df = sns.load_dataset('titanic')
             df
 
-        st.subheader(f"{idx.getSubIdx()}**컬럼(columns) 설명**")
+        st.subheader(f"{idx.getSubIdx()}컬럼(columns) 설명")
         st.markdown('- survived: 생존여부 (1: 생존, 0: 사망)\n'
                     '- pclass: 좌석 등급 (1등급, 2등급, 3등급)\n'
                     '- sex: 성별\n'
@@ -167,11 +121,12 @@ def pandas_dataset():
                     '- alone: 혼자 탑승 여부\n')
         st.divider()
 
-def show_section(topic, chapter, section):
-    path = (topic, chapter, section)
+def show_chapter(topic, chapter):
+    st.title(chapter)
+    path = (topic, chapter)
 
     ### Python 컨텐츠 작성
-    if path == ("파이썬 기초", "자료형", "자료형") :
+    if path == ("파이썬 기초", "자료형") :
         st.header(f"{idx.getHeadIdx()}숫자형")
         st.subheader(f"{idx.getSubIdx()}숫자형이란")
         st.write("숫자형에는 정수형(Integer)과 실수형(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
@@ -1002,8 +957,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : {1, 3}
                 ''')
     ################################################################################################################################################################################
-    #"제어문": ["if문", "while문", "for문"]
-    elif path == ("파이썬 기초", "제어문", "제어문") :
+    elif path == ("파이썬 기초", "제어문") :
         st.header(f"{idx.getHeadIdx()}if문")
         st.subheader(f"{idx.getSubIdx()}if문 기본 구조")
         st.write('''
@@ -1277,7 +1231,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.write("range(1, 11)은 숫자 1부터 10까지(1 이상 11 미만)의 숫자를 데이터로 가지는 객체입니다. 따라서 위 예에서 i 변수에 숫자가 1부터 10까지 하나씩 차례로 대입되면서 add += i 문장을 반복적으로 수행하고 add 최종적으로 55가 됩니다.")
     
-    elif path == ("파이썬 기초", "고급", "고급") :
+    elif path == ("파이썬 기초", "고급") :
         st.header(f"{idx.getHeadIdx()}함수")
         st.subheader(f"{idx.getSubIdx()}함수란")
         st.write("코드의 반복을 줄이거나 어떠한 용도를 위해 특정 코드들을 모아둔 것입니다. 한 번 작성해두면 해당 코드가 필요할 때 함수를 호출해서 쉽게 재사용 할 수 있고, 용도에 따라 분리가 가능해 가독성이 좋습니다.")
@@ -1379,7 +1333,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write("add는 2개의 인수를 받아 서로 더한 값을 리턴하는 lambda 함수입니다. lambda로 만든 함수는 return 명령어가 없어도 표현식의 결과값을 리턴합니다.")
 
     ### Pandas 컨텐츠 작성
-    elif path == ("Pandas 기초", "DataFrame", "데이터프레임 생성") :
+    elif path == ("Pandas 기초", "DataFrame") :
         st.header(f"{idx.getHeadIdx()}데이터프레임 생성") ## 소단원01
 
         st.markdown('- 2차원 데이터 구조 (Excel 데이터 시트와 비슷합니다.) \n'
@@ -1730,7 +1684,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
     ## Excel/CSV        
 
-    elif path == ("Pandas 기초", "Excel/CSV", "Excel") :
+    elif path == ("Pandas 기초", "Excel/CSV") :
         
         st.header(f"{idx.getHeadIdx()}Excel") ## 소단원01
         st.subheader(f"{idx.getSubIdx()}Excel-불러오기") ## 소단원01 - 세부01
@@ -1850,7 +1804,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('현재 디렉터리에서 sample1.csv가 저장된 것을 확인할 수 있습니다.')
         st.divider()
 
-    elif path == ("Pandas 기초", "Data 전처리", "데이터 복사"):
+    elif path == ("Pandas 기초", "Data 전처리"):
         st.header(f"{idx.getHeadIdx()}데이터 복사") ## 소단원01
         
         st.write('Pandas DataFrame의 **복사(Copy), 결측치 처리**, 그리고 row, column의 **추가, 삭제, 컬럼간 연산, 타입의 변환**을 다뤄보겠습니다.')
@@ -2196,7 +2150,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
     
 
-    elif path == ("Pandas 기초", "Data 연결과 병합", "데이터 연결"):
+    elif path == ("Pandas 기초", "Data 연결과 병합"):
 
         import pandas as pd
 
@@ -2351,7 +2305,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code(code)
         st.write(pd.merge(df1, df2, left_on='이름', right_on='고객명'))
 
-    elif path == ("Pandas 기초", "Static", "기술 통계"):
+    elif path == ("Pandas 기초", "Static"):
         
         st.header(f"{idx.getHeadIdx()}기술 통계") # 소단원01
 
@@ -2602,7 +2556,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(numeric_df.corr()['survived']) 
         st.divider()
     ### Matplotlib 컨텐츠 작성
-    elif path == ("Matplotlib 기초", "Matplotlib 기본", "기본 사용"):
+    elif path == ("Matplotlib 기초", "Matplotlib 기본"):
         st.header(f"{idx.getHeadIdx()}기본 사용")
         st.write("Matplotlib 라이브러리를 이용해서 그래프를 그리는 일반적인 방법에 대해 소개합니다.")
         st.subheader(f"{idx.getSubIdx()}기본 그래프 그리기")
@@ -2696,7 +2650,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.pyplot(plt)
         plt.close()
     
-    elif path == ("Matplotlib 기초", "그래프 그리기?", "그래프 그리기"):
+    elif path == ("Matplotlib 기초", "그래프 그리기?"):
         st.header(f"{idx.getHeadIdx()}그래프 그리기")
         st.subheader(f"{idx.getSubIdx()}단일 그래프")
         with st.echo():
@@ -2835,7 +2789,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.pyplot(plt)
         plt.close()
 
-    elif path == ("Matplotlib 기초", "그래프에 text", "title, text"):
+    elif path == ("Matplotlib 기초", "그래프에 text"):
         st.header(f"{idx.getHeadIdx()}Title")
         st.write("**matplotlib.pyplot** 모듈의 **title()** 함수를 이용해서 그래프의 타이틀 (Title)을 설정할 수 있습니다.")
         st.write("그래프의 타이틀을 표시하고 위치를 조절하는 방법, 그리고 타이틀의 폰트와 스타일을 설정하는 방법에 대해 알아봅니다.")
@@ -3028,7 +2982,7 @@ Graph Title'''
         st.pyplot(plt)
         plt.close()
     
-    elif path == ("Matplotlib 기초", "그래프", "label, legend, 축 범위"):
+    elif path == ("Matplotlib 기초", "그래프"):
         st.header(f"{idx.getHeadIdx()}축 레이블(Label) 설정하기")
         st.write("**matplotlib.pyplot** 모듈의 **xlabel(), ylabel()** 함수를 사용하면 그래프의 x, y 축에 대한 레이블을 표시할 수 있습니다.")
         st.write("xlabel(), ylabel() 함수를 사용해서 그래프의 축에 레이블을 표시하는 방법에 대해 소개합니다.")
@@ -3342,7 +3296,7 @@ Graph Title'''
         st.code(code, language="python")
         st.write("위의 예제 그림에서 X축은 0.85에서 4.15, Y축은 1.6에서 10.4 범위로 표시되었음을 알 수 있습니다.  ")
     
-    elif path == ("Matplotlib 기초", "스타일 세부 설정", "선,마커,색상"):
+    elif path == ("Matplotlib 기초", "스타일 세부 설정"):
         st.header(f"{idx.getHeadIdx()}선 종류 지정")
         st.write("데이터를 표현하기 위해 그려지는 선의 종류를 지정하는 방법을 소개합니다.")
         st.write("선 종류를 나타내는 문자열 또는 튜플을 이용해서 다양한 선의 종류를 구현할 수 있습니다.")
@@ -3634,7 +3588,7 @@ Graph Title'''
         st.pyplot(plt)
         plt.close()
 
-    elif path == ("Matplotlib 기초", "Grid, Annotate", "grid, annotate"):
+    elif path == ("Matplotlib 기초", "Grid, Annotate"):
         st.header(f"{idx.getHeadIdx()}그리드(Grid)")
         st.write("데이터의 위치를 더 명확하게 나타내기 위해 그래프에 그리드 **(Grid, 격자)** 를 표시할 수 있습니다.")
         st.write("**matplotlib.pyplot** 모듈의 **grid()** 함수를 이용해서 그래프에 다양하게 그리드를 설정해 보겠습니다.")
@@ -3725,7 +3679,7 @@ Graph Title'''
         st.pyplot(plt)
         plt.close()
 
-    elif path == ("Matplotlib 기초", "Plot", "Scatter, line, area, box"):
+    elif path == ("Matplotlib 기초", "Plot"):
         st.header(f"{idx.getHeadIdx()}Scatterplot")
         st.write("**산점도 (Scatter plot)** 는 두 변수의 상관 관계를 직교 좌표계의 평면에 점으로 표현하는 그래프입니다.")
         st.write("**matplotlib.pyplot** 모듈의 **scatter()** 함수를 이용하면 산점도를 그릴 수 있습니다.")
@@ -4011,7 +3965,7 @@ y'''
         st.pyplot(plt)
         plt.close()
 
-    elif path == ("Matplotlib 기초", "Matplotlib 그래프", "컬러맵 그리기"):
+    elif path == ("Matplotlib 기초", "Matplotlib 그래프"):
         st.header(f"{idx.getHeadIdx()}컬러맵 그리기")
         st.write("**matplotlib.pyplot** 모듈은 컬러맵을 간편하게 설정하기 위한 여러 함수를 제공합니다.")
         st.write("아래의 함수들을 사용해서 그래프의 컬러맵을 설정하는 방식에 대해 소개합니다.")
@@ -4105,7 +4059,7 @@ y'''
         st.write("예를 들어, **winter** 와 **winter_r** 은 순서가 앞뒤로 뒤집어진 컬러맵입니다.")
 
         
-    elif path == ("Matplotlib 기초", "막대 그래프", "막대, 수평막대, histogram"):
+    elif path == ("Matplotlib 기초", "막대 그래프"):
         st.header(f"{idx.getHeadIdx()}막대 그래프 그리기")
         st.write("**막대 그래프 (Bar graph, Bar chart)** 는 범주가 있는 데이터 값을 직사각형의 막대로 표현하는 그래프입니다.")
         st.write("Matplotlib에서는 **matplotlib.pyplot** 모듈의 **bar()** 함수를 이용해서 막대 그래프를 간단하게 표현할 수 있습니다.")
@@ -4461,7 +4415,7 @@ y'''
         st.pyplot(plt)
         plt.close()
 
-    elif path == ("Matplotlib 기초", "이외?", "piechart, 3d") :
+    elif path == ("Matplotlib 기초", "이외?") :
         st.header(f"{idx.getHeadIdx()}Pie Chart")
         st.write("**파이 차트 (Pie chart, 원 그래프)** 는 범주별 구성 비율을 원형으로 표현한 그래프입니다.")
         st.write("위의 그림과 같이 **부채꼴의 중심각을 구성 비율에 비례** 하도록 표현합니다.")
@@ -4627,8 +4581,10 @@ y'''
     else :
         st.error("Content Not Found !")
 
+    st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+
 def main() :
-    page, topic, chapter, section = init_session_state()
+    page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
         show_topic(topic)
