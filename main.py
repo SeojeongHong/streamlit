@@ -29,8 +29,8 @@ def load_contents() :
     contents = {
         "파이썬 기초": {
             "자료형": ["자료형"],
-            "제어문": ["if문", "while문", "for문"],
-            "고급": ["함수", "클래스", "모듈", "패키지"]
+            "제어문": ["제어문"],
+            "고급": ["고급"]
         },
         "Pandas 기초": {
             "DataFrame": ["데이터프레임 생성", "데이터프레임 속성", "데이터프레임 조회",
@@ -1009,8 +1009,10 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
     ################################################################################################################################################################################
     #"제어문": ["if문", "while문", "for문"]
-    elif path == ("파이썬 기초", "제어문", "if문") :
-        st.subheader("if문 기본 구조")
+    elif path == ("파이썬 기초", "제어문", "제어문") :
+        idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}if문")
+        st.subheader(f"{idx.getIdx()}if문 기본 구조")
         st.write('''
                 - **if** : 조건이 True인 경우에만 실행
                  
@@ -1042,7 +1044,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                  ''')
         st.divider()
-        st.subheader("조건문 유형 - 비교 연산자")
+        st.subheader(f"{idx.getIdx()}조건문 유형 - 비교 연산자")
         st.write('''
                 |비교연산자|	설명|
                 |------------|-------------|
@@ -1083,7 +1085,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : str1과 str2는 같지 않다
                 ''')
         st.divider()
-        st.subheader("조건문 유형 - and, or, not")
+        st.subheader(f"{idx.getIdx()}조건문 유형 - and, or, not")
         st.write('''
                 |연산자|	설명|
                 |------------|-------------|
@@ -1118,7 +1120,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("조건문 유형 - in, not in")
+        st.subheader(f"{idx.getIdx()}조건문 유형 - in, not in")
         st.write('''
                 |연산자|	설명|
                 |------------|-------------|
@@ -1141,12 +1143,15 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                     print("False")
                 #출력 : True
                 ''')
-    elif path == ("파이썬 기초", "제어문", "while문") :
-        st.subheader("while문이란")
+        st.divider()
+        
+        idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}while문")
+        st.subheader(f"{idx.getIdx()}while문이란")
         st.write("문장을 반복해서 수행해야 할 경우 while 문을 사용합니다. 그래서 while 문을 ‘반복문’이라고도 부릅니다.")
         st.divider()
 
-        st.subheader("while문의 기본 구조")
+        st.subheader(f"{idx.getIdx()}while문의 기본 구조")
         st.write('''
                 while 문은 조건문이 참인 동안 while 문에 속한 문장들을 반복해서 수행하고, 조건문이 거짓이 되는 경우 반복을 중지합니다.
                         
@@ -1171,7 +1176,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("while 문 강제로 빠져나가기")
+        st.subheader(f"{idx.getIdx()}while 문 강제로 빠져나가기")
         st.write("while 문은 조건문이 참인 동안 계속 while 문 안의 내용을 반복적으로 수행합니다. 하지만 강제로 while 문을 빠져나가고 싶은 경우엔 break를 사용해 반복문을 빠져나갈 수 있습니다.")
         st.write("아래 코드는 조건문이 True이기 때문에 무한 반복하게 됩니다.")
         st.code('''
@@ -1192,7 +1197,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 출력 : 5
                 ''')
         st.divider()
-        st.subheader("while 문의 맨 처음으로 돌아가기")
+        st.subheader(f"{idx.getIdx()}while 문의 맨 처음으로 돌아가기")
         st.write("while 문 안의 문장을 수행할 때 입력 조건을 검사해서 조건에 맞지 않으면 while 문을 빠져나갑니다. 그런데 프로그래밍을 하다 보면 while 문을 빠져나가지 않고 while 문의 맨 처음(조건문)으로 다시 돌아가게 만들고 싶은 경우가 생기게 되는데, 이때 사용하는 것이 바로 continue 문입니다.")
         st.code('''
                 a = 0
@@ -1211,8 +1216,11 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #9
                 ''')
         st.write("위는 1부터 10까지의 숫자 중 홀수만 출력하는 예시입니다. a가 10보다 작은 동안 a는 1만큼씩 계속 증가합니다. a % 2 == 0(a를 2로 나누었을 때 나머지가 0인 경우)이 참이 되는 경우는 a가 짝수인 경우입니다. 즉, a가 짝수이면 continue 문을 수행하게 됩니다. 이 continue 문은 while 문의 맨 처음인 조건문(a < 10)으로 돌아가게 하는 명령어입니다. 따라서 위 예에서 a가 짝수이면 print(a) 문장은 수행되지 않을 것입니다.")
-    elif path == ("파이썬 기초", "제어문", "for문") :
-        st.subheader("for문이란")
+        st.divider()
+        
+        idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}for문")
+        st.subheader(f"{idx.getIdx()}for문이란")
         st.write('''
                  for문은 정해진 횟수나 범위 안에서 차례대로 대입하며 반복을 수행하는 반복문입니다. 아래와 같은 기본 구조를 가집니다.
                  
@@ -1225,7 +1233,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                  ''')
         st.divider()
-        st.subheader("for문 사용법")
+        st.subheader(f"{idx.getIdx()}for문 사용법")
         st.code('''
                 numList = ['one', 'two', 'three']
 
@@ -1240,7 +1248,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write("['one', 'two', 'three'] 리스트의 첫 번째 요소인 'one'이 먼저 i 변수에 대입된 후 print(i) 문장을 수행합니다. 다음에 두 번째 요소 'two'가 i 변수에 대입된 후 print(i) 문장을 수행하고 리스트의 마지막 요소까지 이것을 반복합니다.")
         st.divider()
 
-        st.subheader("for문과 continue문")
+        st.subheader(f"{idx.getIdx()}for문과 continue문")
         st.write('''
                 while 문에서 살펴본 continue 문을 for 문에서도 사용할 수 있습니다. 즉, for 문 안의 문장을 수행하는 도중 continue 문을 만나면 for 문의 처음으로 돌아가게 됩니다.
                  ''')
@@ -1258,7 +1266,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write("i의 값이 짝수인 경우 continue문이 수행되어 출력이 수행되지 않습니다.")
         st.divider()
 
-        st.subheader("for문과 함께 자주 사용하는 range 함수")
+        st.subheader(f"{idx.getIdx()}for문과 함께 자주 사용하는 range 함수")
         st.write("for 문은 숫자 리스트를 자동으로 만들어 주는 range 함수와 함께 사용하는 경우가 많습니다. 다음은 range 함수의 간단한 사용법입니다.")
         st.code('''
                 a = range(10)
@@ -1277,13 +1285,15 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 출력 : 55
                 ''')
         st.write("range(1, 11)은 숫자 1부터 10까지(1 이상 11 미만)의 숫자를 데이터로 가지는 객체입니다. 따라서 위 예에서 i 변수에 숫자가 1부터 10까지 하나씩 차례로 대입되면서 add += i 문장을 반복적으로 수행하고 add 최종적으로 55가 됩니다.")
-    #  "고급": ["함수", "클래스", "모듈", "패키지"]
-    elif path == ("파이썬 기초", "고급", "함수") :
-        st.subheader("함수란")
+    
+    elif path == ("파이썬 기초", "고급", "고급") :
+        idx.nextSection()
+        st.header(f"{idx.getSectionIdx()}함수")
+        st.subheader(f"{idx.getIdx()}함수란")
         st.write("코드의 반복을 줄이거나 어떠한 용도를 위해 특정 코드들을 모아둔 것입니다. 한 번 작성해두면 해당 코드가 필요할 때 함수를 호출해서 쉽게 재사용 할 수 있고, 용도에 따라 분리가 가능해 가독성이 좋습니다.")
         st.divider()
 
-        st.subheader("함수의 구조")
+        st.subheader(f"{idx.getIdx()}함수의 구조")
         st.write('''def는 함수를 만들 때 사용하는 예약어이며, 함수 이름은 함수를 만드는 사람이 임의로 만들 수 있습니다. 함수 이름 뒤 괄호 안의 매개변수는 이 함수에 입력으로 전달되는 값을 받는 변수입니다. 이렇게 함수를 정의한 후 if, while, for 문 등과 마찬가지로 함수에서 수행할 문장을 입력합니다.''')
         st.code('''
                 def 함수명(매개변수):
@@ -1307,7 +1317,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.divider()
 
-        st.subheader("매개변수와 인수")
+        st.subheader(f"{idx.getIdx()}매개변수와 인수")
         st.write("매개변수는 함수에 입력으로 전달된 값을 받는 변수, 인수는 함수를 호출할 때 전달하는 입력값을 의미합니다.")
 
         st.code('''
@@ -1317,7 +1327,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 print(add(3, 4))  # 3, 4는 인수
                 ''')
         st.divider()
-        st.subheader("return(반환값)")
+        st.subheader(f"{idx.getIdx()}return(반환값)")
         st.write("함수는 들어온 입력값을 받은 후 처리를 하여 적절한 값을 리턴해 줍니다. 함수의 형태는 입력값과 리턴값의 존재 유무에 딸 4가지 유형으로 나뉩니다.")
         st.write('''
                 - 입력값과 리턴값이 모두 있는 일반적인 함수
@@ -1362,7 +1372,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 출력 : Hi
                 ''')
         st.divider()
-        st.subheader("lambda")
+        st.subheader(f"{idx.getIdx()}lambda")
         st.write('''
                  lambda는 함수를 생성할 때 사용하는 예약어로, def와 동일한 역할을 합니다. 보통 함수를 한 줄로 간결하게 만들 때 사용합니다. def를 사용해야 할 정도로 복잡하지 않거나 def를 사용할 수 없는 곳에 주로 사용됩니다.
                  
