@@ -1574,17 +1574,17 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('- indexing과 slicing을 할 수 있습니다.')
         st.write('- slicing은 [**시작(포함): 끝(포함)**] 규칙에 유의합니다. 둘 다 포함 합니다.')
 
-        st.write('**01-1. indexing 예시**')
+        st.write('**01. indexing 예시**')
         st.code('''df.loc[5, 'class']''')
         st.write(df.loc[5, 'class'])
         st.divider()
 
-        st.write('**01-2. fancy indexing 예시**')
+        st.write('**02. fancy indexing 예시**')
         st.code('''df.loc[2:5, ['age', 'fare', 'who']]''')
         st.write(df.loc[2:5, ['age', 'fare', 'who']])
         st.divider()
 
-        st.write('**01-3. slicing 예시**')
+        st.write('**03. slicing 예시**')
         st.code('''df.loc[2:5, 'class':'deck'].head()''')
         st.write(df.loc[2:5, 'class':'deck'].head())
 
@@ -1592,7 +1592,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(df.loc[:6, 'class':'deck'])
         st.divider()
 
-        st.write('**01-4. loc - 조건 필터**')
+        st.write('**04. loc - 조건 필터**')
         st.write('boolean index을 만들어 조건에 맞는 데이터만 추출해 낼 수 있습니다.')
         st.code('''cond = (df['age'] >= 70)\ncond''')
         cond = (df['age'] >= 70)
@@ -1602,7 +1602,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(df.loc[cond])
         st.divider()
 
-        st.write('**01-5. loc - 다중조건**')
+        st.write('**05. loc - 다중조건**')
         st.write('다중 조건은 먼저 condition(조건)을 정의하고 **&** 와 **|** 연산자로 **복합 조건을 생성**합니다.')
         st.code(
             '''# 조건1 정의\ncond1 = (df['fare'] > 30)\n# 조건2 정의\ncond2 = (df['who'] == 'woman')''')
@@ -1616,7 +1616,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(df.loc[cond1 | cond2])
         st.divider()
 
-        st.write('**01-6. 조건 필터 후 데이터 대입**')
+        st.write('**06. 조건 필터 후 데이터 대입**')
         st.code('''cond = (df['age'] >= 70)\ncond''')
         cond = (df['age'] >= 70)
         st.write(cond)
@@ -1625,7 +1625,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(df.loc[cond])
         st.divider()
 
-        st.write('**01-7. 나이 컬럼**만 가져옵니다.')
+        st.write('**07. 나이 컬럼**만 가져옵니다.')
         with st.echo():
             df.loc[cond, 'age']
         st.divider()
@@ -1644,22 +1644,22 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(df.head())
         st.divider()
 
-        st.write('**02-1. indexing**')
+        st.write('**01. indexing**')
         st.code('''df.iloc[1, 3]''')
         st.write(df.iloc[1, 3])
         st.divider()
 
-        st.write('**02-2. Fancy Indexing**')
+        st.write('**02. Fancy Indexing**')
         st.code('''df.iloc[[0, 3, 4], [0, 1, 5, 6]]''')
         st.write(df.iloc[[0, 3, 4], [0, 1, 5, 6]])
         st.divider()
 
-        st.write('**02-3. Slicing**')
+        st.write('**03. Slicing**')
         st.code('''df.iloc[:3, :5]''')
         st.write(df.iloc[:3, :5])
         st.divider()
 
-        st.write('**02-4. isin**')
+        st.write('**04. isin**')
         st.write('특정 값의 포함 여부는 isin 함수를 통해 비교가 가능합니다. (파이썬의 in 키워드는 사용 불가 합니다.)')
         with st.echo():
             import pandas as pd
@@ -1681,7 +1681,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
             condition = sample['name'].isin(['kim', 'lee'])
         with st.echo():
             sample.loc[condition]
-
+            
     ## Excel/CSV        
 
     elif path == ("Pandas 기초", "Excel/CSV") :
@@ -2433,7 +2433,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.divider()
 
-        st.subheader('mean() - 평균')
+        st.subheader(f"{idx.getSubIdx()}mean() - 평균")
 
         st.write('데이터의 **평균**')
         st.write('DataFrame 평균')
