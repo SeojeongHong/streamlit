@@ -9,19 +9,19 @@ class IndexAllocator:
     def __init__(self):
         self.parentIdx = 0
         self.childIdx = 0
-        
+
+    #format : 1. / 2. / 3. ...
     def getHeadIdx(self) :
         #섹션 변경
         self.parentIdx += 1
         self.childIdx = 0
         
-        #format : 1. / 2. / 3. ...
         return f"{self.parentIdx}. "
-    
+
+    #format : 1.1 / 1.2 ...
     def getSubIdx(self):
         self.childIdx += 1
         
-        #format : 1.1 / 1.2 ...
         return f"{self.parentIdx}.{self.childIdx} "
 idx = IndexAllocator()
 
@@ -1321,7 +1321,168 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 : 7
                 ''')
         st.write("add는 2개의 인수를 받아 서로 더한 값을 리턴하는 lambda 함수입니다. lambda로 만든 함수는 return 명령어가 없어도 표현식의 결과값을 리턴합니다.")
+        st.divider()
 
+        # st.header(f"{idx.getHeadIdx()}클래스")
+        # st.write('''
+        #          어떤 하나의 기능을 구현하는데 여러개의 함수가 필요할 때가 있습니다. 이때 데이터와 세부적인 기능을 수행하는 함수들을 묶어서 구현할 수 있는데 
+        #          이때 기본적으로 사용되는 것이 클래스입니다. 클래스는 상속 등의 다양한 기능을 통해 프로그램의 복잡도를 감소시켜주며 확장에 매우 유리하게 작용합니다.
+        #          ''')
+        # st.code('''
+        #         class 클래스_이름 : 
+        #                     def 함수_이름1(self) : 
+        #                         수행할 문장
+        #                         ...
+        #                     def 함수_이름2(self) : 
+        #                         수행할 문장
+        #                         ...
+        #         ''')
+        # st.divider()
+        # st.subheader(f"{idx.getSubIdx()}클래스와 객체")
+        # st.write('''
+        #         클래스와 객체는 '과자틀'과 '과자 틀로 찍어낸 과자'에 비유할 수 있습니다.
+        #         ''')
+        
+        # st.divider()
+
+        st.header(f"{idx.getHeadIdx()}모듈")
+        st.write('''
+                 모듈이란 함수나 변수 또는 클래스를 모아 놓은 파이썬 파일입니다. 모듈은 다른 파이썬 프로그램에서 불러와 사용할 수 있도록 만든 파이썬 파일이라고도 할 수 있습니다. 
+                 파이썬으로 프로그래밍을 할 때 매우 많은 모듈을 사용하며, 다른 사람들이 이미 만들어 놓은 모듈을 사용할 수도 있고 직접 만들어 사용할 수도 있습니다.''')
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}모듈 만들기")
+        st.write('''
+                아래와 같이 :blue-background[add]와 :blue-background[sub] 함수만 있는 파일 mod1.py를 만들고 :red-background[C:\\hfpy] 디렉터리에 저장합니다. 이 mod1.py 파일이 바로 모듈이 됩니다.
+                 ''')
+        st.code('''
+                # mod1.py
+                def add(a, b):
+                    return a + b
+
+                def sub(a, b): 
+                    return a-b
+                ''')
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}모듈 불러오기")
+        st.write('''
+                mod1.py를 저장한 :red-background[C:\\hfpy]에 새로운 py 파일을 생성해 봅시다. 이후 만들어둔 mod1.py 파일, 즉 모듈을 파이썬에서 불러와 사용하기 위해선 mod1.py를 저장한 :blue-background[import mod1]을 작성해 줍시다. 
+                (* import는 현재 디렉터리에 있는 파일이나 파이썬 라이브러리가 저장된 디렉터리에 있는 모듈만 불러올 수 있습니다.)
+                
+                         import 모듈_이름
+
+                import는 이미 만들어 놓은 파이썬 모듈을 사용할 수 있게 해 주는 명령어입니다. mod1.py 파일에 있는 add 함수를 사용하기 위해서는 mod1.add처럼 모듈 이름 뒤에 도트 연산자(.)를 붙이고 함수 이름을 쓰면 됩니다.
+                 ''')
+        st.code('''
+                import mod1
+                print(mod1.add(3, 4))
+                # 출력 : 7
+
+                print(mod1.sub(4, 2))
+                # 출력 : 2
+                ''')
+
+        st.write('''
+                여기에서 '모듈_이름'은 mod1.py에서 .py 확장자를 제거한 mod1만을 가리킵니다. 때로는 mod1.add, mod1.sub처럼 쓰지 않고 add, sub처럼 모듈 이름 없이 함수 이름만 쓰고 싶은 경우도 있을 것입니다.
+                이럴 때는 다음과 같이 사용할 수 있습니다.
+
+                        from 모듈_이름 import 모듈_함수
+                 
+                위와 같이 함수를 직접 import하면 모듈 이름을 붙이지 않고 바로 해당 모듈의 함수를 쓸 수 있습니다.
+                 ''')
+        st.code('''
+                #add 함수 하나만 사용
+                from mod1 import add
+                
+                print(add(3, 4))
+                # 출력 : 7
+                ''')
+        st.code('''
+                #2개 이상의 함수 불러오기
+                from mod1 import add, sub
+                
+                print(add(3, 4))
+                # 출력 : 7
+
+                print(sub(4, 2))
+                # 출력 : 2
+                ''')
+        st.write('''
+                모듈 내 모든 함수를 불러오고 싶을 때 :blue-background[*] 문자를 사용할 수 있습니다.
+                ''')
+        st.code('''
+                #모든 함수 불러오기
+                from mod1 import *
+                
+                print(add(3, 4))
+                # 출력 : 7
+
+                print(sub(4, 2))
+                # 출력 : 2
+                ''')
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}클래스나 변수 등을 포함한 모듈")
+        st.write('''
+                클래스나 변수 등을 포함할 수도 있습니다. 다음과 같은 mod2.py 파일을 작성해 봅시다.
+                 ''')
+        st.code('''
+                # mod2.py
+                PI = 3.141592
+
+                class Math: 
+                    def solv(self, r): 
+                        return PI * (r ** 2) 
+
+                def add(a, b): 
+                    return a+b 
+                ''')
+        st.write('''
+                mod2를 불러오기 위해 mod1.py를 저장한 디렉터리에 새로운 py파일을 작성해 봅시다.
+                 ''')
+        
+        st.code('''
+                import mod2
+                
+                print(mod2.PI)
+                # 출력 : 3.141592
+
+                a = mod2.Math()
+                print(a.solv(2))
+                # 출력 : 12.566368
+
+                print(mod2.add(mod2.PI, 4.4))
+                # 출력 : 7.541592
+                ''')
+        
+        st.divider()
+
+        st.header(f"{idx.getHeadIdx()}패키지")
+        st.write('''
+                패키지는 모듈의 집합을 뜻합니다. 모듈은 하나의 .py 파이썬 파일, 패키지는 여러개의 .py 파일을 모아놓은 폴더 개념으로 생각할 수 있습니다.
+                파이썬 패키지 중 예로는 넘파이 (NumPy)와 Pandas (판다스)가 있습니다.
+                ''')
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}pip를 이용하여 패키지 설치하기")
+        st.write('''
+                 일부 패키지는 파이썬을 설치할 때 함께 설치됩니다. 그러나 그 외에 추가로 패키지를 더 사용해야 할 때는 사용자가 수동으로 설치해야 합니다.
+                 파이썬은 간단한 명령어만으로 패키지를 쉽게 내려받아 설치할 수 있습니다.
+
+                        pip install 패키지이름
+                 
+                예를 들어 pandas 패키지를 설치하려면 :blue-background[pip install pandas] 명령을 통해 설치할 수 있습니다.
+                ''')
+        st.divider()
+        
+        st.subheader(f"{idx.getSubIdx()}pip를 이용하여 설치된 패키지 확인하기")
+        st.write('''
+                 :blue-background[pip list] 명령을 통해 설치된 패키지 목록을 볼 수 있습니다.
+
+                        pip list
+
+                ''')
+    
     ### Pandas 컨텐츠 작성
     elif path == ("Pandas 기초", "DataFrame") :
         st.header(f"{idx.getHeadIdx()}데이터프레임 생성") ## 소단원01
