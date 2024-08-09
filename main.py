@@ -31,7 +31,9 @@ def load_contents() :
     contents = {
         "파이썬 기초": ["자료형", "제어문", "고급"],
         "Pandas 기초": ["DataFrame", "Excel/CSV", "Data 전처리", "Data 연결과 병합", "Static"],
-        "Matplotlib 기초":["Matplotlib 기본", "그래프 그리기?", "그래프에 text", "그래프", "스타일 세부 설정", "Grid, Annotate", "Plot", "막대 그래프", "이외?"]
+        "Matplotlib 기초":["Matplotlib 기본", "그래프 그리기?", "그래프에 text", "그래프", "스타일 세부 설정", 
+                         "Grid, Annotate", "Plot", "막대 그래프", "이외?"],
+        "실습 프로젝트":[],
     }
     topics = list(contents.keys())
     return contents, topics
@@ -79,6 +81,7 @@ def show_topic(topic):
             "Pandas 기초" : "Pandas 기초 문법을 제공합니다.",
             "Matplotlib 기초" : '''matplotlib.pyplot 모듈은 명령어 스타일로 동작하는 함수의 모음입니다.\n
 matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을 만들고, 몇 개의 선을 표현하고, 레이블로 꾸미는 등 간편하게 그래프를 만들고 변화를 줄 수 있습니다.''',
+            "실습 프로젝트" : "데이터 분석 및 시각화 실습 코드를 제공합니다.",
     }
     st.info(info_txt[topic])
     
