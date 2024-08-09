@@ -1709,27 +1709,28 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         
         st.write('**철도 Sheet의 데이터 불러오기**')
 
-        with st.echo():
+        st.code('''
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
-                                sheet_name='철도')
+            excel = pd.read_excel('seoul_transportation.xlsx', 
+                                sheet_name='철도', engine='openpyxl')
             excel.head()
-        
+            ''')
         
         import pandas as pd
         excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
-                                sheet_name='철도')
+                                sheet_name='철도', engine='openpyxl')
         st.write(excel.head())
 
         # st.divider()
 
         st.write('**버스 Sheet의 데이터 불러오기**')
 
-        with st.echo():
+        st.code('''
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+            excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
             excel.head()
+            ''')
         excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
         st.write(excel.head())
@@ -1737,11 +1738,15 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.markdown(''':blue-background[sheet_name]을 None으로 지정하면 모든 sheet를 가지고 옵니다.''')
                     
         st.write('가지고 올 때는 OrderedDict로 가져오며, :blue-background[keys()]로 시트명을 조회할 수 있습니다.')
-        with st.echo():
+        st.code('''
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+            excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name=None, engine='openpyxl')
             excel
+            ''')
+        excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+                                sheet_name=None, engine='openpyxl')
+        st.write(excel)
 
         st.divider()
         st.markdown(':blue-background[keys()]를 통해 엑셀이 포함하고 있는 시트를 조회할 수 있습니다.')
@@ -1758,12 +1763,16 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                     )
         st.divider()
 
-        with st.echo():
+        st.code('''
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', sheet_name='철도', engine='openpyxl')
+            excel = pd.read_excel('seoul_transportation.xlsx', sheet_name='철도', engine='openpyxl')
             excel.head()
+            ''')
+        excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+                                sheet_name='버스', engine='openpyxl')
         st.write(excel.head())
-            
+        
+
         st.divider()
 
         st.write('**시트명 없이 저장**')
@@ -1796,20 +1805,25 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}CSV-불러오기") ## 소단원02- 세부01
-        with st.echo():
+        st.code('''
             import pandas as pd
-            df = pd.read_csv('data/서울시주민등록인구/seoul_population.csv')
+            df = pd.read_csv('seoul_population.csv')
             df
+            ''')
+        df = pd.read_csv('data/서울시주민등록인구/seoul_population.csv')
+        st.write(df)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}CSV-저장하기") ## 소단원02 - 세부02
         st.markdown('저장하는 방법은 excel과 유사합니다.\n'
                     '다만, csv파일 형식에는 sheet_name 옵션은 없습니다.')
 
-        with st.echo():
+        st.code('''
             import pandas as pd
-            df = pd.read_csv('data/서울시주민등록인구/seoul_population.csv')
+            df = pd.read_csv('seoul_population.csv')
             df
+            ''')
+        df = pd.read_csv('data/서울시주민등록인구/seoul_population.csv')
         st.divider()
 
         st.write(''':blue-background[to_csv()]로 csv 파일형식으로 저장할 수 있습니다.''')
@@ -1819,15 +1833,17 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
 
         st.markdown("읽어드린 **Excel 파일도 csv**로 저장할 수 있습니다.")
-        with st.echo():
+        st.code('''
             import pandas as pd
-            excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
-                                sheet_name='버스')
+            excel = pd.read_excel('seoul_transportation.xlsx', sheet_name='버스')
+                ''')
+        # excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
+        #                         sheet_name='버스')
         code = '''excel.to_csv('sample1.csv', index=False)'''
         st.code(code, language="python")
         st.write('현재 디렉터리에서 sample1.csv가 저장된 것을 확인할 수 있습니다.')
         st.divider()
-
+    
     elif path == ("Pandas 기초", "Data 전처리"):
         st.header(f"{idx.getHeadIdx()}데이터 복사") ## 소단원01
         
@@ -2182,11 +2198,32 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.write('여러 개의 DataFrame으로 이루어진 데이터를 합치는 방법인 concat()(연결), merge()(병합)에 대하여 다뤄보겠습니다.')
         st.write('- :blue-background[concat()]은 2개 이상의 DataFrame을 행 혹은 열 방향으로 연결합니다.')
-        
+        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 2개의 데이터를 다운로드 해주세요')
+
+        with open('data/유가정보/gas_first_2019.csv', "rb") as template_file:
+            template_byte = template_file.read()
+        with open('data/유가정보/gas_second_2019.csv', "rb") as template_file:
+            template_sec = template_file.read()
+        but1, but2 = st.columns([2, 6])
+        with but1:
+            button1 = st.download_button(label="download data",
+                            type="primary",
+                            data=template_byte,
+                           file_name = "gas_first_2019.csv"
+            )
+        with but2:
+            button2 = st.download_button(label="download data",
+                            type="primary",
+                            data=template_sec,
+                           file_name = "gas_second_2019.csv"
+            )
+        st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
+
+
         st.divider()
 
         st.write('**1월부터 6월까지 상반기** 데이터 로드')
-        code = '''gas1 = pd.read_csv('data/유가정보/gas_first_2019.csv', encoding='euc-kr')'''
+        code = '''gas1 = pd.read_csv('gas_first_2019.csv', encoding='euc-kr')'''
         st.code(code)
         st.code('print(gas1.shape)\ngas1.head()')
         gas1 = pd.read_csv('data/유가정보/gas_first_2019.csv', encoding='euc-kr')
@@ -2194,9 +2231,11 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(gas1.head())
         
         st.write('**7월 부터 12월 까지 하반기** 데이터 로드')
-        code =  '''gas2 = pd.read_csv('data/유가정보/gas_second_2019.csv', encoding='euc-kr')'''
+        code =  '''gas2 = pd.read_csv('gas_second_2019.csv', encoding='euc-kr')'''
+        st.code(code)
         gas2 = pd.read_csv('data/유가정보/gas_second_2019.csv', encoding='euc-kr')
-        code = '''print(gas2.shape)\ngas2.head()'''    
+        code = '''print(gas2.shape)\ngas2.head()'''
+        st.code(code)    
         st.write(gas2.shape)
         st.write(gas2.head())
 
