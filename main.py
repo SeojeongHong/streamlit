@@ -4797,6 +4797,102 @@ y'''
 
     elif path == ("실습 프로젝트", "대기오염 데이터 분석"):
         st.header(f"{idx.getHeadIdx()}서울시 대기오염")
+        st.subheader("서울시 대기오염")
+        st.write("CSV 파일의 2022년 서울시 대기오염 측정정보를 사용하여 데이터 로드, 분석 및 시각화 결론도출까지 실습을 진행합니다.")
+
+        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
+        
+        with open('data/서울시대기오염측정정보/Measurement_summary.csv', "rb") as template_file:
+            template_byte = template_file.read()
+
+        st.download_button(label="download data",
+                            type="primary",
+                            data=template_byte,
+                           file_name = "AIR_HOUR_2022.csv"
+        )
+        with st.echo():
+            # 필요한 패키지 설치
+            import numpy as np
+            import pandas as pd
+            import seaborn as sns
+            import matplotlib.pyplot as plt
+
+            # 데이터 불러오기
+            df_summary = pd.read_csv('data/서울시대기오염측정정보/Measurement_summary.csv')
+            df_item = pd.read_csv('data/서울시대기오염측정정보/Measurement_item_info.csv')
+            df_station = pd.read_csv('data/서울시대기오염측정정보/Measurement_station_info.csv')
+
+            df_summary.head()
+            df_item.head()
+            df_station.head()
+        import pandas as pd
+        df_summary = pd.read_csv('data/서울시대기오염측정정보/Measurement_summary.csv')
+        df_item = pd.read_csv('data/서울시대기오염측정정보/Measurement_item_info.csv')
+        df_station = pd.read_csv('data/서울시대기오염측정정보/Measurement_station_info.csv')
+
+        st.write("Measurement_summary")
+        st.write(df_summary.head())
+        st.write("Measurement_item_info")
+        st.write(df_item.head())
+        st.write("Measurement_station_info")
+        st.write(df_station.head())
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}데이터 합치기")
+        st.write("Measurement data를 data와 time으로 나누고, 일 평균 값으로 합칩니다.")
+
+        with st.echo():
+            # 'Measurement date' 열을 사용하여 date_time 분리
+            date_time = df_summary['Measurement date'].str.split(" ", n=1, expand=True)
+            date_time.head()
+        date_time = df_summary['Measurement date'].str.split(" ", n=1, expand=True)
+        st.write(date_time.head())
+
+        with st.echo():
+            # date_time에서 날짜와 시간을 추출하여 새로운 열 추가
+            df_summary['date'] = date_time[0]
+            df_summary['time'] = date_time[1]
+            # 원래의 'Measurement date' 열 삭제
+            df_summary = df_summary.drop(['Measurement date'], axis=1)
+            df_summary.head()
+        # df_summary['date'] = date_time[0]
+        # df_summary['time'] = date_time[1]
+        # df_summary = df_summary.drop(['Measurement date'], axis=1)
+        # st.write(df_summary.head())
+
+
+        st.subheader(f"{idx.getSubIdx()}데이터 분석")
+        st.write("먼저 서울 전체에 대해서 분석해 보기 위해서 data로 groupby하고 분석합니다.")
+
+        with st.echo():
+            df_seoul = df_summary.groupby(['date'], as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':'mean', 'CO':'mean', 'PM10':'mean', 'PM2.5':'mean'})
+            df_seoul.head()
+        df_seoul = df_summary.groupby(['date'], as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':'mean', 'CO':'mean', 'PM10':'mean', 'PM2.5':'mean'})
+        st.write(df_seoul.head())
+
+        with st.echo():
+            df_seoul.plot(x='date')
+            plt.show()
+        st.pyplot(plt)
+        plt.close()
+
+        # st.subheader(f"{idx.getSubIdx()}Seaborn 히트맵 예제")
+        # with st.echo():
+        #     df_numeric = df_seoul.drop(columns=['date'])
+        #     # 상관 행렬 계산
+        #     corr = df_seoul.corr()
+        #     # Figure 및 Axes 객체 생성
+        #     fig, ax = plt.subplots(figsize=(11, 9))
+        #     # 색상 맵 생성
+        #     cmap = sns.diverging_palette(220, 10, as_cmap=True)
+        #     # 히트맵 생성
+        #     sns.heatmap(corr, cmap=cmap, vmax=1, center=0,
+        #                 square=True, linewidths=.5, cbar_kws={"shrink": .5})
+        #     plt.show()
+        # st.pyplot(plt)
+        # plt.close()
+
         
 
     else :
