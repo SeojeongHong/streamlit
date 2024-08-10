@@ -1,9 +1,9 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import matplotlib.pyplot as plt
+import numpy as np
 plt.rcParams['font.family'] ='Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] =False
-import numpy as np
 
 class IndexAllocator:
     def __init__(self):
@@ -15,14 +15,13 @@ class IndexAllocator:
         #섹션 변경
         self.parentIdx += 1
         self.childIdx = 0
-        
         return f"{self.parentIdx}. "
 
     #format : 1.1 / 1.2 ...
     def getSubIdx(self):
         self.childIdx += 1
-        
         return f"{self.parentIdx}.{self.childIdx} "
+
 idx = IndexAllocator()
 
 @st.cache_data
