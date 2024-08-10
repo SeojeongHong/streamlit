@@ -1,9 +1,10 @@
+plt.rcParams['font.family'] ='Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] =False
 import streamlit as st
 from streamlit_option_menu import option_menu
 import matplotlib.pyplot as plt
 import numpy as np
-plt.rcParams['font.family'] ='Malgun Gothic'
-plt.rcParams['axes.unicode_minus'] =False
+
 
 class IndexAllocator:
     def __init__(self):
