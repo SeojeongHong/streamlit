@@ -5,6 +5,9 @@ plt.rcParams['font.family'] ='Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] =False
 import numpy as np
 
+#########################################
+#           컨텐츠 제거 코드            #
+#########################################
 
 class IndexAllocator:
     def __init__(self):
@@ -98,31 +101,6 @@ matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을
                         args=('change_chapter', {'chapter':title}),
                         use_container_width=True)
 
-### pandas에서 사용할 타이타닉 데이터셋
-def pandas_dataset():
-        st.subheader(f"{idx.getSubIdx()}실습에 사용할 데이터셋")
-        with st.echo():
-            import seaborn as sns
-            df = sns.load_dataset('titanic')
-            df
-
-        st.subheader(f"{idx.getSubIdx()}컬럼(columns) 설명")
-        st.markdown('- survived: 생존여부 (1: 생존, 0: 사망)\n'
-                    '- pclass: 좌석 등급 (1등급, 2등급, 3등급)\n'
-                    '- sex: 성별\n'
-                    '- age: 나이\n'
-                    '- sibsp: 형제 + 배우자 수\n'
-                    '- parch: 부모 + 자녀 수\n'
-                    '- fare: 좌석 요금\n'
-                    '- embarked: 탑승 항구 (S, C, Q)\n'
-                    '- class: pclass와 동일\n'
-                    '- who: 남자(man), 여자(woman), 아이(child)\n'
-                    '- adult_male: 성인 남자 여부\n'
-                    '- deck: 데크 번호 (알파벳 + 숫자 혼용)\n'
-                    '- embark_town: 탑승 항구 이름\n'
-                    '- alive: 생존여부 (yes, no)\n'
-                    '- alone: 혼자 탑승 여부\n')
-        st.divider()
 
 def show_chapter(topic, chapter):
     st.title(chapter)
@@ -142,19 +120,6 @@ def show_chapter(topic, chapter):
                 b = 100.0
                 ''')
         st.divider()
-
-        st.subheader(f"{idx.getSubIdx()}숫자형의 연산 - 산술 연산자")
-        st.write('''
-                |연산자	|의미	|
-                |----------|-----------|
-                |+          |덧셈
-                |-	        |뺄셈
-                |*	        |곱셈
-                |**	        |거듭제곱
-                |/	        |나눗셈
-                |//	        |몫
-                |%	        |나머지
-                 ''')
 
     else :
         st.error("Content Not Found !")
