@@ -1,2 +1,7 @@
 streamlit
 streamlit-option-menu
+matplotlib
+numpy
+pandas
+seaborn
+openpyxl
