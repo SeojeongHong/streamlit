@@ -4803,15 +4803,38 @@ y'''
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
-        
-        with open('data/서울시대기오염측정정보/Measurement_item_info.csv', "rb") as template_file:
-            template_byte = template_file.read()
+        col1, col2, col3 = st.columns(3)
 
-        st.download_button(label="download data",
-                            type="primary",
-                            data=template_byte,
-                           file_name = "Measurement_item_info.csv"
-        )
+        with col1:
+            st.write("Measurement_item_info.csv")
+            with open('data/서울시대기오염측정정보/Measurement_item_info.csv', "rb") as template_file:
+                template_byte = template_file.read()
+
+            st.download_button(label="download data",
+                                type="primary",
+                                data=template_byte,
+                            file_name = "Measurement_item_info.csv"
+            )
+        with col2:
+            st.write("Measurement_station_info.csv")
+            with open('data/서울시대기오염측정정보/Measurement_station_info.csv', "rb") as template_file:
+                template_byte = template_file.read()
+
+            st.download_button(label="download data",
+                                type="primary",
+                                data=template_byte,
+                            file_name = "Measurement_station_info.csv"
+            )
+        with col3:
+            st.write("Measurement_summary.csv")
+            with open('data/서울시대기오염측정정보/Measurement_summary.csv', "rb") as template_file:
+                template_byte = template_file.read()
+
+            st.download_button(label="download data",
+                                type="primary",
+                                data=template_byte,
+                            file_name = "Measurement_summary.csv"
+            )
         with st.echo():
             # 필요한 패키지 설치
             import numpy as np
@@ -4882,21 +4905,20 @@ sns.heatmap(corr, cmap=cmap, vmax=1, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5})
 plt.show() 
 '''
-        # 히트맵 예제 오류
-        # with st.echo():
-        #     df_numeric = df_seoul.drop(columns=['date'])
-        #     # 상관 행렬 계산
-        #     corr = df_seoul.corr()
-        #     # Figure 및 Axes 객체 생성
-        #     fig, ax = plt.subplots(figsize=(11, 9))
-        #     # 색상 맵 생성
-        #     cmap = sns.diverging_palette(220, 10, as_cmap=True)
-        #     # 히트맵 생성
-        #     sns.heatmap(corr, cmap=cmap, vmax=1, center=0,
-        #                 square=True, linewidths=.5, cbar_kws={"shrink": .5})
-        #     plt.show()
-        # st.pyplot(plt)
-        # plt.close()
+        with st.echo():
+            df_numeric = df_seoul.drop(columns=['date'])
+            # 상관 행렬 계산
+            corr = df_numeric.corr()
+            # Figure 및 Axes 객체 생성
+            fig, ax = plt.subplots(figsize=(11, 9))
+            # 색상 맵 생성
+            cmap = sns.diverging_palette(220, 10, as_cmap=True)
+            # 히트맵 생성
+            sns.heatmap(corr, cmap=cmap, vmax=1, center=0,
+                        square=True, linewidths=.5, cbar_kws={"shrink": .5})
+            plt.show()
+        st.pyplot(plt)
+        plt.close()
         st.divider()
         st.write("**PM10 농도**")
         st.write("미세먼지(PM10) 기준으로 좋음, 보통, 나쁨, 매우나쁨으로 구분")
