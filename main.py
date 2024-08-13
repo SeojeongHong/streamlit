@@ -4797,20 +4797,20 @@ y'''
         plt.close()
 
     elif path == ("실습 프로젝트", "대기오염 데이터 분석"):
-        st.header(f"{idx.getHeadIdx()}서울시 대기오염")
-        st.subheader("서울시 대기오염")
-        st.write("CSV 파일의 2022년 서울시 대기오염 측정정보를 사용하여 데이터 로드, 분석 및 시각화 결론도출까지 실습을 진행합니다.")
+        st.header(f"{idx.getHeadIdx()}서울시 종로구 대기오염")
+        st.subheader("서울시 종로구 대기오염")
+        st.write("CSV 파일의 2022년 서울시 종로구 대기오염 측정정보를 사용하여 데이터 로드, 분석 및 시각화 결론도출까지 실습을 진행합니다.")
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
         
-        with open('data/서울시대기오염측정정보/Measurement_summary.csv', "rb") as template_file:
+        with open('data/서울시대기오염측정정보/Measurement_item_info.csv', "rb") as template_file:
             template_byte = template_file.read()
 
         st.download_button(label="download data",
                             type="primary",
                             data=template_byte,
-                           file_name = "AIR_HOUR_2022.csv"
+                           file_name = "Measurement_item_info.csv"
         )
         with st.echo():
             # 필요한 패키지 설치
@@ -4827,45 +4827,41 @@ y'''
             df_summary.head()
             df_item.head()
             df_station.head()
-        import pandas as pd
-        df_summary = pd.read_csv('data/서울시대기오염측정정보/Measurement_summary.csv')
-        df_item = pd.read_csv('data/서울시대기오염측정정보/Measurement_item_info.csv')
-        df_station = pd.read_csv('data/서울시대기오염측정정보/Measurement_station_info.csv')
-
-        st.write("Measurement_summary")
+        st.write("**Measurement_summary**")
         st.write(df_summary.head())
-        st.write("Measurement_item_info")
+        st.write("**Measurement_item_info**")
         st.write(df_item.head())
-        st.write("Measurement_station_info")
+        st.write("**Measurement_station_info**")
         st.write(df_station.head())
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}데이터 합치기")
         st.write("Measurement data를 data와 time으로 나누고, 일 평균 값으로 합칩니다.")
-
-        with st.echo():
-            # 'Measurement date' 열을 사용하여 date_time 분리
-            date_time = df_summary['Measurement date'].str.split(" ", n=1, expand=True)
-            date_time.head()
+        code = '''# 'Measurement date' 열을 사용하여 date_time 분리
+date_time = df_summary['Measurement date'].str.split(" ", n=1, expand=True)
+date_time.head()'''
+        st.code(code, language='python')
         date_time = df_summary['Measurement date'].str.split(" ", n=1, expand=True)
         st.write(date_time.head())
 
-        with st.echo():
-            # date_time에서 날짜와 시간을 추출하여 새로운 열 추가
-            df_summary['date'] = date_time[0]
-            df_summary['time'] = date_time[1]
-            # 원래의 'Measurement date' 열 삭제
-            df_summary = df_summary.drop(['Measurement date'], axis=1)
-            df_summary.head()
-        # df_summary['date'] = date_time[0]
-        # df_summary['time'] = date_time[1]
-        # df_summary = df_summary.drop(['Measurement date'], axis=1)
-        # st.write(df_summary.head())
+        code = '''
+# date_time에서 날짜와 시간을 추출하여 새로운 열 추가
+df_summary['date'] = date_time[0]
+df_summary['time'] = date_time[1]
+# 원래의 'Measurement date' 열 삭제
+df_summary = df_summary.drop(['Measurement date'], axis=1)
+df_summary.head()
+'''
+        st.code(code, language='python')
+
+        df_summary['date'] = date_time[0]
+        df_summary['time'] = date_time[1]
+        df_summary = df_summary.drop(['Measurement date'], axis=1)
+        st.write(df_summary.head())
 
 
         st.subheader(f"{idx.getSubIdx()}데이터 분석")
         st.write("먼저 서울 전체에 대해서 분석해 보기 위해서 data로 groupby하고 분석합니다.")
-
         with st.echo():
             df_seoul = df_summary.groupby(['date'], as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':'mean', 'CO':'mean', 'PM10':'mean', 'PM2.5':'mean'})
             df_seoul.head()
@@ -4878,7 +4874,15 @@ y'''
         st.pyplot(plt)
         plt.close()
 
-        # st.subheader(f"{idx.getSubIdx()}Seaborn 히트맵 예제")
+        code = '''
+corr = df_seoul.corr()
+f, ax = plt.subplots(figsize=(11, 9))
+cmap = sns.diverging_palette(220, 10, as_cmap=True)
+sns.heatmap(corr, cmap=cmap, vmax=1, center=0,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
+plt.show() 
+'''
+        # 히트맵 예제 오류
         # with st.echo():
         #     df_numeric = df_seoul.drop(columns=['date'])
         #     # 상관 행렬 계산
@@ -4893,9 +4897,66 @@ y'''
         #     plt.show()
         # st.pyplot(plt)
         # plt.close()
-
+        st.divider()
+        st.write("**PM10 농도**")
+        st.write("미세먼지(PM10) 기준으로 좋음, 보통, 나쁨, 매우나쁨으로 구분")
+        st.write("대한민국의 미세먼지 환경기준(일평균)")
+        st.write("◾ 좋음 0~30")
+        st.write("◾ 보통 ~80")
+        st.write("◾ 나쁨 ~150")
+        st.write("◾ 매우나쁨151~")
+        code = '''df_seoul['PM10_class'] = -1
+df_seoul.head()'''
+        st.code(code, language='python')
+        df_seoul['PM10_class'] = -1
+        st.write(df_seoul.head())
+        st.write("PM10 농도 값을 기준으로 각 행에 대해 클래스를 할당하고, 'PM10_class'라는 새로운 열에 이 값을 저장합니다.")
+        st.write("PM10 농도가 특정 범위에 있는 경우에 따라 0,1,2,3 값을 가집니다.")
+        code = '''
+for (idx, row) in df_seoul.iterrows():
+    pm10 = row[5]
+    _class = -1
+    if pm10 < 0:
+        continue
+    elif pm10 < 30:
+        _class = 0
+    elif pm10 < 80:
+        _class = 1
+    elif pm10 < 150:
+        _class = 2
+    else:
+        _class = 3
+    df_seoul.loc[idx, 'PM10_class'] = _class
+df_seoul.head()
+'''
+        for indx, row in df_seoul.iterrows():
+            # pm10 = row[5]
+            pm10 = row['PM10']
+            _class = -1
+            if pm10 < 0:
+                continue
+            elif pm10 < 30:
+                _class = 0
+            elif pm10 < 80:
+                _class = 1
+            elif pm10 < 150:
+                _class = 2
+            else:
+                _class = 3
+            df_seoul.loc[indx, 'PM10_class'] = _class
+        st.write(df_seoul.head())
+        df_seoul['PM10_class'].value_counts().plot(kind="bar")
+        st.pyplot(plt)
+        plt.close()
+        st.write("**Examine Strongest Correlation**")
+        st.write("seaborn과 jointplot을 사용하여 두 변수 간의 관계를 시각화 하였습니다.")
+        st.write("df_seoul 데이터프레임의 'CO'와 'NO2'라는 두 변수 간의 상관관계를 시각화 하였습니다.")
+        with st.echo():
+            sns.jointplot(x=df_seoul["CO"], y=df_seoul["NO2"], kind='kde', xlim=(0,1),ylim=(0,0.13), color='g')
+            plt.show()
+        st.pyplot(plt)
+        plt.close()
         
-
     else :
         st.error("Content Not Found !")
 
