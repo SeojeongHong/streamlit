@@ -4985,7 +4985,7 @@ df_seoul.head()
         st.write("지역별 음식점 소비 데이터를 활용하여 데이터 로드부터, 데이터 탐색 및 분석, 시각화, 결론 도출까지 실습 진행해보겠습니다.")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
         
-        with open('pages/data/음식점소비트렌드/음식점소비트렌드데이터.csv', "rb") as template_file:
+        with open('data/음식점소비트렌드/음식점소비트렌드데이터.csv', "rb") as template_file:
             template_csv = template_file.read()
 
         st.download_button(label="download data",
