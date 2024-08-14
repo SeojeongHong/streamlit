@@ -35,7 +35,7 @@ def load_contents() :
         "파이썬 기초": ["자료형", "제어문", "고급"],
         "Pandas 기초": ["DataFrame", "Excel/CSV", "Data 전처리", "Data 연결과 병합", "Static"],
         "Matplotlib 기초":["Matplotlib 기본", "그래프 그리기", "그래프에 text", "그래프 세부 속성", "스타일 세부 설정", 
-                         "Grid, Annotate", "다양한 plot", "막대 그래프", "Pie chart, 3D plot"],
+                         "Grid, Annotate", "다양한 Plot", "막대 그래프", "Pie chart, 3D plot"],
         "실습 프로젝트":["대기오염 데이터 분석", "지역별 음식점 소비 트렌드 분석", "날씨별 공공자전거 수요 분석"],
     }
     topics = list(contents.keys())
