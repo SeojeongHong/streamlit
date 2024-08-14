@@ -5,7 +5,6 @@ import os
 from matplotlib import font_manager as fm
 fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
-plt.rcParams['font.family'] = prop.get_name()
 import numpy as np
 import seaborn as sns
 
@@ -5655,7 +5654,7 @@ plt.show()''')
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
         ax.set_title("이용건수 분포", fontproperties=prop)
-        ax.set_xlabel("이용 건수")
+        ax.set_xlabel("이용 건수", fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
 
