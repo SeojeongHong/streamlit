@@ -102,32 +102,6 @@ matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을
                         args=('change_chapter', {'chapter':title}),
                         use_container_width=True)
 
-### pandas에서 사용할 타이타닉 데이터셋
-def pandas_dataset():
-        st.subheader(f"{idx.getSubIdx()}실습에 사용할 데이터셋")
-        with st.echo():
-            import seaborn as sns
-            df = sns.load_dataset('titanic')
-            df.head()
-
-        st.subheader(f"{idx.getSubIdx()}컬럼(columns) 설명")
-        st.markdown('- survived: 생존여부 (1: 생존, 0: 사망)\n'
-                    '- pclass: 좌석 등급 (1등급, 2등급, 3등급)\n'
-                    '- sex: 성별\n'
-                    '- age: 나이\n'
-                    '- sibsp: 형제 + 배우자 수\n'
-                    '- parch: 부모 + 자녀 수\n'
-                    '- fare: 좌석 요금\n'
-                    '- embarked: 탑승 항구 (S, C, Q)\n'
-                    '- class: pclass와 동일\n'
-                    '- who: 남자(man), 여자(woman), 아이(child)\n'
-                    '- adult_male: 성인 남자 여부\n'
-                    '- deck: 데크 번호 (알파벳 + 숫자 혼용)\n'
-                    '- embark_town: 탑승 항구 이름\n'
-                    '- alive: 생존여부 (yes, no)\n'
-                    '- alone: 혼자 탑승 여부\n')
-        st.divider()
-
 def show_chapter(topic, chapter):
     st.title(chapter)
     path = (topic, chapter)
@@ -136,6 +110,7 @@ def show_chapter(topic, chapter):
     if path == ("파이썬 기초", "자료형") :
         st.header(f"{idx.getHeadIdx()}숫자형")
         st.write("숫자형에는 정수형(Integer)과 실수형(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
+        
 ###############################################################################################################
     elif path == ("실습 프로젝트", "날씨별 공공자전거 수요 분석"):
         st.header(f"{idx.getHeadIdx()}날씨별 공공자전거 수요 분석")
@@ -196,7 +171,7 @@ def show_chapter(topic, chapter):
                 bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
                 
                 bike_df2.head()
-                ''')
+                ''', line_numbers=True)
         bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
         bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
         st.write(bike_df2.head())
