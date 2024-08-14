@@ -108,7 +108,7 @@ def pandas_dataset():
         with st.echo():
             import seaborn as sns
             df = sns.load_dataset('titanic')
-            df
+            df.head()
 
         st.subheader(f"{idx.getSubIdx()}컬럼(columns) 설명")
         st.markdown('- survived: 생존여부 (1: 생존, 0: 사망)\n'
@@ -1527,7 +1527,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.write('values는 모든 값을 출력하며, **numpy array 형식**으로 출력됩니다.')
         with st.echo():
-            df.values
+            df.values.head()
 
         st.header(f"{idx.getHeadIdx()}데이터프레임 정렬") ## 소단원04
 
