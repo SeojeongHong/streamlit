@@ -2103,7 +2103,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         
         code = 'df1.drop(1)'
         st.code(code)
-        st.write(df1.head().drop(1))
+        st.write(df1.drop(1))
         
         st.divider()
         st.write('행 삭제시 **범위를 지정하여 삭제**할 수 있습니다.')
@@ -2114,7 +2114,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('**fancy indexing**을 활용하여 삭제할 수 있습니다.')
         code = 'df1.drop([1, 3, 5, 7, 9])'
         st.code(code)
-        st.write(df1.head().drop([1, 3, 5, 7, 9]))
+        st.write(df1.drop([1, 3, 5, 7, 9]))
             
         st.divider()
 
@@ -2130,7 +2130,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.write('**다수의 컬럼(column) 삭제**도 가능합니다.')
         st.code('''df1.drop(['who', 'deck', 'alive'], axis=1)''')
-        st.write(df1.head().drop(['who', 'deck', 'alive'], axis=1))
+        st.write(df1.drop(['who', 'deck', 'alive'], axis=1))
         st.divider()
 
         st.write('삭제된 내용을 바로 적용하려면')
