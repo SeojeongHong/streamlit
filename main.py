@@ -1,10 +1,12 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import matplotlib.pyplot as plt
-plt.rcParams['font.family'] ='Malgun Gothic'
-plt.rcParams['axes.unicode_minus'] =False
+import os
+from matplotlib import font_manager as fm
+fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
+prop = fm.FontProperties(fname=fpath)
 import numpy as np
-
+import seaborn as sns
 
 class IndexAllocator:
     def __init__(self):
@@ -5651,6 +5653,7 @@ plt.show()''')
         st.code('''sns.histplot(data['이용건수'])''')
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
+        plt.fig("이용건수 분포", fontproperties=prop)
         st.pyplot(fig)
 
         st.code('''sns.lineplot(x=data['일'], y=data['이용건수'])''')
