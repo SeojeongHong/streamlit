@@ -177,7 +177,7 @@ def show_chapter(topic, chapter):
         bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
         #------------------------------------------------------------
         st.write('''
-                **weather_info** /n
+                **weather_info** //n
                 weather_info.head()
                 ''')
         st.write(weather_info.head())
