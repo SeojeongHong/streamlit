@@ -5466,16 +5466,16 @@ plt.show()''')
             import matplotlib.pyplot as plt
 
             # 기상관측자료 데이터
-            weather_info = pd.read_csv('data/실습03/기상관측자료/OBS_ASOS_TIM_202306.csv', encoding='cp949')
+            weather_info = pd.read_csv('data/실습03/기상관측자료_202306.csv', encoding='cp949')
             
             #자전거 이용정보 데이터
             files = [
-                "data/실습03/공공자전거이용정보/bike_2306_0.csv",
-                "data/실습03/공공자전거이용정보/bike_2306_1.csv",
-                "data/실습03/공공자전거이용정보/bike_2306_2.csv",
-                "data/실습03/공공자전거이용정보/bike_2306_3.csv",
-                "data/실습03/공공자전거이용정보/bike_2306_4.csv",
-                "data/실습03/공공자전거이용정보/bike_2306_5.csv"
+                "data/실습03/공공자전거이용정보0.csv",
+                "data/실습03/공공자전거이용정보1.csv",
+                "data/실습03/공공자전거이용정보2.csv",
+                "data/실습03/공공자전거이용정보3.csv",
+                "data/실습03/공공자전거이용정보4.csv",
+                "data/실습03/공공자전거이용정보5.csv"
             ]
 
             #파일 병합
