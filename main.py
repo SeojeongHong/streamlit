@@ -5615,18 +5615,10 @@ plt.show()''')
         st.subheader(f"{idx.getSubIdx()}피처의 분포 시각화")
         st.write("원하는 컬럼을 선택해 피처의 분포를 확인합니다.")
         st.code('''
-                con_cols = []
-                
-                for col in data.columns:
-                if (data[col].dtype == 'float64') or (col == '습도(%)'):
-                    con_cols.append(col)
+                con_cols = ["기온", "강수량(mm)", "풍속(m/s)", "습도(%)", "일조"]
                 ''')
-        con_cols = []
-                
-        for col in data.columns:
-            if (data[col].dtype == 'float64') or (col == '습도(%)'):
-                con_cols.append(col)
-        st.write(con_cols)
+        con_cols = ["기온", "강수량(mm)", "풍속(m/s)", "습도(%)", "일조"]
+        
         
         st.write("선택된 칼럼에 대한 피처의 분포를 시각화합니다.")
         st.code('''
@@ -5637,7 +5629,7 @@ plt.show()''')
                 sns.histplot(data = data, x = col, ax = ax[i])
                 ''')
         
-        fig, axes = plt.subplots(2,5, figsize = (20,8))
+        fig, axes = plt.subplots(1,5, figsize = (20,8))
         ax = axes.flatten()
         # axes = (n,n)형태 / ax = m형태
         for i, col in enumerate(con_cols):
