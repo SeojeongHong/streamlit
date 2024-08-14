@@ -5469,19 +5469,17 @@ plt.show()''')
             weather_info = pd.read_csv('data/기상관측자료/OBS_ASOS_TIM_202306.csv', encoding='cp949')
             
             #자전거 이용정보 데이터
-            file0="data/공공자전거이용정보/bike_2306_0.csv"
-            file1="data/공공자전거이용정보/bike_2306_1.csv"
-            file2="data/공공자전거이용정보/bike_2306_2.csv"
-            file3="data/공공자전거이용정보/bike_2306_3.csv"
-            file4="data/공공자전거이용정보/bike_2306_4.csv"
-            file5="data/공공자전거이용정보/bike_2306_5.csv"
-            bike0 = pd.read_csv(file0, encoding = 'cp949')
-            bike1 = pd.read_csv(file1, encoding = 'cp949')
-            bike2 = pd.read_csv(file2, encoding = 'cp949')
-            bike3 = pd.read_csv(file3, encoding = 'cp949')
-            bike4 = pd.read_csv(file4, encoding = 'cp949')
-            bike5 = pd.read_csv(file5, encoding = 'cp949')
-            bike_info = pd.concat([bike0, bike1, bike2, bike3, bike4, bike5],ignore_index = True)
+            files = [
+                "data/공공자전거이용정보/bike_2306_0.csv",
+                "data/공공자전거이용정보/bike_2306_1.csv",
+                "data/공공자전거이용정보/bike_2306_2.csv",
+                "data/공공자전거이용정보/bike_2306_3.csv",
+                "data/공공자전거이용정보/bike_2306_4.csv",
+                "data/공공자전거이용정보/bike_2306_5.csv"
+            ]
+
+            #파일 병합
+            bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
 
             weather_info.head()
             bike_info.head()
