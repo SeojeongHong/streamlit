@@ -5697,10 +5697,7 @@ plt.show()''')
         st.pyplot(fig)
         plt.close(fig)
 
-        st.write('''
-                공휴일 이용건수보다 평일 이용건수가 더 많음
-                -> 분석 결과 작성
-                ''')
+    
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}평일과 공휴일 이용건수 차이")
