@@ -2775,6 +2775,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code('''numeric_df.corr()['survived']''')
         st.write(numeric_df.corr()['survived']) 
         st.divider()
+    
     ### Matplotlib 컨텐츠 작성
     elif path == ("Matplotlib 기초", "Matplotlib 기본"):
         st.header(f"{idx.getHeadIdx()}기본 사용")
@@ -3288,7 +3289,7 @@ Graph Title'''
             plt.plot([1, 2, 3], [3, 6, 9])
             plt.plot([1, 2, 3], [2, 4, 9])
             # 타이틀 & font 설정
-            plt.title("이것은 타이틀 입니다")
+            plt.title("이것은 타이틀 입니다", fontproperties=prop)
 
             plt.show()
         st.pyplot(plt)
@@ -3306,11 +3307,11 @@ Graph Title'''
             plt.plot(np.arange(10), np.log(np.arange(10)))
 
             # 타이틀 & font 설정
-            plt.title('X, Y 틱을 조정합니다', fontsize=10)
+            plt.title('X, Y 틱을 조정합니다', fontsize=10, fontproperties=prop)
 
             # X축 & Y축 Label 설정
-            plt.xlabel('X축', fontsize=10)
-            plt.ylabel('Y축', fontsize=10)
+            plt.xlabel('X축', fontsize=10, fontproperties=prop)
+            plt.ylabel('Y축', fontsize=10, fontproperties=prop)
 
             # X tick, Y tick 설정
             plt.xticks(rotation=90)
@@ -3717,11 +3718,11 @@ Graph Title'''
             plt.plot(np.arange(10), np.arange(10)*2 - 30, marker='*', linestyle=':', color='r')
 
             # 타이틀 & font 설정
-            plt.title('색상 설정 예제', fontsize=10)
+            plt.title('색상 설정 예제', fontsize=10, fontproperties=prop)
 
             # X축 & Y축 Label 설정
-            plt.xlabel('X축', fontsize=10)
-            plt.ylabel('Y축', fontsize=10)
+            plt.xlabel('X축', fontsize=10, fontproperties=prop)
+            plt.ylabel('Y축', fontsize=10, fontproperties=prop)
 
             # X tick, Y tick 설정
             plt.xticks(rotation=90)
@@ -3794,11 +3795,11 @@ Graph Title'''
             plt.plot(np.arange(10), np.arange(10)*2 - 30, color='b', alpha=1.0)
 
             # 타이틀 & font 설정
-            plt.title('투명도 (alpha) 설정 예제', fontsize=10)
+            plt.title('투명도 (alpha) 설정 예제', fontsize=10, fontproperties=prop)
 
             # X축 & Y축 Label 설정
-            plt.xlabel('X축', fontsize=10)
-            plt.ylabel('Y축', fontsize=10)
+            plt.xlabel('X축', fontsize=10, fontproperties=prop)
+            plt.ylabel('Y축', fontsize=10, fontproperties=prop)
 
             # X tick, Y tick 설정
             plt.xticks(rotation=90)
@@ -3879,18 +3880,18 @@ Graph Title'''
             plt.plot(np.arange(10), np.arange(10)*2 - 30, marker='*', linestyle=':', color='r')
 
             # 타이틀 & font 설정
-            plt.title('그리드 설정 예제', fontsize=10)
+            plt.title('그리드 설정 예제', fontsize=10, fontproperties=prop)
 
             # X축 & Y축 Label 설정
-            plt.xlabel('X축', fontsize=10)
-            plt.ylabel('Y축', fontsize=10)
+            plt.xlabel('X축', fontsize=10, fontproperties=prop)
+            plt.ylabel('Y축', fontsize=10, fontproperties=prop)
 
             # X tick, Y tick 설정
             plt.xticks(rotation=90)
             plt.yticks(rotation=30)
 
             # annotate 설정
-            plt.annotate('코로나 사태 발생 지점', xy=(3, -20), xytext=(3, -25), arrowprops=dict(facecolor='black', shrink=0.05))
+            plt.annotate('코로나 사태 발생 지점', xy=(3, -20), xytext=(3, -25), arrowprops=dict(facecolor='black', shrink=0.05), fontproperties=prop)
 
             # grid 옵션 추가
             plt.grid()
