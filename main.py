@@ -5655,11 +5655,13 @@ plt.show()''')
         sns.histplot(data['이용건수'], ax=ax)
         ax.set_title("이용건수 분포", fontproperties=prop)
         st.pyplot(fig)
+        plt.close(fig)
 
         st.code('''sns.lineplot(x=data['일'], y=data['이용건수'])''')
         fig, ax = plt.subplots()
         sns.lineplot(x=data['일'].map(str), y=data['이용건수'], ax=ax)
         st.pyplot(fig)
+        plt.close(fig)
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}피처의 분포 시각화")
@@ -5691,6 +5693,7 @@ plt.show()''')
         for i, col in enumerate(con_cols):
             sns.histplot(data = data, x = col, ax = ax[i])
         st.pyplot(fig)
+        plt.close(fig)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}이용건수와 피처와의 관계")
@@ -5723,6 +5726,7 @@ plt.show()''')
         axes[1,1].set_title('강수량(mm)별 이용건수')
         fig.subplots_adjust(hspace = 0.4)        
         st.pyplot(fig)
+        plt.close(fig)
 
         st.write('''
                 공휴일 이용건수보다 평일 이용건수가 더 많음
@@ -5741,6 +5745,7 @@ sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
         plt.figure(figsize = (15,3))
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일', ax=ax)
         st.pyplot(fig)
+        plt.close(fig)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이")
@@ -5752,6 +5757,7 @@ sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)
         plt.figure(figsize = (15,3))
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)', ax=ax)
         st.pyplot(fig)
+        plt.close(fig)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이(box)")
@@ -5770,6 +5776,7 @@ sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)
         ax.set_xticks([0, 1, 2, 3, 4, 5, 6])
         ax.set_xticklabels(dofw)
         st.pyplot(fig)
+        plt.close(fig)
         st.divider()
 
         #######분석 결과
