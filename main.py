@@ -5450,13 +5450,13 @@ plt.show()''')
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
-        with open('data/공공자전거이용정보.zip', "rb") as template_file:
+        with open('data/실습03.zip', "rb") as template_file:
             template_zip = template_file.read()
 
         st.download_button(label="download data",
                             type="primary",
                             data=template_zip,
-                           file_name = "공공자전거이용정보.zip"
+                           file_name = "실습03.zip"
         )
         with st.echo():
             # 필요한 패키지 설치
@@ -5466,16 +5466,16 @@ plt.show()''')
             import matplotlib.pyplot as plt
 
             # 기상관측자료 데이터
-            weather_info = pd.read_csv('data/기상관측자료/OBS_ASOS_TIM_202306.csv', encoding='cp949')
+            weather_info = pd.read_csv('data/실습03/기상관측자료/OBS_ASOS_TIM_202306.csv', encoding='cp949')
             
             #자전거 이용정보 데이터
             files = [
-                "data/공공자전거이용정보/bike_2306_0.csv",
-                "data/공공자전거이용정보/bike_2306_1.csv",
-                "data/공공자전거이용정보/bike_2306_2.csv",
-                "data/공공자전거이용정보/bike_2306_3.csv",
-                "data/공공자전거이용정보/bike_2306_4.csv",
-                "data/공공자전거이용정보/bike_2306_5.csv"
+                "data/실습03/공공자전거이용정보/bike_2306_0.csv",
+                "data/실습03/공공자전거이용정보/bike_2306_1.csv",
+                "data/실습03/공공자전거이용정보/bike_2306_2.csv",
+                "data/실습03/공공자전거이용정보/bike_2306_3.csv",
+                "data/실습03/공공자전거이용정보/bike_2306_4.csv",
+                "data/실습03/공공자전거이용정보/bike_2306_5.csv"
             ]
 
             #파일 병합
