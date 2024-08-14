@@ -5768,6 +5768,19 @@ plt.show()''')
         plt.close(fig)
         st.divider()
 
+        st.code('''
+                fig, ax = plt.subplots()
+                plt.figure(figsize=(10,8))
+                sns.heatmap(data[con_cols].corr(), annot=True, cmap = 'coolwarm')
+
+                plt.show()
+                ''')
+        fig, ax = plt.subplots()
+        plt.figure(figsize=(10,8))
+        sns.heatmap(data[con_cols].corr(), annot=True, cmap = 'coolwarm')
+
+        st.pyplot(fig)
+        plt.close(fig)
     else :
         st.error("Content Not Found !")
 
