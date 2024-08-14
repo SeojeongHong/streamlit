@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import matplotlib.pyplot as plt
 import os
+import io
 from matplotlib import font_manager as fm
 fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
@@ -4982,6 +4983,7 @@ df_seoul.head()
         plt.close()
 
     elif path == ("실습 프로젝트", "지역별 음식점 소비 트렌드 분석"):
+        import io
         import numpy as np
         import seaborn as sns
 
