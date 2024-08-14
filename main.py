@@ -5720,7 +5720,10 @@ plt.show()''')
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일', ax=ax)
         ax.set_xlabel("대여시간", fontproperties=prop)
         ax.set_ylabel("이용건수", fontproperties=prop)
-        plt.legend(prop=prop)
+        
+        handles, labels = ax.get_legend_handles_labels()
+        ax.legend(handles, labels, title='공휴일', title_fontproperties=prop, prop=prop)
+
         st.pyplot(fig)
         plt.close(fig)
         st.divider()
