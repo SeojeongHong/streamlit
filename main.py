@@ -5655,6 +5655,7 @@ plt.show()''')
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
         ax.set_title("이용건수 분포", fontproperties=prop)
+        ax.set_xlabel("이용 건수")
         st.pyplot(fig)
         plt.close(fig)
 
