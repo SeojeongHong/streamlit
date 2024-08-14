@@ -5622,7 +5622,7 @@ plt.show()''')
         
         st.write("선택된 칼럼에 대한 피처의 분포를 시각화합니다.")
         st.code('''
-                fig, axes = plt.subplots(1,5, figsize = (8,8))
+                fig, axes = plt.subplots(1,5, figsize = (20, 4))
                 ax = axes.flatten()
                 
                 # axes = (n,n)형태 / ax = m형태
@@ -5630,7 +5630,7 @@ plt.show()''')
                     sns.histplot(data = data, x = col, ax = ax[i])
                 ''')
         
-        fig, axes = plt.subplots(1,5, figsize = (8,8))
+        fig, axes = plt.subplots(1,5, figsize = (20, 4))
         ax = axes.flatten()
         # axes = (n,n)형태 / ax = m형태
         for i, col in enumerate(con_cols):
