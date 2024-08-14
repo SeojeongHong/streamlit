@@ -4775,6 +4775,8 @@ for (idx, row) in df_seoul.iterrows():
     df_seoul.loc[idx, 'PM10_class'] = _class
 df_seoul.head()
 '''
+        st.code(code, language='python')
+        
         for indx, row in df_seoul.iterrows():
             # pm10 = row[5]
             pm10 = row['PM10']
