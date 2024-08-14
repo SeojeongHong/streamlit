@@ -223,7 +223,7 @@ def show_chapter(topic, chapter):
         # 토요일, 일요일을 공휴일로 설정
         bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
 
-        # st.write(bike_df2.head())
+        st.write(bike_df2.head())
         st.divider()
 
         # st.header(f"{idx.getHeadIdx()}날씨 데이터 전처리")
