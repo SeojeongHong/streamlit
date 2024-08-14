@@ -403,7 +403,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 print( a.replace("mornig", "evening") )  #replace(바뀔_문자열, 바꿀_문자열)
                 #출력 : Good evening
                 ''')
-        st.write("replace 함수는 eplace(바뀔_문자열, 바꿀_문자열)처럼 사용해서 문자열 안의 특정한 값을 다른 값으로 치환해 줍니다.")
+        st.write("replace 함수는 replace(바뀔_문자열, 바꿀_문자열)처럼 사용해서 문자열 안의 특정한 값을 다른 값으로 치환해 줍니다.")
         st.write('''
                 - **split()** : 문자열 나누기
                  ''')
