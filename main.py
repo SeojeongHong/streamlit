@@ -5499,6 +5499,8 @@ plt.show()''')
         st.code('''
                 bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
                 bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
+                
+                bike_df2.head()
                 ''')
         bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
         bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
@@ -5627,7 +5629,11 @@ plt.show()''')
         st.write(bike_mg.head())
 
         st.write("**대여일자, 날짜, 시간** 데이터가 중복되는 것을 확인할 수 있습니다. 중복되는 데이터를 제거해보겠습니다.")
-        st.code('''bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)''')
+        st.code('''
+                bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
+                
+                bike_mg.head()
+                ''')
         bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
         st.write(bike_mg.head())
 
