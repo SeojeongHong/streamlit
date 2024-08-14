@@ -2048,10 +2048,10 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('- **any**: 1개 라도 NaN값이 존재시 drop')
 
         st.write('- **all**: 모두 NaN값이 존재시 drop')
-        code = '''df1.head().dropna(how='all')'''
+        code = '''df1.dropna(how='all')'''
         st.code(code)
         df1.dropna(how='all')
-        st.write(df1)
+        st.write(df1.head())
 
         st.header(f"{idx.getHeadIdx()}column 추가") ## 소단원03
 
@@ -2101,15 +2101,15 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.subheader(f"{idx.getSubIdx()}행 (row) 삭제")
         st.write('행 삭제시 **index를 지정하여 삭제**합니다.')
         
-        code = 'df1.head().drop(1)'
+        code = 'df1.drop(1)'
         st.code(code)
-        st.write(df1.drop(1))
+        st.write(df1.head().drop(1))
         
         st.divider()
         st.write('행 삭제시 **범위를 지정하여 삭제**할 수 있습니다.')
-        code = 'df1.head()drop(np.arange(10))'
+        code = 'df1.drop(np.arange(10))'
         st.code(code)
-        st.write(df1.drop(np.arange(10)))
+        st.write(df1.head().drop(np.arange(10)))
 
         st.write('**fancy indexing**을 활용하여 삭제할 수 있습니다.')
         code = 'df1.drop([1, 3, 5, 7, 9])'
@@ -2119,7 +2119,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}열 (column) 삭제")
-        st.code('df1.head()')
+        st.code('df1')
         st.write(df1.head())
         st.divider()
 
