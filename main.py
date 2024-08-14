@@ -4,15 +4,15 @@ import matplotlib.pyplot as plt
 import os
 import io
 from matplotlib import font_manager as fm
-# fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
-# prop = fm.FontProperties(fname=fpath)
+fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
+prop = fm.FontProperties(fname=fpath)
+
+# 폰트 설정
+plt.rcParams['font.family'] = prop.get_name()
 import numpy as np
 import seaborn as sns
 import pandas as pd
 
-#한글 표시
-plt.rcParams['font.family'] = 'NanumGothic'
-plt.rc('font', family='NanumGothic')
 
 class IndexAllocator:
     def __init__(self):
