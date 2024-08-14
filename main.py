@@ -5450,13 +5450,13 @@ plt.show()''')
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
-        with open('data/공공자전거이용정보/bike_2306_0.csv', "rb") as template_file:
-            template_csv = template_file.read()
+        with open('data/공공자전거이용정보.zip', "rb") as template_file:
+            template_zip = template_file.read()
 
         st.download_button(label="download data",
                             type="primary",
-                            data=template_csv,
-                           file_name = "bike_2306_0.csv"
+                            data=template_zip,
+                           file_name = "공공자전거이용정보.zip"
         )
         with st.echo():
             # 필요한 패키지 설치
