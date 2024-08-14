@@ -5595,7 +5595,12 @@ plt.show()''')
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}이용건수 분포 시각화")
-        st.code('''sns.histplot(data['이용건수'])''')
+        st.code('''
+                fig, ax = plt.subplots()
+                sns.histplot(data['이용건수'], ax=ax)
+
+                plt.show()
+                ''')
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
         ax.set_title("이용건수 분포", fontproperties=prop)
@@ -5603,7 +5608,12 @@ plt.show()''')
         st.pyplot(fig)
         plt.close(fig)
 
-        st.code('''sns.lineplot(x=data['일'], y=data['이용건수'])''')
+        st.code('''
+                fig, ax = plt.subplots()
+                sns.lineplot(x=data['일'], y=data['이용건수'])
+
+                plt.show()
+                ''')
         fig, ax = plt.subplots()
         sns.lineplot(x=data['일'].map(str), y=data['이용건수'], ax=ax)
         ax.set_xlabel("일", fontproperties=prop)
@@ -5628,6 +5638,8 @@ plt.show()''')
                 # axes = (n,n)형태 / ax = m형태
                 for i, col in enumerate(con_cols):
                     sns.histplot(data = data, x = col, ax = ax[i])
+
+                plt.show()
                 ''')
         
         fig, axes = plt.subplots(1,5, figsize = (20, 4))
@@ -5658,6 +5670,8 @@ plt.show()''')
 
                 # 간격조정
                 fig.subplots_adjust(hspace = 0.4)
+
+                plt.show()
                 ''')
         fig, axes = plt.subplots(2,2, figsize = (20,8))
         sns.barplot(data = data, x = '일', y= '이용건수', ax = axes[0,0])
@@ -5684,6 +5698,8 @@ plt.show()''')
                  ''')
         st.code('''plt.figure(figsize = (15,3))
 sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
+
+plt.show()
                 ''')
         
         fig, ax = plt.subplots()
@@ -5697,8 +5713,12 @@ sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
 
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이")
         st.write("토요일에 이용건수가 더 많고, 토요일 오후에 전반적으로 이용률이 높은 모습을 보입니다.")
-        st.code('''plt.figure(figsize = (15,3))
-sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)'))
+        st.code('''
+                fig, ax = plt.subplots()
+                plt.figure(figsize = (15,3))
+                sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)'))
+
+                plt.show()
                 ''')
         fig, ax = plt.subplots()
         plt.figure(figsize = (15,3))
@@ -5713,9 +5733,11 @@ sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이(box)")
         st.write("휴일은 상대적으로 변동성이 적고, 평일은 변동성이 큰 편입니다.")
         st.code('''
+                fig, ax = plt.subplots()
                 sns.boxplot(x='요일(num)', y='이용건수',data = data)
                 dofw = list('월화수목금토일')
                 plt.xticks([0,1,2,3,4,5,6],dofw)
+                
                 plt.show()
                 ''')
         fig, ax = plt.subplots()
