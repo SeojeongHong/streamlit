@@ -5466,7 +5466,7 @@ plt.show()''')
             import matplotlib.pyplot as plt
 
             # 기상관측자료 데이터
-            weather_info = pd.read_csv('data/실습03/기상관측자료_202306.csv', encoding='cp949')
+            weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
             
             #자전거 이용정보 데이터
             files = [
