@@ -3143,7 +3143,7 @@ Graph Title'''
         st.write("1️⃣ **첫 번째 방법**")
         st.write("지원하는 폰트를 찾아 설정해주기")
         st.write("이 중에서 matplotlib에서 지원하는 폰트를 찾아 설정해주면 됩니다.")
-        st.write("윈도우에서는 'malgun.ttf' 혹은 'NanumBarunGothic.ttf' 등을 사용할 수 있다. 맥에서는 'AppleGothic.ttf' 등을 사용할 수 있다.")
+        st.write("윈도우에서는 'malgun.ttf' 혹은 'NanumBarunGothic.ttf' 등을 사용할 수 있습니다. 맥에서는 'AppleGothic.ttf' 등을 사용할 수 있습니다.")
         code = '''
 import matplotlib.pyplot as plt
 plt.rcParams['font.family'] ='Malgun Gothic'
@@ -3152,7 +3152,7 @@ plt.rcParams['axes.unicode_minus'] =False'''
         st.write("2️⃣ **두 번째 방법**")
         st.write("사용중인 os에서 한글 폰트 찾아 설정해주기")
         st.write("보통 첫번째 방법으로 하면 대부분 작동하는데, 새로 다운받거나 지원하지 않는 다른 폰트를 사용하고 싶다면 경로를 따로 지정해줘야 합니다.")
-        st.write('윈도우에서는 "C:\Windows\Fonts" 폴더에, 맥에서는 "/Library/Fonts" 폴더에 폰트 파일이 저장되어 있다.')
+        st.write('윈도우에서는 "C:\Windows\Fonts" 폴더에, 맥에서는 "/Library/Fonts" 폴더에 폰트 파일이 저장되어 있습니다.')
         st.write("다음 코드는 윈도우 기준 입니다.")
         code = '''
 import matplotlib.pyplot as plt
@@ -3525,7 +3525,7 @@ plt.rc('font', family=font_name)'''
         st.write("- 'v' triangle_down marker")
         st.write("- '^' triangle_up marker")
         st.write("- '<' triangle_left marker")
-        st.write("- >' triangle_right marker")
+        st.write("- '>' triangle_right marker")
         st.write("- '1' tri_down marker")
         st.write("- '2' tri_up marker")
         st.write("- '3' tri_left marker")
@@ -3777,11 +3777,11 @@ plt.rc('font', family=font_name)'''
         st.subheader(f"{idx.getSubIdx()}기본 사용")
         code  = '''plt.annotate(s, xy, xytext, arrowprops, **kwargs)'''
         st.code(code, language='python')
-        st.write("'s' 는 주석으로 표시할 텍스트 내용입니다. string으로 값을 넣어야 합니다.")
-        st.write("'xy' 는 주석을 추가할 데이터 포인트의 위치 입니다. 튜플 형태의 (x,y)좌표 입니다.")
-        st.write("'arrowprops' 는 화살표 스타일과 속성을 설정은 인자로 사전(dictionary) 타입의 값이 들어갑니다.")
+        st.write("- 's' 는 주석으로 표시할 텍스트 내용입니다. string으로 값을 넣어야 합니다.")
+        st.write("- 'xy' 는 주석을 추가할 데이터 포인트의 위치 입니다. 튜플 형태의 (x,y)좌표 입니다.")
+        st.write("- 'arrowprops' 는 화살표 스타일과 속성을 설정은 인자로 사전(dictionary) 타입의 값이 들어갑니다.")
         st.caption("화살표를 사용하지 않으려면 arrowprops=None으로 설정합니다.")
-        st.write("'**kwargs' 는 추가적인 매개변수로, 텍스트 스타일이나 기타 속성을 지정할 수 있습니다.")
+        st.write("- '**kwargs' 는 추가적인 매개변수로, 텍스트 스타일이나 기타 속성을 지정할 수 있습니다.")
         with st.echo():
             import matplotlib.pyplot as plt
             import numpy as np
@@ -3948,6 +3948,7 @@ y'''
             plt.fill_between(x, y_3, color="red", alpha=0.3)
         st.pyplot(plt)
         plt.close()
+        st.divider()
 
         st.header(f"{idx.getHeadIdx()}Box Plot")
         st.write("**박스 플롯 (Box plot)** 또는 **박스-위스커 플롯 (Box-Whisker plot)** 은 수치 데이터를 표현하는 하나의 방식입니다.")
@@ -4806,7 +4807,7 @@ df_seoul.head()
 
         st.header(f"{idx.getHeadIdx()}결론 도출")
         st.subheader(f"{idx.getSubIdx()}대기 오염 데이터 분석 결과")
-        st.write("시계열 그래프를 통해 일별 평균 대기오염 수치를 시각화하며, 특정 대기오염 물질이 시간에 따라 어떻게 변하는지를 보여 줍니다.")
+        st.write("시계열 그래프를 통해 일별 평균 대기오염 수치를 시각화하며, 특정 대기오염 물질이 시간에 따라 어떻게 변하는지를 보여줍니다.")
         st.write("상관 행렬의 히트맵은 각 대기오염 물질 간의 상관관계를 색상으로 나타냅니다. 이 분석을 통해 SO2, NO2, O3, CO, PM10, PM2.5 간의 상관관계를 확인할 수 있습니다.")
         st.write("이번 분석을 통해 서울시(종로구)의 대기오염 상황을 깊이 이해할 수 있었습니다. PM10 농도에 따라 대기질을 구분하고, 각 대기오염 물질 간의 상관관계를 분석하여 서울의 대기오염 패턴을 더 잘 이해할 수 있습니다.")
 
