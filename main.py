@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 import io
 from matplotlib import font_manager as fm
-fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
+fpath = "customfont/NanumGothic-Regular.ttf"
 prop = fm.FontProperties(fname=fpath)
 
 # 폰트 설정
