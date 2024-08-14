@@ -198,33 +198,33 @@ def show_chapter(topic, chapter):
         st.write(bike_df2.head())
         st.divider()
 
-        # st.subheader(f"{idx.getSubIdx()}파생변수 생성")
-        # st.write('''대여일자에서 **년도, 월, 일, 요일, 공휴일** 변수를 생성합니다.''')
-        # st.code('''
-        #         bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
-        #         bike_df2['년도'] = bike_df2['대여일자'].dt.year
-        #         bike_df2['월'] = bike_df2['대여일자'].dt.month
-        #         bike_df2['일'] = bike_df2['대여일자'].dt.day
-        #         bike_df2['요일(num)'] = bike_df2['대여일자'].dt.dayofweek
-        #         bike_df2['공휴일'] = 0  #0: 평일 1: 공휴일
+        st.subheader(f"{idx.getSubIdx()}파생변수 생성")
+        st.write('''대여일자에서 **년도, 월, 일, 요일, 공휴일** 변수를 생성합니다.''')
+        st.code('''
+                bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
+                bike_df2['년도'] = bike_df2['대여일자'].dt.year
+                bike_df2['월'] = bike_df2['대여일자'].dt.month
+                bike_df2['일'] = bike_df2['대여일자'].dt.day
+                bike_df2['요일(num)'] = bike_df2['대여일자'].dt.dayofweek
+                bike_df2['공휴일'] = 0  #0: 평일 1: 공휴일
                 
-        #         # 토요일, 일요일을 공휴일로 설정
-        #         bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
-        #         bike_df2.sample(10)
-        #         ''',line_numbers=True)
+                # 토요일, 일요일을 공휴일로 설정
+                bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
+                bike_df2
+                ''',line_numbers=True)
         
-        # bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
-        # bike_df2['년도'] = bike_df2['대여일자'].dt.year
-        # bike_df2['월'] = bike_df2['대여일자'].dt.month
-        # bike_df2['일'] = bike_df2['대여일자'].dt.day
-        # bike_df2['요일(num)'] = bike_df2['대여일자'].dt.dayofweek
-        # bike_df2['공휴일'] = 0 #0: 평일 1: 공휴일
+        bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
+        bike_df2['년도'] = bike_df2['대여일자'].dt.year
+        bike_df2['월'] = bike_df2['대여일자'].dt.month
+        bike_df2['일'] = bike_df2['대여일자'].dt.day
+        bike_df2['요일(num)'] = bike_df2['대여일자'].dt.dayofweek
+        bike_df2['공휴일'] = 0  #0: 평일 1: 공휴일
         
-        # # 토요일, 일요일을 공휴일로 설정
-        # bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
+        # 토요일, 일요일을 공휴일로 설정
+        bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
 
-        # st.write(bike_df2.sample(10))
-        # st.divider()
+        # st.write(bike_df2.head())
+        st.divider()
 
         # st.header(f"{idx.getHeadIdx()}날씨 데이터 전처리")
         # st.subheader(f"{idx.getSubIdx()}날짜, 시간 컬럼 생성")
