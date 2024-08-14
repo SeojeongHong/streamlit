@@ -5450,7 +5450,8 @@ plt.show()''')
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
-        with open('data/zipfile/실습03.zip', "rb") as template_file:
+        st.write('해당 파일을 압축 해제해 **실습03** 폴더를 :blue-background[data/실습03/]'경로로 이동해주세요.)
+        with open('data/실습03.zip', "rb") as template_file:
             template_zip = template_file.read()
 
         st.download_button(label="download data",
@@ -5472,10 +5473,10 @@ plt.show()''')
             files = [
                 "data/실습03/공공자전거이용정보0.csv",
                 "data/실습03/공공자전거이용정보1.csv",
-                # "data/실습03/공공자전거이용정보2.csv",
-                # "data/실습03/공공자전거이용정보3.csv",
-                # "data/실습03/공공자전거이용정보4.csv",
-                # "data/실습03/공공자전거이용정보5.csv"
+                "data/실습03/공공자전거이용정보2.csv",
+                "data/실습03/공공자전거이용정보3.csv",
+                "data/실습03/공공자전거이용정보4.csv",
+                "data/실습03/공공자전거이용정보5.csv"
             ]
 
             #파일 병합
