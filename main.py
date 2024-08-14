@@ -8,6 +8,7 @@ fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
+import pandas as pd
 
 class IndexAllocator:
     def __init__(self):
@@ -131,32 +132,53 @@ def show_chapter(topic, chapter):
                             data=template_zip,
                            file_name = "실습03.zip"
         )
-        with st.echo():
-            # 필요한 패키지 설치
-            import numpy as np
-            import pandas as pd
-            import seaborn as sns
-            import matplotlib.pyplot as plt
+        st.code('''
+                # 필요한 패키지 설치
+                import numpy as np
+                import pandas as pd
+                import seaborn as sns
+                import matplotlib.pyplot as plt
+                ''', line_numbers=True)
 
-            # 기상관측자료 데이터
-            weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
-            
-            #자전거 이용정보 데이터
-            files = [
-                "data/실습03/공공자전거이용정보0.csv",
-                "data/실습03/공공자전거이용정보1.csv",
-                "data/실습03/공공자전거이용정보2.csv",
-                "data/실습03/공공자전거이용정보3.csv",
-                "data/실습03/공공자전거이용정보4.csv",
-                "data/실습03/공공자전거이용정보5.csv"
-            ]
+        st.write("실습에 필요한 데이터를 불러오겠습니다.")
+        st.code('''
+                # 기상관측자료 데이터
+                weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
+                
+                #자전거 이용정보 데이터
+                files = [
+                    "data/실습03/공공자전거이용정보0.csv",
+                    "data/실습03/공공자전거이용정보1.csv",
+                    "data/실습03/공공자전거이용정보2.csv",
+                    "data/실습03/공공자전거이용정보3.csv",
+                    "data/실습03/공공자전거이용정보4.csv",
+                    "data/실습03/공공자전거이용정보5.csv"
+                ]
 
-            #파일 병합
-            bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
+                #파일 병합
+                bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
+    
+                weather_info.head()
+                bike_info.head()
+                ''', line_numbers=True)
+        weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
+                
+        #자전거 이용정보 데이터
+        files = [
+            "data/실습03/공공자전거이용정보0.csv",
+            "data/실습03/공공자전거이용정보1.csv",
+            "data/실습03/공공자전거이용정보2.csv",
+            "data/실습03/공공자전거이용정보3.csv",
+            "data/실습03/공공자전거이용정보4.csv",
+            "data/실습03/공공자전거이용정보5.csv"
+        ]
 
-            weather_info.head()
-            bike_info.head()
+        #파일 병합
+        bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
 
+        weather_info.head()
+        bike_info.head()
+        
         st.write("**weather_info**")
         st.write(weather_info.head())
         st.write("**bike_info**")
