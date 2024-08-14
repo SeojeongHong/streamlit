@@ -5626,6 +5626,8 @@ plt.show()''')
         for col in data.columns:
             if (data[col].dtype == 'float64') or (col == '습도(%)'):
                 con_cols.append(col)
+        st.write(con_cols)
+        
         st.write("선택된 칼럼에 대한 피처의 분포를 시각화합니다.")
         st.code('''
                 fig, axes = plt.subplots(2,5, figsize = (20,8))
@@ -5634,7 +5636,7 @@ plt.show()''')
                 for i, col in enumerate(con_cols):
                 sns.histplot(data = data, x = col, ax = ax[i])
                 ''')
-        #############예제랑 좀 다름
+        
         fig, axes = plt.subplots(2,5, figsize = (20,8))
         ax = axes.flatten()
         # axes = (n,n)형태 / ax = m형태
