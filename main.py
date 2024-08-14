@@ -3336,9 +3336,9 @@ plt.rc('font', family=font_name)'''
 
         st.header(f"{idx.getHeadIdx()}축 범위 지정하기")
         st.write("**matplotlib.pyplot** 모듈의 **xlim(), ylim(), axis()** 함수를 사용하면 그래프의 X, Y축이 표시되는 범위를 지정할 수 있습니다.")
-        st.write("◾ xlim() - X축이 표시되는 범위를 지정하거나 반환합니다.")
-        st.write("◾ ylim() - Y축이 표시되는 범위를 지정하거나 반환합니다.")
-        st.write("◾ axis() - X, Y축이 표시되는 범위를 지정하거나 반환합니다.")
+        st.write("- xlim() - X축이 표시되는 범위를 지정하거나 반환합니다.")
+        st.write("- ylim() - Y축이 표시되는 범위를 지정하거나 반환합니다.")
+        st.write("- axis() - X, Y축이 표시되는 범위를 지정하거나 반환합니다.")
         st.write("그래프의 축의 범위를 지정하고, 확인하는 방법에 대해 소개합니다.")
         
         st.subheader(f"{idx.getSubIdx()}기본 사용 - xlim(), ylim()")
@@ -3427,10 +3427,10 @@ plt.rc('font', family=font_name)'''
         st.write("데이터를 표현하기 위해 그려지는 선의 종류를 지정하는 방법을 소개합니다.")
         st.write("선 종류를 나타내는 문자열 또는 튜플을 이용해서 다양한 선의 종류를 구현할 수 있습니다.")
         st.write("**< line의 종류 >**")
-        st.write("◾ '-' solid line style")
-        st.write("◾ '--' dashed line style")
-        st.write("◾ '-.' dash-dot line style")
-        st.write("◾ ':' dotted line style")
+        st.write("- '-' solid line style")
+        st.write("- '--' dashed line style")
+        st.write("- '-.' dash-dot line style")
+        st.write("- ':' dotted line style")
         with st.echo():
             import matplotlib.pyplot as plt
 
@@ -3519,28 +3519,28 @@ plt.rc('font', family=font_name)'''
         st.write("**plot()** 함수의 **포맷 문자열 (Format string)** 을 사용해서 그래프의 선과 마커를 지정하는 방법에 대해 알아봅니다.")
         st.subheader(f"{idx.getSubIdx()}기본 사용")
         st.write("**< marker의 종류 >**")
-        st.write("◾ '.' point marker")
-        st.write("◾ ',' pixel marker")
-        st.write("◾ 'o' circle marker")
-        st.write("◾ 'v' triangle_down marker")
-        st.write("◾ '^' triangle_up marker")
-        st.write("◾ '<' triangle_left marker")
-        st.write("◾ >' triangle_right marker")
-        st.write("◾ '1' tri_down marker")
-        st.write("◾ '2' tri_up marker")
-        st.write("◾ '3' tri_left marker")
-        st.write("◾ '4' tri_right marker")
-        st.write("◾ 's ' square marker")
-        st.write("◾ 'p' pentagon marker")
-        st.write("◾ '*' star marker")
-        st.write("◾ 'h' hexagon1 marker")
-        st.write("◾ 'H' hexagon2 marker")
-        st.write("◾ '+' plus marker")
-        st.write("◾ 'x' x marker")
-        st.write("◾ 'D' diamond marker")
-        st.write("◾ 'd' thin_diamond marker")
-        st.write("◾ '|' vline marker")
-        st.write("◾ '_' hline marker")
+        st.write("- '.' point marker")
+        st.write("- ',' pixel marker")
+        st.write("- 'o' circle marker")
+        st.write("- 'v' triangle_down marker")
+        st.write("- '^' triangle_up marker")
+        st.write("- '<' triangle_left marker")
+        st.write("- >' triangle_right marker")
+        st.write("- '1' tri_down marker")
+        st.write("- '2' tri_up marker")
+        st.write("- '3' tri_left marker")
+        st.write("- '4' tri_right marker")
+        st.write("- 's ' square marker")
+        st.write("- 'p' pentagon marker")
+        st.write("- '*' star marker")
+        st.write("- 'h' hexagon1 marker")
+        st.write("- 'H' hexagon2 marker")
+        st.write("- '+' plus marker")
+        st.write("- 'x' x marker")
+        st.write("- 'D' diamond marker")
+        st.write("- 'd' thin_diamond marker")
+        st.write("- '|' vline marker")
+        st.write("- '_' hline marker")
         with st.echo():
             import matplotlib.pyplot as plt
 
@@ -3602,14 +3602,14 @@ plt.rc('font', family=font_name)'''
         
         st.subheader(f"{idx.getSubIdx()}기본 색상")
         st.write("**< color의 종류 >**")
-        st.write("◾ 'b' blue")
-        st.write("◾ 'g' green")
-        st.write("◾ 'r' red")
-        st.write("◾ 'c' cyan")
-        st.write("◾ 'm' magenta")
-        st.write("◾ 'y' yellow")
-        st.write("◾ 'k' black")
-        st.write("◾ 'w' white")
+        st.write("- 'b' blue")
+        st.write("- 'g' green")
+        st.write("- 'r' red")
+        st.write("- 'c' cyan")
+        st.write("- 'm' magenta")
+        st.write("- 'y' yellow")
+        st.write("- 'k' black")
+        st.write("- 'w' white")
         with st.echo():
             import matplotlib.pyplot as plt
             import numpy as np
@@ -4459,10 +4459,10 @@ y'''
         st.write("**matplotlib.pyplot** 모듈의 **pie()** 함수를 이용해서 파이 차트를 그리는 방법에 대해 소개합니다.")
 
         st.subheader(f"{idx.getSubIdx()}pie chart 옵션")
-        st.write("◾ explode : 파이에서 툭 튀어져 나온 비율")
-        st.write("◾ autopct : 퍼센트 자동으로 표기")
-        st.write("◾ shadow : 그림자 표시")
-        st.write("◾ startangle : 파이를 그리기 시작할 각도")
+        st.write("- explode : 파이에서 툭 튀어져 나온 비율")
+        st.write("- autopct : 퍼센트 자동으로 표기")
+        st.write("- shadow : 그림자 표시")
+        st.write("- startangle : 파이를 그리기 시작할 각도")
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}기본 사용")
@@ -4677,6 +4677,7 @@ y'''
         st.write(df_station.head())
         st.divider()
 
+        st.header(f"{idx.getHeadIdx()}데이터 전처리")
         st.subheader(f"{idx.getSubIdx()}데이터 합치기")
         st.write("Measurement data를 data와 time으로 나누고, 일 평균 값으로 합칩니다.")
         code = '''# 'Measurement date' 열을 사용하여 date_time 분리
@@ -4702,7 +4703,8 @@ df_summary.head()
         st.write(df_summary.head())
         st.divider()
 
-        st.subheader(f"{idx.getSubIdx()}데이터 분석")
+        st.header(f"{idx.getHeadIdx()}데이터 분석")
+        st.subheader(f"{idx.getSubIdx()}시계열 그래프")
         st.write("먼저 서울 전체에 대해서 분석해 보기 위해서 data로 groupby하고 분석합니다.")
         with st.echo():
             df_seoul = df_summary.groupby(['date'], as_index=False).agg({'SO2':'mean', 'NO2':'mean', 'O3':'mean', 'CO':'mean', 'PM10':'mean', 'PM2.5':'mean'})
@@ -4724,6 +4726,7 @@ sns.heatmap(corr, cmap=cmap, vmax=1, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5})
 plt.show() 
 '''
+        st.subheader(f"{idx.getSubIdx()}히트맵")
         with st.echo():
             df_numeric = df_seoul.drop(columns=['date'])
             # 상관 행렬 계산
@@ -4739,13 +4742,13 @@ plt.show()
         st.pyplot(plt)
         plt.close()
         st.divider()
-        st.write("1️⃣ **PM10 농도**")
+        st.subheader(f"{idx.getSubIdx()}PM10 농도")
         st.write("미세먼지(PM10) 기준으로 좋음, 보통, 나쁨, 매우나쁨으로 구분")
         st.write("대한민국의 미세먼지 환경기준(일평균)")
-        st.write("◾ 좋음 0~30")
-        st.write("◾ 보통 ~80")
-        st.write("◾ 나쁨 ~150")
-        st.write("◾ 매우나쁨151~")
+        st.write("- 좋음 0~30")
+        st.write("- 보통 ~80")
+        st.write("- 나쁨 ~150")
+        st.write("- 매우나쁨151~")
         code = '''df_seoul['PM10_class'] = -1
 df_seoul.head()'''
         st.code(code, language='python')
@@ -4792,7 +4795,7 @@ df_seoul.head()
         plt.close()
         st.divider()
 
-        st.write("2️⃣ **Examine Strongest Correlation**")
+        st.subheader(f"{idx.getSubIdx()}Examine Strongest Correlation")
         st.write("seaborn과 jointplot을 사용하여 두 변수 간의 관계를 시각화 하였습니다.")
         st.write("df_seoul 데이터프레임의 'CO'와 'NO2'라는 두 변수 간의 상관관계를 시각화 하였습니다.")
         with st.echo():
@@ -4800,6 +4803,12 @@ df_seoul.head()
             plt.show()
         st.pyplot(plt)
         plt.close()
+
+        st.header(f"{idx.getHeadIdx()}결론 도출")
+        st.subheader(f"{idx.getSubIdx()}대기 오염 데이터 분석 결과")
+        st.write("시계열 그래프를 통해 일별 평균 대기오염 수치를 시각화하며, 특정 대기오염 물질이 시간에 따라 어떻게 변하는지를 보여 줍니다.")
+        st.write("상관 행렬의 히트맵은 각 대기오염 물질 간의 상관관계를 색상으로 나타냅니다. 이 분석을 통해 SO2, NO2, O3, CO, PM10, PM2.5 간의 상관관계를 확인할 수 있습니다.")
+        st.write("이번 분석을 통해 서울시(종로구)의 대기오염 상황을 깊이 이해할 수 있었습니다. PM10 농도에 따라 대기질을 구분하고, 각 대기오염 물질 간의 상관관계를 분석하여 서울의 대기오염 패턴을 더 잘 이해할 수 있습니다.")
 
     elif path == ("실습 프로젝트", "지역별 음식점 소비 트렌드 분석"):
         import io
