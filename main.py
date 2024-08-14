@@ -157,13 +157,13 @@ def show_chapter(topic, chapter):
 
                 #파일 병합
                 bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
-    
+
+                #출력
                 weather_info.head()
                 bike_info.head()
                 ''', line_numbers=True)
+        #------------------------------------------------------------
         weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
-                
-        #자전거 이용정보 데이터
         files = [
             "data/실습03/공공자전거이용정보0.csv",
             "data/실습03/공공자전거이용정보1.csv",
@@ -175,11 +175,11 @@ def show_chapter(topic, chapter):
 
         #파일 병합
         bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
-
-        weather_info.head()
-        bike_info.head()
-        
-        st.write("**weather_info**")
+        #------------------------------------------------------------
+        st.write('''
+                **weather_info** /n
+                weather_info.head()
+                ''')
         st.write(weather_info.head())
         st.write("**bike_info**")
         st.write(bike_info.head())
