@@ -1517,7 +1517,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.write('index는 기본 설정된 **RangeIndex**가 출력됩니다.')
         with st.echo():
-            df.index
+            df.head().index
         st.divider()
 
         st.write('columns **열**을 출력합니다.')
@@ -1620,7 +1620,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('boolean index을 만들어 조건에 맞는 데이터만 추출해 낼 수 있습니다.')
         st.code('''cond = (df['age'] >= 70)\ncond''')
         cond = (df['age'] >= 70)
-        st.write(cond)
+        st.write(cond.head())
         st.divider()
         st.code('''df.loc[cond]''')
         st.write(df.loc[cond])
@@ -1835,7 +1835,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
             df
             ''')
         df = pd.read_csv('data/서울시주민등록인구/seoul_population.csv')
-        st.write(df)
+        st.write(df.head())
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}CSV-저장하기") ## 소단원02 - 세부02
@@ -1962,7 +1962,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write('즉, :blue-background[loc]에 적용하여 조건 필터링을 걸 수 있습니다.')
         code = '''df.loc[df['age'].isnull()]'''
         st.code(code)
-        st.write(df.loc[df['age'].isnull()])
+        st.write(df.head().loc[df['age'].isnull()])
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}결측치 채우기 - fillna()")
@@ -2041,14 +2041,14 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.write(''':blue-background[dropna()]로 **1개 라도 NaN 값이 있는 행**은 제거할 수 있습니다. :blue-background[(how='any')]''')
         code = '''df1.dropna()'''
         df1.dropna()
-        st.write(df1)
+        st.write(df1.head())
         st.divider()
 
         st.write('기본 옵션 값은 :blue-background[how=any]로 설정되어 있으며, 다음과 같이 변경할 수 있습니다.')
         st.write('- **any**: 1개 라도 NaN값이 존재시 drop')
 
         st.write('- **all**: 모두 NaN값이 존재시 drop')
-        code = '''df1.dropna(how='all')'''
+        code = '''df1.head().dropna(how='all')'''
         st.code(code)
         df1.dropna(how='all')
         st.write(df1)
@@ -2101,20 +2101,20 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.subheader(f"{idx.getSubIdx()}행 (row) 삭제")
         st.write('행 삭제시 **index를 지정하여 삭제**합니다.')
         
-        code = 'df1.drop(1)'
+        code = 'df1.head().drop(1)'
         st.code(code)
         st.write(df1.drop(1))
         
         st.divider()
         st.write('행 삭제시 **범위를 지정하여 삭제**할 수 있습니다.')
-        code = 'df1.drop(np.arange(10))'
+        code = 'df1.head()drop(np.arange(10))'
         st.code(code)
         st.write(df1.drop(np.arange(10)))
 
         st.write('**fancy indexing**을 활용하여 삭제할 수 있습니다.')
         code = 'df1.drop([1, 3, 5, 7, 9])'
         st.code(code)
-        st.write(df1.drop([1, 3, 5, 7, 9]))
+        st.write(df1.head().drop([1, 3, 5, 7, 9]))
             
         st.divider()
 
@@ -2130,7 +2130,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.write('**다수의 컬럼(column) 삭제**도 가능합니다.')
         st.code('''df1.drop(['who', 'deck', 'alive'], axis=1)''')
-        st.write(df1.drop(['who', 'deck', 'alive'], axis=1))
+        st.write(df1.head().drop(['who', 'deck', 'alive'], axis=1))
         st.divider()
 
         st.write('삭제된 내용을 바로 적용하려면')
@@ -4563,7 +4563,7 @@ y'''
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}3D 그래프")
-        st.write("3D로 그래프를 그리기 위해서는 mplot3d를 추가로 import 합니다")
+        st.write("3D로 그래프를 그리기 위해서는 mplot3d를 추가로 import 합니다.")
         with st.echo():
             from mpl_toolkits import mplot3d
 
