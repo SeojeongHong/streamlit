@@ -4800,7 +4800,6 @@ y'''
 
     elif path == ("실습 프로젝트", "대기오염 데이터 분석"):
         st.header(f"{idx.getHeadIdx()}서울시 종로구 대기오염")
-        st.subheader("서울시 종로구 대기오염")
         st.write("CSV 파일의 2022년 서울시 종로구 대기오염 측정정보를 사용하여 데이터 로드, 분석 및 시각화 결론도출까지 실습을 진행합니다.")
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
