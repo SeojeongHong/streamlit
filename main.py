@@ -5,7 +5,7 @@ import os
 from matplotlib import font_manager as fm
 fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
-plt.rcParams['font.family'] = font_prop.get_name()
+# plt.rcParams['font.family'] = prop.get_name()
 import numpy as np
 import seaborn as sns
 
