@@ -190,7 +190,7 @@ def show_chapter(topic, chapter):
                 # 토요일, 일요일을 공휴일로 설정
                 bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
                 bike_df2.sample(10)
-                ''')
+                ''',line_numbers=True)
         
         bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
         bike_df2['년도'] = bike_df2['대여일자'].dt.year
@@ -211,7 +211,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 weather_info['날짜'] = weather_info['일시'].str[:10]
                 weather_info['시간'] = weather_info['일시'].str[11:13].astype(int)
-                ''')
+                ''',line_numbers=True)
         
         weather_info['날짜'] = weather_info['일시'].str[:10]
         weather_info['시간'] = weather_info['일시'].str[11:13].astype(int)
@@ -224,7 +224,7 @@ def show_chapter(topic, chapter):
                 
                 #칼럼명 변경
                 weather_df.columns = ['날짜', '시간', '기온', '강수량(mm)', '풍속(m/s)', '풍향(16방위)', '습도(%)','일조','일사', '적설(cm)','전운량',  '지면온도']
-                ''')
+                ''',line_numbers=True)
         weather_df = weather_info[['날짜', '시간', '기온(°C)', '강수량(mm)', '풍속(m/s)', '풍향(16방위)', '습도(%)','일조(hr)','일사(MJ/m2)', '적설(cm)','전운량(10분위)', '지면온도(°C)']]
         weather_df.columns = ['날짜', '시간', '기온', '강수량(mm)', '풍속(m/s)', '풍향(16방위)', '습도(%)','일조','일사', '적설(cm)','전운량',  '지면온도']
         st.divider()
@@ -232,7 +232,7 @@ def show_chapter(topic, chapter):
         st.subheader(f"{idx.getSubIdx()}결측치 확인")
         st.code('''
                 weather_df.isnull().sum()
-                ''')
+                ''',line_numbers=True)
         st.write(weather_df.isnull().sum())
         st.write('''
                 **강수량, 적설, 일조, 일사**와 같이 NaN값이 0인 경우는 0으로 fill 해줍니다. **전운량, 기온, 지면온도, 풍향, 풍속**은 같은 일자의 이전시간대의 데이터로 대체합니다.
@@ -246,7 +246,7 @@ def show_chapter(topic, chapter):
                 weather_df['적설(cm)'].fillna(0, inplace = True)
                 weather_df['일조'].fillna(0, inplace = True)
                 weather_df['일사'].fillna(0, inplace = True)
-                ''')
+                ''',line_numbers=True)
         weather_df['강수량(mm)'].fillna(0, inplace = True)
         weather_df['적설(cm)'].fillna(0, inplace = True)
         weather_df['일조'].fillna(0, inplace = True)
@@ -265,7 +265,7 @@ def show_chapter(topic, chapter):
                 weather_df['풍향(16방위)'].fillna(method='ffill',inplace = True)
                 weather_df['전운량'].fillna(method='ffill',inplace = True)
                 weather_df['지면온도'].fillna(method='ffill',inplace = True)
-                ''')
+                ''',line_numbers=True)
         weather_df = weather_df.sort_values(['날짜','시간'])
         weather_df['기온'].fillna(method='ffill',inplace = True)
         weather_df['풍속(m/s)'].fillna(method='ffill',inplace = True)
@@ -274,7 +274,9 @@ def show_chapter(topic, chapter):
         weather_df['지면온도'].fillna(method='ffill',inplace = True)
         
         st.write("결측치를 제거한 결과를 확인해보겠습니다.")
-        st.code('''weather_df.isnull().sum()''')
+        st.code('''
+                weather_df.isnull().sum()
+                ''',line_numbers=True)
         st.write(weather_df.isnull().sum())
         st.divider()
 
@@ -289,7 +291,7 @@ def show_chapter(topic, chapter):
                                     left_on =['대여일자', '대여시간'], 
                                     right_on = ['날짜', '시간']) #default = inner 
                 bike_mg.head()
-                ''')
+                ''',line_numbers=True)
         weather_df['날짜'] = pd.to_datetime(weather_df['날짜'])
         #데이터 타입 맞추기 
         bike_mg = pd.merge (bike_df2, 
@@ -303,14 +305,16 @@ def show_chapter(topic, chapter):
                 bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
                 
                 bike_mg.head()
-                ''')
+                ''',line_numbers=True)
         bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
         st.write(bike_mg.head())
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}데이터 시각화")
         st.write("원본 데이터프레임을 보존하기 위해 복사본을 생성한 후 시각화를 진행하겠습니다.")
-        st.code('''data = bike_mg.copy()''')
+        st.code('''
+                data = bike_mg.copy()
+                ''',line_numbers=True)
         data = bike_mg.copy()
 
         st.subheader(f"{idx.getSubIdx()}데이터 요약 통계")
@@ -318,7 +322,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 desc_df = data.describe().T
                 desc_df
-                ''')
+                ''',line_numbers=True)
         desc_df = data.describe().T
         st.write(desc_df)
         st.divider()
@@ -329,7 +333,7 @@ def show_chapter(topic, chapter):
                 sns.histplot(data['이용건수'], ax=ax)
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
         ax.set_title("이용건수 분포", fontproperties=prop)
@@ -342,7 +346,7 @@ def show_chapter(topic, chapter):
                 sns.lineplot(x=data['일'], y=data['이용건수'])
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, ax = plt.subplots()
         sns.lineplot(x=data['일'].map(str), y=data['이용건수'], ax=ax)
         ax.set_xlabel("일", fontproperties=prop)
@@ -355,7 +359,7 @@ def show_chapter(topic, chapter):
         st.write("원하는 컬럼을 선택해 피처의 분포를 확인합니다.")
         st.code('''
                 con_cols = ["기온", "강수량(mm)", "풍속(m/s)", "습도(%)", "일조"]
-                ''')
+                ''',line_numbers=True)
         con_cols = ["기온", "강수량(mm)", "풍속(m/s)", "습도(%)", "일조"]
         
         
@@ -369,7 +373,7 @@ def show_chapter(topic, chapter):
                     sns.histplot(data = data, x = col, ax = ax[i])
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         
         fig, axes = plt.subplots(1,5, figsize = (20, 4))
         ax = axes.flatten()
@@ -402,7 +406,7 @@ def show_chapter(topic, chapter):
                 fig.subplots_adjust(hspace = 0.4)
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, axes = plt.subplots(2,2, figsize = (20,8))
         sns.barplot(data = data, x = '일', y= '이용건수', ax = axes[0,0])
         sns.barplot(data = data, x = '공휴일', y= '이용건수', ax = axes[0,1])
@@ -444,7 +448,7 @@ def show_chapter(topic, chapter):
                 sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
             
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         
         fig, ax = plt.subplots()
         plt.figure(figsize = (15,3))
@@ -467,7 +471,7 @@ def show_chapter(topic, chapter):
                 sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)'))
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, ax = plt.subplots()
         plt.figure(figsize = (15,3))
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)', ax=ax)
@@ -488,7 +492,7 @@ def show_chapter(topic, chapter):
                 plt.xticks([0,1,2,3,4,5,6],dofw)
                 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, ax = plt.subplots()
         plt.figure(figsize = (15,3))
         sns.boxplot(x='요일(num)', y='이용건수',data = data, ax=ax)
