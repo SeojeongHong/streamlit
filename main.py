@@ -5315,7 +5315,7 @@ df_seoul.head()
     plt.show()''')
     
         plt.figure(figsize=(8,8), dpi=100)
-        df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow')
+        df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow', textprops={'font':prop})
         plt.xticks(fontproperties=prop)
         st.pyplot(plt)
         st.divider()
