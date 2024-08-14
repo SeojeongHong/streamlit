@@ -183,19 +183,20 @@ def show_chapter(topic, chapter):
         st.write(bike_info.head())
         st.divider()
         
-        # st.header(f"{idx.getHeadIdx()}공공자전거 데이터 전처리")
-        # st.subheader(f"{idx.getSubIdx()}집계 데이터 생성")
-        # st.write('''날씨 정보와의 결합에 필요한 데이터(**이용건수**)를 생성하기 위해 **대여일자**, **대여시간**으로 집계해줍니다.''')
-        # st.code('''
-        #         bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
-        #         bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
+        st.header(f"{idx.getHeadIdx()}공공자전거 데이터 전처리")
+        st.subheader(f"{idx.getSubIdx()}집계 데이터 생성")
+        st.write('''날씨 정보와의 결합에 필요한 데이터(**이용건수**)를 생성하기 위해 **대여일자**, **대여시간**으로 집계해줍니다.''')
+        st.code('''
+                bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
+                bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
                 
-        #         bike_df2.head()
-        #         ''', line_numbers=True)
-        # bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
-        # bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
-        # st.write(bike_df2.head())
-        # st.divider()
+                bike_df2
+                ''', line_numbers=True)
+        bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
+        bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
+        
+        st.write(bike_df2.head())
+        st.divider()
 
         # st.subheader(f"{idx.getSubIdx()}파생변수 생성")
         # st.write('''대여일자에서 **년도, 월, 일, 요일, 공휴일** 변수를 생성합니다.''')
