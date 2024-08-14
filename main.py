@@ -5574,7 +5574,7 @@ plt.show()''')
                 bike_mg.head()
                 ''')
         bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
-        st.write(bike_mg)
+        st.write(bike_mg.head())
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}데이터 시각화")
@@ -5648,6 +5648,7 @@ plt.show()''')
             ax[i].set_xlabel(col, fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
+        st.write("선택된 칼럼에 대한 피처의 분포를 시각화합니다.")
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}이용건수와 피처와의 관계")
@@ -5694,7 +5695,11 @@ plt.show()''')
         fig.subplots_adjust(hspace = 0.4)        
         st.pyplot(fig)
         plt.close(fig)
-
+        st.write('''
+                - 공휴일 이용건수보다 평일 이용건수가 더 많습니다.
+                - 기온이 높을수록 이용건수가 증가하는 경향을 보입니다.
+                - 강수량이 적을수록 이용량이 높습니다.
+                ''')
     
         st.divider()
 
@@ -5768,19 +5773,6 @@ plt.show()''')
         plt.close(fig)
         st.divider()
 
-        st.code('''
-                fig, ax = plt.subplots()
-                plt.figure(figsize=(10,8))
-                sns.heatmap(data[con_cols].corr(), annot=True, cmap = 'coolwarm')
-
-                plt.show()
-                ''')
-        fig, ax = plt.subplots()
-        plt.figure(figsize=(10,8))
-        sns.heatmap(data[con_cols].corr(), annot=True, cmap = 'coolwarm', ax=ax)
-
-        st.pyplot(fig)
-        plt.close(fig)
     else :
         st.error("Content Not Found !")
 
