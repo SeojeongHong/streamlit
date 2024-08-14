@@ -5752,6 +5752,7 @@ plt.show()''')
 
         ax.set_xlabel("요일(num)", fontproperties=prop)
         ax.set_ylabel("이용건수", fontproperties=prop)
+        plt.xticks(fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
         st.divider()
