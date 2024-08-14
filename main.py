@@ -5748,11 +5748,10 @@ plt.show()''')
         # 요일 이름 설정
         dofw = list('월화수목금토일')
         ax.set_xticks([0, 1, 2, 3, 4, 5, 6])
-        ax.set_xticklabels(dofw)
+        ax.set_xticklabels(dofw, fontproperties=prop)
 
         ax.set_xlabel("요일(num)", fontproperties=prop)
         ax.set_ylabel("이용건수", fontproperties=prop)
-        ax.xticks(fontproperties=prop)
         
         st.pyplot(fig)
         plt.close(fig)
