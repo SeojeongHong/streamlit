@@ -5575,8 +5575,6 @@ plt.show()''')
                 ''')
         bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
         st.write(bike_mg.head())
-
-        ##처리된 데이터 저장 추가할말
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}데이터 시각화")
@@ -5604,7 +5602,7 @@ plt.show()''')
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
         ax.set_title("이용건수 분포", fontproperties=prop)
-        ax.set_xlabel("이용 건수", fontproperties=prop)
+        ax.set_xlabel("이용건수", fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
 
@@ -5770,8 +5768,6 @@ plt.show()''')
         plt.close(fig)
         st.divider()
 
-        #######분석 결과
-        
     else :
         st.error("Content Not Found !")
 
