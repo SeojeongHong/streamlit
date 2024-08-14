@@ -5653,7 +5653,7 @@ plt.show()''')
         st.code('''sns.histplot(data['이용건수'])''')
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
-        fig.title("이용건수 분포", fontproperties=prop)
+        ax.set_title("이용건수 분포", fontproperties=prop)
         st.pyplot(fig)
 
         st.code('''sns.lineplot(x=data['일'], y=data['이용건수'])''')
