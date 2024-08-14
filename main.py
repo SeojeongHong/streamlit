@@ -5696,10 +5696,12 @@ plt.show()''')
         st.write('''평일과 공휴일에는 완전히 다른 이용 현황을 보이는 것을 확인할 수 있습니다.
                  평일의 경우 오전 8시, 오후 6시에 이용건수 피크를 보이는데, 출퇴근으로 인한 영향으로 추측해볼 수 있겠습니다.
                  ''')
-        st.code('''plt.figure(figsize = (15,3))
-sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
-
-plt.show()
+        st.code('''
+                fig, ax = plt.subplots()
+                plt.figure(figsize = (15,3))
+                sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
+            
+                plt.show()
                 ''')
         
         fig, ax = plt.subplots()
