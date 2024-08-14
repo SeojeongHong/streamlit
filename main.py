@@ -31,8 +31,8 @@ def load_contents() :
     contents = {
         "파이썬 기초": ["자료형", "제어문", "고급"],
         "Pandas 기초": ["DataFrame", "Excel/CSV", "Data 전처리", "Data 연결과 병합", "Static"],
-        "Matplotlib 기초":["Matplotlib 기본", "그래프 그리기?", "그래프에 text", "그래프", "스타일 세부 설정", 
-                         "Grid, Annotate", "Plot", "막대 그래프", "이외?"],
+        "Matplotlib 기초":["Matplotlib 기본", "그래프 그리기", "그래프에 text", "그래프 세부 속성", "스타일 세부 설정", 
+                         "Grid, Annotate", "Plot", "막대 그래프", "Pie chart, 3D plot"],
         "실습 프로젝트":["대기오염 데이터 분석", "지역별 음식점 소비 트렌드 분석", "날씨별 공공자전거 수요 분석"],
     }
     topics = list(contents.keys())
@@ -2868,7 +2868,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.pyplot(plt)
         plt.close()
     
-    elif path == ("Matplotlib 기초", "그래프 그리기?"):
+    elif path == ("Matplotlib 기초", "그래프 그리기"):
         st.header(f"{idx.getHeadIdx()}그래프 그리기")
         st.subheader(f"{idx.getSubIdx()}단일 그래프")
         with st.echo():
@@ -3200,7 +3200,7 @@ Graph Title'''
         st.pyplot(plt)
         plt.close()
     
-    elif path == ("Matplotlib 기초", "그래프"):
+    elif path == ("Matplotlib 기초", "그래프 세부 속성"):
         st.header(f"{idx.getHeadIdx()}축 레이블(Label) 설정하기")
         st.write("**matplotlib.pyplot** 모듈의 **xlabel(), ylabel()** 함수를 사용하면 그래프의 x, y 축에 대한 레이블을 표시할 수 있습니다.")
         st.write("xlabel(), ylabel() 함수를 사용해서 그래프의 축에 레이블을 표시하는 방법에 대해 소개합니다.")
@@ -4633,7 +4633,7 @@ y'''
         st.pyplot(plt)
         plt.close()
 
-    elif path == ("Matplotlib 기초", "이외?") :
+    elif path == ("Matplotlib 기초", "Pie chart, 3D plot") :
         st.header(f"{idx.getHeadIdx()}Pie Chart")
         st.write("**파이 차트 (Pie chart, 원 그래프)** 는 범주별 구성 비율을 원형으로 표현한 그래프입니다.")
         st.write("위의 그림과 같이 **부채꼴의 중심각을 구성 비율에 비례** 하도록 표현합니다.")
@@ -5494,7 +5494,7 @@ plt.show()''')
         
         st.header(f"{idx.getHeadIdx()}공공자전거 데이터 전처리")
         st.subheader(f"{idx.getSubIdx()}집계 데이터 생성")
-        st.write('''날씨 정보와의 결합에 필요한 데이터(이용건수)를 생성하기 위해 '대여일자', '대여시간'으로 집계해줍니다.''')
+        st.write('''날씨 정보와의 결합에 필요한 데이터(**이용건수**)를 생성하기 위해 **대여일자**, **대여시간**으로 집계해줍니다.''')
         st.code('''
                 bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
                 bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
@@ -5505,7 +5505,7 @@ plt.show()''')
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}파생변수 생성")
-        st.write('''대여일자에서 년도, 월, 일, 요일, 공휴일 변수를 생성합니다.''')
+        st.write('''대여일자에서 **년도, 월, 일, 요일, 공휴일** 변수를 생성합니다.''')
         st.code('''
                 bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
                 bike_df2['년도'] = bike_df2['대여일자'].dt.year
@@ -5534,7 +5534,7 @@ plt.show()''')
 
         st.header(f"{idx.getHeadIdx()}날씨 데이터 전처리")
         st.subheader(f"{idx.getSubIdx()}날짜, 시간 컬럼 생성")
-        st.write('''자전거 이용정보와의 결합을 위해 '일시' 칼럼에서 '날짜'와 '시간' 정보를 추출합니다.''')
+        st.write('''자전거 이용정보와의 결합을 위해 **일시** 칼럼에서 **날짜**와 **시간** 정보를 추출합니다.''')
         st.code('''
                 weather_info['날짜'] = weather_info['일시'].str[:10]
                 weather_info['시간'] = weather_info['일시'].str[11:13].astype(int)
@@ -5562,7 +5562,7 @@ plt.show()''')
                 ''')
         st.write(weather_df.isnull().sum())
         st.write('''
-                강수량, 적설, 일조, 일사와 같이 NaN값이 0인 경우는 0으로 fill 해줍니다. 전운량, 기온, 지면온도, 풍향, 풍속은 같은 일자의 이전시간대의 데이터로 대체합니다.
+                **강수량, 적설, 일조, 일사**와 같이 NaN값이 0인 경우는 0으로 fill 해줍니다. **전운량, 기온, 지면온도, 풍향, 풍속**은 같은 일자의 이전시간대의 데이터로 대체합니다.
                 ''')
         
         st.write('''
@@ -5625,7 +5625,7 @@ plt.show()''')
                             right_on = ['날짜', '시간']) #default = inner 
         st.write(bike_mg.head())
 
-        st.write("대여일자, 날짜, 시간 데이터가 중복되는 것을 확인할 수 있습니다. 중복되는 데이터를 제거해보겠습니다.")
+        st.write("**대여일자, 날짜, 시간** 데이터가 중복되는 것을 확인할 수 있습니다. 중복되는 데이터를 제거해보겠습니다.")
         st.code('''bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)''')
         bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
         st.write(bike_mg.head())
