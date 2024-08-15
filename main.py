@@ -3,7 +3,7 @@ from streamlit_option_menu import option_menu
 import matplotlib.pyplot as plt
 import os
 import io
-from matplotlib import font_manager as fm
+from matplotlib import font_manager as fm, rc
 fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath).get_name()
 rc('prop', family = prop)
