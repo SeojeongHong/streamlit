@@ -517,7 +517,7 @@ def show_chapter(topic, chapter):
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일', ax=ax)
         
         ax.set_xlabel('대여시간', fontproperties=prop)
-        ax.set_xlabel('이용건수', fontproperties=prop)
+        ax.set_ylabel('이용건수', fontproperties=prop)
 
         st.pyplot(fig)
         plt.close(fig)
@@ -535,7 +535,7 @@ def show_chapter(topic, chapter):
         fig, ax = plt.subplots()
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)', ax=ax)
         ax.set_xlabel('대여시간', fontproperties=prop)
-        ax.set_xlabel('이용건수', fontproperties=prop)
+        ax.set_ylabel('이용건수', fontproperties=prop)
 
 
         st.pyplot(fig)
@@ -556,6 +556,8 @@ def show_chapter(topic, chapter):
         sns.boxplot(x='요일(num)', y='이용건수',data = data, ax=ax)
         dofw = list('월화수목금토일')
         plt.xticks([0,1,2,3,4,5,6],dofw, fontproperties=prop)
+        ax.set_xlabel('요일(num)', fontproperties=prop)
+        ax.set_ylabel('이용건수', fontproperties=prop)
         
         st.pyplot(fig)
         plt.close(fig)
