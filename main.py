@@ -515,7 +515,8 @@ def show_chapter(topic, chapter):
         
         fig, ax = plt.subplots()
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일', ax=ax)
-        
+
+        ax.legend(handles, labels, title='공휴일', title_fontproperties=prop, prop=prop)
         ax.set_xlabel('대여시간', fontproperties=prop)
         ax.set_ylabel('이용건수', fontproperties=prop)
 
@@ -534,6 +535,8 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         fig, ax = plt.subplots()
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)', ax=ax)
+
+        ax.legend(handles, labels, title='요일(num)', title_fontproperties=prop, prop=prop)
         ax.set_xlabel('대여시간', fontproperties=prop)
         ax.set_ylabel('이용건수', fontproperties=prop)
 
