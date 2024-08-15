@@ -389,7 +389,7 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         
         fig, ax = plt.subplots()
-        sns.histplot(data['이용건수'], ax=ax, fontproperties=prop)
+        sns.histplot(data['이용건수'], ax=ax)
         st.pyplot(fig)
         plt.close(fig)
         
@@ -523,7 +523,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 sns.boxplot(x='요일(num)', y='이용건수',data = data)
                 dofw = list('월화수목금토일')
-                plt.xticks([0,1,2,3,4,5,6],dofw)
+                plt.xticks([0,1,2,3,4,5,6],dofw, fontproperties=prop)
                 
                 plt.show()
                 ''',line_numbers=True)
