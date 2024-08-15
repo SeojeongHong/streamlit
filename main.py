@@ -4,15 +4,9 @@ import matplotlib.pyplot as plt
 import os
 import io
 from matplotlib import font_manager as fm
-fpath = "customfont/NanumGothic-Regular.ttf"
-prop = fm.FontProperties(fname=fpath)
-
-# 폰트 설정
-plt.rcParams['font.family'] = prop.get_name()
 import numpy as np
 import seaborn as sns
 import pandas as pd
-
 
 class IndexAllocator:
     def __init__(self):
@@ -184,8 +178,8 @@ def show_chapter(topic, chapter):
         bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
         #------------------------------------------------------------
         st.write("**weather_info**")
-        st.code('''weather_info.head()''', line_numbers=True)
-        st.write(weather_info.head())
+        st.code('''weather_info.sample(5)''', line_numbers=True)
+        st.write(weather_info.sample(5))
         
         st.write("**bike_info**")
         st.code('''bike_info.sample(5)''', line_numbers=True)
@@ -200,11 +194,11 @@ def show_chapter(topic, chapter):
                 bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
                 bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
 
-                bike_df2
+                bike_df2.sample(5)
                 ''', line_numbers=True)
         bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
         bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
-        st.write(bike_df2.head())
+        st.write(bike_df2.sample(5))
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}파생변수 생성")
@@ -220,7 +214,7 @@ def show_chapter(topic, chapter):
 
                 # 토요일, 일요일을 공휴일로 설정
                 bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
-                bike_df2
+                bike_df2.sample(5)
                 ''',line_numbers=True)
         
         bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
@@ -232,7 +226,7 @@ def show_chapter(topic, chapter):
 
         # 토요일, 일요일을 공휴일로 설정
         bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
-        st.write(bike_df2.head())
+        st.write(bike_df2.sample(5))
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}날씨 데이터 전처리")
@@ -492,9 +486,6 @@ def show_chapter(topic, chapter):
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}평일과 공휴일 이용건수 차이")
-        st.write('''평일과 공휴일에는 완전히 다른 이용 현황을 보이는 것을 확인할 수 있습니다.
-                 평일의 경우 오전 8시, 오후 6시에 이용건수 피크를 보이는데, 출퇴근으로 인한 영향으로 추측해볼 수 있겠습니다.
-                 ''')
         st.code('''
                 sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
             
@@ -506,10 +497,12 @@ def show_chapter(topic, chapter):
 
         st.pyplot(fig)
         plt.close(fig)
+        st.write('''평일과 공휴일에는 완전히 다른 이용 현황을 보이는 것을 확인할 수 있습니다.
+                 평일의 경우 오전 8시, 오후 6시에 이용건수 피크를 보이는데, 출퇴근으로 인한 영향으로 추측해볼 수 있겠습니다.
+                 ''')
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이")
-        st.write("토요일에 이용건수가 더 많고, 토요일 오후에 전반적으로 이용률이 높은 모습을 보입니다.")
         st.code('''
                 sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)')
 
@@ -520,10 +513,11 @@ def show_chapter(topic, chapter):
 
         st.pyplot(fig)
         plt.close(fig)
+        st.write("토요일에 이용건수가 더 많고, 토요일 오후에 전반적으로 이용률이 높은 모습을 보입니다.")
+        
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이(box)")
-        st.write("공휴일은 상대적으로 변동성이 적고, 평일은 변동성이 큰 편입니다.")
         st.code('''
                 sns.boxplot(x='요일(num)', y='이용건수',data = data)
                 dofw = list('월화수목금토일')
@@ -538,6 +532,8 @@ def show_chapter(topic, chapter):
         
         st.pyplot(fig)
         plt.close(fig)
+        st.write("공휴일은 상대적으로 변동성이 적고, 평일은 변동성이 큰 편입니다.")
+        
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}결론 도출")
