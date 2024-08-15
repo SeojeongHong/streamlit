@@ -3,10 +3,9 @@ from streamlit_option_menu import option_menu
 import matplotlib.pyplot as plt
 import os
 import io
-from matplotlib import font_manager as fm, rc
+from matplotlib import font_manager as fm
 fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
-prop = fm.FontProperties(fname=fpath).get_name()
-rc('font', family = prop)
+prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
 import pandas as pd
@@ -390,7 +389,7 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         
         fig, ax = plt.subplots()
-        sns.histplot(data['이용건수'], ax=ax)
+        sns.histplot(data['이용건수'], ax=ax, fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
         
