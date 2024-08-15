@@ -390,6 +390,7 @@ def show_chapter(topic, chapter):
         
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
+        ax.set_xlabel('이용건수', fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
         
@@ -401,6 +402,8 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         fig, ax = plt.subplots()
         sns.lineplot(x=data['일'], y=data['이용건수'], ax=ax)
+        ax.set_xlabel('일', fontproperties=prop)
+        ax.set_ylabel('이용건수', fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
 
@@ -433,6 +436,11 @@ def show_chapter(topic, chapter):
         # axes = (n,n)형태 / ax = m형태
         for i, col in enumerate(con_cols):
             sns.histplot(data = data, x = col, ax = ax[i])
+        ax[0].set_xlabel('기온', fontproperties=prop)
+        ax[1].set_xlabel('강수량(mm)', fontproperties=prop)
+        ax[2].set_xlabel('풍속(m/s)', fontproperties=prop)
+        ax[3].set_xlabel('습도(%)', fontproperties=prop)
+        ax[4].set_xlabel('일조', fontproperties=prop)
         
         st.pyplot(fig)
         plt.close(fig)
@@ -468,10 +476,21 @@ def show_chapter(topic, chapter):
         sns.lineplot(data = data, x = '강수량(mm)', y= '이용건수', ax = axes[1,1])
 
         #제목 설정 
-        axes[0,0].set_title('일별 이용건수')
-        axes[0,1].set_title('공휴일여부에 따른 이용건수')
-        axes[1,0].set_title('기온별 이용건수')
-        axes[1,1].set_title('강수량(mm)별 이용건수')
+        axes[0,0].set_title('일별 이용건수', fontproperties=prop)
+        axes[0,0].set_xlabel('일', fontproperties=prop)
+        axes[0,0].set_ylabel('이용건수', fontproperties=prop)
+        
+        axes[0,1].set_title('공휴일여부에 따른 이용건수', fontproperties=prop)
+        axes[0,1].set_xlabel('공휴일', fontproperties=prop)
+        axes[0,1].set_ylabel('이용건수', fontproperties=prop)
+        
+        axes[1,0].set_title('기온별 이용건수', fontproperties=prop)
+        axes[1,0].set_xlabel('기온', fontproperties=prop)
+        axes[1,0].set_ylabel('이용건수', fontproperties=prop)
+        
+        axes[1,1].set_title('강수량(mm)별 이용건수', fontproperties=prop)
+        axes[1,1].set_xlabel('강수량(mm)', fontproperties=prop)
+        axes[1,1].set_ylabel('이용건수', fontproperties=prop)
 
         # 간격조정
         fig.subplots_adjust(hspace = 0.4)
@@ -496,6 +515,9 @@ def show_chapter(topic, chapter):
         
         fig, ax = plt.subplots()
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일', ax=ax)
+        
+        ax.set_xlabel('대여시간', fontproperties=prop)
+        ax.set_xlabel('이용건수', fontproperties=prop)
 
         st.pyplot(fig)
         plt.close(fig)
@@ -512,6 +534,9 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         fig, ax = plt.subplots()
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)', ax=ax)
+        ax.set_xlabel('대여시간', fontproperties=prop)
+        ax.set_xlabel('이용건수', fontproperties=prop)
+
 
         st.pyplot(fig)
         plt.close(fig)
@@ -530,7 +555,7 @@ def show_chapter(topic, chapter):
         fig, ax = plt.subplots()
         sns.boxplot(x='요일(num)', y='이용건수',data = data, ax=ax)
         dofw = list('월화수목금토일')
-        plt.xticks([0,1,2,3,4,5,6],dofw)
+        plt.xticks([0,1,2,3,4,5,6],dofw, fontproperties=prop)
         
         st.pyplot(fig)
         plt.close(fig)
