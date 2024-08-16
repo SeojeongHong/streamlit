@@ -5917,6 +5917,7 @@ df_seoul.head()
                 plt.show()
                 ''',line_numbers=True)
         import matplotlib.pyplot as plt
+        import seaborn as sns
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
         st.pyplot(fig)
