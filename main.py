@@ -8,7 +8,6 @@ fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
-import pandas as pd
 
 class IndexAllocator:
     def __init__(self):
@@ -5690,6 +5689,8 @@ df_seoul.head()
                 bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
                 ''', line_numbers=True)
         #------------------------------------------------------------
+        
+        import pandas as pd
         # 기상관측자료 데이터
         weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
 
