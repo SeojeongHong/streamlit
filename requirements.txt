@@ -1,5 +1,6 @@
 streamlit
 streamlit-option-menu
+streamlit_float
 matplotlib
 numpy
 pandas
