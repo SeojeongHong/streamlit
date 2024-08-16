@@ -6630,8 +6630,8 @@ plt.show()'''
 def goback_btn() :
     button_container = st.container()
     with button_container:
-         st.button("돌아가기", on_click=update_session_state, args=('go_back',))
-    button_container.float(float_css_helper(width="2.2rem", right="20rem",bottom="1rem"))
+         st.button("돌아가기", on_click=update_session_state, args=('go_back',), type="primary")
+    button_container.float(float_css_helper(width="2.2rem", right="5rem",bottom="1rem"))
 
 def main() :
     float_init()
