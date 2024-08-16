@@ -5665,7 +5665,7 @@ df_seoul.head()
                 import seaborn as sns
                 import matplotlib.pyplot as plt
 
-                # #한글 표시 -> 캐싱
+                #한글 표시
                 plt.rcParams['font.family'] = 'NanumGothic'
                 plt.rc('font', family='NanumGothic')
                 ''', line_numbers=True)
