@@ -8,6 +8,8 @@ fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
+from streamlit_float import *
+float_init()
 
 class IndexAllocator:
     def __init__(self):
@@ -129,6 +131,14 @@ def pandas_dataset():
         st.divider()
 
 def show_chapter(topic, chapter):
+    button_container = st.container()
+    with button_container:
+    if st.button("돌아가기"):
+        #세션업데이트
+        st.write("클릭")
+    button_css = float_css_helper(width="2.2rem", right="5rem",bottom="1rem", transition=0)
+    button_container.float(button_css)
+    
     st.title(chapter)
     path = (topic, chapter)
 
