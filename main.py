@@ -5774,6 +5774,7 @@ df_seoul.head()
         weather_info['시간'] = weather_info['일시'].str[11:13].astype(int)
 
         #weather_info.info() 출력 코드
+        import io
         buffer = io.StringIO()
         weather_info.info(buf=buffer)
         st.text(buffer.getvalue())
