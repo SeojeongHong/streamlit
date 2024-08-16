@@ -8,6 +8,8 @@ fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
+from streamlit_float import *
+float_init()
 
 class IndexAllocator:
     def __init__(self):
@@ -6731,7 +6733,11 @@ plt.show()'''
     else :
         st.error("Content Not Found !")
 
-    st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+    # st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+    button_container = st.container()
+    with button_container:
+         st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+    button_container.float(float_css_helper(width="2.2rem", right="20rem",bottom="1rem"))
 
 def main() :
     page, topic, chapter = init_session_state()
@@ -6740,6 +6746,7 @@ def main() :
         show_topic(topic)
     elif page == 'page_chapter':
         show_chapter(topic, chapter)
+        
     
     with st.sidebar:
         option_menu(
