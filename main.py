@@ -6679,7 +6679,6 @@ plt.show()'''
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)', ax=ax)
         ax.set_xlabel("대여시간", fontproperties=prop)
         ax.set_ylabel("이용건수", fontproperties=prop)
-        ax.set_xticklabels(dofw, fontproperties=prop)
         handles, labels = ax.get_legend_handles_labels()
         ax.legend(handles, labels, title='요일(num)', title_fontproperties=prop, prop=prop)
        
@@ -6701,9 +6700,11 @@ plt.show()'''
         fig, ax = plt.subplots()
         sns.boxplot(x='요일(num)', y='이용건수',data = data, ax=ax)
         dofw = list('월화수목금토일')
-        plt.xticks([0,1,2,3,4,5,6],dofw)
+        plt.xticks([0,1,2,3,4,5,6],dofw, fontproperties=prop)
         ax.set_xlabel("요일(num)", fontproperties=prop)
         ax.set_ylabel("이용건수", fontproperties=prop)
+        # ax.set_xticklabels(dofw, fontproperties=prop)
+        
         
         st.pyplot(fig)
         plt.close(fig)
