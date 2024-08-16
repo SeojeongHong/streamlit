@@ -1169,7 +1169,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 li = ["A", "B", "C", "D"]
 
                 while li :
-                        print(li.pop())
+                    print(li.pop())
                 
                 #출력
                 # D
