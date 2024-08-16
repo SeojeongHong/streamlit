@@ -5690,7 +5690,11 @@ df_seoul.head()
                 ''', line_numbers=True)
         #------------------------------------------------------------
         
+        import numpy as np
         import pandas as pd
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+        import io
         # 기상관측자료 데이터
         weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
 
@@ -5774,7 +5778,6 @@ df_seoul.head()
         weather_info['시간'] = weather_info['일시'].str[11:13].astype(int)
 
         #weather_info.info() 출력 코드
-        import io
         buffer = io.StringIO()
         weather_info.info(buf=buffer)
         st.text(buffer.getvalue())
@@ -5916,8 +5919,7 @@ df_seoul.head()
 
                 plt.show()
                 ''',line_numbers=True)
-        import matplotlib.pyplot as plt
-        import seaborn as sns
+
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
         st.pyplot(fig)
