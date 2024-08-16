@@ -135,7 +135,7 @@ def show_chapter(topic, chapter):
     ### Python 컨텐츠 작성
     if path == ("파이썬 기초", "자료형") :
         st.header(f"{idx.getHeadIdx()}숫자형")
-        st.write("숫자형에는 정수형(Integer)과 실수형(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
+        st.write("숫자형에는 **정수형**(Integer)과 **실수형**(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
         st.code('''
                 #정수형(Integer)
                 a = 123
@@ -257,7 +257,7 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}문자열 길이 구하기")
-        st.write("문자열의 길이는 다음과 같이 len 함수를 사용하면 구할 수 있습니다.")
+        st.write("문자열의 길이는 다음과 같이 **len** 함수를 사용하면 구할 수 있습니다.")
         st.code('''
                 a = "Life is too short"
                 print(len(a))
@@ -266,7 +266,7 @@ def show_chapter(topic, chapter):
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}문자열 인덱싱")
-        st.write("인덱싱이란 문자열에서 문자를 추출하는 것입니다. 문자열의 문자에 접급하기 위해서 '문자열[인덱스]' 형식으로 접든할 수 있습니다. 이때 인덱스는 0부터 시작합니다.")
+        st.write("인덱싱이란 문자열에서 문자를 추출하는 것입니다. 문자열의 문자에 접근하기 위해서 '**문자열[인덱스]**' 형식으로 접근할 수 있습니다. 이때 인덱스는 0부터 시작합니다.")
         st.code('''
                 str = "Hello World"
                 
@@ -283,7 +283,7 @@ def show_chapter(topic, chapter):
                  
                         문자열[start : end : step]
                 
-start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 의미합니다. step의 기본 값은 1으로 생략 가능합니다.
+**start**는 시작 인덱스, **end**는 끝 인덱스, **step**은 슬라이싱 간격을 의미합니다. step의 기본 값은 1으로 생략 가능합니다.
                  ''')
         st.code('''
                 str = "Life is too short, You need Python"
@@ -421,7 +421,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         
         st.header(f"{idx.getHeadIdx()}불")
         st.write('''
-                불(bool)이란 참(True)과 거짓(False)을 나타내는 자료형입니다. 불 자료형은 다음 2가지 값만을 가질 수 있습니다.
+                불(bool)이란 **참**(True)과 **거짓**(False)을 나타내는 자료형입니다. 불 자료형은 다음 2가지 값만을 가질 수 있습니다.
 
                 - True: 참을 의미한다.
                 - False: 거짓을 의미한다.
@@ -530,7 +530,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트 길이 구하기")
-        st.write("리스트 길이를 구하기 위해서는 다음처럼 len 함수를 사용해야 합니다.")
+        st.write("리스트 길이를 구하기 위해서는 다음처럼 **len** 함수를 사용해야 합니다.")
         st.code('''
                 a = [1, 2, 3]
                 print(len(a))
@@ -550,7 +550,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트 요소 삭제하기")
-        st.write("del 함수를 사용해 리스트의 요소를 삭제할 수 있습니다. 삭제 또한 인덱스를 통해 요소에 접근합니다.")
+        st.write("**del** 함수를 사용해 리스트의 요소를 삭제할 수 있습니다. 삭제 또한 인덱스를 통해 요소에 접근합니다.")
         st.code('''
                 a = [1, 2, 3]
                 del a[1]
@@ -757,7 +757,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         
         st.header(f"{idx.getHeadIdx()}딕셔너리")
         st.write('''
-                딕셔너리(dictionary)란 단어 그대로 '사전'이라는 뜻입니다. 딕셔너리의 기본 구조는 아래와 같이 Key와 Value를 한 쌍으로 가지며, 리스트나 튜플처럼 순차적으로 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는 특징을 가집니다.
+                딕셔너리(dictionary)란 단어 그대로 '사전'이라는 뜻입니다. 딕셔너리의 기본 구조는 아래와 같이 **Key**와 **Value**를 한 쌍으로 가지며, 리스트나 튜플처럼 순차적으로 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는 특징을 가집니다.
         
                     {Key1: Value1, Key2: Value2, Key3: Value3, ...}
                 
@@ -874,7 +874,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                  - 중복을 허용하지 않는다.
                  - 순서가 없다(Unordered).
 
-                 set은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하기 위한 필터로 종종 사용됩니다. 또한, 리스트나 튜플은 순서가 있기(ordered) 때문에 인덱싱을 통해 요솟값을 얻을 수 있지만, set 자료형은 순서가 없기(unordered) 때문에 인덱싱을 통해 요솟값을 얻을 수 없습니다.
+                 set은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하기 위한 필터로 종종 사용됩니다. 또한, 리스트나 튜플은 순서가 있기 때문에 인덱싱을 통해 요솟값을 얻을 수 있지만, set 자료형은 순서가 없기 때문에 인덱싱을 통해 요솟값을 얻을 수 없습니다.
                  ''')
         st.subheader(f"{idx.getSubIdx()}집합의 연산")
         st.code('''
