@@ -382,7 +382,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.lstrip() )
+                print( a.rstrip() )
                 #출력 : '  hi'
                 ''')
         
@@ -391,7 +391,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.lstrip() )
+                print( a.strip() )
                 #출력 : 'hi'
                 ''')
         
@@ -1120,7 +1120,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 출력 : 55
                 ''')
         st.divider()
-
+        
         st.subheader(f"{idx.getSubIdx()}while 문 강제로 빠져나가기")
         st.write("while 문은 조건문이 참인 동안 계속 while 문 안의 내용을 반복적으로 수행합니다. 하지만 강제로 while 문을 빠져나가고 싶은 경우엔 break를 사용해 반복문을 빠져나갈 수 있습니다.")
         st.write("아래 코드는 조건문이 True이기 때문에 무한 반복하게 됩니다.")
@@ -1161,6 +1161,23 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #9
                 ''')
         st.write("위는 1부터 10까지의 숫자 중 홀수만 출력하는 예시입니다. a가 10보다 작은 동안 a는 1만큼씩 계속 증가합니다. a % 2 == 0(a를 2로 나누었을 때 나머지가 0인 경우)이 참이 되는 경우는 a가 짝수인 경우입니다. 즉, a가 짝수이면 continue 문을 수행하게 됩니다. 이 continue 문은 while 문의 맨 처음인 조건문(a < 10)으로 돌아가게 하는 명령어입니다. 따라서 위 예에서 a가 짝수이면 print(a) 문장은 수행되지 않을 것입니다.")
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}while 문 리스트와 함께 사용하기")
+        st.write('''while 문은 조건문에는 수식이 아닌 리스트 자료형이 올 수 있습니다. 리스트의 경우 값이 비어 있으면([]) 거짓(False)이 되고 비어 있지 않으면 참(True)이 되기 때문입니다.''')
+        st.code('''
+                li = ["A", "B", "C", "D"]
+
+                while li :
+                        print(li.pop())
+                
+                #출력
+                # D
+                # C
+                # B
+                # A
+                ''')
+        st.write("**pop()** 함수는 리스트 요소의 마지막 값을 제거하고 반환합니다. 위 코드의 경우, 주어진 리스트의 값이 빌 때까지 마지막 값을 제거하는 반복문을 수행합니다.")
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}for문")
@@ -1219,15 +1236,52 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''')
         st.write("range(10)은 0부터 10 미만의 숫자를 포함하는 range 객체를 만들어 줍니다. 시작 숫자와 끝 숫자를 지정하려면 range(시작_숫자, 끝_숫자) 형태를 사용하는데, 이때 끝 숫자는 포함되지 않습니다.")
         st.code('''
-                add = 0
-
                 for i in range(1, 11) :
-                    add += i
+                    print(i)
                 
-                print(add)
-                # 출력 : 55
+                # 출력
+                # 1
+                # 2
+                # 3
+                # 4
+                # 5
+                # 6
+                # 7
+                # 8
+                # 9
+                # 10
                 ''')
-        st.write("range(1, 11)은 숫자 1부터 10까지(1 이상 11 미만)의 숫자를 데이터로 가지는 객체입니다. 따라서 위 예에서 i 변수에 숫자가 1부터 10까지 하나씩 차례로 대입되면서 add += i 문장을 반복적으로 수행하고 add 최종적으로 55가 됩니다.")
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}for문과 함께 자주 사용하는 enumerate 함수")
+        st.write("for 문 사용 시 몇 번째 반복문인지 확인이 필요할 경우가 있습니다. 이때 enumerate 함수를 사용해 인덱스 번호와 리스트의 값을 함께 반환할 수 있습니다.")
+        st.code('''
+                num = ["zero", "one", "two", "three", "four", "five"]
+
+                for idx, n in enumerate(num) :
+                        print(idx, n)
+                # 출력
+                # 0 zero
+                # 1 one
+                # 2 two
+                # 3 three
+                # 4 four
+                # 5 five
+                ''')
+        st.write("start 인자를 사용해 인덱스를 0이 아닌 다른 숫자로 시작할 수 있습니다.")
+        st.code('''
+                letter = ["A", "B", "C", "D", "E"]
+
+                for idx, l in enumerate(letter, start=5) :
+                        print(idx, l)
+                # 출력
+                # 5 A
+                # 6 B
+                # 7 C
+                # 8 D
+                # 9 E
+                ''')
+        
+        
     
     elif path == ("파이썬 기초", "고급") :
         st.header(f"{idx.getHeadIdx()}함수")
@@ -1333,7 +1387,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.header(f"{idx.getHeadIdx()}패키지")
         st.write('''
                 패키지는 모듈의 집합을 뜻합니다. 모듈은 하나의 .py 파이썬 파일, 패키지는 여러개의 .py 파일을 모아놓은 폴더 개념으로 생각할 수 있습니다.
-                파이썬 패키지 중 예로는 넘파이 (NumPy)와 Pandas (판다스)가 있습니다.
+                파이썬 패키지 중 예로는 넘파이(NumPy)와 Pandas(판다스)가 있습니다.
                 ''')
         st.divider()
 
@@ -1354,6 +1408,235 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                         pip list
 
+                ''')    
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}패키지 호출하기")
+        st.write('''
+                설치한 패키지를 사용하기 위해선 **import**를 통해 호출해 불러와주어야 합니다. **import**문은 코드의 가장 상단에 작성해줍니다.
+
+                                import 패키지명
+                ''')    
+        st.write('''
+                패키지명이 너무 길면 **as** 를 사용하여 짧은 패키지 별명을 사용할 수 있습니다.
+                ''')    
+        st.code('''import pandas as pd''')
+        st.divider()
+
+        st.header(f"{idx.getHeadIdx()}NumPy")
+        st.write("NumPy는 대규모 다차원 배열과 행렬 연산에 필요한 다양한 함수와 메소드를 제공합니다. 데이터 분석, 데이터 처리, 선형 대수, 머신 러닝 등 다양한 분야에서 널리 사용되고 있습니다.")
+
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}기본 사용법")
+        st.write("아래 명령어를 사용하여 NumPy 패키지를 설치해줍니다.")
+        st.code("pip install numpy")
+
+        st.write("코드 가장 상단에 **import** 해주어 NumPy를 호출합니다.")
+        st.code("import numpy as np")
+        st.divider()
+
+        st.header(f"{idx.getHeadIdx()}Array")
+        st.subheader(f"{idx.getSubIdx()}Array 만들기")
+        st.write("NumPy의 가장 기본적인 데이터 구조는 배열입니다. NumPy 배열은 동일한 타입의 데이터를 담는 다차원 배열입니다.")
+
+        st.code('''
+                # 1차원 배열
+                a = np.array([1, 2, 3])
+
+                print(a) 
+                #출력 : [1 2 3]
+
+                # 2차원 배열
+                b = np.array([[1, 2, 3], [4, 5, 6]])
+
+                print(b)
+                #출력
+                # [[1 2 3]
+                #  [4 5 6]]
+
+                # 3차원 배열
+                c = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+
+                print(c)
+                #출력
+                # [[[1 2]
+                #   [3 4]]
+
+                #  [[5 6]
+                #   [7 8]]]
+                ''')
+        
+        st.write("이렇게 생성된 배열의 크기는 **shape**속성을 통해 확인할 수 있습니다.")
+        st.code('''
+                print(a.shape)  # 출력 : (3,)
+                print(b.shape)  # 출력 : (2, 3)
+                print(c.shape)  # 출력 : (2, 2, 2)
+                ''')
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}NumPy 배열 연산")
+        st.write("NumPy 배열은 다른 배열 또는 스칼라와의 연산을 지원합니다. NumPy 배열의 연산은 배열의 **원소별(element-wise)**로 이루어집니다.")
+
+        st.code('''
+                a = np.array([1, 2, 3])
+                b = np.array([4, 5, 6])
+
+                # 원소별 덧셈
+                c = a + b
+                print(c)    # 출력 [5, 7, 9]
+
+                # 원소별 곱셈
+                d = a * b
+                print(d)    # 출력 [4, 10, 18]
+
+                # 스칼라와의 연산
+                e = a + 1  
+                print(e)    # 출력 [2, 3, 4]
+                ''')
+        st.write('''- **sum()** : 합계''')
+        st.code('''
+                a = np.array([1, 2, 3])
+
+                # 합계
+                b = np.sum(a)
+                print(b)  # 출력 6
+                ''')
+        
+        st.write('''- **mean()** : 평균''')
+        st.code('''
+                a = np.array([1, 2, 3])
+
+                b = np.mean(a)
+                print(b)  # 출력 2.0
+                ''')
+        
+        st.write('''- **min()** : 최소값''')
+        st.code('''
+                a = np.array([1, 2, 3])
+
+                b = np.min(a)
+                print(b)  # 출력 1
+                ''')
+        
+        st.write('''- **max()** : 최대값''')
+        st.code('''
+                a = np.array([1, 2, 3])
+
+                b = np.max(a)
+                print(b)  # 출력 3
+                ''')
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}Numpy 배열 인덱싱과 슬라이싱")
+        st.write("NumPy 배열의 인덱싱과 슬라이싱은 Python 리스트의 인덱싱과 슬라이싱과 매우 유사합니다. NumPy 배열의 인덱싱과 슬라이싱을 사용하여 배열의 일부를 선택할 수 있습니다.")
+        st.code('''
+                a = np.array([1, 2, 3, 4, 5])
+
+                # 인덱싱
+                b = a[0]
+                print(b)  # 출력 1
+
+                c = a[2]
+                print(c)  # 출력 3
+
+                # 슬라이싱
+                d = a[1:4]
+                print(d)  # 출력 [2, 3, 4]
+
+                e = a[:3]   
+                print(e)  # 출력 [1, 2, 3]
+
+                f = a[3:]   
+                print(f)  # 출력 [4, 5]
+                ''')
+        st.write("다차원 NumPy 배열에서는 각 차원의 인덱스를 콤마로 구분하여 인덱싱할 수 있습니다.")
+        st.code('''
+                a = np.array([[1, 2, 3], [4, 5, 6]])
+
+                # 인덱싱
+                b = a[0, 0]  
+                print(b)  # 출력 1
+
+                c = a[1, 2]  
+                print(c)  # 출력 6
+
+                # 슬라이싱
+                d = a[0, 1:3]  
+                print(d)  # 출력 [2, 3]
+
+                e = a[:, 1]    
+                print(e)  # 출력 [2, 5]
+
+                f = a[:, :2]   
+                print(f)  # 출력 [[1, 2], [4, 5]]
+                ''')
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}NumPy 배열 병합과 분리")
+        st.write("**concatenate()** 함수를 사용해 다차원 배열을 병합할 수 있습니다. concatenate() 함수는 병합할 배열을 첫 번째 인자로 전달하며, 두 개 이상의 배열을 병합할 경우에는 튜플 형태로 전달합니다. **axis** 인자를 사용하여 병합할 방향을 지정할 수 있습니다. axis 인자를 지정하지 않을 경우 기본값인 0으로 설정됩니다.")
+        st.code('''
+                a = np.array([1, 2, 3])
+                b = np.array([4, 5, 6])
+
+                # 배열 병합
+                c = np.concatenate((a, b))
+                print(c)  # 출력 [1, 2, 3, 4, 5, 6]
+                ''')
+        st.write("**axis=0**은 첫 번째 차원을 따라 배열을 병합한다는 의미입니다. 아래 코드의 경우 a와 b 배열이 첫 번째 차원을 공유하므로 axis=0으로 배열을 병합할 수 있습니다.")
+        st.code('''
+                a = np.array([[1, 2], [3, 4]])
+                b = np.array([[5, 6]])
+
+                # 배열 병합
+                c = np.concatenate((a, b), axis=0)  
+                print(c)    # 출력 [[1, 2], [3, 4], [5, 6]]
+                ''')
+        st.write("**split()** 함수를 사용해 다차원 배열을 분리할 수 있습니다. split() 함수는 분리할 배열과 분리할 인덱스를 전달하며, 분리할 인덱스는 분리될 배열의 첫 번째 차원을 따라 지정합니다.")
+        st.code('''
+                a = np.array([1, 2, 3, 4, 5, 6])
+
+                # 배열 분리
+                b, c = np.split(a, [3])  
+                print(b, c)    # 출력 [1, 2, 3], [4, 5, 6])
+                ''')
+        st.write("**axis=0**은 첫 번째 차원을 따라 배열을 분리한다는 의미입니다. 아래 코드의 경우 a의 첫 번째 행을 기준으로 배열을 분리합니다.")
+        st.code('''
+                a = np.array([[1, 2, 3], [4, 5, 6]])
+
+                # 배열 분리
+                b, c = np.split(a, [1], axis=0)  
+                print(b, c)    # 출력 [[1, 2, 3]], [[4, 5, 6]]
+                ''')
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}NumPy 관련 함수")
+        st.write("NumPy는 배열의 계산과 관련된 다양한 함수를 제공합니다.")
+
+        st.write('''- **np.zeros()** : 모든 원소가 0인 배열 생성''')
+        st.code('''
+                arr = np.zeros((2, 3))
+                print(arr)                
+                ''')
+        st.write('''- **np.ones()** : 모든 원소가 1인 배열 생성''')
+        st.code('''
+                arr = np.ones((2, 2))
+                print(arr)                
+                ''')
+        st.write('''- **np.arange()** : 범위 내의 일정 간격을 가진 배열 생성''')
+        st.code('''
+                arr = np.arange(1, 10, 2)   #범위가 1에서 10까지이고 간격이 2인 배열
+                print(arr)    #출력 [1 3 5 7 9]               
+                ''')
+        st.write('''- **np.linspace()** : 범위 내에서 균등 간격으로 원하는 개수의 배열 생성''')
+        st.code('''
+                arr = np.linspace(0, 1, 5)    #범위가 0에서 1까지이고 원하는 개수가 5개인 배열
+                print(arr)    #출력 [0.   0.25 0.5  0.75 1.  ]            
+                ''')
+        st.write('''- **np.random.random()** : 0부터 1사이의 난수를 가지는 배열 생성''')
+        st.code('''
+                arr = np.random.random((2, 2))  #크기 지정(2*2)
+                print(arr)    #출력 [[0.8180057  0.58944475] [0.71871027 0.70529442]]
+                ''')
+        st.write('''- **np.random.randn()** : 평균이 0이고 표준편차가 1인 정규 분포를 따르는 난수를 가지는 배열 생성''')
+        st.code('''
+                arr = np.random.randn(2, 2)  #크기 지정(2*4)
+                print(arr)    # 출력 [[-1.09887802  2.13154382] [-0.96512407 -0.37879234]]
                 ''')
     
     ### Pandas 컨텐츠 작성
@@ -5357,7 +5640,7 @@ df_seoul.head()
 
 
 
-    elif path == ("실습 프로젝트", "날씨별 공공자전거 수요 분석"):
+     elif path == ("실습 프로젝트", "날씨별 공공자전거 수요 분석"):
         st.header(f"{idx.getHeadIdx()}날씨별 공공자전거 수요 분석")
         st.write('''
                 자전거 대여소는 계절과 날씨에 따라 대여 건수의 변동이 심해, 운영 비용에 큰 영향을 미치고 있습니다. 따라서 날씨예보정보를 활용해 대여건수를 사전에 예측하고, 
@@ -5376,108 +5659,147 @@ df_seoul.head()
                             data=template_zip,
                            file_name = "실습03.zip"
         )
-        with st.echo():
-            # 필요한 패키지 설치
-            import numpy as np
-            import pandas as pd
-            import seaborn as sns
-            import matplotlib.pyplot as plt
+        st.code('''
+                # 필요한 패키지 설치
+                import numpy as np
+                import pandas as pd
+                import seaborn as sns
+                import matplotlib.pyplot as plt
 
-            # 기상관측자료 데이터
-            weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
-            
-            #자전거 이용정보 데이터
-            files = [
-                "data/실습03/공공자전거이용정보0.csv",
-                "data/실습03/공공자전거이용정보1.csv",
-                "data/실습03/공공자전거이용정보2.csv",
-                "data/실습03/공공자전거이용정보3.csv",
-                "data/실습03/공공자전거이용정보4.csv",
-                "data/실습03/공공자전거이용정보5.csv"
-            ]
+                # #한글 표시 -> 캐싱
+                plt.rcParams['font.family'] = 'NanumGothic'
+                plt.rc('font', family='NanumGothic')
+                ''', line_numbers=True)
 
-            #파일 병합
-            bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
+        st.write("실습에 필요한 데이터를 불러오겠습니다.")
+        st.code('''
+                # 기상관측자료 데이터
+                weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
 
-            weather_info.head()
-            bike_info.head()
+                #자전거 이용정보 데이터
+                files = [
+                    "data/실습03/공공자전거이용정보0.csv",
+                    "data/실습03/공공자전거이용정보1.csv",
+                    "data/실습03/공공자전거이용정보2.csv",
+                    "data/실습03/공공자전거이용정보3.csv",
+                    "data/실습03/공공자전거이용정보4.csv",
+                    "data/실습03/공공자전거이용정보5.csv"
+                ]
 
+                #파일 병합
+                bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
+                ''', line_numbers=True)
+        #------------------------------------------------------------
+        # 기상관측자료 데이터
+        weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
+
+        #자전거 이용정보 데이터
+        files = [
+            "data/실습03/공공자전거이용정보0.csv",
+            "data/실습03/공공자전거이용정보1.csv",
+            "data/실습03/공공자전거이용정보2.csv",
+            "data/실습03/공공자전거이용정보3.csv",
+            "data/실습03/공공자전거이용정보4.csv",
+            "data/실습03/공공자전거이용정보5.csv"
+        ]
+
+        #파일 병합
+        bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
+        #------------------------------------------------------------
         st.write("**weather_info**")
-        st.write(weather_info.head())
+        st.code('''weather_info.sample(5)''', line_numbers=True)
+        st.write(weather_info.sample(5))
+        
         st.write("**bike_info**")
-        st.write(bike_info.head())
+        st.code('''bike_info.sample(5)''', line_numbers=True)
+        st.write(bike_info.sample(5))
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}공공자전거 데이터 전처리")
         st.subheader(f"{idx.getSubIdx()}집계 데이터 생성")
         st.write('''날씨 정보와의 결합에 필요한 데이터(**이용건수**)를 생성하기 위해 **대여일자**, **대여시간**으로 집계해줍니다.''')
         st.code('''
+                #공공자전거 집계 데이터 생성
                 bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
                 bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
-                
-                bike_df2.head()
-                ''')
+
+                bike_df2.sample(5)
+                ''', line_numbers=True)
         bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
         bike_df2 = bike_df2.reset_index() #인덱스 재 정렬 , 기존 인덱스를 열로
-        st.write(bike_df2.head())
+        st.write(bike_df2.sample(5))
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}파생변수 생성")
         st.write('''대여일자에서 **년도, 월, 일, 요일, 공휴일** 변수를 생성합니다.''')
         st.code('''
+                #공공자전거 파생변수 생성
                 bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
                 bike_df2['년도'] = bike_df2['대여일자'].dt.year
                 bike_df2['월'] = bike_df2['대여일자'].dt.month
                 bike_df2['일'] = bike_df2['대여일자'].dt.day
                 bike_df2['요일(num)'] = bike_df2['대여일자'].dt.dayofweek
                 bike_df2['공휴일'] = 0  #0: 평일 1: 공휴일
-                
+
                 # 토요일, 일요일을 공휴일로 설정
                 bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
-                bike_df2.sample(10)
-                ''')
+                bike_df2.sample(5)
+                ''',line_numbers=True)
         
         bike_df2['대여일자'] = pd.to_datetime(bike_df2['대여일자'])
         bike_df2['년도'] = bike_df2['대여일자'].dt.year
         bike_df2['월'] = bike_df2['대여일자'].dt.month
         bike_df2['일'] = bike_df2['대여일자'].dt.day
         bike_df2['요일(num)'] = bike_df2['대여일자'].dt.dayofweek
-        bike_df2['공휴일'] = 0 #0: 평일 1: 공휴일
-        
+        bike_df2['공휴일'] = 0  #0: 평일 1: 공휴일
+
         # 토요일, 일요일을 공휴일로 설정
         bike_df2.loc[bike_df2['요일(num)'].isin([5,6]),['공휴일']] = 1
-
-        st.write(bike_df2.sample(10))
+        st.write(bike_df2.sample(5))
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}날씨 데이터 전처리")
         st.subheader(f"{idx.getSubIdx()}날짜, 시간 컬럼 생성")
         st.write('''자전거 이용정보와의 결합을 위해 **일시** 칼럼에서 **날짜**와 **시간** 정보를 추출합니다.''')
         st.code('''
+                #날씨 데이터 전처리
                 weather_info['날짜'] = weather_info['일시'].str[:10]
                 weather_info['시간'] = weather_info['일시'].str[11:13].astype(int)
-                ''')
+
+                weather_info.info()
+                ''',line_numbers=True)
         
         weather_info['날짜'] = weather_info['일시'].str[:10]
         weather_info['시간'] = weather_info['일시'].str[11:13].astype(int)
+
+        #weather_info.info() 출력 코드
+        buffer = io.StringIO()
+        weather_info.info(buf=buffer)
+        st.text(buffer.getvalue())
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}컬럼 선택")
         st.write("분석에 사용할 컬럼을 순서대로 가져와서 새 데이터 프레임을 생성합니다.")
         st.code('''
                 weather_df = weather_info[['날짜', '시간', '기온(°C)', '강수량(mm)', '풍속(m/s)', '풍향(16방위)', '습도(%)','일조(hr)','일사(MJ/m2)', '적설(cm)','전운량(10분위)', '지면온도(°C)']]
-                
+
                 #칼럼명 변경
                 weather_df.columns = ['날짜', '시간', '기온', '강수량(mm)', '풍속(m/s)', '풍향(16방위)', '습도(%)','일조','일사', '적설(cm)','전운량',  '지면온도']
-                ''')
+                weather_df.columns
+                ''',line_numbers=True)
+        
         weather_df = weather_info[['날짜', '시간', '기온(°C)', '강수량(mm)', '풍속(m/s)', '풍향(16방위)', '습도(%)','일조(hr)','일사(MJ/m2)', '적설(cm)','전운량(10분위)', '지면온도(°C)']]
+
+        #칼럼명 변경
         weather_df.columns = ['날짜', '시간', '기온', '강수량(mm)', '풍속(m/s)', '풍향(16방위)', '습도(%)','일조','일사', '적설(cm)','전운량',  '지면온도']
+        st.write(weather_df.columns)
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}결측치 확인")
         st.code('''
+                #결측치 확인
                 weather_df.isnull().sum()
-                ''')
+                ''',line_numbers=True)
         st.write(weather_df.isnull().sum())
         st.write('''
                 **강수량, 적설, 일조, 일사**와 같이 NaN값이 0인 경우는 0으로 fill 해줍니다. **전운량, 기온, 지면온도, 풍향, 풍속**은 같은 일자의 이전시간대의 데이터로 대체합니다.
@@ -5487,45 +5809,55 @@ df_seoul.head()
                 - NaN 값을 0으로 fill (fillna)
                  ''')
         st.code('''
-                weather_df['강수량(mm)'].fillna(0, inplace = True)
-                weather_df['적설(cm)'].fillna(0, inplace = True)
-                weather_df['일조'].fillna(0, inplace = True)
-                weather_df['일사'].fillna(0, inplace = True)
-                ''')
-        weather_df['강수량(mm)'].fillna(0, inplace = True)
-        weather_df['적설(cm)'].fillna(0, inplace = True)
-        weather_df['일조'].fillna(0, inplace = True)
-        weather_df['일사'].fillna(0, inplace = True)
+                # NaN 값을 0으로 fill (fillna)
+                weather_df.loc[:, '강수량(mm)'] = weather_df['강수량(mm)'].fillna(0)
+                weather_df.loc[:, '적설(cm)'] = weather_df['적설(cm)'].fillna(0)
+                weather_df.loc[:, '일조'] = weather_df['일조'].fillna(0)
+                weather_df.loc[:, '일사'] = weather_df['일사'].fillna(0)
+                ''',line_numbers=True)
+        weather_df.loc[:, '강수량(mm)'] = weather_df['강수량(mm)'].fillna(0)
+        weather_df.loc[:, '적설(cm)'] = weather_df['적설(cm)'].fillna(0)
+        weather_df.loc[:, '일조'] = weather_df['일조'].fillna(0)
+        weather_df.loc[:, '일사'] = weather_df['일사'].fillna(0)
 
         st.write('''
                 - NaN 값을 직전 데이터의 값으로 fill (ffill)
                  ''')
         st.code('''
+                # NaN 값을 직전 데이터의 값으로 fill (ffill)
                 # 날짜 시간으로 정렬
                 weather_df = weather_df.sort_values(['날짜','시간'])
 
                 # 전 값으로 
-                weather_df['기온'].fillna(method='ffill',inplace = True)
-                weather_df['풍속(m/s)'].fillna(method='ffill',inplace = True)
-                weather_df['풍향(16방위)'].fillna(method='ffill',inplace = True)
-                weather_df['전운량'].fillna(method='ffill',inplace = True)
-                weather_df['지면온도'].fillna(method='ffill',inplace = True)
-                ''')
+                weather_df['기온'] = weather_df['기온'].ffill()
+                weather_df['풍속(m/s)']= weather_df['풍속(m/s)'].ffill()
+                weather_df['풍향(16방위)'] = weather_df['풍향(16방위)'].ffill()
+                weather_df['전운량'] = weather_df['전운량'].ffill()
+                weather_df['지면온도'] = weather_df['지면온도'].ffill()
+                ''',line_numbers=True)
+        # NaN 값을 직전 데이터의 값으로 fill (ffill)
+        # 날짜 시간으로 정렬
         weather_df = weather_df.sort_values(['날짜','시간'])
-        weather_df['기온'].fillna(method='ffill',inplace = True)
-        weather_df['풍속(m/s)'].fillna(method='ffill',inplace = True)
-        weather_df['풍향(16방위)'].fillna(method='ffill',inplace = True)
-        weather_df['전운량'].fillna(method='ffill',inplace = True)
-        weather_df['지면온도'].fillna(method='ffill',inplace = True)
+
+        # 전 값으로 
+        weather_df['기온'] = weather_df['기온'].ffill()
+        weather_df['풍속(m/s)']= weather_df['풍속(m/s)'].ffill()
+        weather_df['풍향(16방위)'] = weather_df['풍향(16방위)'].ffill()
+        weather_df['전운량'] = weather_df['전운량'].ffill()
+        weather_df['지면온도'] = weather_df['지면온도'].ffill()
         
         st.write("결측치를 제거한 결과를 확인해보겠습니다.")
-        st.code('''weather_df.isnull().sum()''')
+        st.code('''
+                #결측치 제거 확인
+                weather_df.isnull().sum()
+                ''',line_numbers=True)
         st.write(weather_df.isnull().sum())
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}데이터 결합")
         st.write("전처리된 공공자전거 데이터와 날씨 데이터를 결합해 날씨별 자전거 대여 데이터를 만들어보겠습니다.")
         st.code('''
+                #데이터 결합
                 weather_df['날짜'] = pd.to_datetime(weather_df['날짜'])
 
                 #데이터 타입 맞추기 
@@ -5534,8 +5866,10 @@ df_seoul.head()
                                     left_on =['대여일자', '대여시간'], 
                                     right_on = ['날짜', '시간']) #default = inner 
                 bike_mg.head()
-                ''')
+                ''',line_numbers=True)
+        #데이터 결합
         weather_df['날짜'] = pd.to_datetime(weather_df['날짜'])
+
         #데이터 타입 맞추기 
         bike_mg = pd.merge (bike_df2, 
                             weather_df, 
@@ -5545,67 +5879,72 @@ df_seoul.head()
 
         st.write("**대여일자, 날짜, 시간** 데이터가 중복되는 것을 확인할 수 있습니다. 중복되는 데이터를 제거해보겠습니다.")
         st.code('''
+                #중복데이터 제거
                 bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
-                
+
                 bike_mg.head()
-                ''')
+                ''',line_numbers=True)
+        #중복데이터 제거
         bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
         st.write(bike_mg.head())
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}데이터 시각화")
         st.write("원본 데이터프레임을 보존하기 위해 복사본을 생성한 후 시각화를 진행하겠습니다.")
-        st.code('''data = bike_mg.copy()''')
+        st.code('''
+                #복사본 생성
+                data = bike_mg.copy()
+                ''',line_numbers=True)
         data = bike_mg.copy()
 
         st.subheader(f"{idx.getSubIdx()}데이터 요약 통계")
         st.write("데이터의 요약 통계를 확인해 정상적인 값인지 확인해보겠습니다.")
         st.code('''
+                #데이터 요약 통계
                 desc_df = data.describe().T
                 desc_df
-                ''')
+                ''',line_numbers=True)
         desc_df = data.describe().T
         st.write(desc_df)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}이용건수 분포 시각화")
         st.code('''
-                fig, ax = plt.subplots()
-                sns.histplot(data['이용건수'], ax=ax)
+                sns.histplot(data['이용건수'])
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
+        
         fig, ax = plt.subplots()
         sns.histplot(data['이용건수'], ax=ax)
-        ax.set_title("이용건수 분포", fontproperties=prop)
-        ax.set_xlabel("이용건수", fontproperties=prop)
         st.pyplot(fig)
         plt.close(fig)
+        
 
         st.code('''
-                fig, ax = plt.subplots()
                 sns.lineplot(x=data['일'], y=data['이용건수'])
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, ax = plt.subplots()
-        sns.lineplot(x=data['일'].map(str), y=data['이용건수'], ax=ax)
-        ax.set_xlabel("일", fontproperties=prop)
-        ax.set_ylabel("이용 건수", fontproperties=prop)
+        sns.lineplot(x=data['일'], y=data['이용건수'], ax=ax)
         st.pyplot(fig)
         plt.close(fig)
+
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}피처의 분포 시각화")
         st.write("원하는 컬럼을 선택해 피처의 분포를 확인합니다.")
         st.code('''
+                #컬럼 선택
                 con_cols = ["기온", "강수량(mm)", "풍속(m/s)", "습도(%)", "일조"]
-                ''')
+                ''',line_numbers=True)
         con_cols = ["기온", "강수량(mm)", "풍속(m/s)", "습도(%)", "일조"]
         
         
         st.write("선택된 칼럼에 대한 피처의 분포를 시각화합니다.")
         st.code('''
+                #피처의 분포 시각화
                 fig, axes = plt.subplots(1,5, figsize = (20, 4))
                 ax = axes.flatten()
                 
@@ -5614,17 +5953,16 @@ df_seoul.head()
                     sns.histplot(data = data, x = col, ax = ax[i])
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         
         fig, axes = plt.subplots(1,5, figsize = (20, 4))
         ax = axes.flatten()
         # axes = (n,n)형태 / ax = m형태
         for i, col in enumerate(con_cols):
             sns.histplot(data = data, x = col, ax = ax[i])
-            ax[i].set_xlabel(col, fontproperties=prop)
+        
         st.pyplot(fig)
         plt.close(fig)
-        st.write("선택된 칼럼에 대한 피처의 분포를 시각화합니다.")
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}이용건수와 피처와의 관계")
@@ -5647,28 +5985,25 @@ df_seoul.head()
                 fig.subplots_adjust(hspace = 0.4)
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
+        
         fig, axes = plt.subplots(2,2, figsize = (20,8))
+                
         sns.barplot(data = data, x = '일', y= '이용건수', ax = axes[0,0])
         sns.barplot(data = data, x = '공휴일', y= '이용건수', ax = axes[0,1])
         sns.lineplot(data = data, x = '기온', y= '이용건수', ax = axes[1,0])
         sns.lineplot(data = data, x = '강수량(mm)', y= '이용건수', ax = axes[1,1])
-        axes[0,0].set_title('일별 이용건수', fontproperties=prop)
-        axes[0,0].set_xlabel("일", fontproperties=prop)
-        axes[0,0].set_ylabel("이용건수", fontproperties=prop)
+
+        #제목 설정 
+        axes[0,0].set_title('일별 이용건수')
+        axes[0,1].set_title('공휴일여부에 따른 이용건수')
+        axes[1,0].set_title('기온별 이용건수')
+        axes[1,1].set_title('강수량(mm)별 이용건수')
+
+        # 간격조정
+        fig.subplots_adjust(hspace = 0.4)
+
         
-        axes[0,1].set_title('공휴일여부에 따른 이용건수', fontproperties=prop)
-        axes[0,1].set_xlabel("공휴일", fontproperties=prop)
-        axes[0,1].set_ylabel("이용건수", fontproperties=prop)
-        
-        axes[1,0].set_title('기온별 이용건수', fontproperties=prop)
-        axes[1,0].set_xlabel("기온", fontproperties=prop)
-        axes[1,0].set_ylabel("이용건수", fontproperties=prop)
-        
-        axes[1,1].set_title('강수량(mm)별 이용건수', fontproperties=prop)
-        axes[1,1].set_xlabel("강수량(mm)", fontproperties=prop)
-        axes[1,1].set_ylabel("이용건수", fontproperties=prop)
-        fig.subplots_adjust(hspace = 0.4)        
         st.pyplot(fig)
         plt.close(fig)
         st.write('''
@@ -5680,73 +6015,54 @@ df_seoul.head()
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}평일과 공휴일 이용건수 차이")
-        st.write('''평일과 공휴일에는 완전히 다른 이용 현황을 보이는 것을 확인할 수 있습니다.
-                 평일의 경우 오전 8시, 오후 6시에 이용건수 피크를 보이는데, 출퇴근으로 인한 영향으로 추측해볼 수 있겠습니다.
-                 ''')
         st.code('''
-                fig, ax = plt.subplots()
-                plt.figure(figsize = (15,3))
                 sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일')
             
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         
         fig, ax = plt.subplots()
-        plt.figure(figsize = (15,3))
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '공휴일', ax=ax)
-        ax.set_xlabel("대여시간", fontproperties=prop)
-        ax.set_ylabel("이용건수", fontproperties=prop)
-        
-        handles, labels = ax.get_legend_handles_labels()
-        ax.legend(handles, labels, title='공휴일', title_fontproperties=prop, prop=prop)
 
         st.pyplot(fig)
         plt.close(fig)
+        st.write('''평일과 공휴일에는 완전히 다른 이용 현황을 보이는 것을 확인할 수 있습니다.
+                 평일의 경우 오전 8시, 오후 6시에 이용건수 피크를 보이는데, 출퇴근으로 인한 영향으로 추측해볼 수 있겠습니다.
+                 ''')
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이")
-        st.write("토요일에 이용건수가 더 많고, 토요일 오후에 전반적으로 이용률이 높은 모습을 보입니다.")
         st.code('''
-                fig, ax = plt.subplots()
-                plt.figure(figsize = (15,3))
-                sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)'))
+                sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)')
 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, ax = plt.subplots()
-        plt.figure(figsize = (15,3))
         sns.pointplot(x='대여시간', y='이용건수',data = data, hue = '요일(num)', ax=ax)
-        ax.set_xlabel("대여시간", fontproperties=prop)
-        ax.set_ylabel("이용건수", fontproperties=prop)
-        handles, labels = ax.get_legend_handles_labels()
-        ax.legend(handles, labels, title='요일(num)', title_fontproperties=prop, prop=prop)
+
         st.pyplot(fig)
         plt.close(fig)
+        st.write("토요일에 이용건수가 더 많고, 토요일 오후에 전반적으로 이용률이 높은 모습을 보입니다.")
+        
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}요일에 따른 이용건수 차이(box)")
-        st.write("공휴일은 상대적으로 변동성이 적고, 평일은 변동성이 큰 편입니다.")
         st.code('''
-                fig, ax = plt.subplots()
                 sns.boxplot(x='요일(num)', y='이용건수',data = data)
                 dofw = list('월화수목금토일')
                 plt.xticks([0,1,2,3,4,5,6],dofw)
                 
                 plt.show()
-                ''')
+                ''',line_numbers=True)
         fig, ax = plt.subplots()
-        plt.figure(figsize = (15,3))
         sns.boxplot(x='요일(num)', y='이용건수',data = data, ax=ax)
-        # 요일 이름 설정
         dofw = list('월화수목금토일')
-        ax.set_xticks([0, 1, 2, 3, 4, 5, 6])
-        ax.set_xticklabels(dofw, fontproperties=prop)
-
-        ax.set_xlabel("요일(num)", fontproperties=prop)
-        ax.set_ylabel("이용건수", fontproperties=prop)
+        plt.xticks([0,1,2,3,4,5,6],dofw)
         
         st.pyplot(fig)
         plt.close(fig)
+        st.write("공휴일은 상대적으로 변동성이 적고, 평일은 변동성이 큰 편입니다.")
+        
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}결론 도출")
