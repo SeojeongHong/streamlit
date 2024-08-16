@@ -6703,8 +6703,6 @@ plt.show()'''
         plt.xticks([0,1,2,3,4,5,6],dofw, fontproperties=prop)
         ax.set_xlabel("요일(num)", fontproperties=prop)
         ax.set_ylabel("이용건수", fontproperties=prop)
-        # ax.set_xticklabels(dofw, fontproperties=prop)
-        
         
         st.pyplot(fig)
         plt.close(fig)
