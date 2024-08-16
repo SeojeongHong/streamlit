@@ -135,7 +135,7 @@ def show_chapter(topic, chapter):
     ### Python 컨텐츠 작성
     if path == ("파이썬 기초", "자료형") :
         st.header(f"{idx.getHeadIdx()}숫자형")
-        st.write("숫자형에는 정수형(Integer)과 실수형(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
+        st.write("숫자형에는 **정수형**(Integer)과 **실수형**(Float)이 있습니다. 정수는 양의 정수와 음의 정수, 0이 될 수 있는 숫자입니다. 실수는 소수점이 포함된 숫자를 의미합니다.")
         st.code('''
                 #정수형(Integer)
                 a = 123
@@ -257,7 +257,7 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}문자열 길이 구하기")
-        st.write("문자열의 길이는 다음과 같이 len 함수를 사용하면 구할 수 있습니다.")
+        st.write("문자열의 길이는 다음과 같이 **len** 함수를 사용하면 구할 수 있습니다.")
         st.code('''
                 a = "Life is too short"
                 print(len(a))
@@ -266,7 +266,7 @@ def show_chapter(topic, chapter):
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}문자열 인덱싱")
-        st.write("인덱싱이란 문자열에서 문자를 추출하는 것입니다. 문자열의 문자에 접급하기 위해서 '문자열[인덱스]' 형식으로 접든할 수 있습니다. 이때 인덱스는 0부터 시작합니다.")
+        st.write("인덱싱이란 문자열에서 문자를 추출하는 것입니다. 문자열의 문자에 접근하기 위해서 '**문자열[인덱스]**' 형식으로 접근할 수 있습니다. 이때 인덱스는 0부터 시작합니다.")
         st.code('''
                 str = "Hello World"
                 
@@ -283,7 +283,7 @@ def show_chapter(topic, chapter):
                  
                         문자열[start : end : step]
                 
-start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 의미합니다. step의 기본 값은 1으로 생략 가능합니다.
+**start**는 시작 인덱스, **end**는 끝 인덱스, **step**은 슬라이싱 간격을 의미합니다. step의 기본 값은 1으로 생략 가능합니다.
                  ''')
         st.code('''
                 str = "Life is too short, You need Python"
@@ -421,7 +421,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         
         st.header(f"{idx.getHeadIdx()}불")
         st.write('''
-                불(bool)이란 참(True)과 거짓(False)을 나타내는 자료형입니다. 불 자료형은 다음 2가지 값만을 가질 수 있습니다.
+                불(bool)이란 **참**(True)과 **거짓**(False)을 나타내는 자료형입니다. 불 자료형은 다음 2가지 값만을 가질 수 있습니다.
 
                 - True: 참을 의미한다.
                 - False: 거짓을 의미한다.
@@ -530,7 +530,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트 길이 구하기")
-        st.write("리스트 길이를 구하기 위해서는 다음처럼 len 함수를 사용해야 합니다.")
+        st.write("리스트 길이를 구하기 위해서는 다음처럼 **len** 함수를 사용해야 합니다.")
         st.code('''
                 a = [1, 2, 3]
                 print(len(a))
@@ -550,7 +550,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트 요소 삭제하기")
-        st.write("del 함수를 사용해 리스트의 요소를 삭제할 수 있습니다. 삭제 또한 인덱스를 통해 요소에 접근합니다.")
+        st.write("**del** 함수를 사용해 리스트의 요소를 삭제할 수 있습니다. 삭제 또한 인덱스를 통해 요소에 접근합니다.")
         st.code('''
                 a = [1, 2, 3]
                 del a[1]
@@ -757,7 +757,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         
         st.header(f"{idx.getHeadIdx()}딕셔너리")
         st.write('''
-                딕셔너리(dictionary)란 단어 그대로 '사전'이라는 뜻입니다. 딕셔너리의 기본 구조는 아래와 같이 Key와 Value를 한 쌍으로 가지며, 리스트나 튜플처럼 순차적으로 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는 특징을 가집니다.
+                딕셔너리(dictionary)란 단어 그대로 '사전'이라는 뜻입니다. 딕셔너리의 기본 구조는 아래와 같이 **Key**와 **Value**를 한 쌍으로 가지며, 리스트나 튜플처럼 순차적으로 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는 특징을 가집니다.
         
                     {Key1: Value1, Key2: Value2, Key3: Value3, ...}
                 
@@ -874,7 +874,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                  - 중복을 허용하지 않는다.
                  - 순서가 없다(Unordered).
 
-                 set은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하기 위한 필터로 종종 사용됩니다. 또한, 리스트나 튜플은 순서가 있기(ordered) 때문에 인덱싱을 통해 요솟값을 얻을 수 있지만, set 자료형은 순서가 없기(unordered) 때문에 인덱싱을 통해 요솟값을 얻을 수 없습니다.
+                 set은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하기 위한 필터로 종종 사용됩니다. 또한, 리스트나 튜플은 순서가 있기 때문에 인덱싱을 통해 요솟값을 얻을 수 있지만, set 자료형은 순서가 없기 때문에 인덱싱을 통해 요솟값을 얻을 수 없습니다.
                  ''')
         st.subheader(f"{idx.getSubIdx()}집합의 연산")
         st.code('''
@@ -956,7 +956,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 print( s1 )
                 #출력 : {1, 3}
                 ''',line_numbers=True)
-    ################################################################################################################################################################################
+    
     elif path == ("파이썬 기초", "제어문") :
         st.header(f"{idx.getHeadIdx()}if문")
         st.subheader(f"{idx.getSubIdx()}if문 기본 구조")
@@ -1122,7 +1122,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}while 문 강제로 빠져나가기")
-        st.write("while 문은 조건문이 참인 동안 계속 while 문 안의 내용을 반복적으로 수행합니다. 하지만 강제로 while 문을 빠져나가고 싶은 경우엔 break를 사용해 반복문을 빠져나갈 수 있습니다.")
+        st.write("while 문은 조건문이 참인 동안 계속 while 문 안의 내용을 반복적으로 수행합니다. 하지만 강제로 while 문을 빠져나가고 싶은 경우엔 **break**를 사용해 반복문을 빠져나갈 수 있습니다.")
         st.write("아래 코드는 조건문이 True이기 때문에 무한 반복하게 됩니다.")
         st.code('''
                 a = 30
@@ -1143,7 +1143,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}while 문의 맨 처음으로 돌아가기")
-        st.write("while 문 안의 문장을 수행할 때 입력 조건을 검사해서 조건에 맞지 않으면 while 문을 빠져나갑니다. 그런데 프로그래밍을 하다 보면 while 문을 빠져나가지 않고 while 문의 맨 처음(조건문)으로 다시 돌아가게 만들고 싶은 경우가 생기게 되는데, 이때 사용하는 것이 바로 continue 문입니다.")
+        st.write("while 문 안의 문장을 수행할 때 입력 조건을 검사해서 조건에 맞지 않으면 while 문을 빠져나갑니다. 그런데 프로그래밍을 하다 보면 while 문을 빠져나가지 않고 while 문의 맨 처음(조건문)으로 다시 돌아가게 만들고 싶은 경우가 생기게 되는데, 이때 사용하는 것이 바로 **continue** 문입니다.")
         st.code('''
                 a = 0
                 while a < 10 :
@@ -1210,7 +1210,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
         st.subheader(f"{idx.getSubIdx()}for문과 continue문")
         st.write('''
-                while 문에서 살펴본 continue 문을 for 문에서도 사용할 수 있습니다. 즉, for 문 안의 문장을 수행하는 도중 continue 문을 만나면 for 문의 처음으로 돌아가게 됩니다.
+                while 문에서 살펴본 continue 문을 for 문에서도 사용할 수 있습니다. 즉, for 문 안의 문장을 수행하는 도중 **continue** 문을 만나면 for 문의 처음으로 돌아가게 됩니다.
                  ''')
         st.code('''
                 for i in [10, 23, 17, 22, 12] :
@@ -1227,7 +1227,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}for문과 함께 자주 사용하는 range 함수")
-        st.write("for 문은 숫자 리스트를 자동으로 만들어 주는 range 함수와 함께 사용하는 경우가 많습니다. 다음은 range 함수의 간단한 사용법입니다.")
+        st.write("for 문은 숫자 리스트를 자동으로 만들어 주는 **range** 함수와 함께 사용하는 경우가 많습니다. 다음은 range 함수의 간단한 사용법입니다.")
         st.code('''
                 a = range(10)
 
@@ -1253,7 +1253,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}for문과 함께 자주 사용하는 enumerate 함수")
-        st.write("for 문 사용 시 몇 번째 반복문인지 확인이 필요할 경우가 있습니다. 이때 enumerate 함수를 사용해 인덱스 번호와 리스트의 값을 함께 반환할 수 있습니다.")
+        st.write("for 문 사용 시 몇 번째 반복문인지 확인이 필요할 경우가 있습니다. 이때 **enumerate** 함수를 사용해 인덱스 번호와 리스트의 값을 함께 반환할 수 있습니다.")
         st.code('''
                 num = ["zero", "one", "two", "three", "four", "five"]
 
@@ -1289,7 +1289,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}함수의 구조")
-        st.write('''def는 함수를 만들 때 사용하는 예약어이며, 함수 이름은 함수를 만드는 사람이 임의로 만들 수 있습니다. 함수 이름 뒤 괄호 안의 매개변수는 이 함수에 입력으로 전달되는 값을 받는 변수입니다. 이렇게 함수를 정의한 후 if, while, for 문 등과 마찬가지로 함수에서 수행할 문장을 입력합니다.''')
+        st.write('''**def**는 함수를 만들 때 사용하는 예약어이며, 함수 이름은 함수를 만드는 사람이 임의로 만들 수 있습니다. 함수 이름 뒤 괄호 안의 매개변수는 이 함수에 입력으로 전달되는 값을 받는 변수입니다. 이렇게 함수를 정의한 후 if, while, for 문 등과 마찬가지로 함수에서 수행할 문장을 입력합니다.''')
         st.code('''
                 def 함수명(매개변수):
                     수행할_문장1
@@ -1313,7 +1313,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}매개변수와 인수")
-        st.write("매개변수는 함수에 입력으로 전달된 값을 받는 변수, 인수는 함수를 호출할 때 전달하는 입력값을 의미합니다.")
+        st.write("**매개변수**는 함수에 입력으로 전달된 값을 받는 변수, 인수는 함수를 호출할 때 전달하는 입력값을 의미합니다.")
 
         st.code('''
                 def add(a, b):  # a, b는 매개변수
@@ -1369,7 +1369,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
         st.subheader(f"{idx.getSubIdx()}lambda")
         st.write('''
-                 lambda는 함수를 생성할 때 사용하는 예약어로, def와 동일한 역할을 합니다. 보통 함수를 한 줄로 간결하게 만들 때 사용합니다. def를 사용해야 할 정도로 복잡하지 않거나 def를 사용할 수 없는 곳에 주로 사용됩니다.
+                 **lambda**는 함수를 생성할 때 사용하는 예약어로, def와 동일한 역할을 합니다. 보통 함수를 한 줄로 간결하게 만들 때 사용합니다. def를 사용해야 할 정도로 복잡하지 않거나 def를 사용할 수 없는 곳에 주로 사용됩니다.
                  
                         함수_이름 = lambda 매개변수1, 매개변수2, ... : 매개변수를_이용한_표현식
                  
@@ -1423,7 +1423,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}NumPy")
-        st.write("NumPy는 대규모 다차원 배열과 행렬 연산에 필요한 다양한 함수와 메소드를 제공합니다. 데이터 분석, 데이터 처리, 선형 대수, 머신 러닝 등 다양한 분야에서 널리 사용되고 있습니다.")
+        st.write("**NumPy**는 대규모 다차원 배열과 행렬 연산에 필요한 다양한 함수와 메소드를 제공합니다. 데이터 분석, 데이터 처리, 선형 대수, 머신 러닝 등 다양한 분야에서 널리 사용되고 있습니다.")
 
         st.divider()
         st.subheader(f"{idx.getSubIdx()}기본 사용법")
@@ -1473,7 +1473,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}NumPy 배열 연산")
-        st.write("NumPy 배열은 다른 배열 또는 스칼라와의 연산을 지원합니다. NumPy 배열의 연산은 배열의 **원소별(element-wise)**로 이루어집니다.")
+        st.write("NumPy 배열은 다른 배열 또는 스칼라와의 연산을 지원합니다. NumPy 배열의 연산은 배열의 **원소별**로 이루어집니다.")
 
         st.code('''
                 a = np.array([1, 2, 3])
