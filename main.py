@@ -95,7 +95,7 @@ matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을
         with table[i // 3][i % 3]:
             card = st.container(height=200, border=True)
             subcard = card.container(height=110, border=False)
-            subcard.subheader(title)
+            subcard.markdown(f"<h3 style='text-align: left;font-size: 22px;'>{wrap_text(title)}</h3>", unsafe_allow_html=True)
 
             card.button("학습하기", 
                         key=f"btn_{i}",
@@ -6632,6 +6632,26 @@ def goback_btn() :
          st.button("돌아가기", on_click=update_session_state, args=('go_back',))
     button_container.float(float_css_helper(width="2.2rem", right="20rem",bottom="1rem"))
 
+def wrap_text(text, max_width=14):
+    lines = []
+    current_line = ""
+    current_width = 0
+
+    for word in text.split():
+        word_width = sum(2 if '가' <= ch <= '힣' else 1 for ch in word)
+
+        if current_width + word_width > max_width:
+            lines.append(current_line.rstrip())
+            current_line = word + " "
+            current_width = word_width  # 띄어쓰기의 너비를 1로 계산
+        else:
+            current_line += word + " "
+            current_width += word_width  # 띄어쓰기의 너비를 1로 계산
+
+    if current_line:
+        lines.append(current_line.rstrip())
+
+    return "<br>".join(lines)
 def main() :
     float_init()
     page, topic, chapter = init_session_state()
