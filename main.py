@@ -131,14 +131,6 @@ def pandas_dataset():
         st.divider()
 
 def show_chapter(topic, chapter):
-    button_container = st.container()
-    with button_container:
-        if st.button("돌아가기", on_click=update_session_state, args=('go_back',)):
-            #세션업데이트
-            st.write("클릭")
-    button_css = float_css_helper(width="2.2rem", right="10rem",bottom="1rem")
-    button_container.float(button_css)
-    
     st.title(chapter)
     path = (topic, chapter)
 
@@ -6741,7 +6733,11 @@ plt.show()'''
     else :
         st.error("Content Not Found !")
 
-    st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+    # st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+    button_container = st.container()
+    with button_container:
+         st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+    button_container.float(float_css_helper(width="2.2rem", right="10rem",bottom="1rem"))
 
 def main() :
     page, topic, chapter = init_session_state()
@@ -6750,6 +6746,7 @@ def main() :
         show_topic(topic)
     elif page == 'page_chapter':
         show_chapter(topic, chapter)
+        
     
     with st.sidebar:
         option_menu(
