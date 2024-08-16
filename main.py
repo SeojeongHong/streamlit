@@ -9,7 +9,6 @@ prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
 from streamlit_float import *
-float_init()
 
 class IndexAllocator:
     def __init__(self):
@@ -6627,19 +6626,20 @@ plt.show()'''
     else :
         st.error("Content Not Found !")
 
-    # st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+def goback_btn() :
+    button_container = st.container()
+    with button_container:
+         st.button("돌아가기", on_click=update_session_state, args=('go_back',))
+    button_container.float(float_css_helper(width="2.2rem", right="20rem",bottom="1rem"))
 
 def main() :
+    float_init()
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
         show_topic(topic)
     elif page == 'page_chapter':
-        button_container = st.container()
-        with button_container:
-             st.button("돌아가기", on_click=update_session_state, args=('go_back',))
-        button_container.float(float_css_helper(width="2.2rem", right="20rem",bottom="1rem"))
-        
+        goback_btn()
         show_chapter(topic, chapter)
         
     
