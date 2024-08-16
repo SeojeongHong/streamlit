@@ -8,6 +8,7 @@ fpath = os.path.join(os.getcwd(), "customfont/NanumGothic-Regular.ttf")
 prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
+import pandas as pd
 
 class IndexAllocator:
     def __init__(self):
@@ -5639,58 +5640,58 @@ df_seoul.head()
 
 
 
-    # elif path == ("실습 프로젝트", "날씨별 공공자전거 수요 분석"):
-    #     st.header(f"{idx.getHeadIdx()}날씨별 공공자전거 수요 분석")
-    #     st.write('''
-    #             자전거 대여소는 계절과 날씨에 따라 대여 건수의 변동이 심해, 운영 비용에 큰 영향을 미치고 있습니다. 따라서 날씨예보정보를 활용해 대여건수를 사전에 예측하고, 
-    #              운영 비용을 조정하기 위한 데이터 분석 및 시각화 실습을 진행합니다.
-    #              ''')
-    #     st.divider()
+    elif path == ("실습 프로젝트", "날씨별 공공자전거 수요 분석"):
+        st.header(f"{idx.getHeadIdx()}날씨별 공공자전거 수요 분석")
+        st.write('''
+                자전거 대여소는 계절과 날씨에 따라 대여 건수의 변동이 심해, 운영 비용에 큰 영향을 미치고 있습니다. 따라서 날씨예보정보를 활용해 대여건수를 사전에 예측하고, 
+                 운영 비용을 조정하기 위한 데이터 분석 및 시각화 실습을 진행합니다.
+                 ''')
+        st.divider()
 
-    #     st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
-    #     st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
-    #     st.write('해당 파일을 압축 해제해 **실습03** 폴더를 :blue-background[data/실습03/]경로로 이동해주세요.')
-    #     with open('data/실습03.zip', "rb") as template_file:
-    #         template_zip = template_file.read()
+        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
+        st.write('해당 파일을 압축 해제해 **실습03** 폴더를 :blue-background[data/실습03/]경로로 이동해주세요.')
+        with open('data/실습03.zip', "rb") as template_file:
+            template_zip = template_file.read()
 
-    #     st.download_button(label="download data",
-    #                         type="primary",
-    #                         data=template_zip,
-    #                        file_name = "실습03.zip"
-    #     )
-    #     st.code('''
-    #             # 필요한 패키지 설치
-    #             import numpy as np
-    #             import pandas as pd
-    #             import seaborn as sns
-    #             import matplotlib.pyplot as plt
+        st.download_button(label="download data",
+                            type="primary",
+                            data=template_zip,
+                           file_name = "실습03.zip"
+        )
+        st.code('''
+                # 필요한 패키지 설치
+                import numpy as np
+                import pandas as pd
+                import seaborn as sns
+                import matplotlib.pyplot as plt
 
-    #             #한글 표시
-    #             plt.rcParams['font.family'] = 'NanumGothic'
-    #             plt.rc('font', family='NanumGothic')
-    #             ''', line_numbers=True)
+                #한글 표시
+                plt.rcParams['font.family'] = 'NanumGothic'
+                plt.rc('font', family='NanumGothic')
+                ''', line_numbers=True)
 
-    #     st.write("실습에 필요한 데이터를 불러오겠습니다.")
-    #     st.code('''
-    #             # 기상관측자료 데이터
-    #             weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
+        st.write("실습에 필요한 데이터를 불러오겠습니다.")
+        st.code('''
+                # 기상관측자료 데이터
+                weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
 
-    #             #자전거 이용정보 데이터
-    #             files = [
-    #                 "data/실습03/공공자전거이용정보0.csv",
-    #                 "data/실습03/공공자전거이용정보1.csv",
-    #                 "data/실습03/공공자전거이용정보2.csv",
-    #                 "data/실습03/공공자전거이용정보3.csv",
-    #                 "data/실습03/공공자전거이용정보4.csv",
-    #                 "data/실습03/공공자전거이용정보5.csv"
-    #             ]
+                #자전거 이용정보 데이터
+                files = [
+                    "data/실습03/공공자전거이용정보0.csv",
+                    "data/실습03/공공자전거이용정보1.csv",
+                    "data/실습03/공공자전거이용정보2.csv",
+                    "data/실습03/공공자전거이용정보3.csv",
+                    "data/실습03/공공자전거이용정보4.csv",
+                    "data/실습03/공공자전거이용정보5.csv"
+                ]
 
-    #             #파일 병합
-    #             bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
-    #             ''', line_numbers=True)
-    #     #------------------------------------------------------------
-    #     # 기상관측자료 데이터
-    #     weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
+                #파일 병합
+                bike_info = pd.concat([pd.read_csv(file, encoding='cp949') for file in files], ignore_index=True)
+                ''', line_numbers=True)
+        #------------------------------------------------------------
+        # 기상관측자료 데이터
+        weather_info = pd.read_csv('data/실습03/기상관측자료202306.csv', encoding='cp949')
 
         # #자전거 이용정보 데이터
         # files = [
