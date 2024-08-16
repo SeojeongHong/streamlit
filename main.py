@@ -1434,7 +1434,6 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code("import numpy as np")
         st.divider()
 
-        st.header(f"{idx.getHeadIdx()}Array")
         st.subheader(f"{idx.getSubIdx()}Array 만들기")
         st.write("NumPy의 가장 기본적인 데이터 구조는 배열입니다. NumPy 배열은 동일한 타입의 데이터를 담는 다차원 배열입니다.")
 
