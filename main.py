@@ -6737,7 +6737,7 @@ plt.show()'''
     button_container = st.container()
     with button_container:
          st.button("돌아가기", on_click=update_session_state, args=('go_back',))
-    button_container.float(float_css_helper(width="2.2rem", right="10rem",bottom="1rem"))
+    button_container.float(float_css_helper(width="2.2rem", right="20rem",bottom="1rem"))
 
 def main() :
     page, topic, chapter = init_session_state()
