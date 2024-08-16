@@ -133,7 +133,7 @@ def pandas_dataset():
 def show_chapter(topic, chapter):
     button_container = st.container()
     with button_container:
-        if st.button("돌아가기"):
+        if st.button("돌아가기", on_click=update_session_state, args=('go_back',)):
             #세션업데이트
             st.write("클릭")
     button_css = float_css_helper(width="2.2rem", right="10rem",bottom="1rem")
