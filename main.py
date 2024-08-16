@@ -93,9 +93,10 @@ matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을
     table = [st.columns(3)] * ((len(chapters) + 2) // 3)
     for i, title in enumerate(chapters):
         with table[i // 3][i % 3]:
+            formatted_title = title.replace(" ", "<br>")
             card = st.container(height=200, border=True)
             subcard = card.container(height=110, border=False)
-            subcard.subheader(title)
+            subcard.markdown(f"<h3 style='text-align: left;'>{formatted_title}</h3>", unsafe_allow_html=True)
 
             card.button("학습하기", 
                         key=f"btn_{i}",
