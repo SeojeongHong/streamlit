@@ -1030,7 +1030,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 else :
                     print("str1과 str2는 같지 않다")
                 #출력 : str1과 str2는 같지 않다
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}조건문 유형 - and, or, not")
         st.write('''
@@ -1064,7 +1064,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                     print("False")
                 #출력 : True
 
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}조건문 유형 - in, not in")
@@ -1089,7 +1089,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 else :
                     print("False")
                 #출력 : True
-                ''')
+                ''',line_numbers=True)
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}while문")
@@ -1118,7 +1118,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 
                 print(sum)
                 # 출력 : 55
-                ''')
+                ''',line_numbers=True)
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}while 문 강제로 빠져나가기")
@@ -1128,7 +1128,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = 30
                 while True : #무한 반복
                     a -= 5
-                ''')
+                ''',line_numbers=True)
         st.write("while문을 강제로 빠져나오기 위해, 특정 조건을 만족할 경우 break를 사용하여 while문을 빠져나올 수 있습니다.")
         st.code('''
                 a = 30
@@ -1140,7 +1140,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                         break
                 print(a)
                 # 출력 : 5
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}while 문의 맨 처음으로 돌아가기")
         st.write("while 문 안의 문장을 수행할 때 입력 조건을 검사해서 조건에 맞지 않으면 while 문을 빠져나갑니다. 그런데 프로그래밍을 하다 보면 while 문을 빠져나가지 않고 while 문의 맨 처음(조건문)으로 다시 돌아가게 만들고 싶은 경우가 생기게 되는데, 이때 사용하는 것이 바로 continue 문입니다.")
@@ -1159,7 +1159,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #5
                 #7
                 #9
-                ''')
+                ''',line_numbers=True)
         st.write("위는 1부터 10까지의 숫자 중 홀수만 출력하는 예시입니다. a가 10보다 작은 동안 a는 1만큼씩 계속 증가합니다. a % 2 == 0(a를 2로 나누었을 때 나머지가 0인 경우)이 참이 되는 경우는 a가 짝수인 경우입니다. 즉, a가 짝수이면 continue 문을 수행하게 됩니다. 이 continue 문은 while 문의 맨 처음인 조건문(a < 10)으로 돌아가게 하는 명령어입니다. 따라서 위 예에서 a가 짝수이면 print(a) 문장은 수행되지 않을 것입니다.")
         st.divider()
 
@@ -1176,7 +1176,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # C
                 # B
                 # A
-                ''')
+                ''',line_numbers=True)
         st.write("**pop()** 함수는 리스트 요소의 마지막 값을 제거하고 반환합니다. 위 코드의 경우, 주어진 리스트의 값이 빌 때까지 마지막 값을 제거하는 반복문을 수행합니다.")
         st.divider()
         
@@ -1204,7 +1204,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #one
                 #two
                 #three
-                ''')
+                ''',line_numbers=True)
         st.write("['one', 'two', 'three'] 리스트의 첫 번째 요소인 'one'이 먼저 i 변수에 대입된 후 print(i) 문장을 수행합니다. 다음에 두 번째 요소 'two'가 i 변수에 대입된 후 print(i) 문장을 수행하고 리스트의 마지막 요소까지 이것을 반복합니다.")
         st.divider()
 
@@ -1221,7 +1221,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #출력 :
                 # 23
                 # 17
-                ''')
+                ''',line_numbers=True)
         
         st.write("i의 값이 짝수인 경우 continue문이 수행되어 출력이 수행되지 않습니다.")
         st.divider()
@@ -1233,7 +1233,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(a)
                 # 출력 : range(0, 10)
-                ''')
+                ''',line_numbers=True)
         st.write("range(10)은 0부터 10 미만의 숫자를 포함하는 range 객체를 만들어 줍니다. 시작 숫자와 끝 숫자를 지정하려면 range(시작_숫자, 끝_숫자) 형태를 사용하는데, 이때 끝 숫자는 포함되지 않습니다.")
         st.code('''
                 for i in range(1, 11) :
@@ -1250,7 +1250,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 8
                 # 9
                 # 10
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}for문과 함께 자주 사용하는 enumerate 함수")
         st.write("for 문 사용 시 몇 번째 반복문인지 확인이 필요할 경우가 있습니다. 이때 enumerate 함수를 사용해 인덱스 번호와 리스트의 값을 함께 반환할 수 있습니다.")
@@ -1266,7 +1266,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 3 three
                 # 4 four
                 # 5 five
-                ''')
+                ''',line_numbers=True)
         st.write("start 인자를 사용해 인덱스를 0이 아닌 다른 숫자로 시작할 수 있습니다.")
         st.code('''
                 letter = ["A", "B", "C", "D", "E"]
@@ -1279,7 +1279,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 7 C
                 # 8 D
                 # 9 E
-                ''')
+                ''',line_numbers=True)
         
         
     
@@ -1296,7 +1296,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                     수행할_문장2
                     ...
                     return 결과값
-                 ''')
+                 ''',line_numbers=True)
         
         st.write("다음의 함수명은 add이고 입력으로 a, b 2개의 값을 받으며 리턴값(출력값)은 2개의 입력값을 더한 값입니다.")
         st.code('''
@@ -1309,7 +1309,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(z)
                 #출력 : 17
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}매개변수와 인수")
@@ -1320,7 +1320,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                     return a+b
 
                 print(add(3, 4))  # 3, 4는 인수
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}return(반환값)")
         st.write("함수는 들어온 입력값을 받은 후 처리를 하여 적절한 값을 리턴해 줍니다. 함수의 형태는 입력값과 리턴값의 존재 유무에 딸 4가지 유형으로 나뉩니다.")
@@ -1334,7 +1334,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(add(3, 4))
                 # 출력 : 7
-                ''')
+                ''',line_numbers=True)
         st.write('''
                 - 입력값이 없는 함수
                  ''')
@@ -1344,7 +1344,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(say())
                 # 출력 : Hi
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - 리턴값이 없는 함수
@@ -1355,7 +1355,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 add(3, 4)
                 # 출력 : 3, 4의 합은 7입니다.
-                ''')
+                ''',line_numbers=True)
         st.write('''
                 - 입력값도, 리턴값도 없는 함수
                  ''')
@@ -1365,7 +1365,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 say()
                 # 출력 : Hi
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}lambda")
         st.write('''
@@ -1380,7 +1380,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(result)
                 #출력 : 7
-                ''')
+                ''',line_numbers=True)
         st.write("add는 2개의 인수를 받아 서로 더한 값을 리턴하는 lambda 함수입니다. lambda로 만든 함수는 return 명령어가 없어도 표현식의 결과값을 리턴합니다.")
         st.divider()
 
@@ -1462,14 +1462,14 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 #  [[5 6]
                 #   [7 8]]]
-                ''')
+                ''',line_numbers=True)
         
         st.write("이렇게 생성된 배열의 크기는 **shape**속성을 통해 확인할 수 있습니다.")
         st.code('''
                 print(a.shape)  # 출력 : (3,)
                 print(b.shape)  # 출력 : (2, 3)
                 print(c.shape)  # 출력 : (2, 2, 2)
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}NumPy 배열 연산")
@@ -1490,7 +1490,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 스칼라와의 연산
                 e = a + 1  
                 print(e)    # 출력 [2, 3, 4]
-                ''')
+                ''',line_numbers=True)
         st.write('''- **sum()** : 합계''')
         st.code('''
                 a = np.array([1, 2, 3])
@@ -1498,7 +1498,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 합계
                 b = np.sum(a)
                 print(b)  # 출력 6
-                ''')
+                ''',line_numbers=True)
         
         st.write('''- **mean()** : 평균''')
         st.code('''
@@ -1506,7 +1506,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 b = np.mean(a)
                 print(b)  # 출력 2.0
-                ''')
+                ''',line_numbers=True)
         
         st.write('''- **min()** : 최소값''')
         st.code('''
@@ -1514,7 +1514,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 b = np.min(a)
                 print(b)  # 출력 1
-                ''')
+                ''',line_numbers=True)
         
         st.write('''- **max()** : 최대값''')
         st.code('''
@@ -1522,7 +1522,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 b = np.max(a)
                 print(b)  # 출력 3
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}Numpy 배열 인덱싱과 슬라이싱")
         st.write("NumPy 배열의 인덱싱과 슬라이싱은 Python 리스트의 인덱싱과 슬라이싱과 매우 유사합니다. NumPy 배열의 인덱싱과 슬라이싱을 사용하여 배열의 일부를 선택할 수 있습니다.")
@@ -1545,7 +1545,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 f = a[3:]   
                 print(f)  # 출력 [4, 5]
-                ''')
+                ''',line_numbers=True)
         st.write("다차원 NumPy 배열에서는 각 차원의 인덱스를 콤마로 구분하여 인덱싱할 수 있습니다.")
         st.code('''
                 a = np.array([[1, 2, 3], [4, 5, 6]])
@@ -1566,7 +1566,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 f = a[:, :2]   
                 print(f)  # 출력 [[1, 2], [4, 5]]
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}NumPy 배열 병합과 분리")
         st.write("**concatenate()** 함수를 사용해 다차원 배열을 병합할 수 있습니다. concatenate() 함수는 병합할 배열을 첫 번째 인자로 전달하며, 두 개 이상의 배열을 병합할 경우에는 튜플 형태로 전달합니다. **axis** 인자를 사용하여 병합할 방향을 지정할 수 있습니다. axis 인자를 지정하지 않을 경우 기본값인 0으로 설정됩니다.")
@@ -1577,7 +1577,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 배열 병합
                 c = np.concatenate((a, b))
                 print(c)  # 출력 [1, 2, 3, 4, 5, 6]
-                ''')
+                ''',line_numbers=True)
         st.write("**axis=0**은 첫 번째 차원을 따라 배열을 병합한다는 의미입니다. 아래 코드의 경우 a와 b 배열이 첫 번째 차원을 공유하므로 axis=0으로 배열을 병합할 수 있습니다.")
         st.code('''
                 a = np.array([[1, 2], [3, 4]])
@@ -1586,7 +1586,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 배열 병합
                 c = np.concatenate((a, b), axis=0)  
                 print(c)    # 출력 [[1, 2], [3, 4], [5, 6]]
-                ''')
+                ''',line_numbers=True)
         st.write("**split()** 함수를 사용해 다차원 배열을 분리할 수 있습니다. split() 함수는 분리할 배열과 분리할 인덱스를 전달하며, 분리할 인덱스는 분리될 배열의 첫 번째 차원을 따라 지정합니다.")
         st.code('''
                 a = np.array([1, 2, 3, 4, 5, 6])
@@ -1594,7 +1594,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 배열 분리
                 b, c = np.split(a, [3])  
                 print(b, c)    # 출력 [1, 2, 3], [4, 5, 6])
-                ''')
+                ''',line_numbers=True)
         st.write("**axis=0**은 첫 번째 차원을 따라 배열을 분리한다는 의미입니다. 아래 코드의 경우 a의 첫 번째 행을 기준으로 배열을 분리합니다.")
         st.code('''
                 a = np.array([[1, 2, 3], [4, 5, 6]])
@@ -1602,7 +1602,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 배열 분리
                 b, c = np.split(a, [1], axis=0)  
                 print(b, c)    # 출력 [[1, 2, 3]], [[4, 5, 6]]
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}NumPy 관련 함수")
         st.write("NumPy는 배열의 계산과 관련된 다양한 함수를 제공합니다.")
@@ -1611,32 +1611,32 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code('''
                 arr = np.zeros((2, 3))
                 print(arr)                
-                ''')
+                ''',line_numbers=True)
         st.write('''- **np.ones()** : 모든 원소가 1인 배열 생성''')
         st.code('''
                 arr = np.ones((2, 2))
                 print(arr)                
-                ''')
+                ''',line_numbers=True)
         st.write('''- **np.arange()** : 범위 내의 일정 간격을 가진 배열 생성''')
         st.code('''
                 arr = np.arange(1, 10, 2)   #범위가 1에서 10까지이고 간격이 2인 배열
                 print(arr)    #출력 [1 3 5 7 9]               
-                ''')
+                ''',line_numbers=True)
         st.write('''- **np.linspace()** : 범위 내에서 균등 간격으로 원하는 개수의 배열 생성''')
         st.code('''
                 arr = np.linspace(0, 1, 5)    #범위가 0에서 1까지이고 원하는 개수가 5개인 배열
                 print(arr)    #출력 [0.   0.25 0.5  0.75 1.  ]            
-                ''')
+                ''',line_numbers=True)
         st.write('''- **np.random.random()** : 0부터 1사이의 난수를 가지는 배열 생성''')
         st.code('''
                 arr = np.random.random((2, 2))  #크기 지정(2*2)
                 print(arr)    #출력 [[0.8180057  0.58944475] [0.71871027 0.70529442]]
-                ''')
+                ''',line_numbers=True)
         st.write('''- **np.random.randn()** : 평균이 0이고 표준편차가 1인 정규 분포를 따르는 난수를 가지는 배열 생성''')
         st.code('''
                 arr = np.random.randn(2, 2)  #크기 지정(2*4)
                 print(arr)    # 출력 [[-1.09887802  2.13154382] [-0.96512407 -0.37879234]]
-                ''')
+                ''',line_numbers=True)
     
     ### Pandas 컨텐츠 작성
     elif path == ("Pandas 기초", "DataFrame") :
