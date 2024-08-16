@@ -144,7 +144,7 @@ def show_chapter(topic, chapter):
                 #실수형(Floating)
                 a = 3.14
                 b = 100.0
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}숫자형의 연산 - 산술 연산자")
@@ -184,7 +184,7 @@ def show_chapter(topic, chapter):
 
                 print( a % b )
                 #출력 : 1
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}숫자형의 연산 - 복합 연산자")
@@ -241,7 +241,7 @@ def show_chapter(topic, chapter):
                 a %= 9  #a = a % 9
                 print(a)
                 #출력 : 4
-                ''')
+                ''',line_numbers=True)
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}문자열")
@@ -254,7 +254,7 @@ def show_chapter(topic, chapter):
                 str2 = 'Python is Easy'
                 print(str2)
                 #출력 : Python is Easy
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}문자열 길이 구하기")
         st.write("문자열의 길이는 다음과 같이 len 함수를 사용하면 구할 수 있습니다.")
@@ -262,7 +262,7 @@ def show_chapter(topic, chapter):
                 a = "Life is too short"
                 print(len(a))
                 #출력 : 17
-                ''')
+                ''',line_numbers=True)
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}문자열 인덱싱")
@@ -274,7 +274,7 @@ def show_chapter(topic, chapter):
                 print(str[3])   #출력 : l
                 print(str[-1])   #출력 : d
                 print(str[-5])   #출력 : W
-                ''')
+                ''',line_numbers=True)
         st.write("인덱스의 (-) 는 문자열을 뒤에서부터 읽기 위해 사용합니다. 즉, str[-1]은 뒤에서 첫 번째가 되는 문자를 의미하며, str[-5]는 뒤에서 5번째 문자를 의미합니다.")
         st.divider()
 
@@ -289,7 +289,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 str = "Life is too short, You need Python"
                 print(str[0:4])
                 # 출력 : Life
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 슬라이싱할 때 start를 생략하면 처음부터 end까지, end를 생략하면 start부터 끝까지 문자열을 추출합니다.
@@ -304,7 +304,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # end 생략
                 print(str[ -6: ])
                 # 출력 : Python
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}문자열 관련 함수")
         st.write('''
@@ -314,7 +314,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = "hobby"
                 print( a.count('b') )   #문자열 중 문자 b의 개수 리턴
                 #출력 : 2
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **find()** : 위치 알려 주기1
@@ -326,7 +326,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( a.find('k') )   #찾는 문자나 문자열이 존재하지 않는다면 -1을 리턴
                 #출력 : -1
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **index()** : 위치 알려 주기2
@@ -340,7 +340,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #Traceback (most recent call last):
                 #File "<stdin>", line 1, in <module>
                 #ValueError: substring not found
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **join()** : 문자열 삽입
@@ -348,7 +348,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code('''
                 print( ",".join('abcd') )   #abcd 문자열의 각각의 문자 사이에 ‘,’를 삽입
                 #출력 : a,b,c,d
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **upper()** : 소문자를 대문자로 바꾸기
@@ -357,7 +357,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = "hi"
                 print( a.upper() )
                 #출력 : 'HI'
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **lower()** : 대문자를 소문자로 바꾸기
@@ -366,7 +366,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = "HELLO"
                 print( a.lower() )
                 #출력 : 'hello'
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **lstrip()** : 왼쪽 공백 지우기
@@ -375,7 +375,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = "  hi  "
                 print( a.lstrip() )
                 #출력 : 'hi  '
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **rstrip()** : 오른쪽 공백 지우기
@@ -384,7 +384,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = "  hi  "
                 print( a.rstrip() )
                 #출력 : '  hi'
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **strip()** : 양쪽 공백 지우기
@@ -393,7 +393,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = "  hi  "
                 print( a.strip() )
                 #출력 : 'hi'
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **replace()** : 문자열 바꾸기
@@ -402,7 +402,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = "Good mornig"
                 print( a.replace("mornig", "evening") )  #replace(바뀔_문자열, 바꿀_문자열)
                 #출력 : Good evening
-                ''')
+                ''',line_numbers=True)
         st.write("replace 함수는 replace(바뀔_문자열, 바꿀_문자열)처럼 사용해서 문자열 안의 특정한 값을 다른 값으로 치환해 줍니다.")
         st.write('''
                 - **split()** : 문자열 나누기
@@ -415,7 +415,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 b = "a:b:c:d"
                 print( b.split(':') )
                 #출력 : ['a', 'b', 'c', 'd']
-                ''')
+                ''',line_numbers=True)
         st.write("split 함수는 a.split()처럼 괄호 안에 아무 값도 넣어 주지 않으면 공백([Space], [Tab], [Enter])을 기준으로 문자열을 나누어 줍니다. 만약 b.split(':')처럼 괄호 안에 특정 값이 있을 경우에는 괄호 안의 값을 구분자로 해서 문자열을 나누어 줍니다.")    
         st.divider()
         
@@ -439,7 +439,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = 5 < 3
                 print(a)
                 #출력 : False
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}자료형의 참과 거짓")
         st.write('''
@@ -483,7 +483,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = [1,2,['P',3]]  #리스트 안에 입력된 리스트
                 print(a)
                 #출력 : [1, 2, ['P', 3]]
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트의 인덱싱")
         st.write("리스트 역시 문자열처럼 인덱싱을 적용할 수 있습니다.")
@@ -498,7 +498,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( a[-1] )
                 #출력 : 3
-                ''')
+                ''',line_numbers=True)
         
         st.write("리스트 안에 리스트가 있는 경우에도 인덱싱이 가능합니다.")
         st.code('''
@@ -512,7 +512,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( a[-1][1] )
                 #출력 : 'b'
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}리스트의 슬라이싱")
@@ -527,7 +527,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(a[2:])
                 #출력 : [3, 4, 5]
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트 길이 구하기")
         st.write("리스트 길이를 구하기 위해서는 다음처럼 len 함수를 사용해야 합니다.")
@@ -535,7 +535,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = [1, 2, 3]
                 print(len(a))
                 #출력 : 3
-                ''')
+                ''',line_numbers=True)
         st.write("len은 문자열, 리스트 외에 앞으로 배울 튜플과 딕셔너리에도 사용할 수 있는 함수입니다.")
         
         st.divider()
@@ -547,7 +547,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(a)
                 #출력 : [1, 2, 4]
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트 요소 삭제하기")
         st.write("del 함수를 사용해 리스트의 요소를 삭제할 수 있습니다. 삭제 또한 인덱스를 통해 요소에 접근합니다.")
@@ -557,7 +557,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(a)
                 #출력 : [1, 3]
-                ''')
+                ''',line_numbers=True)
         st.write("다음처럼 슬라이싱 기법을 사용하여 리스트의 요소 여러 개를 한꺼번에 삭제할 수도 있습니다.")
         st.code('''
                 a = [1, 2, 3, 4, 5]
@@ -565,7 +565,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(a)
                 #출력 : [1, 2]
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}리스트 관련 함수")
         st.write('''
@@ -576,13 +576,13 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a.append(4)
                 print( a )   #리스트의 맨 마지막에 4를 추가
                 #출력 : [1, 2, 3, 4]
-                ''')
+                ''',line_numbers=True)
         st.write("리스트 안에는 어떤 자료형도 추가할 수 있습니다.")
         st.code('''
                 a.append([5, 6])
                 print( a )   #리스트에 리스트를 추가
                 #출력 : [1, 2, 3, 4, [5, 6]]
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **sort()** : 리스트 정렬
@@ -592,14 +592,14 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a.sort()
                 print( a )
                 #출력 : [1, 2, 3, 4]
-                ''')
+                ''',line_numbers=True)
         st.write("문자 역시 알파벳 순서로 정렬할 수 있습니다.")
         st.code('''
                 a = ['a', 'c', 'b']
                 a.sort()
                 print( a )
                 #출력 : ['a', 'b', 'c']
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **reverse()** : 리스트 뒤집기
@@ -609,7 +609,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a.reverse()
                 print( a )
                 #출력 : ['b', 'c', 'a']
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **index()** : 인덱스 반환
@@ -626,7 +626,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 #Traceback (most recent call last):
                 #    File "<stdin>", line 1, in <module>
                 #ValueError: 0 is not in list
-                ''')
+                ''',line_numbers=True)
         st.write("값 0은 a 리스트에 존재하지 않기 때문에 오류가 발생합니다.")
 
         st.write('''
@@ -641,7 +641,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a.insert(3, 5)      #3번째 자리에 5 삽입
                 print( a )
                 #출력 : [4, 1, 2, 5, 3]
-                ''')
+                ''',line_numbers=True)
         st.write("insert(a, b)는 리스트의 a번째 위치에 b를 삽입합니다.")
         
         st.write('''
@@ -652,7 +652,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a.remove(3)
                 print( a )
                 #출력 : [1, 2, 1, 2, 3]
-                ''')
+                ''',line_numbers=True)
         st.write("remove(x)는 리스트에서 첫 번째로 나오는 x를 삭제하는 함수입니다. a가 3이라는 값을 2개 가지고 있을 경우, 첫 번째 3만 제거됩니다.")
 
         st.write('''
@@ -665,7 +665,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( a )
                 #출력 : [1, 2]
-                ''')
+                ''',line_numbers=True)
         st.write("pop()은 리스트의 맨 마지막 요소를 리턴하고 그 요소는 삭제합니다. a리스트에서 3을 끄집어 내고, [1, 2]만 남게 됩니다.")
         st.code('''
                 a = [1, 2, 3]
@@ -674,7 +674,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( a )
                 #출력 : [1, 3]
-                ''')
+                ''',line_numbers=True)
         st.write("pop(x)은 리스트의 x번째 요소를 리턴하고 그 요소는 삭제합니다. a리스트에서 a[1]의 값을 끄집어 내고, [1, 3]만 남게 됩니다.")
         
         st.write('''
@@ -684,7 +684,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a = [1, 2, 3, 1]
                 print( a.count(1) )    #1이라는 값이 a에 총 2개
                 #출력 : 2
-                ''')
+                ''',line_numbers=True)
         st.write("count(x)는 리스트 안에 x가 몇 개 있는지 조사하여 그 개수를 리턴하는 함수입니다.")
         
         st.write('''
@@ -700,7 +700,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 a.extend(b)
                 print(a)
                 #출력 : [1, 2, 3, 4, 5, 6, 7]
-                ''')
+                ''',line_numbers=True)
         st.write("extend(x)에서 x에는 리스트만 올 수 있으며 원래의 a 리스트에 x 리스트를 더하게 됩니다.") 
         st.divider()
         
@@ -719,7 +719,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 t3 = (1, 2, 3)
                 t4 = 1, 2, 3
                 t5 = ('a', 'b', ('ab', 'cd'))
-                ''')
+                ''',line_numbers=True)
         st.write('''
                 모습은 리스트와 거의 비슷하지만, 튜플에서는 리스트와 다른 2가지 차이점을 찾아볼 수 있습니다. t2 = (1,)처럼 단지 1개의 요소만을 가질 때는 요소 뒤에 쉼표(,)를 반드시 붙여야 한다는 것과 t4 = 1, 2, 3처럼 소괄호()를 생략해도 된다는 점입니다.
                  ''')
@@ -735,7 +735,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(t1[3])
                 # 출력 : 'b'
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}튜플의 슬라이싱")
@@ -744,7 +744,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(t1[1:])
                 # 출력 : (2, 'a', 'b')
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}튜플 길이 구하기")
@@ -752,7 +752,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 t1 = (1, 2, 'a', 'b')
                 print(len(t1))
                 #출력 : 4
-                ''')   
+                ''',line_numbers=True)
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}딕셔너리")
@@ -780,7 +780,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                     "age" : 30,
                     "city" : "New York"
                 }
-                ''')
+                ''',line_numbers=True)
         
         st.write("딕셔너리는 Key - Value 로 이루어진 데이터 타입이기 때문에 리스트와 같이 인덱스를 사용해서 요소에 접근할 수 없습니다. 딕셔너리의 특정 요소에 접근하기 위해선 지정된 '키' 값을 이용해야 합니다.")
         st.code('''
@@ -790,7 +790,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print(person["age"])
                 #출력 : 30
-                ''')
+                ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}딕셔너리 쌍 추가, 삭제하기")
         st.code('''
@@ -803,7 +803,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 del person["city"]
                 print(person)
                 #출력 : {'name': 'Alice', 'age': 30, 'job': 'Chef'}
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}딕셔너리 관련 함수")
@@ -813,7 +813,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code('''
                 print(person.keys())
                 #출력 : dict_keys(['name', 'age', 'job'])
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **values()** : Value 리스트 만들기
@@ -821,7 +821,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code('''
                 print(person.values())
                 #출력 : dict_values(['Alice', 30, 'Chef'])
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **items()** : Key, Value 쌍 얻기
@@ -829,7 +829,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code('''
                 print(person.items())
                 #출력 : dict_items([('name', 'Alice'), ('age', 30), ('job', 'Chef')])
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **get()** : Key로 Value 얻기
@@ -837,7 +837,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
         st.code('''
                 print(person.get("name"))
                 #출력 : Alice
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **in()** : 해당 Key가 딕셔너리 안에 있는지 조사하기
@@ -848,14 +848,14 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print("birth" in person)
                 #출력 : False
-                ''')
+                ''',line_numbers=True)
         st.write('''
                 - **clear()** : Key: Value 쌍 모두 지우기
                  ''')
         st.code('''
                 print(person.clear())
                 #출력 : None
-                ''')
+                ''',line_numbers=True)
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}집합")
@@ -867,7 +867,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 s2 = set("Hello")
                 print(s2)
                 # 출력 : {'e', 'H', 'l', 'o'}
-                ''')
+                ''',line_numbers=True)
         st.write('''
                 's2 = set("Hello")' 결과에서 확인할 수 있듯, set에는 다음과 같은 2가지 특징이 있습니다.
                  
@@ -881,7 +881,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 # 연산에 사용할 2개의 set 생성
                 s1 = set([1, 2, 3, 4, 5, 6])
                 s2 = set([4, 5, 6, 7, 8, 9])
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **교집합** : & , intersection
@@ -892,7 +892,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( s1.intersection(s2) )
                 #출력 : {4, 5, 6}
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **합집합** : | , union
@@ -903,7 +903,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( s1.union(s2) )
                 #출력 : {1, 2, 3, 4, 5, 6, 7, 8, 9}
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **차집합** : -(빼기), difference
@@ -920,7 +920,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
 
                 print( s2.difference(s1) )
                 #출력 : {8, 9, 7}
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}집합 관련 함수")
@@ -933,7 +933,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 
                 print( s1 )
                 #출력 : {1, 2, 3, 4}
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **update()** : 값 여러 개 추가하기
@@ -944,7 +944,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 
                 print( s1 )
                 #출력 : {1, 2, 3, 4, 5, 6}
-                ''')
+                ''',line_numbers=True)
         
         st.write('''
                 - **remove()** : 특정 값 제거하기
@@ -955,7 +955,7 @@ start는 시작 인덱스, end는 끝 인덱스, step은 슬라이싱 간격을 
                 
                 print( s1 )
                 #출력 : {1, 3}
-                ''')
+                ''',line_numbers=True)
     ################################################################################################################################################################################
     elif path == ("파이썬 기초", "제어문") :
         st.header(f"{idx.getHeadIdx()}if문")
