@@ -9,6 +9,11 @@ prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
 from streamlit_float import *
+from streamlit_server_state import server_state, server_state_lock
+
+with server_state_lock["count"]:  # Lock the "count" state for thread-safety
+    if "count" not in server_state:
+        server_state.count = 0
 
 class IndexAllocator:
     def __init__(self):
@@ -31,6 +36,7 @@ idx = IndexAllocator()
 
 @st.cache_data
 def load_contents() :
+    server_state.count += 1
     #topic - chapter
     contents = {
         "파이썬 기초": ["자료형", "제어문", "고급"],
@@ -6676,6 +6682,7 @@ def main() :
                 "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
             }
         )
+        st.write("Count = ", server_state.count)
 
 if __name__ == "__main__":
     main()
