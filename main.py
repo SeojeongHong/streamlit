@@ -9,11 +9,7 @@ prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
 from streamlit_float import *
-from streamlit_server_state import server_state, server_state_lock
-
-with server_state_lock["count"]:  # Lock the "count" state for thread-safety
-    if "count" not in server_state:
-        server_state.count = 0
+from streamlit_server_state import server_state
 
 class IndexAllocator:
     def __init__(self):
@@ -36,7 +32,6 @@ idx = IndexAllocator()
 
 @st.cache_data
 def load_contents() :
-    server_state.count += 1
     #topic - chapter
     contents = {
         "파이썬 기초": ["자료형", "제어문", "고급"],
@@ -50,6 +45,13 @@ def load_contents() :
 CONTENTS , TOPICS = load_contents()
 
 def init_session_state() :
+    if "count" not in server_state:
+        server_state.count = 0
+
+    if 'init' not in st.session_state:
+        st.session_state['init'] = True
+        server_state.count += 1
+
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
 
@@ -6682,7 +6684,16 @@ def main() :
                 "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
             }
         )
-        st.write("Count = ", server_state.count)
+        st.markdown(
+                f"""
+                <div style="position: relative; height: 1rem;">
+                        <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
+                        today : {server_state.count}
+                        </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+                )
 
 if __name__ == "__main__":
     main()
