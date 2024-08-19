@@ -9,6 +9,7 @@ prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
 from streamlit_float import *
+from streamlit_server_state import server_state
 
 class IndexAllocator:
     def __init__(self):
@@ -44,6 +45,13 @@ def load_contents() :
 CONTENTS , TOPICS = load_contents()
 
 def init_session_state() :
+    if "count" not in server_state:
+        server_state.count = 0
+
+    if 'init' not in st.session_state:
+        st.session_state['init'] = True
+        server_state.count += 1
+    
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
 
@@ -6698,6 +6706,16 @@ def main() :
                 "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
             }
         )
+    st.markdown(
+                f"""
+                <div style="position: relative; height: 1rem;">
+                        <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
+                        {server_state.count} views
+                        </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+                )
 
 if __name__ == "__main__":
     main()
