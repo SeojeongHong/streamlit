@@ -6801,7 +6801,6 @@ plt.show()''', line_numbers=True)
                 - 습도, 풍속, 일조량도 이용건수에 **영향**을 미치는 것으로 보입니다.
                 ''')
         st.divider()
-        st.divider()
         
     else :
         st.error("Content Not Found !")
