@@ -259,7 +259,7 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}문자열 길이 구하기")
-        st.write("문자열의 길이는 다음과 같이 **len** 함수를 사용하면 구할 수 있습니다.")
+        st.write("문자열의 길이는 다음과 같이 **len** 함수를 사용해 구할 수 있습니다.")
         st.code('''
                 a = "Life is too short"
                 print(len(a))
@@ -314,7 +314,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "hobby"
-                print( a.count('b') )   #문자열 중 문자 b의 개수 리턴
+                print(a.count('b'))   #문자열 중 문자 b의 개수 리턴
                 #출력 : 2
                 ''',line_numbers=True)
         
@@ -323,10 +323,10 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Python is the best choice"
-                print( a.find('b') )   #문자열 중 문자 b가 처음으로 나온 위치 리턴
+                print(a.find('b'))   #문자열 중 문자 b가 처음으로 나온 위치 리턴
                 #출력 : 14
 
-                print( a.find('k') )   #찾는 문자나 문자열이 존재하지 않는다면 -1을 리턴
+                print(a.find('k'))   #찾는 문자나 문자열이 존재하지 않는다면 -1을 리턴
                 #출력 : -1
                 ''',line_numbers=True)
         
@@ -335,10 +335,10 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Life is too short"
-                print( a.index('t') )   #문자열 중 문자 t가 맨 처음으로 나온 위치를 리턴
+                print(a.index('t'))   #문자열 중 문자 t가 맨 처음으로 나온 위치를 리턴
                 #출력 : 8
 
-                print( a.index('k') )   #찾는 문자나 문자열이 존재하지 않는다면 오류 발생
+                print(a.index('k'))   #찾는 문자나 문자열이 존재하지 않는다면 오류 발생
                 #Traceback (most recent call last):
                 #File "<stdin>", line 1, in <module>
                 #ValueError: substring not found
@@ -348,7 +348,7 @@ def show_chapter(topic, chapter):
                 - **join()** : 문자열 삽입
                  ''')
         st.code('''
-                print( ",".join('abcd') )   #abcd 문자열의 각각의 문자 사이에 ‘,’를 삽입
+                print(",".join('abcd'))   #abcd 문자열의 각각의 문자 사이에 ‘,’를 삽입
                 #출력 : a,b,c,d
                 ''',line_numbers=True)
         
@@ -357,7 +357,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "hi"
-                print( a.upper() )
+                print(a.upper())
                 #출력 : 'HI'
                 ''',line_numbers=True)
         
@@ -366,7 +366,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "HELLO"
-                print( a.lower() )
+                print(a.lower())
                 #출력 : 'hello'
                 ''',line_numbers=True)
         
@@ -375,7 +375,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.lstrip() )
+                print(a.lstrip())
                 #출력 : 'hi  '
                 ''',line_numbers=True)
         
@@ -384,7 +384,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.rstrip() )
+                print(a.rstrip())
                 #출력 : '  hi'
                 ''',line_numbers=True)
         
@@ -393,7 +393,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.strip() )
+                print(a.strip())
                 #출력 : 'hi'
                 ''',line_numbers=True)
         
@@ -402,7 +402,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Good mornig"
-                print( a.replace("mornig", "evening") )  #replace(바뀔_문자열, 바꿀_문자열)
+                print(a.replace("mornig", "evening"))  #replace(바뀔_문자열, 바꿀_문자열)
                 #출력 : Good evening
                 ''',line_numbers=True)
         st.write("replace 함수는 replace(바뀔_문자열, 바꿀_문자열)처럼 사용해서 문자열 안의 특정한 값을 다른 값으로 치환해 줍니다.")
@@ -411,11 +411,11 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Life is too short"
-                print( a.split() )
+                print(a.split())
                 #출력 : ['Life', 'is', 'too', 'short']
 
                 b = "a:b:c:d"
-                print( b.split(':') )
+                print(b.split(':'))
                 #출력 : ['a', 'b', 'c', 'd']
                 ''',line_numbers=True)
         st.write("split 함수는 a.split()처럼 괄호 안에 아무 값도 넣어 주지 않으면 공백([Space], [Tab], [Enter])을 기준으로 문자열을 나누어 줍니다. 만약 b.split(':')처럼 괄호 안에 특정 값이 있을 경우에는 괄호 안의 값을 구분자로 해서 문자열을 나누어 줍니다.")    
@@ -492,13 +492,13 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
 
-                print( a[0] )
+                print(a[0])
                 #출력 : 1
 
-                print( a[0] + a[2] )
+                print(a[0] + a[2])
                 #출력 : 4
 
-                print( a[-1] )
+                print(a[-1])
                 #출력 : 3
                 ''',line_numbers=True)
         
@@ -506,13 +506,13 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3, ['a', 'b', 'c']]
 
-                print( a[0] )
+                print(a[0])
                 #출력 : 1
 
-                print( a[-1] )
+                print(a[-1])
                 #출력 : ['a', 'b', 'c']
 
-                print( a[-1][1] )
+                print(a[-1][1])
                 #출력 : 'b'
                 ''',line_numbers=True)
         st.divider()
@@ -521,7 +521,7 @@ def show_chapter(topic, chapter):
         st.write("문자열과 마찬가지로 리스트에서도 슬라이싱 기법을 적용할 수 있습니다.")
         st.code('''
                 a = [1, 2, 3, 4, 5]
-                print( a[0:2])
+                print(a[0:2])
                 #출력 : [1, 2]
 
                 print(a[:2])
@@ -576,13 +576,13 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
                 a.append(4)
-                print( a )   #리스트의 맨 마지막에 4를 추가
+                print(a)   #리스트의 맨 마지막에 4를 추가
                 #출력 : [1, 2, 3, 4]
                 ''',line_numbers=True)
         st.write("리스트 안에는 어떤 자료형도 추가할 수 있습니다.")
         st.code('''
                 a.append([5, 6])
-                print( a )   #리스트에 리스트를 추가
+                print(a)   #리스트에 리스트를 추가
                 #출력 : [1, 2, 3, 4, [5, 6]]
                 ''',line_numbers=True)
         
@@ -592,14 +592,14 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 4, 3, 2]
                 a.sort()
-                print( a )
+                print(a)
                 #출력 : [1, 2, 3, 4]
                 ''',line_numbers=True)
         st.write("문자 역시 알파벳 순서로 정렬할 수 있습니다.")
         st.code('''
                 a = ['a', 'c', 'b']
                 a.sort()
-                print( a )
+                print(a)
                 #출력 : ['a', 'b', 'c']
                 ''',line_numbers=True)
         
@@ -609,7 +609,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = ['a', 'c', 'b']
                 a.reverse()
-                print( a )
+                print(a)
                 #출력 : ['b', 'c', 'a']
                 ''',line_numbers=True)
         
@@ -618,13 +618,13 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = [1, 2, 3]
-                print( a.index(3) )     #3의 위치(인덱스) 리턴
+                print(a.index(3))     #3의 위치(인덱스) 리턴
                 #출력 : 2
 
-                print( a.index(1) )     #1의 위치(인덱스) 리턴
+                print(a.index(1))     #1의 위치(인덱스) 리턴
                 #출력 : 0
 
-                print( a.index(0) )     #0의 위치(인덱스) 리턴 -> 오류
+                print(a.index(0))     #0의 위치(인덱스) 리턴 -> 오류
                 #Traceback (most recent call last):
                 #    File "<stdin>", line 1, in <module>
                 #ValueError: 0 is not in list
@@ -637,11 +637,11 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
                 a.insert(0, 4)      #0번째 자리에 4 삽입
-                print( a )
+                print(a)
                 #출력 : [4, 1, 2, 3]
 
                 a.insert(3, 5)      #3번째 자리에 5 삽입
-                print( a )
+                print(a)
                 #출력 : [4, 1, 2, 5, 3]
                 ''',line_numbers=True)
         st.write("insert(a, b)는 리스트의 a번째 위치에 b를 삽입합니다.")
@@ -652,7 +652,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3, 1, 2, 3]
                 a.remove(3)
-                print( a )
+                print(a)
                 #출력 : [1, 2, 1, 2, 3]
                 ''',line_numbers=True)
         st.write("remove(x)는 리스트에서 첫 번째로 나오는 x를 삭제하는 함수입니다. a가 3이라는 값을 2개 가지고 있을 경우, 첫 번째 3만 제거됩니다.")
@@ -662,19 +662,19 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = [1, 2, 3]
-                print( a.pop() )    #맨 마지막 요소를 리턴하고, 해당 요소 삭제
+                print(a.pop())    #맨 마지막 요소를 리턴하고, 해당 요소 삭제
                 #출력 : 3
 
-                print( a )
+                print(a)
                 #출력 : [1, 2]
                 ''',line_numbers=True)
         st.write("pop()은 리스트의 맨 마지막 요소를 리턴하고 그 요소는 삭제합니다. a리스트에서 3을 끄집어 내고, [1, 2]만 남게 됩니다.")
         st.code('''
                 a = [1, 2, 3]
-                print( a.pop(1) )    #인덱스 1의 요소를 리턴하고, 해당 요소 삭제
+                print(a.pop(1))    #인덱스 1의 요소를 리턴하고, 해당 요소 삭제
                 #출력 : 2
 
-                print( a )
+                print(a)
                 #출력 : [1, 3]
                 ''',line_numbers=True)
         st.write("pop(x)은 리스트의 x번째 요소를 리턴하고 그 요소는 삭제합니다. a리스트에서 a[1]의 값을 끄집어 내고, [1, 3]만 남게 됩니다.")
@@ -684,7 +684,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = [1, 2, 3, 1]
-                print( a.count(1) )    #1이라는 값이 a에 총 2개
+                print(a.count(1))    #1이라는 값이 a에 총 2개
                 #출력 : 2
                 ''',line_numbers=True)
         st.write("count(x)는 리스트 안에 x가 몇 개 있는지 조사하여 그 개수를 리턴하는 함수입니다.")
@@ -695,7 +695,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
                 a.extend([4, 5])
-                print( a )
+                print(a)
                 #출력 : [1, 2, 3, 4, 5]
 
                 b = [6, 7]
@@ -878,6 +878,8 @@ def show_chapter(topic, chapter):
 
                  set은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하기 위한 필터로 종종 사용됩니다. 또한, 리스트나 튜플은 순서가 있기 때문에 인덱싱을 통해 요솟값을 얻을 수 있지만, set 자료형은 순서가 없기 때문에 인덱싱을 통해 요솟값을 얻을 수 없습니다.
                  ''')
+        st.divider()
+
         st.subheader(f"{idx.getSubIdx()}집합의 연산")
         st.code('''
                 # 연산에 사용할 2개의 set 생성
@@ -889,10 +891,10 @@ def show_chapter(topic, chapter):
                 - **교집합** : & , intersection
                  ''')
         st.code('''
-                print( s1 & s2 )
+                print(s1 & s2)
                 #출력 : {4, 5, 6}
 
-                print( s1.intersection(s2) )
+                print(s1.intersection(s2))
                 #출력 : {4, 5, 6}
                 ''',line_numbers=True)
         
@@ -900,10 +902,10 @@ def show_chapter(topic, chapter):
                 - **합집합** : | , union
                  ''')
         st.code('''
-                print( s1 | s2 )
+                print(s1 | s2)
                 #출력 : {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-                print( s1.union(s2) )
+                print(s1.union(s2))
                 #출력 : {1, 2, 3, 4, 5, 6, 7, 8, 9}
                 ''',line_numbers=True)
         
@@ -911,16 +913,16 @@ def show_chapter(topic, chapter):
                 - **차집합** : -(빼기), difference
                  ''')
         st.code('''
-                print( s1 - s2 )
+                print(s1 - s2)
                 #출력 : {1, 2, 3}
 
-                print( s2 - s1 )
+                print(s2 - s1)
                 #출력 : {8, 9, 7}
 
-                print( s1.difference(s2) )
+                print(s1.difference(s2))
                 #출력 : {1, 2, 3}
 
-                print( s2.difference(s1) )
+                print(s2.difference(s1))
                 #출력 : {8, 9, 7}
                 ''',line_numbers=True)
         st.divider()
@@ -933,7 +935,7 @@ def show_chapter(topic, chapter):
                 s1 = set([1, 2, 3])
                 s1.add(4)
                 
-                print( s1 )
+                print(s1)
                 #출력 : {1, 2, 3, 4}
                 ''',line_numbers=True)
         
@@ -944,7 +946,7 @@ def show_chapter(topic, chapter):
                 s1 = set([1, 2, 3])
                 s1.update([4, 5, 6])
                 
-                print( s1 )
+                print(s1)
                 #출력 : {1, 2, 3, 4, 5, 6}
                 ''',line_numbers=True)
         
@@ -955,43 +957,50 @@ def show_chapter(topic, chapter):
                 s1 = set([1, 2, 3])
                 s1.remove(2)
                 
-                print( s1 )
+                print(s1)
                 #출력 : {1, 3}
                 ''',line_numbers=True)
+        st.divider()
     
     elif path == ("파이썬 기초", "제어문") :
         st.header(f"{idx.getHeadIdx()}if문")
         st.subheader(f"{idx.getSubIdx()}if문 기본 구조")
         st.write('''
                 - **if** : 조건이 True인 경우에만 실행
-                 
-                        if 조건:
-                            조건이 True면 수행할 문장
-                 
+                ''')
+        st.code('''
+                if 조건:
+                    조건이 True면 수행할 문장
+                ''', language="text")
+        
+        st.write('''
                 - **if - else** : 조건이 True라면 if 실행문을, False라면 else 실행문을 실행
-                 
-                        if 조건:
-                            조건이 True면 수행할 문장
+                ''')
+        st.code('''
+                if 조건:
+                    조건이 True면 수행할 문장
                             ...
-                        else:
-                            조건이 False면 수행할 문장
-                            ...
+                else:
+                    조건이 False면 수행할 문장
+                ''', language="text")
+        
+        st.write('''
                 - **if - elif - else** : 여러 개의 조건을 사용하는 경우. 조건문이 True가 되는 if 혹은 elif 문을 실행하고, 모든 조건문이 False라면 else 실행문을 실행.
-                 
-                        if 조건1:
-                            조건1이 True면 수행할 문장
+                ''')
+        st.code('''
+                if 조건1:
+                    조건1이 True면 수행할 문장
                             ...
-                        elif 조건2:
-                            조건2이 True면 수행할 문장
+                elif 조건2:
+                    조건2이 True면 수행할 문장
 
-                        elif 조건3:
-                            조건3이 True면 수행할 문장
+                elif 조건3:
+                    조건3이 True면 수행할 문장
                         
-                        else:
-                            모든 조건이 False면 수행할 문장
+                else:
+                    모든 조건이 False면 수행할 문장
                             ...
-
-                 ''')
+                ''', language="text")
         st.divider()
         st.subheader(f"{idx.getSubIdx()}조건문 유형 - 비교 연산자")
         st.write('''
@@ -1101,14 +1110,14 @@ def show_chapter(topic, chapter):
         st.subheader(f"{idx.getSubIdx()}while문의 기본 구조")
         st.write('''
                 while 문은 조건문이 참인 동안 while 문에 속한 문장들을 반복해서 수행하고, 조건문이 거짓이 되는 경우 반복을 중지합니다.
-                        
-                    while 조건문:
-                        수행할_문장1
-                        수행할_문장2
-                        수행할_문장3
+                ''')
+        st.code('''
+                while 조건문:
+                    수행할_문장1
+                    수행할_문장2
+                    수행할_문장3
                         ...
-
-                 ''')
+                ''', language="text")
         st.write("아래 코드는 1부터 10까지 더해주는 코드를 반복문으로 작성한 예시입니다. ")
         st.code('''
                 i = 1
@@ -1162,11 +1171,11 @@ def show_chapter(topic, chapter):
                 #7
                 #9
                 ''',line_numbers=True)
-        st.write("위는 1부터 10까지의 숫자 중 홀수만 출력하는 예시입니다. a가 10보다 작은 동안 a는 1만큼씩 계속 증가합니다. a % 2 == 0(a를 2로 나누었을 때 나머지가 0인 경우)이 참이 되는 경우는 a가 짝수인 경우입니다. 즉, a가 짝수이면 continue 문을 수행하게 됩니다. 이 continue 문은 while 문의 맨 처음인 조건문(a < 10)으로 돌아가게 하는 명령어입니다. 따라서 위 예에서 a가 짝수이면 print(a) 문장은 수행되지 않을 것입니다.")
+        st.write("위는 1부터 10까지의 숫자 중 홀수만 출력하는 예시입니다. a가 10보다 작은 동안 a는 1만큼씩 계속 증가합니다. a % 2 == 0(a를 2로 나누었을 때 나머지가 0인 경우)이 참이 되는 경우는 a가 짝수인 경우입니다. 즉, a가 짝수이면 continue 문을 수행하게 됩니다. 이 continue 문은 while 문의 맨 처음인 조건문(a < 10)으로 돌아가게 하는 명령어입니다. 따라서 위 예에서 a가 짝수이면 print(a) 문장은 수행되지 않습니다.")
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}while 문 리스트와 함께 사용하기")
-        st.write('''while 문은 조건문에는 수식이 아닌 리스트 자료형이 올 수 있습니다. 리스트의 경우 값이 비어 있으면([]) 거짓(False)이 되고 비어 있지 않으면 참(True)이 되기 때문입니다.''')
+        st.write('''while 문의 조건문에는 수식이 아닌 리스트 자료형이 올 수 있습니다. 리스트의 경우 값이 비어 있으면([]) 거짓(False)이 되고 비어 있지 않으면 참(True)이 되기 때문입니다.''')
         st.code('''
                 li = ["A", "B", "C", "D"]
 
@@ -1185,14 +1194,15 @@ def show_chapter(topic, chapter):
         st.header(f"{idx.getHeadIdx()}for문")
         st.write('''
                  for문은 정해진 횟수나 범위 안에서 차례대로 대입하며 반복을 수행하는 반복문입니다. 아래와 같은 기본 구조를 가집니다.
-                 
-                        for 변수 in 리스트(또는 튜플, 문자열):
-                            수행할_문장1
-                            수행할_문장2
+                ''')
+        st.code('''
+                for 변수 in 리스트(또는 튜플, 문자열):
+                    수행할_문장1
+                    수행할_문장2
                             ...
-
+                ''', language="text")        
+        st.write('''
                 리스트나 튜플, 문자열의 첫 번째 요소부터 마지막 요소까지 차례로 변수에 대입되어 for문 내 문장들이 수행됩니다.
-
                  ''')
         st.divider()
         st.subheader(f"{idx.getSubIdx()}for문 사용법")
@@ -1298,7 +1308,7 @@ def show_chapter(topic, chapter):
                     수행할_문장2
                     ...
                     return 결과값
-                 ''',line_numbers=True)
+                 ''',language="text", line_numbers=True)
         
         st.write("다음의 함수명은 add이고 입력으로 a, b 2개의 값을 받으며 리턴값(출력값)은 2개의 입력값을 더한 값입니다.")
         st.code('''
@@ -1315,17 +1325,18 @@ def show_chapter(topic, chapter):
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}매개변수와 인수")
-        st.write("**매개변수**는 함수에 입력으로 전달된 값을 받는 변수, 인수는 함수를 호출할 때 전달하는 입력값을 의미합니다.")
+        st.write("**매개변수**는 함수에 입력으로 전달된 값을 받는 변수, **인수**는 함수를 호출할 때 전달하는 입력값을 의미합니다.")
 
         st.code('''
                 def add(a, b):  # a, b는 매개변수
                     return a+b
 
                 print(add(3, 4))  # 3, 4는 인수
+                #출력 : 7
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}return(반환값)")
-        st.write("함수는 들어온 입력값을 받은 후 처리를 하여 적절한 값을 리턴해 줍니다. 함수의 형태는 입력값과 리턴값의 존재 유무에 딸 4가지 유형으로 나뉩니다.")
+        st.write("함수는 들어온 입력값을 받은 후 처리를 하여 적절한 값을 리턴해 줍니다. 함수의 형태는 입력값과 리턴값의 존재 유무에 따라 4가지 유형으로 나뉩니다.")
         st.write('''
                 - 입력값과 리턴값이 모두 있는 일반적인 함수
                  ''')
@@ -1398,17 +1409,19 @@ def show_chapter(topic, chapter):
                  일부 패키지는 파이썬을 설치할 때 함께 설치됩니다. 그러나 그 외에 추가로 패키지를 더 사용해야 할 때는 사용자가 수동으로 설치해야 합니다.
                  파이썬은 간단한 명령어만으로 패키지를 쉽게 내려받아 설치할 수 있습니다.
 
-                        pip install 패키지이름
+                 **윈도우키**+**R** 또는 **윈도우 검색창**에서 **CMD**(명령 프롬프트)를 검색하여 CMD 창을 열고 아래 :blue-background[pip install] 명령을 통해 패키지 설치를 진행합니다.
+
+                        $ pip install 패키지이름
                  
-                예를 들어 pandas 패키지를 설치하려면 :blue-background[pip install pandas] 명령을 통해 설치할 수 있습니다.
+                예를 들어 pandas 패키지의 경우 :blue-background[pip install pandas] 명령을 통해 설치할 수 있습니다.
                 ''')
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}pip를 이용하여 설치된 패키지 확인하기")
         st.write('''
-                 :blue-background[pip list] 명령을 통해 설치된 패키지 목록을 볼 수 있습니다.
+                 CMD창에서 :blue-background[pip list] 명령을 통해 설치된 패키지 목록을 볼 수 있습니다.
 
-                        pip list
+                        $ pip list
 
                 ''')    
         st.divider()
@@ -1429,8 +1442,8 @@ def show_chapter(topic, chapter):
 
         st.divider()
         st.subheader(f"{idx.getSubIdx()}기본 사용법")
-        st.write("아래 명령어를 사용하여 NumPy 패키지를 설치해줍니다.")
-        st.code("pip install numpy")
+        st.write("CMD 창을 열고 아래 명령어를 사용하여 NumPy 패키지를 설치해 줍니다.")
+        st.code("$ pip install numpy")
 
         st.write("코드 가장 상단에 **import** 해주어 NumPy를 호출합니다.")
         st.code("import numpy as np")
@@ -1612,12 +1625,12 @@ def show_chapter(topic, chapter):
         st.write('''- **np.zeros()** : 모든 원소가 0인 배열 생성''')
         st.code('''
                 arr = np.zeros((2, 3))
-                print(arr)                
+                print(arr)    #출력 [[0. 0. 0.] [0. 0. 0.]]    
                 ''',line_numbers=True)
         st.write('''- **np.ones()** : 모든 원소가 1인 배열 생성''')
         st.code('''
                 arr = np.ones((2, 2))
-                print(arr)                
+                print(arr)    #출력 [[1. 1.] [1. 1.]]
                 ''',line_numbers=True)
         st.write('''- **np.arange()** : 범위 내의 일정 간격을 가진 배열 생성''')
         st.code('''
