@@ -5629,9 +5629,9 @@ plt.show()'''
     
         st.header(f"{idx.getHeadIdx()}지역별 음식점 소비기반 트렌드 데이터")
         st.write("지역별 음식점 소비 데이터를 활용하여 데이터 로드부터, 데이터 탐색 및 분석, 시각화, 결론 도출까지 실습 진행해보겠습니다.")
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()} 컬럼 설명")
         st.write("- CTPRVN_NM : 시도명칭")
         st.write("- SIGNGU_NM : 시군구 명칭")
@@ -5639,226 +5639,224 @@ plt.show()'''
         st.write("- FOOD_FCLTY_CO : 식당수")
         st.write("- POPLTN_CO : 인구수")
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
-    
+
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
         
         with open('data/음식점소비트렌드/음식점소비트렌드데이터.csv', "rb") as template_file:
             template_csv = template_file.read()
-    
+
         st.download_button(label="download data",
                             type="primary",
                             data=template_csv,
-                           file_name = "음식점소비트렌드데이터.csv"
+                        file_name = "음식점소비트렌드데이터.csv"
         )
-    
-        st.code("import pandas as pd\n\ndf_map = pd.read_csv('음식점소비트렌드데이터.csv')")
+
+        st.code("import pandas as pd\n\ndf_map = pd.read_csv('음식점소비트렌드데이터.csv')", line_numbers=True)
         import pandas as pd
         df_map = pd.read_csv('data/음식점소비트렌드/음식점소비트렌드데이터.csv')
-    
-        st.code('df_map')
+
+        st.code('df_map', line_numbers=True)
         st.write(df_map)
         st.divider()
-    
+
         st.header(f"{idx.getHeadIdx()}데이터 탐색하기(EDA)")
         st.write('데이터 분석에는 **데이터를 탐색**하는 과정이 필요합니다.')
         st.write('- 데이터를 다양한 각도에서 관찰하고 이해하는 과정')
         st.write('- 데이터 분석 전 통계적은 방법으로 자료를 직관적으로 바라보는 과정')
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}통계 값으로 데이터 탐색하기")
-    
-        st.code('# 행과 열의 수 확인\ndf_map.shape')
+
+        st.code('# 행과 열의 수 확인\ndf_map.shape', line_numbers=True)
         st.write(df_map.shape)
-    
-        st.code('# 기본 정보 확인\ndf_map.info()')
+
+        st.code('# 기본 정보 확인\ndf_map.info()', line_numbers=True)
         buffer = io.StringIO()
         df_map.info(buf=buffer)
         s = buffer.getvalue()
         st.text(s)
-    
-        st.code('# 결측치 개수 확인 isnull()\ndf_map.isnull().sum()')
+
+        st.code('# 결측치 개수 확인 isnull()\ndf_map.isnull().sum()', line_numbers=True)
         st.write(df_map.isnull().sum())
-    
-        st.code('# 중복 데이터 확인 duplicated()\ndf_map.duplicated().sum()')
+
+        st.code('# 중복 데이터 확인 duplicated()\ndf_map.duplicated().sum()', line_numbers=True)
         st.write(df_map.duplicated().sum())
-    
-        st.code('# 앞의 다섯 개 확인\ndf_map.head()')
+
+        st.code('# 앞의 다섯 개 확인\ndf_map.head()', line_numbers=True)
         st.write(df_map.head())
-    
-        st.code('# 마지막 다섯 개 확인\ndf_map.tail()')
+
+        st.code('# 마지막 다섯 개 확인\ndf_map.tail()', line_numbers=True)
         st.write(df_map.tail())
-    
-        st.code('# 통계 데이터 확인\ndf_map.describe()')
+
+        st.code('# 통계 데이터 확인\ndf_map.describe()', line_numbers=True)
         st.write(df_map.describe())
-    
-        st.code('# 개별 칼럼 통계치 - 거주자 평균\ndf_map.POPLTN_CO.mean()')
+
+        st.code('# 개별 칼럼 통계치 - 거주자 평균\ndf_map.POPLTN_CO.mean()', line_numbers=True)
         st.write(df_map.POPLTN_CO.mean())
-    
-        st.code('# 전체 식당 수\ndf_map.FOOD_FCLTY_CO.sum()')
+
+        st.code('# 전체 식당 수\ndf_map.FOOD_FCLTY_CO.sum()', line_numbers=True)
         st.write(df_map.FOOD_FCLTY_CO.sum())
-    
-        st.code('# 특정 칼럼의 고유한 값 확인 value_counts()\nCTPRVN_NM.value_counts()')  
+
+        st.code('# 특정 칼럼의 고유한 값 확인 value_counts()\ndf_map.CTPRVN_NM.value_counts()', line_numbers=True)  
         st.write(df_map.CTPRVN_NM.value_counts())
-    
-        st.code('# SIGNGU_NM의 고유한 값\ndf_map.SIGNGU_NM.value_counts()')
+
+        st.code('# SIGNGU_NM의 고유한 값\ndf_map.SIGNGU_NM.value_counts()', line_numbers=True)
         st.write(df_map.SIGNGU_NM.value_counts())
-    
-        st.code('# 특정 칼럼의 고유한 값 개수 확인 nunique() -  CTPRVN_NM\ndf_map.CTPRVN_NM.nunique()')
+
+        st.code('# 특정 칼럼의 고유한 값 개수 확인 nunique() -  CTPRVN_NM\ndf_map.CTPRVN_NM.nunique()', line_numbers=True)
         st.write(df_map.CTPRVN_NM.nunique())
-    
-        st.code('# 식당 종류 확인\ndf_map.FOOD_FCLTY_NM.value_counts()')
+
+        st.code('# 식당 종류 확인\ndf_map.FOOD_FCLTY_NM.value_counts()', line_numbers=True)
         st.write(df_map.FOOD_FCLTY_NM.value_counts())
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}조건 인덱싱으로 탐색하기")
-    
-        st.code('''# 시군구 이름이 강서구인 데이터\ndf_map[df_map['SIGNGU_NM'] == '강서구']''')
+
+        st.code('''# 시군구 이름이 강서구인 데이터\ndf_map[df_map['SIGNGU_NM'] == '강서구']''', line_numbers=True)
         st.write(df_map[df_map['SIGNGU_NM'] == '강서구'])
-    
-        st.code('''# 서울시 강서구만 가져오기 --- 서울시 & 강서구\ndf_map[(df_map.CTPRVN_NM == '서울특별시') & (df_map.SIGNGU_NM == '강서구')]''')
+
+        st.code('''# 서울시 강서구만 가져오기 --- 서울시 & 강서구\ndf_map[(df_map.CTPRVN_NM == '서울특별시') & (df_map.SIGNGU_NM == '강서구')]''', line_numbers=True)
         st.write(df_map[(df_map.CTPRVN_NM == '서울특별시') & (df_map.SIGNGU_NM == '강서구')])
-    
-        st.code('''# 서울시 강남구 식당수 --> df_map[강남구 & 서울특별시]['FOOD_FCLTY_NM'].sum()\ndf_map[(df_map.SIGNGU_NM == '강남구')&(df_map.CTPRVN_NM == '서울특별시')].FOOD_FCLTY_CO.sum()''')
+
+        st.code('''# 서울시 강남구 식당수 --> df_map[강남구 & 서울특별시]['FOOD_FCLTY_NM'].sum()\ndf_map[(df_map.SIGNGU_NM == '강남구')&(df_map.CTPRVN_NM == '서울특별시')].FOOD_FCLTY_CO.sum()''', line_numbers=True)
         st.write(df_map[(df_map.SIGNGU_NM == '강남구')&(df_map.CTPRVN_NM == '서울특별시')].FOOD_FCLTY_CO.sum())
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}피벗 테이블 만들기 :gray-background[pd.pivot_table()]")
         st.markdown("- df : 데이터프레임 \n- index : 기준점이 되는 칼럼 (보통 문자열)\n - values : 계산하려는 칼럼 (보통 숫자)\n - aggfunc : 기초통계함수 (mean, sum 등)")
         
         st.code('''# 피벗테이블 - 시군구별 식당수 합계 데이터프레임만들기
-    df_식당수 = pd.pivot_table(df_map,
-                        index=['CTPRVN_NM', 'SIGNGU_NM'],
-                        values= 'FOOD_FCLTY_CO',
-                        aggfunc= 'sum')
-    df_식당수''')
+df_식당수 = pd.pivot_table(df_map,
+                    index=['CTPRVN_NM', 'SIGNGU_NM'],
+                    values= 'FOOD_FCLTY_CO',
+                    aggfunc= 'sum')
+df_식당수''', line_numbers=True)
         df_식당수 = pd.pivot_table(df_map,
                         index=['CTPRVN_NM', 'SIGNGU_NM'],
                         values= 'FOOD_FCLTY_CO',
                         aggfunc= 'sum')
         st.write(df_식당수)
-    
+
         st.code('''# 전체 식당 수 다시 확인
-    df_식당수.FOOD_FCLTY_CO.sum())''')
+df_식당수.FOOD_FCLTY_CO.sum())''', line_numbers=True)
         st.write(df_식당수.FOOD_FCLTY_CO.sum())
-        st.code('''df_map.FOOD_FCLTY_CO.sum()''')
-        st.write(df_map.FOOD_FCLTY_CO.sum())
-    
+
+
         st.code('''# 시군구별 인구수 합계 데이터프레임 만들기
-    
-    df_인구수 = pd.pivot_table(df_map,
-                        index=['CTPRVN_NM', 'SIGNGU_NM'],
-                        values= 'POPLTN_CO',
-                        aggfunc= 'min')
-    df_인구수''')
+
+df_인구수 = pd.pivot_table(df_map,
+                    index=['CTPRVN_NM', 'SIGNGU_NM'],
+                    values= 'POPLTN_CO',
+                    aggfunc= 'min')
+df_인구수''', line_numbers=True)
         df_인구수 = pd.pivot_table(df_map,
                         index=['CTPRVN_NM', 'SIGNGU_NM'],
                         values= 'POPLTN_CO',
                         aggfunc= 'min')
         st.write(df_인구수)
         st.divider()
-    
+
         st.header(f"{idx.getHeadIdx()}데이터 전처리")
         st.write('분석을 위해 서울시 데이터만 사용하려고 합니다. 위에서 사용한 피벗 테이블을 활용하여 서울시 데이터만 추출 후 csv 파일로 만들어보겠습니다.')
-    
+
         st.subheader(f"{idx.getSubIdx()}데이터 프레임 합치기")
-    
+
         st.code('''df_pivot = pd.concat([df_식당수,df_인구수], axis=1)
-    df_pivot''')
+df_pivot''', line_numbers=True)
         df_pivot = pd.concat([df_식당수,df_인구수], axis=1)
         st.write(df_pivot)
-    
-        st.code('''df_pivot.info()''')
+
+        st.code('''df_pivot.info()''', line_numbers=True)
         buffer = io.StringIO()
         df_pivot.info(buf=buffer)
         s = buffer.getvalue()
         st.text(s)
         
         st.subheader(f"{idx.getSubIdx()}컬럼 이름 변경")
-    
+
         st.code('''# 칼럼이름 변경{'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}
-    
-    df_pivot.rename(columns={'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}, inplace=True)
-    df_pivot.head()''')
+
+df_pivot.rename(columns={'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}, inplace=True)
+df_pivot.head()''', line_numbers=True)
         df_pivot.rename(columns={'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}, inplace=True)
         st.write(df_pivot.head())
-    
+
         st.subheader(f"{idx.getSubIdx()}서울시 데이터 csv로 저장")
-    
+
         st.code('''# 서울시만 저장
-    df_seoul = df_pivot.loc['서울특별시']
-    df_seoul.head()''')
+df_seoul = df_pivot.loc['서울특별시']
+df_seoul.head()''', line_numbers=True)
         df_seoul = df_pivot.loc['서울특별시']
         st.write(df_seoul.head())
-    
-        st.code('''df_seoul.to_csv('seoul.csv')''')
+
+        st.code('''df_seoul.to_csv('seoul.csv')''', line_numbers=True)
         # df_seoul.to_csv('seoul.csv')
         
         st.divider()
-    
+
         st.header(f"{idx.getHeadIdx()}데이터 시각화하기")
-    
+
         st.subheader(f"{idx.getSubIdx()}필요한 라이브러리 로드")
-    
+
         st.code('''# 시각화 라이브러리 로드 및 설치
-    import pandas as pd
-    import matplotlib as mpl
-    import matplotlib.pyplot as plt
-    from matplotlib import rc
-    
-    rc('font', family='Malgun Gothic')
-    
-    # 유니코드에서  음수 부호설정
-    mpl.rc('axes', unicode_minus=False)''')
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from matplotlib import rc
+
+rc('font', family='Malgun Gothic')
+
+# 유니코드에서  음수 부호설정
+mpl.rc('axes', unicode_minus=False)''', line_numbers=True)
         
         import pandas as pd
         import matplotlib as mpl
         import matplotlib.pyplot as plt
         from matplotlib import rc
-    
+
         rc('font', family='Malgun Gothic')
         
         mpl.rc('axes', unicode_minus=False)
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}서울시 데이터 불러오기")
-    
+
         st.code('''# 가공한 서울시 데이터 불러오기
-    df_seoul = pd.read_csv('seoul.csv')''')
-        st.code('df_seoul.head()')
+df_seoul = pd.read_csv('seoul.csv')''', line_numbers=True)
+        st.code('df_seoul.head()', line_numbers=True)
         df_seoul = pd.read_csv('data/seoul.csv')
         st.write(df_seoul.head())
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}식당수 시각화")
         st.write('서울시 데이터를 활용하여 식당 분포 꺾은선 그래프를 도출해보겠습니다.')
+
     
-       
-    
+
         st.code('''# 서울시 식당분포 그리기
-    plt.title('서울시 식당 분포')
-    plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
-    plt.show()''')
-    
+plt.title('서울시 식당 분포')
+plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
+plt.show()''', line_numbers=True)
         
         plt.title('서울시 식당 분포', fontproperties=prop)
         plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
         plt.xticks(fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.write('- 글자가 겹칩니다. **사이즈 조정**하고, **글씨를 회전**해보겠습니다.')
-    
+
         st.code('''# 화면 사이즈 설정과 글씨 회전
-    plt.figure(figsize=(20, 4))
-    plt.title('서울시 식당 분포')
-    plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
-    plt.show()''')
-        
+plt.figure(figsize=(20, 4))
+plt.title('서울시 식당 분포')
+plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
+plt.show()''', line_numbers=True)
+
         # 화면 사이즈 설정과 글씨 회전
         plt.figure(figsize=(20, 4))
         plt.title('서울시 식당 분포', fontproperties=prop)
@@ -5868,15 +5866,15 @@ plt.show()'''
         st.write()
         st.write('- 사이즈가 너무 커졌습니다. **사이즈 조정**하고, **y축에 label**을 붙혀보겠습니다.')
         st.write()
-    
+
         st.code('''plt.figure(figsize=(8, 4))
-    plt.title('서울시 식당 분포')
-    plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
-    # x라벨을 회전
-    plt.xticks(rotation=60) # 시계 반대방향으로 60도 회전
-    plt.ylabel('문화체육관광시설 인근 음식점')
-    plt.show()''')
-        
+plt.title('서울시 식당 분포')
+plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
+# x라벨을 회전
+plt.xticks(rotation=60) # 시계 반대방향으로 60도 회전
+plt.ylabel('문화체육관광시설 인근 음식점')
+plt.show()''', line_numbers=True)
+
         plt.figure(figsize=(8, 4))
         plt.title('서울시 식당 분포', fontproperties=prop)
         plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
@@ -5884,22 +5882,22 @@ plt.show()'''
         plt.xticks(rotation=60, fontproperties=prop) # 시계 반대방향으로 60도 회전
         plt.ylabel('문화체육관광시설 인근 음식점', fontproperties=prop)
         st.pyplot(plt)
-    
-    
+
+
         st.write('- **막대 그래프**를 그려보겠습니다. **색을 hotpink**로 설정할 것입니다.')
-    
-    
+
+
         st.code('''# 막대 그래프 그리기
-    plt.figure(figsize=(8, 4))
-    plt.title('서울시 식당 분포')
-    # plt.bar()
-    plt.bar(df_seoul['SIGNGU_NM'], df_seoul['식당수'], color='hotpink')
-    # x라벨을 회전
-    plt.xticks(rotation=60)
-    plt.ylabel('문화체육관광시설 인근 음식점')
-    plt.show()''')
-    
-    
+plt.figure(figsize=(8, 4))
+plt.title('서울시 식당 분포')
+# plt.bar()
+plt.bar(df_seoul['SIGNGU_NM'], df_seoul['식당수'], color='hotpink')
+# x라벨을 회전
+plt.xticks(rotation=60)
+plt.ylabel('문화체육관광시설 인근 음식점')
+plt.show()''', line_numbers=True)
+
+
         plt.figure(figsize=(8, 4))
         plt.title('서울시 식당 분포', fontproperties=prop)
         # plt.bar()
@@ -5908,180 +5906,180 @@ plt.show()'''
         plt.xticks(rotation=60, fontproperties=prop)
         plt.ylabel('문화체육관광시설 인근 음식점', fontproperties=prop)
         st.pyplot(plt)
-        
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}인구수 시각화")
-    
+
         st.write('인구수만 활용하여 그래프를 시각화해보겠습니다.')
-        
+
         st.code('''# 인구수만 포함하는 데이터 프레임 만들기
-    df_인구 = df_seoul.drop('식당수', axis=1)
-    df_인구.set_index('SIGNGU_NM', inplace=True)
-    df_인구''')
+df_인구 = df_seoul.drop('식당수', axis=1)
+df_인구.set_index('SIGNGU_NM', inplace=True)
+df_인구''', line_numbers=True)
         # 인구수만 포함하는 데이터 프레임 만들기
         df_인구 = df_seoul.drop('식당수', axis=1)
         df_인구.set_index('SIGNGU_NM', inplace=True)
         st.write(df_인구)
-    
+
         st.code('''# 서울시 인구분포 막대그래프 그리기
-    df_인구.plot(kind='bar', figsize=(10,5), color='orange')
-    plt.xticks(rotation=60)
-    plt.xlabel('') # xlabel 이름을 지우기
-    plt.show()''')
-        
+df_인구.plot(kind='bar', figsize=(10,5), color='orange')
+plt.xticks(rotation=60)
+plt.xlabel('') # xlabel 이름을 지우기
+plt.show()''', line_numbers=True)
+
         # 서울시 인구분포 막대그래프 그리기
         df_인구.plot(kind='bar', figsize=(10,5), color='orange')
         plt.xticks(rotation=60, fontproperties=prop)
         plt.xlabel('') # xlabel 이름을 지우기
         st.pyplot(plt)
-    
+
         st.code('''# 수평 막대그래프 그리기 barh
-    df_인구.plot(kind='barh', figsize=(10,5), color='orange')
-    # plt.xticks(rotation=60)
-    plt.ylabel('')
-    plt.show()''')
-        
+df_인구.plot(kind='barh', figsize=(10,5), color='orange')
+# plt.xticks(rotation=60)
+plt.ylabel('')
+plt.show()''', line_numbers=True)
+
         # 수평 막대그래프 그리기 barh
         df_인구.plot(kind='barh', figsize=(10,5), color='orange')
         # plt.xticks(rotation=60)
         plt.yticks(fontproperties=prop)
         plt.ylabel('')
         st.pyplot(plt)
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}서브플롯 활용하기")
-    
+
         st.write('- 그래프 2개를 함께 plt에 나타내고 싶습니다.')
         st.write('- 이러한 상황에서 서브플롯을 사용하면 적절합니다.')
-    
+
         st.code('''# 서브플롯 그리기
-    fig = plt.figure(figsize=(10,5))
-    ax = fig.add_subplot(1,1,1) # 1행 1열 1번째
-    
-    ax.bar(df_인구.index, df_인구['인구수'], color='orange')
-    plt.xticks(rotation=60)
-    plt.show()''')
-        
+fig = plt.figure(figsize=(10,5))
+ax = fig.add_subplot(1,1,1) # 1행 1열 1번째
+
+ax.bar(df_인구.index, df_인구['인구수'], color='orange')
+plt.xticks(rotation=60)
+plt.show()''', line_numbers=True)
+
         # 서브플롯 그리기
         fig = plt.figure(figsize=(10,5))
         ax = fig.add_subplot(1,1,1) # 1행 1열 1번째
-    
+
         ax.bar(df_인구.index, df_인구['인구수'], color='orange')
         plt.xticks(rotation=60, fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.write('- 수평으로 2개의 그래프를 나타내보겠습니다.')
-    
+
         st.code('''# 서브 플롯
-    fig = plt.figure(figsize=(20,5))
-    
-    ax1 = fig.add_subplot(1,2,1)  # 1행 2열 중 첫번째(왼쪽)
-    ax2 = fig.add_subplot(1,2,2)  # 1행 2열 중 두번째(오른쪽)
-                
-    # 인구수 막대그래프
-    ax1.bar(df_인구.index, df_인구['인구수'], color='green')
-    ax1.set_title('서울시 인구분포')
-    ax1.set_xticklabels(df_인구.index, rotation=45)
-    
-    # 식당수 꺽은선그래프
-    ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
-    ax2.set_title('서울시 식당분포')
-    ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
-    
-    plt.show()''')
-        
+fig = plt.figure(figsize=(20,5))
+
+ax1 = fig.add_subplot(1,2,1)  # 1행 2열 중 첫번째(왼쪽)
+ax2 = fig.add_subplot(1,2,2)  # 1행 2열 중 두번째(오른쪽)
+            
+# 인구수 막대그래프
+ax1.bar(df_인구.index, df_인구['인구수'], color='green')
+ax1.set_title('서울시 인구분포')
+ax1.set_xticklabels(df_인구.index, rotation=45)
+
+# 식당수 꺽은선그래프
+ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
+ax2.set_title('서울시 식당분포')
+ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
+
+plt.show()''', line_numbers=True)
+
         # 서브 플롯
         fig = plt.figure(figsize=(20,5))
-    
+
         ax1 = fig.add_subplot(1,2,1)  # 1행 2열 중 첫번째(왼쪽)
         ax2 = fig.add_subplot(1,2,2)  # 1행 2열 중 두번째(오른쪽)
         # 인구수 막대그래프
         ax1.bar(df_인구.index, df_인구['인구수'], color='green')
         ax1.set_title('서울시 인구분포', fontproperties=prop)
         ax1.set_xticklabels(df_인구.index, rotation=45, fontproperties=prop)
-    
+
         # 식당수 꺽은선그래프
         ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
         ax2.set_title('서울시 식당분포', fontproperties=prop)
         ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45, fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.write('- 수직으로 2개의 그래프를 나타내보겠습니다.')
-    
+
         st.code('''# 서브 플롯
-    fig = plt.figure(figsize=(20,10))
-    
-    ax1 = fig.add_subplot(2,1,1)  # 2행 1열 중 첫번째(위쪽)
-    ax2 = fig.add_subplot(2,1,2)  # 2행 1열 중 두번째(아래쪽)
-    
-    # 인구수 막대그래프
-    ax1.bar(df_인구.index, df_인구['인구수'], color='green')
-    ax1.set_title('서울시 인구분포')
-    ax1.set_xticklabels(df_인구.index, rotation=45)
-    
-    # 식당수 꺽은선그래프
-    ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
-    ax2.set_title('서울시 식당분포')
-    ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
-    
-    plt.show()''')
-        
+fig = plt.figure(figsize=(20,10))
+
+ax1 = fig.add_subplot(2,1,1)  # 2행 1열 중 첫번째(위쪽)
+ax2 = fig.add_subplot(2,1,2)  # 2행 1열 중 두번째(아래쪽)
+
+# 인구수 막대그래프
+ax1.bar(df_인구.index, df_인구['인구수'], color='green')
+ax1.set_title('서울시 인구분포')
+ax1.set_xticklabels(df_인구.index, rotation=45)
+
+# 식당수 꺽은선그래프
+ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
+ax2.set_title('서울시 식당분포')
+ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
+
+plt.show()''', line_numbers=True)
+
         # 서브 플롯
         fig = plt.figure(figsize=(20,10))
-    
+
         ax1 = fig.add_subplot(2,1,1)  # 2행 1열 중 첫번째(위쪽)
         ax2 = fig.add_subplot(2,1,2)  # 2행 1열 중 두번째(아래쪽)
-    
+
         # 인구수 막대그래프
         ax1.bar(df_인구.index, df_인구['인구수'], color='green')
         ax1.set_title('서울시 인구분포', fontproperties=prop)
         ax1.set_xticklabels(df_인구.index, rotation=45, fontproperties=prop)
-    
+
         # 식당수 꺽은선그래프
         ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
         ax2.set_title('서울시 식당분포', fontproperties=prop)
         ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45, fontproperties=prop)
-    
+
         st.pyplot(plt)
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}심화 - 식당 비율 그래프")
         st.write('- 인구 100명당 **식당 수 비율**을 시각화 하고 싶습니다.')
         st.write('- 직관성을 높이기 위해 **서울시 인구수 막대 그래프**와 함께 나타내고 싶습니다.')
         st.write('- 각 그래프를 시각화 하고, **식당 수 비율**과 **인구수**를 함께 나타내보겠습니다.')
-    
+
         st.code('''# 인구 100명당 식당수 비율 칼럼 생성
-    df_seoul['식당비율'] = (df_seoul.식당수 / (df_seoul.인구수*0.01))
-    df_seoul.head()''')
+df_seoul['식당비율'] = (df_seoul.식당수 / (df_seoul.인구수*0.01))
+df_seoul.head()''', line_numbers=True)
         # 인구 100명당 식당수 비율 칼럼 생성
         df_seoul['식당비율'] = (df_seoul.식당수 / (df_seoul.인구수*0.01))
         st.write(df_seoul.head())
-    
+
         st.code('''# 식당비율 선그래프
-    
-    plt.figure(figsize=(8,4))
-    plt.title('인구 수 대비 식당수')
-    plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b+-.')
-    plt.xticks(rotation=45)
-    plt.show()''')
-    
+
+plt.figure(figsize=(8,4))
+plt.title('인구 수 대비 식당수')
+plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b+-.')
+plt.xticks(rotation=45)
+plt.show()''', line_numbers=True)
+
         plt.figure(figsize=(8,4))
         plt.title('인구 수 대비 식당수', fontproperties=prop)
         plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b+-.')
         plt.xticks(rotation=45, fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.code('''# 식당 수 막대 그래프도 같이 그리기
-    
-    plt.figure(figsize=(12,8))
-    plt.title('서울시 구별 인구수 대비 식당수')
-    plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='pink')
-    plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b*-')
-    plt.xticks(rotation=45)
-    plt.show()''')
+
+plt.figure(figsize=(12,8))
+plt.title('서울시 구별 인구수 대비 식당수')
+plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='pink')
+plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b*-')
+plt.xticks(rotation=45)
+plt.show()''', line_numbers=True)
     
         plt.figure(figsize=(12,8))
         plt.title('서울시 구별 인구수 대비 식당수', fontproperties=prop)
@@ -6091,17 +6089,17 @@ plt.show()'''
         st.pyplot(plt)
     
         st.code('''# twinx()함수로 2축 그래프 그리기
-    
-    plt.figure(figsize=(10,4))
-    plt.title('서울특별시')
-    plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='green', label='음식점수')
-    plt.legend(bbox_to_anchor=(0.15, 1.22))
-    plt.xticks(rotation=-45)
-    
-    y_right = plt.twinx()
-    y_right.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, color='purple', marker='o', label='인구 수 대비 음식점')
-    plt.legend(bbox_to_anchor=(0.23, 1.12))
-    plt.show()''')
+
+plt.figure(figsize=(10,4))
+plt.title('서울특별시')
+plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='green', label='음식점수')
+plt.legend(bbox_to_anchor=(0.15, 1.22))
+plt.xticks(rotation=-45)
+
+y_right = plt.twinx()
+y_right.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, color='purple', marker='o', label='인구 수 대비 음식점')
+plt.legend(bbox_to_anchor=(0.23, 1.12))
+plt.show()''', line_numbers=True)
     
     
         plt.figure(figsize=(10,4))
@@ -6123,17 +6121,17 @@ plt.show()'''
     
     
         st.code('''#거주자순
-    df_거주자순 = df_seoul.sort_values('인구수', ascending=False, ignore_index=True)
-    df_거주자순''')
+df_거주자순 = df_seoul.sort_values('인구수', ascending=False, ignore_index=True)
+df_거주자순''', line_numbers=True)
         df_거주자순 = df_seoul.sort_values('인구수', ascending=False, ignore_index=True)
         st.write(df_거주자순)
     
         st.write('- 비율은 소수점 아래 한 자리까지 나타내도록 하여 원 그래프를 시각화합니다.')
     
         st.code('''#원그래프 그리기
-    plt.figure(figsize=(8,8), dpi=100)
-    df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow')
-    plt.show()''')
+plt.figure(figsize=(8,8), dpi=100)
+df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow')
+plt.show()''', line_numbers=True)
     
         plt.figure(figsize=(8,8), dpi=100)
         df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow', textprops={'font':prop})
