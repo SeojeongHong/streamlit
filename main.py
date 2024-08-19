@@ -45,13 +45,15 @@ def load_contents() :
 CONTENTS , TOPICS = load_contents()
 
 def init_session_state() :
-    if "count" not in server_state:
-        server_state.count = 0
+    # global 변수
+    if "views" not in server_state:
+        server_state.views = 0
 
-    if 'init' not in st.session_state:
-        st.session_state['init'] = True
-        server_state.count += 1
-
+    # 페이지 최초 로드(최초 세션 연결)시 views 증가
+    if 'lock' not in st.session_state:
+        st.session_state['lock'] = True
+        server_state.views += 1
+    
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
 
@@ -96,14 +98,24 @@ def show_topic(topic):
 matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을 만들고, 몇 개의 선을 표현하고, 레이블로 꾸미는 등 간편하게 그래프를 만들고 변화를 줄 수 있습니다.''',
             "실습 프로젝트" : "데이터 분석 및 시각화 실습 코드를 제공합니다.",
     }
-    st.info(info_txt[topic])
+    with st.container():
+        st.info(info_txt[topic])
     
     table = [st.columns(3)] * ((len(chapters) + 2) // 3)
     for i, title in enumerate(chapters):
         with table[i // 3][i % 3]:
-            card = st.container(height=180, border=True)
-            subcard = card.container(height=90, border=False)
-            subcard.markdown(f"<h3 style='text-align: left;font-size: 22px;'>{wrap_text(title)}</h3>", unsafe_allow_html=True)
+            formatted_title = title.replace('\n', ' ')
+            card = st.container(height=200, border=True)
+            subcard = card.container(height=110, border=False)
+            subcard.markdown(f"""<h3 style='
+                    text-align: left;
+                    word-break: keep-all;
+                    overflow-wrap: break-word;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    '>{formatted_title}</h3>""", unsafe_allow_html=True)
 
             card.button("학습하기", 
                         key=f"btn_{i}",
@@ -266,7 +278,7 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}문자열 길이 구하기")
-        st.write("문자열의 길이는 다음과 같이 **len** 함수를 사용하면 구할 수 있습니다.")
+        st.write("문자열의 길이는 다음과 같이 **len** 함수를 사용해 구할 수 있습니다.")
         st.code('''
                 a = "Life is too short"
                 print(len(a))
@@ -321,7 +333,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "hobby"
-                print( a.count('b') )   #문자열 중 문자 b의 개수 리턴
+                print(a.count('b'))   #문자열 중 문자 b의 개수 리턴
                 #출력 : 2
                 ''',line_numbers=True)
         
@@ -330,10 +342,10 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Python is the best choice"
-                print( a.find('b') )   #문자열 중 문자 b가 처음으로 나온 위치 리턴
+                print(a.find('b'))   #문자열 중 문자 b가 처음으로 나온 위치 리턴
                 #출력 : 14
 
-                print( a.find('k') )   #찾는 문자나 문자열이 존재하지 않는다면 -1을 리턴
+                print(a.find('k'))   #찾는 문자나 문자열이 존재하지 않는다면 -1을 리턴
                 #출력 : -1
                 ''',line_numbers=True)
         
@@ -342,10 +354,10 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Life is too short"
-                print( a.index('t') )   #문자열 중 문자 t가 맨 처음으로 나온 위치를 리턴
+                print(a.index('t'))   #문자열 중 문자 t가 맨 처음으로 나온 위치를 리턴
                 #출력 : 8
 
-                print( a.index('k') )   #찾는 문자나 문자열이 존재하지 않는다면 오류 발생
+                print(a.index('k'))   #찾는 문자나 문자열이 존재하지 않는다면 오류 발생
                 #Traceback (most recent call last):
                 #File "<stdin>", line 1, in <module>
                 #ValueError: substring not found
@@ -355,7 +367,7 @@ def show_chapter(topic, chapter):
                 - **join()** : 문자열 삽입
                  ''')
         st.code('''
-                print( ",".join('abcd') )   #abcd 문자열의 각각의 문자 사이에 ‘,’를 삽입
+                print(",".join('abcd'))   #abcd 문자열의 각각의 문자 사이에 ‘,’를 삽입
                 #출력 : a,b,c,d
                 ''',line_numbers=True)
         
@@ -364,7 +376,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "hi"
-                print( a.upper() )
+                print(a.upper())
                 #출력 : 'HI'
                 ''',line_numbers=True)
         
@@ -373,7 +385,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "HELLO"
-                print( a.lower() )
+                print(a.lower())
                 #출력 : 'hello'
                 ''',line_numbers=True)
         
@@ -382,7 +394,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.lstrip() )
+                print(a.lstrip())
                 #출력 : 'hi  '
                 ''',line_numbers=True)
         
@@ -391,7 +403,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.rstrip() )
+                print(a.rstrip())
                 #출력 : '  hi'
                 ''',line_numbers=True)
         
@@ -400,7 +412,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "  hi  "
-                print( a.strip() )
+                print(a.strip())
                 #출력 : 'hi'
                 ''',line_numbers=True)
         
@@ -409,7 +421,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Good mornig"
-                print( a.replace("mornig", "evening") )  #replace(바뀔_문자열, 바꿀_문자열)
+                print(a.replace("mornig", "evening"))  #replace(바뀔_문자열, 바꿀_문자열)
                 #출력 : Good evening
                 ''',line_numbers=True)
         st.write("replace 함수는 replace(바뀔_문자열, 바꿀_문자열)처럼 사용해서 문자열 안의 특정한 값을 다른 값으로 치환해 줍니다.")
@@ -418,11 +430,11 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = "Life is too short"
-                print( a.split() )
+                print(a.split())
                 #출력 : ['Life', 'is', 'too', 'short']
 
                 b = "a:b:c:d"
-                print( b.split(':') )
+                print(b.split(':'))
                 #출력 : ['a', 'b', 'c', 'd']
                 ''',line_numbers=True)
         st.write("split 함수는 a.split()처럼 괄호 안에 아무 값도 넣어 주지 않으면 공백([Space], [Tab], [Enter])을 기준으로 문자열을 나누어 줍니다. 만약 b.split(':')처럼 괄호 안에 특정 값이 있을 경우에는 괄호 안의 값을 구분자로 해서 문자열을 나누어 줍니다.")    
@@ -439,7 +451,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.divider()
         st.subheader(f"{idx.getSubIdx()}불 자료형 사용법")
-        st.write("불 자료형은 조건문의 리턴 값으로도 사용됩니다.")
+        st.write("불 자료형은 조건문의 리턴값으로도 사용됩니다.")
         st.code('''
                 a = 5 > 3
                 print(a)
@@ -499,13 +511,13 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
 
-                print( a[0] )
+                print(a[0])
                 #출력 : 1
 
-                print( a[0] + a[2] )
+                print(a[0] + a[2])
                 #출력 : 4
 
-                print( a[-1] )
+                print(a[-1])
                 #출력 : 3
                 ''',line_numbers=True)
         
@@ -513,13 +525,13 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3, ['a', 'b', 'c']]
 
-                print( a[0] )
+                print(a[0])
                 #출력 : 1
 
-                print( a[-1] )
+                print(a[-1])
                 #출력 : ['a', 'b', 'c']
 
-                print( a[-1][1] )
+                print(a[-1][1])
                 #출력 : 'b'
                 ''',line_numbers=True)
         st.divider()
@@ -528,7 +540,7 @@ def show_chapter(topic, chapter):
         st.write("문자열과 마찬가지로 리스트에서도 슬라이싱 기법을 적용할 수 있습니다.")
         st.code('''
                 a = [1, 2, 3, 4, 5]
-                print( a[0:2])
+                print(a[0:2])
                 #출력 : [1, 2]
 
                 print(a[:2])
@@ -583,13 +595,13 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
                 a.append(4)
-                print( a )   #리스트의 맨 마지막에 4를 추가
+                print(a)   #리스트의 맨 마지막에 4를 추가
                 #출력 : [1, 2, 3, 4]
                 ''',line_numbers=True)
         st.write("리스트 안에는 어떤 자료형도 추가할 수 있습니다.")
         st.code('''
                 a.append([5, 6])
-                print( a )   #리스트에 리스트를 추가
+                print(a)   #리스트에 리스트를 추가
                 #출력 : [1, 2, 3, 4, [5, 6]]
                 ''',line_numbers=True)
         
@@ -599,14 +611,14 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 4, 3, 2]
                 a.sort()
-                print( a )
+                print(a)
                 #출력 : [1, 2, 3, 4]
                 ''',line_numbers=True)
         st.write("문자 역시 알파벳 순서로 정렬할 수 있습니다.")
         st.code('''
                 a = ['a', 'c', 'b']
                 a.sort()
-                print( a )
+                print(a)
                 #출력 : ['a', 'b', 'c']
                 ''',line_numbers=True)
         
@@ -616,7 +628,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = ['a', 'c', 'b']
                 a.reverse()
-                print( a )
+                print(a)
                 #출력 : ['b', 'c', 'a']
                 ''',line_numbers=True)
         
@@ -625,13 +637,13 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = [1, 2, 3]
-                print( a.index(3) )     #3의 위치(인덱스) 리턴
+                print(a.index(3))     #3의 위치(인덱스) 리턴
                 #출력 : 2
 
-                print( a.index(1) )     #1의 위치(인덱스) 리턴
+                print(a.index(1))     #1의 위치(인덱스) 리턴
                 #출력 : 0
 
-                print( a.index(0) )     #0의 위치(인덱스) 리턴 -> 오류
+                print(a.index(0))     #0의 위치(인덱스) 리턴 -> 오류
                 #Traceback (most recent call last):
                 #    File "<stdin>", line 1, in <module>
                 #ValueError: 0 is not in list
@@ -644,11 +656,11 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
                 a.insert(0, 4)      #0번째 자리에 4 삽입
-                print( a )
+                print(a)
                 #출력 : [4, 1, 2, 3]
 
                 a.insert(3, 5)      #3번째 자리에 5 삽입
-                print( a )
+                print(a)
                 #출력 : [4, 1, 2, 5, 3]
                 ''',line_numbers=True)
         st.write("insert(a, b)는 리스트의 a번째 위치에 b를 삽입합니다.")
@@ -659,7 +671,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3, 1, 2, 3]
                 a.remove(3)
-                print( a )
+                print(a)
                 #출력 : [1, 2, 1, 2, 3]
                 ''',line_numbers=True)
         st.write("remove(x)는 리스트에서 첫 번째로 나오는 x를 삭제하는 함수입니다. a가 3이라는 값을 2개 가지고 있을 경우, 첫 번째 3만 제거됩니다.")
@@ -669,19 +681,19 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = [1, 2, 3]
-                print( a.pop() )    #맨 마지막 요소를 리턴하고, 해당 요소 삭제
+                print(a.pop())    #맨 마지막 요소를 리턴하고, 해당 요소 삭제
                 #출력 : 3
 
-                print( a )
+                print(a)
                 #출력 : [1, 2]
                 ''',line_numbers=True)
         st.write("pop()은 리스트의 맨 마지막 요소를 리턴하고 그 요소는 삭제합니다. a리스트에서 3을 끄집어 내고, [1, 2]만 남게 됩니다.")
         st.code('''
                 a = [1, 2, 3]
-                print( a.pop(1) )    #인덱스 1의 요소를 리턴하고, 해당 요소 삭제
+                print(a.pop(1))    #인덱스 1의 요소를 리턴하고, 해당 요소 삭제
                 #출력 : 2
 
-                print( a )
+                print(a)
                 #출력 : [1, 3]
                 ''',line_numbers=True)
         st.write("pop(x)은 리스트의 x번째 요소를 리턴하고 그 요소는 삭제합니다. a리스트에서 a[1]의 값을 끄집어 내고, [1, 3]만 남게 됩니다.")
@@ -691,7 +703,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.code('''
                 a = [1, 2, 3, 1]
-                print( a.count(1) )    #1이라는 값이 a에 총 2개
+                print(a.count(1))    #1이라는 값이 a에 총 2개
                 #출력 : 2
                 ''',line_numbers=True)
         st.write("count(x)는 리스트 안에 x가 몇 개 있는지 조사하여 그 개수를 리턴하는 함수입니다.")
@@ -702,7 +714,7 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = [1, 2, 3]
                 a.extend([4, 5])
-                print( a )
+                print(a)
                 #출력 : [1, 2, 3, 4, 5]
 
                 b = [6, 7]
@@ -885,6 +897,8 @@ def show_chapter(topic, chapter):
 
                  set은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하기 위한 필터로 종종 사용됩니다. 또한, 리스트나 튜플은 순서가 있기 때문에 인덱싱을 통해 요솟값을 얻을 수 있지만, set 자료형은 순서가 없기 때문에 인덱싱을 통해 요솟값을 얻을 수 없습니다.
                  ''')
+        st.divider()
+
         st.subheader(f"{idx.getSubIdx()}집합의 연산")
         st.code('''
                 # 연산에 사용할 2개의 set 생성
@@ -896,10 +910,10 @@ def show_chapter(topic, chapter):
                 - **교집합** : & , intersection
                  ''')
         st.code('''
-                print( s1 & s2 )
+                print(s1 & s2)
                 #출력 : {4, 5, 6}
 
-                print( s1.intersection(s2) )
+                print(s1.intersection(s2))
                 #출력 : {4, 5, 6}
                 ''',line_numbers=True)
         
@@ -907,10 +921,10 @@ def show_chapter(topic, chapter):
                 - **합집합** : | , union
                  ''')
         st.code('''
-                print( s1 | s2 )
+                print(s1 | s2)
                 #출력 : {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-                print( s1.union(s2) )
+                print(s1.union(s2))
                 #출력 : {1, 2, 3, 4, 5, 6, 7, 8, 9}
                 ''',line_numbers=True)
         
@@ -918,16 +932,16 @@ def show_chapter(topic, chapter):
                 - **차집합** : -(빼기), difference
                  ''')
         st.code('''
-                print( s1 - s2 )
+                print(s1 - s2)
                 #출력 : {1, 2, 3}
 
-                print( s2 - s1 )
+                print(s2 - s1)
                 #출력 : {8, 9, 7}
 
-                print( s1.difference(s2) )
+                print(s1.difference(s2))
                 #출력 : {1, 2, 3}
 
-                print( s2.difference(s1) )
+                print(s2.difference(s1))
                 #출력 : {8, 9, 7}
                 ''',line_numbers=True)
         st.divider()
@@ -940,7 +954,7 @@ def show_chapter(topic, chapter):
                 s1 = set([1, 2, 3])
                 s1.add(4)
                 
-                print( s1 )
+                print(s1)
                 #출력 : {1, 2, 3, 4}
                 ''',line_numbers=True)
         
@@ -951,7 +965,7 @@ def show_chapter(topic, chapter):
                 s1 = set([1, 2, 3])
                 s1.update([4, 5, 6])
                 
-                print( s1 )
+                print(s1)
                 #출력 : {1, 2, 3, 4, 5, 6}
                 ''',line_numbers=True)
         
@@ -962,43 +976,50 @@ def show_chapter(topic, chapter):
                 s1 = set([1, 2, 3])
                 s1.remove(2)
                 
-                print( s1 )
+                print(s1)
                 #출력 : {1, 3}
                 ''',line_numbers=True)
+        st.divider()
     
     elif path == ("파이썬 기초", "제어문") :
         st.header(f"{idx.getHeadIdx()}if문")
         st.subheader(f"{idx.getSubIdx()}if문 기본 구조")
         st.write('''
                 - **if** : 조건이 True인 경우에만 실행
-                 
-                        if 조건:
-                            조건이 True면 수행할 문장
-                 
+                ''')
+        st.code('''
+                if 조건:
+                    조건이 True면 수행할 문장
+                ''', language="text")
+        
+        st.write('''
                 - **if - else** : 조건이 True라면 if 실행문을, False라면 else 실행문을 실행
-                 
-                        if 조건:
-                            조건이 True면 수행할 문장
+                ''')
+        st.code('''
+                if 조건:
+                    조건이 True면 수행할 문장
                             ...
-                        else:
-                            조건이 False면 수행할 문장
-                            ...
+                else:
+                    조건이 False면 수행할 문장
+                ''', language="text")
+        
+        st.write('''
                 - **if - elif - else** : 여러 개의 조건을 사용하는 경우. 조건문이 True가 되는 if 혹은 elif 문을 실행하고, 모든 조건문이 False라면 else 실행문을 실행.
-                 
-                        if 조건1:
-                            조건1이 True면 수행할 문장
+                ''')
+        st.code('''
+                if 조건1:
+                    조건1이 True면 수행할 문장
                             ...
-                        elif 조건2:
-                            조건2이 True면 수행할 문장
+                elif 조건2:
+                    조건2이 True면 수행할 문장
 
-                        elif 조건3:
-                            조건3이 True면 수행할 문장
+                elif 조건3:
+                    조건3이 True면 수행할 문장
                         
-                        else:
-                            모든 조건이 False면 수행할 문장
+                else:
+                    모든 조건이 False면 수행할 문장
                             ...
-
-                 ''')
+                ''', language="text")
         st.divider()
         st.subheader(f"{idx.getSubIdx()}조건문 유형 - 비교 연산자")
         st.write('''
@@ -1108,14 +1129,14 @@ def show_chapter(topic, chapter):
         st.subheader(f"{idx.getSubIdx()}while문의 기본 구조")
         st.write('''
                 while 문은 조건문이 참인 동안 while 문에 속한 문장들을 반복해서 수행하고, 조건문이 거짓이 되는 경우 반복을 중지합니다.
-                        
-                    while 조건문:
-                        수행할_문장1
-                        수행할_문장2
-                        수행할_문장3
+                ''')
+        st.code('''
+                while 조건문:
+                    수행할_문장1
+                    수행할_문장2
+                    수행할_문장3
                         ...
-
-                 ''')
+                ''', language="text")
         st.write("아래 코드는 1부터 10까지 더해주는 코드를 반복문으로 작성한 예시입니다. ")
         st.code('''
                 i = 1
@@ -1169,11 +1190,11 @@ def show_chapter(topic, chapter):
                 #7
                 #9
                 ''',line_numbers=True)
-        st.write("위는 1부터 10까지의 숫자 중 홀수만 출력하는 예시입니다. a가 10보다 작은 동안 a는 1만큼씩 계속 증가합니다. a % 2 == 0(a를 2로 나누었을 때 나머지가 0인 경우)이 참이 되는 경우는 a가 짝수인 경우입니다. 즉, a가 짝수이면 continue 문을 수행하게 됩니다. 이 continue 문은 while 문의 맨 처음인 조건문(a < 10)으로 돌아가게 하는 명령어입니다. 따라서 위 예에서 a가 짝수이면 print(a) 문장은 수행되지 않을 것입니다.")
+        st.write("위는 1부터 10까지의 숫자 중 홀수만 출력하는 예시입니다. a가 10보다 작은 동안 a는 1만큼씩 계속 증가합니다. a % 2 == 0(a를 2로 나누었을 때 나머지가 0인 경우)이 참이 되는 경우는 a가 짝수인 경우입니다. 즉, a가 짝수이면 continue 문을 수행하게 됩니다. 이 continue 문은 while 문의 맨 처음인 조건문(a < 10)으로 돌아가게 하는 명령어입니다. 따라서 위 예에서 a가 짝수이면 print(a) 문장은 수행되지 않습니다.")
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}while 문 리스트와 함께 사용하기")
-        st.write('''while 문은 조건문에는 수식이 아닌 리스트 자료형이 올 수 있습니다. 리스트의 경우 값이 비어 있으면([]) 거짓(False)이 되고 비어 있지 않으면 참(True)이 되기 때문입니다.''')
+        st.write('''while 문의 조건문에는 수식이 아닌 리스트 자료형이 올 수 있습니다. 리스트의 경우 값이 비어 있으면([]) 거짓(False)이 되고 비어 있지 않으면 참(True)이 되기 때문입니다.''')
         st.code('''
                 li = ["A", "B", "C", "D"]
 
@@ -1192,14 +1213,15 @@ def show_chapter(topic, chapter):
         st.header(f"{idx.getHeadIdx()}for문")
         st.write('''
                  for문은 정해진 횟수나 범위 안에서 차례대로 대입하며 반복을 수행하는 반복문입니다. 아래와 같은 기본 구조를 가집니다.
-                 
-                        for 변수 in 리스트(또는 튜플, 문자열):
-                            수행할_문장1
-                            수행할_문장2
+                ''')
+        st.code('''
+                for 변수 in 리스트(또는 튜플, 문자열):
+                    수행할_문장1
+                    수행할_문장2
                             ...
-
+                ''', language="text")        
+        st.write('''
                 리스트나 튜플, 문자열의 첫 번째 요소부터 마지막 요소까지 차례로 변수에 대입되어 for문 내 문장들이 수행됩니다.
-
                  ''')
         st.divider()
         st.subheader(f"{idx.getSubIdx()}for문 사용법")
@@ -1305,7 +1327,7 @@ def show_chapter(topic, chapter):
                     수행할_문장2
                     ...
                     return 결과값
-                 ''',line_numbers=True)
+                 ''',language="text", line_numbers=True)
         
         st.write("다음의 함수명은 add이고 입력으로 a, b 2개의 값을 받으며 리턴값(출력값)은 2개의 입력값을 더한 값입니다.")
         st.code('''
@@ -1322,17 +1344,18 @@ def show_chapter(topic, chapter):
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}매개변수와 인수")
-        st.write("**매개변수**는 함수에 입력으로 전달된 값을 받는 변수, 인수는 함수를 호출할 때 전달하는 입력값을 의미합니다.")
+        st.write("**매개변수**는 함수에 입력으로 전달된 값을 받는 변수, **인수**는 함수를 호출할 때 전달하는 입력값을 의미합니다.")
 
         st.code('''
                 def add(a, b):  # a, b는 매개변수
                     return a+b
 
                 print(add(3, 4))  # 3, 4는 인수
+                #출력 : 7
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}return(반환값)")
-        st.write("함수는 들어온 입력값을 받은 후 처리를 하여 적절한 값을 리턴해 줍니다. 함수의 형태는 입력값과 리턴값의 존재 유무에 딸 4가지 유형으로 나뉩니다.")
+        st.write("함수는 들어온 입력값을 받은 후 처리를 하여 적절한 값을 리턴해 줍니다. 함수의 형태는 입력값과 리턴값의 존재 유무에 따라 4가지 유형으로 나뉩니다.")
         st.write('''
                 - 입력값과 리턴값이 모두 있는 일반적인 함수
                  ''')
@@ -1405,39 +1428,41 @@ def show_chapter(topic, chapter):
                  일부 패키지는 파이썬을 설치할 때 함께 설치됩니다. 그러나 그 외에 추가로 패키지를 더 사용해야 할 때는 사용자가 수동으로 설치해야 합니다.
                  파이썬은 간단한 명령어만으로 패키지를 쉽게 내려받아 설치할 수 있습니다.
 
-                        pip install 패키지이름
+                 **윈도우키**+**R** 또는 **윈도우 검색창**에서 **CMD**(명령 프롬프트)를 검색하여 CMD 창을 열고 아래 :blue-background[pip install] 명령을 통해 패키지 설치를 진행합니다.
+
+                        $ pip install 패키지이름
                  
-                예를 들어 pandas 패키지를 설치하려면 :blue-background[pip install pandas] 명령을 통해 설치할 수 있습니다.
+                예를 들어 pandas 패키지의 경우 :blue-background[pip install pandas] 명령을 통해 설치할 수 있습니다.
                 ''')
         st.divider()
         
         st.subheader(f"{idx.getSubIdx()}pip를 이용하여 설치된 패키지 확인하기")
         st.write('''
-                 :blue-background[pip list] 명령을 통해 설치된 패키지 목록을 볼 수 있습니다.
+                 CMD창에서 :blue-background[pip list] 명령을 통해 설치된 패키지 목록을 볼 수 있습니다.
 
-                        pip list
+                        $ pip list
 
                 ''')    
         st.divider()
         st.subheader(f"{idx.getSubIdx()}패키지 호출하기")
         st.write('''
-                설치한 패키지를 사용하기 위해선 **import**를 통해 호출해 불러와주어야 합니다. **import**문은 코드의 가장 상단에 작성해 줍니다.
+                설치한 패키지를 사용하기 위해선 **import**를 통해 호출해 불러와주어야 합니다. **import**문은 코드의 가장 상단에 작성해줍니다.
 
                                 import 패키지명
                 ''')    
         st.write('''
-                패키지명이 너무 길면 **as** 를 사용하여 짧은 패키지 별명을 사용할 수 있습니다.
+                패키지명이 너무 길면 **as**를 사용하여 짧은 패키지 별명을 사용할 수 있습니다.
                 ''')    
         st.code('''import pandas as pd''')
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}NumPy")
-        st.write("**NumPy**는 대규모 다차원 배열과 행렬 연산에 필요한 다양한 함수와 메소드를 제공합니다. 데이터 분석, 데이터 처리, 선형 대수, 머신 러닝 등 다양한 분야에서 널리 사용되고 있습니다.")
+        st.write("**NumPy**는 대규모 다차원 배열과 행렬 연산에 필요한 다양한 함수와 메서드를 제공합니다. 데이터 분석, 데이터 처리, 선형 대수, 머신 러닝 등 다양한 분야에서 널리 사용되고 있습니다.")
 
         st.divider()
         st.subheader(f"{idx.getSubIdx()}기본 사용법")
-        st.write("아래 명령어를 사용하여 NumPy 패키지를 설치해 줍니다.")
-        st.code("pip install numpy")
+        st.write("CMD 창을 열고 아래 명령어를 사용하여 NumPy 패키지를 설치해 줍니다.")
+        st.code("$ pip install numpy")
 
         st.write("코드 가장 상단에 **import** 해주어 NumPy를 호출합니다.")
         st.code("import numpy as np")
@@ -1619,12 +1644,12 @@ def show_chapter(topic, chapter):
         st.write('''- **np.zeros()** : 모든 원소가 0인 배열 생성''')
         st.code('''
                 arr = np.zeros((2, 3))
-                print(arr)                
+                print(arr)    #출력 [[0. 0. 0.] [0. 0. 0.]]    
                 ''',line_numbers=True)
         st.write('''- **np.ones()** : 모든 원소가 1인 배열 생성''')
         st.code('''
                 arr = np.ones((2, 2))
-                print(arr)                
+                print(arr)    #출력 [[1. 1.] [1. 1.]]
                 ''',line_numbers=True)
         st.write('''- **np.arange()** : 범위 내의 일정 간격을 가진 배열 생성''')
         st.code('''
@@ -2940,6 +2965,14 @@ def show_chapter(topic, chapter):
         import numpy as np
         st.header(f"{idx.getHeadIdx()}기본 사용")
         st.write("Matplotlib 라이브러리를 이용해서 그래프를 그리는 일반적인 방법에 대해 소개합니다.")
+        
+        st.subheader(f"{idx.getSubIdx()}패키지 설치")
+        st.write("- matplotlib 설치 명령어를 통해 설치할 수 있습니다.")
+        st.code('''pip install matplotlib''', language='python')
+        st.write("- 설치한 패키지는 import를 사용하여 호출합니다.")
+        st.code('''import matplotlib''', language='python')
+        st.divider()
+        
         st.subheader(f"{idx.getSubIdx()}기본 그래프 그리기")
         code = '''
 import matplotlib.pyplot as plt
@@ -5396,17 +5429,9 @@ plt.show()'''
         import matplotlib.pyplot as plt
         st.header(f"{idx.getHeadIdx()}서울시 종로구 대기오염")
         st.write("CSV 파일의 2022년 서울시 종로구 대기오염 측정정보를 사용하여 데이터 로드, 분석 및 시각화 결론도출까지 실습을 진행합니다.")
-        st.subheader(f"{idx.getSubIdx()}라이브러리 설치하기")
-        code = '''pip install numpy'''
-        st.code(code, language='python')
-        code = '''pip install pandas'''
-        st.code(code, language='python')
-        code = '''pip install seaborn'''
-        st.code(code, language='python')
-        code = '''pip install matplotlib'''
-        st.code(code, language='python')
 
-        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}데이터 준비")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
         col1, col2, col3 = st.columns(3)
 
@@ -5440,12 +5465,35 @@ plt.show()'''
                                 data=template_byte,
                             file_name = "Measurement_summary.csv"
             )
-        code = '''
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
+        st.write('''
+                CMD 창을 열고 아래의 패키지들을 설치해 줍니다. 
+                 ''')
+        st.code('''
+                $ pip install numpy
+                ''', language="text")
+        st.code('''
+                $ pip install pandas
+                ''', language="text")
+        st.code('''
+                $ pip install seaborn
+                ''', language="text")
+        st.code('''
+                $ pip install matplotlib
+                ''', language="text")
+        
+        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지들을 호출해 줍니다.")
+        st.code('''
+                import numpy as np
+                import pandas as pd
+                import seaborn as sns
+                import matplotlib.pyplot as plt
+                ''')
+        st.divider()
 
+        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        code = '''
 # 데이터 불러오기
 df_summary = pd.read_csv('data/서울시대기오염측정정보/Measurement_summary.csv')
 df_item = pd.read_csv('data/서울시대기오염측정정보/Measurement_item_info.csv')
@@ -5615,9 +5663,58 @@ plt.show()'''
     
         st.header(f"{idx.getHeadIdx()}지역별 음식점 소비기반 트렌드 데이터")
         st.write("지역별 음식점 소비 데이터를 활용하여 데이터 로드부터, 데이터 탐색 및 분석, 시각화, 결론 도출까지 실습 진행해보겠습니다.")
-    
+
         st.divider()
-    
+        st.subheader(f"{idx.getSubIdx()}데이터 준비")
+
+        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
+        
+        with open('data/음식점소비트렌드/음식점소비트렌드데이터.csv', "rb") as template_file:
+            template_csv = template_file.read()
+
+        
+
+        st.download_button(label="download data",
+                            type="primary",
+                            data=template_csv,
+                        file_name = "음식점소비트렌드데이터.csv"
+        )
+
+        st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
+        
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
+        st.write('''
+                CMD 창을 열고 아래의 패키지들을 설치해 줍니다. 
+                 ''')
+        
+        st.code('''
+                $ pip install pandas
+                ''', language="text")
+        st.code('''
+                $ pip install matplotlib
+                ''', language="text")
+        
+        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지들을 호출해 줍니다.")
+        st.code('''
+                import pandas as pd
+                import matplotlib.pyplot as plt
+                ''')
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        st.write("실습에 필요한 데이터를 불러오겠습니다.")
+        st.code('''
+                df_map = pd.read_csv('음식점소비트렌드데이터.csv')
+                
+                df_map    
+                ''', line_numbers=True)
+        import pandas as pd
+        df_map = pd.read_csv('data/음식점소비트렌드/음식점소비트렌드데이터.csv')
+
+        st.write(df_map)
+        st.divider()
         st.subheader(f"{idx.getSubIdx()} 컬럼 설명")
         st.write("- CTPRVN_NM : 시도명칭")
         st.write("- SIGNGU_NM : 시군구 명칭")
@@ -5625,226 +5722,203 @@ plt.show()'''
         st.write("- FOOD_FCLTY_CO : 식당수")
         st.write("- POPLTN_CO : 인구수")
         st.divider()
-    
-        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
-    
-        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
-        
-        with open('data/음식점소비트렌드/음식점소비트렌드데이터.csv', "rb") as template_file:
-            template_csv = template_file.read()
-    
-        st.download_button(label="download data",
-                            type="primary",
-                            data=template_csv,
-                           file_name = "음식점소비트렌드데이터.csv"
-        )
-    
-        st.code("import pandas as pd\n\ndf_map = pd.read_csv('음식점소비트렌드데이터.csv')")
-        import pandas as pd
-        df_map = pd.read_csv('data/음식점소비트렌드/음식점소비트렌드데이터.csv')
-    
-        st.code('df_map')
-        st.write(df_map)
-        st.divider()
-    
+
         st.header(f"{idx.getHeadIdx()}데이터 탐색하기(EDA)")
         st.write('데이터 분석에는 **데이터를 탐색**하는 과정이 필요합니다.')
         st.write('- 데이터를 다양한 각도에서 관찰하고 이해하는 과정')
         st.write('- 데이터 분석 전 통계적은 방법으로 자료를 직관적으로 바라보는 과정')
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}통계 값으로 데이터 탐색하기")
-    
-        st.code('# 행과 열의 수 확인\ndf_map.shape')
+
+        st.code('# 행과 열의 수 확인\ndf_map.shape', line_numbers=True)
         st.write(df_map.shape)
-    
-        st.code('# 기본 정보 확인\ndf_map.info()')
+
+        st.code('# 기본 정보 확인\ndf_map.info()', line_numbers=True)
         buffer = io.StringIO()
         df_map.info(buf=buffer)
         s = buffer.getvalue()
         st.text(s)
-    
-        st.code('# 결측치 개수 확인 isnull()\ndf_map.isnull().sum()')
+
+        st.code('# 결측치 개수 확인 isnull()\ndf_map.isnull().sum()', line_numbers=True)
         st.write(df_map.isnull().sum())
-    
-        st.code('# 중복 데이터 확인 duplicated()\ndf_map.duplicated().sum()')
+
+        st.code('# 중복 데이터 확인 duplicated()\ndf_map.duplicated().sum()', line_numbers=True)
         st.write(df_map.duplicated().sum())
-    
-        st.code('# 앞의 다섯 개 확인\ndf_map.head()')
+
+        st.code('# 앞의 다섯 개 확인\ndf_map.head()', line_numbers=True)
         st.write(df_map.head())
-    
-        st.code('# 마지막 다섯 개 확인\ndf_map.tail()')
+
+        st.code('# 마지막 다섯 개 확인\ndf_map.tail()', line_numbers=True)
         st.write(df_map.tail())
-    
-        st.code('# 통계 데이터 확인\ndf_map.describe()')
+
+        st.code('# 통계 데이터 확인\ndf_map.describe()', line_numbers=True)
         st.write(df_map.describe())
-    
-        st.code('# 개별 칼럼 통계치 - 거주자 평균\ndf_map.POPLTN_CO.mean()')
+
+        st.code('# 개별 칼럼 통계치 - 거주자 평균\ndf_map.POPLTN_CO.mean()', line_numbers=True)
         st.write(df_map.POPLTN_CO.mean())
-    
-        st.code('# 전체 식당 수\ndf_map.FOOD_FCLTY_CO.sum()')
+
+        st.code('# 전체 식당 수\ndf_map.FOOD_FCLTY_CO.sum()', line_numbers=True)
         st.write(df_map.FOOD_FCLTY_CO.sum())
-    
-        st.code('# 특정 칼럼의 고유한 값 확인 value_counts()\nCTPRVN_NM.value_counts()')  
+
+        st.code('# 특정 칼럼의 고유한 값 확인 value_counts()\ndf_map.CTPRVN_NM.value_counts()', line_numbers=True)  
         st.write(df_map.CTPRVN_NM.value_counts())
-    
-        st.code('# SIGNGU_NM의 고유한 값\ndf_map.SIGNGU_NM.value_counts()')
+
+        st.code('# SIGNGU_NM의 고유한 값\ndf_map.SIGNGU_NM.value_counts()', line_numbers=True)
         st.write(df_map.SIGNGU_NM.value_counts())
-    
-        st.code('# 특정 칼럼의 고유한 값 개수 확인 nunique() -  CTPRVN_NM\ndf_map.CTPRVN_NM.nunique()')
+
+        st.code('# 특정 칼럼의 고유한 값 개수 확인 nunique() -  CTPRVN_NM\ndf_map.CTPRVN_NM.nunique()', line_numbers=True)
         st.write(df_map.CTPRVN_NM.nunique())
-    
-        st.code('# 식당 종류 확인\ndf_map.FOOD_FCLTY_NM.value_counts()')
+
+        st.code('# 식당 종류 확인\ndf_map.FOOD_FCLTY_NM.value_counts()', line_numbers=True)
         st.write(df_map.FOOD_FCLTY_NM.value_counts())
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}조건 인덱싱으로 탐색하기")
-    
-        st.code('''# 시군구 이름이 강서구인 데이터\ndf_map[df_map['SIGNGU_NM'] == '강서구']''')
+
+        st.code('''# 시군구 이름이 강서구인 데이터\ndf_map[df_map['SIGNGU_NM'] == '강서구']''', line_numbers=True)
         st.write(df_map[df_map['SIGNGU_NM'] == '강서구'])
-    
-        st.code('''# 서울시 강서구만 가져오기 --- 서울시 & 강서구\ndf_map[(df_map.CTPRVN_NM == '서울특별시') & (df_map.SIGNGU_NM == '강서구')]''')
+
+        st.code('''# 서울시 강서구만 가져오기 --- 서울시 & 강서구\ndf_map[(df_map.CTPRVN_NM == '서울특별시') & (df_map.SIGNGU_NM == '강서구')]''', line_numbers=True)
         st.write(df_map[(df_map.CTPRVN_NM == '서울특별시') & (df_map.SIGNGU_NM == '강서구')])
-    
-        st.code('''# 서울시 강남구 식당수 --> df_map[강남구 & 서울특별시]['FOOD_FCLTY_NM'].sum()\ndf_map[(df_map.SIGNGU_NM == '강남구')&(df_map.CTPRVN_NM == '서울특별시')].FOOD_FCLTY_CO.sum()''')
+
+        st.code('''# 서울시 강남구 식당수 --> df_map[강남구 & 서울특별시]['FOOD_FCLTY_NM'].sum()\ndf_map[(df_map.SIGNGU_NM == '강남구')&(df_map.CTPRVN_NM == '서울특별시')].FOOD_FCLTY_CO.sum()''', line_numbers=True)
         st.write(df_map[(df_map.SIGNGU_NM == '강남구')&(df_map.CTPRVN_NM == '서울특별시')].FOOD_FCLTY_CO.sum())
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}피벗 테이블 만들기 :gray-background[pd.pivot_table()]")
         st.markdown("- df : 데이터프레임 \n- index : 기준점이 되는 칼럼 (보통 문자열)\n - values : 계산하려는 칼럼 (보통 숫자)\n - aggfunc : 기초통계함수 (mean, sum 등)")
         
         st.code('''# 피벗테이블 - 시군구별 식당수 합계 데이터프레임만들기
-    df_식당수 = pd.pivot_table(df_map,
-                        index=['CTPRVN_NM', 'SIGNGU_NM'],
-                        values= 'FOOD_FCLTY_CO',
-                        aggfunc= 'sum')
-    df_식당수''')
+df_식당수 = pd.pivot_table(df_map,
+                    index=['CTPRVN_NM', 'SIGNGU_NM'],
+                    values= 'FOOD_FCLTY_CO',
+                    aggfunc= 'sum')
+df_식당수''', line_numbers=True)
         df_식당수 = pd.pivot_table(df_map,
                         index=['CTPRVN_NM', 'SIGNGU_NM'],
                         values= 'FOOD_FCLTY_CO',
                         aggfunc= 'sum')
         st.write(df_식당수)
-    
+
         st.code('''# 전체 식당 수 다시 확인
-    df_식당수.FOOD_FCLTY_CO.sum())''')
+df_식당수.FOOD_FCLTY_CO.sum())''', line_numbers=True)
         st.write(df_식당수.FOOD_FCLTY_CO.sum())
-        st.code('''df_map.FOOD_FCLTY_CO.sum()''')
-        st.write(df_map.FOOD_FCLTY_CO.sum())
-    
+
+
         st.code('''# 시군구별 인구수 합계 데이터프레임 만들기
-    
-    df_인구수 = pd.pivot_table(df_map,
-                        index=['CTPRVN_NM', 'SIGNGU_NM'],
-                        values= 'POPLTN_CO',
-                        aggfunc= 'min')
-    df_인구수''')
+
+df_인구수 = pd.pivot_table(df_map,
+                    index=['CTPRVN_NM', 'SIGNGU_NM'],
+                    values= 'POPLTN_CO',
+                    aggfunc= 'min')
+df_인구수''', line_numbers=True)
         df_인구수 = pd.pivot_table(df_map,
                         index=['CTPRVN_NM', 'SIGNGU_NM'],
                         values= 'POPLTN_CO',
                         aggfunc= 'min')
         st.write(df_인구수)
         st.divider()
-    
+
         st.header(f"{idx.getHeadIdx()}데이터 전처리")
         st.write('분석을 위해 서울시 데이터만 사용하려고 합니다. 위에서 사용한 피벗 테이블을 활용하여 서울시 데이터만 추출 후 csv 파일로 만들어보겠습니다.')
-    
+
         st.subheader(f"{idx.getSubIdx()}데이터 프레임 합치기")
-    
+
         st.code('''df_pivot = pd.concat([df_식당수,df_인구수], axis=1)
-    df_pivot''')
+df_pivot''', line_numbers=True)
         df_pivot = pd.concat([df_식당수,df_인구수], axis=1)
         st.write(df_pivot)
-    
-        st.code('''df_pivot.info()''')
+
+        st.code('''df_pivot.info()''', line_numbers=True)
         buffer = io.StringIO()
         df_pivot.info(buf=buffer)
         s = buffer.getvalue()
         st.text(s)
         
         st.subheader(f"{idx.getSubIdx()}컬럼 이름 변경")
-    
+
         st.code('''# 칼럼이름 변경{'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}
-    
-    df_pivot.rename(columns={'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}, inplace=True)
-    df_pivot.head()''')
+
+df_pivot.rename(columns={'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}, inplace=True)
+df_pivot.head()''', line_numbers=True)
         df_pivot.rename(columns={'FOOD_FCLTY_CO':'식당수', 'POPLTN_CO':'인구수'}, inplace=True)
         st.write(df_pivot.head())
-    
+
         st.subheader(f"{idx.getSubIdx()}서울시 데이터 csv로 저장")
-    
+
         st.code('''# 서울시만 저장
-    df_seoul = df_pivot.loc['서울특별시']
-    df_seoul.head()''')
+df_seoul = df_pivot.loc['서울특별시']
+df_seoul.head()''', line_numbers=True)
         df_seoul = df_pivot.loc['서울특별시']
         st.write(df_seoul.head())
-    
-        st.code('''df_seoul.to_csv('seoul.csv')''')
+
+        st.code('''df_seoul.to_csv('seoul.csv')''', line_numbers=True)
         # df_seoul.to_csv('seoul.csv')
         
         st.divider()
-    
+
         st.header(f"{idx.getHeadIdx()}데이터 시각화하기")
-    
+
         st.subheader(f"{idx.getSubIdx()}필요한 라이브러리 로드")
-    
+
         st.code('''# 시각화 라이브러리 로드 및 설치
-    import pandas as pd
-    import matplotlib as mpl
-    import matplotlib.pyplot as plt
-    from matplotlib import rc
-    
-    rc('font', family='Malgun Gothic')
-    
-    # 유니코드에서  음수 부호설정
-    mpl.rc('axes', unicode_minus=False)''')
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from matplotlib import rc
+
+rc('font', family='Malgun Gothic')
+
+# 유니코드에서  음수 부호설정
+mpl.rc('axes', unicode_minus=False)''', line_numbers=True)
         
         import pandas as pd
         import matplotlib as mpl
         import matplotlib.pyplot as plt
         from matplotlib import rc
-    
+
         rc('font', family='Malgun Gothic')
         
         mpl.rc('axes', unicode_minus=False)
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}서울시 데이터 불러오기")
-    
+
         st.code('''# 가공한 서울시 데이터 불러오기
-    df_seoul = pd.read_csv('seoul.csv')''')
-        st.code('df_seoul.head()')
+df_seoul = pd.read_csv('seoul.csv')''', line_numbers=True)
+        st.code('df_seoul.head()', line_numbers=True)
         df_seoul = pd.read_csv('data/seoul.csv')
         st.write(df_seoul.head())
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}식당수 시각화")
         st.write('서울시 데이터를 활용하여 식당 분포 꺾은선 그래프를 도출해보겠습니다.')
+
     
-       
-    
+
         st.code('''# 서울시 식당분포 그리기
-    plt.title('서울시 식당 분포')
-    plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
-    plt.show()''')
-    
+plt.title('서울시 식당 분포')
+plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
+plt.show()''', line_numbers=True)
         
         plt.title('서울시 식당 분포', fontproperties=prop)
         plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
         plt.xticks(fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.write('- 글자가 겹칩니다. **사이즈 조정**하고, **글씨를 회전**해보겠습니다.')
-    
+
         st.code('''# 화면 사이즈 설정과 글씨 회전
-    plt.figure(figsize=(20, 4))
-    plt.title('서울시 식당 분포')
-    plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
-    plt.show()''')
-        
+plt.figure(figsize=(20, 4))
+plt.title('서울시 식당 분포')
+plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
+plt.show()''', line_numbers=True)
+
         # 화면 사이즈 설정과 글씨 회전
         plt.figure(figsize=(20, 4))
         plt.title('서울시 식당 분포', fontproperties=prop)
@@ -5854,15 +5928,15 @@ plt.show()'''
         st.write()
         st.write('- 사이즈가 너무 커졌습니다. **사이즈 조정**하고, **y축에 label**을 붙혀보겠습니다.')
         st.write()
-    
+
         st.code('''plt.figure(figsize=(8, 4))
-    plt.title('서울시 식당 분포')
-    plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
-    # x라벨을 회전
-    plt.xticks(rotation=60) # 시계 반대방향으로 60도 회전
-    plt.ylabel('문화체육관광시설 인근 음식점')
-    plt.show()''')
-        
+plt.title('서울시 식당 분포')
+plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
+# x라벨을 회전
+plt.xticks(rotation=60) # 시계 반대방향으로 60도 회전
+plt.ylabel('문화체육관광시설 인근 음식점')
+plt.show()''', line_numbers=True)
+
         plt.figure(figsize=(8, 4))
         plt.title('서울시 식당 분포', fontproperties=prop)
         plt.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'r*-')
@@ -5870,22 +5944,22 @@ plt.show()'''
         plt.xticks(rotation=60, fontproperties=prop) # 시계 반대방향으로 60도 회전
         plt.ylabel('문화체육관광시설 인근 음식점', fontproperties=prop)
         st.pyplot(plt)
-    
-    
+
+
         st.write('- **막대 그래프**를 그려보겠습니다. **색을 hotpink**로 설정할 것입니다.')
-    
-    
+
+
         st.code('''# 막대 그래프 그리기
-    plt.figure(figsize=(8, 4))
-    plt.title('서울시 식당 분포')
-    # plt.bar()
-    plt.bar(df_seoul['SIGNGU_NM'], df_seoul['식당수'], color='hotpink')
-    # x라벨을 회전
-    plt.xticks(rotation=60)
-    plt.ylabel('문화체육관광시설 인근 음식점')
-    plt.show()''')
-    
-    
+plt.figure(figsize=(8, 4))
+plt.title('서울시 식당 분포')
+# plt.bar()
+plt.bar(df_seoul['SIGNGU_NM'], df_seoul['식당수'], color='hotpink')
+# x라벨을 회전
+plt.xticks(rotation=60)
+plt.ylabel('문화체육관광시설 인근 음식점')
+plt.show()''', line_numbers=True)
+
+
         plt.figure(figsize=(8, 4))
         plt.title('서울시 식당 분포', fontproperties=prop)
         # plt.bar()
@@ -5894,180 +5968,180 @@ plt.show()'''
         plt.xticks(rotation=60, fontproperties=prop)
         plt.ylabel('문화체육관광시설 인근 음식점', fontproperties=prop)
         st.pyplot(plt)
-        
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}인구수 시각화")
-    
+
         st.write('인구수만 활용하여 그래프를 시각화해보겠습니다.')
-        
+
         st.code('''# 인구수만 포함하는 데이터 프레임 만들기
-    df_인구 = df_seoul.drop('식당수', axis=1)
-    df_인구.set_index('SIGNGU_NM', inplace=True)
-    df_인구''')
+df_인구 = df_seoul.drop('식당수', axis=1)
+df_인구.set_index('SIGNGU_NM', inplace=True)
+df_인구''', line_numbers=True)
         # 인구수만 포함하는 데이터 프레임 만들기
         df_인구 = df_seoul.drop('식당수', axis=1)
         df_인구.set_index('SIGNGU_NM', inplace=True)
         st.write(df_인구)
-    
+
         st.code('''# 서울시 인구분포 막대그래프 그리기
-    df_인구.plot(kind='bar', figsize=(10,5), color='orange')
-    plt.xticks(rotation=60)
-    plt.xlabel('') # xlabel 이름을 지우기
-    plt.show()''')
-        
+df_인구.plot(kind='bar', figsize=(10,5), color='orange')
+plt.xticks(rotation=60)
+plt.xlabel('') # xlabel 이름을 지우기
+plt.show()''', line_numbers=True)
+
         # 서울시 인구분포 막대그래프 그리기
         df_인구.plot(kind='bar', figsize=(10,5), color='orange')
         plt.xticks(rotation=60, fontproperties=prop)
         plt.xlabel('') # xlabel 이름을 지우기
         st.pyplot(plt)
-    
+
         st.code('''# 수평 막대그래프 그리기 barh
-    df_인구.plot(kind='barh', figsize=(10,5), color='orange')
-    # plt.xticks(rotation=60)
-    plt.ylabel('')
-    plt.show()''')
-        
+df_인구.plot(kind='barh', figsize=(10,5), color='orange')
+# plt.xticks(rotation=60)
+plt.ylabel('')
+plt.show()''', line_numbers=True)
+
         # 수평 막대그래프 그리기 barh
         df_인구.plot(kind='barh', figsize=(10,5), color='orange')
         # plt.xticks(rotation=60)
         plt.yticks(fontproperties=prop)
         plt.ylabel('')
         st.pyplot(plt)
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}서브플롯 활용하기")
-    
+
         st.write('- 그래프 2개를 함께 plt에 나타내고 싶습니다.')
         st.write('- 이러한 상황에서 서브플롯을 사용하면 적절합니다.')
-    
+
         st.code('''# 서브플롯 그리기
-    fig = plt.figure(figsize=(10,5))
-    ax = fig.add_subplot(1,1,1) # 1행 1열 1번째
-    
-    ax.bar(df_인구.index, df_인구['인구수'], color='orange')
-    plt.xticks(rotation=60)
-    plt.show()''')
-        
+fig = plt.figure(figsize=(10,5))
+ax = fig.add_subplot(1,1,1) # 1행 1열 1번째
+
+ax.bar(df_인구.index, df_인구['인구수'], color='orange')
+plt.xticks(rotation=60)
+plt.show()''', line_numbers=True)
+
         # 서브플롯 그리기
         fig = plt.figure(figsize=(10,5))
         ax = fig.add_subplot(1,1,1) # 1행 1열 1번째
-    
+
         ax.bar(df_인구.index, df_인구['인구수'], color='orange')
         plt.xticks(rotation=60, fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.write('- 수평으로 2개의 그래프를 나타내보겠습니다.')
-    
+
         st.code('''# 서브 플롯
-    fig = plt.figure(figsize=(20,5))
-    
-    ax1 = fig.add_subplot(1,2,1)  # 1행 2열 중 첫번째(왼쪽)
-    ax2 = fig.add_subplot(1,2,2)  # 1행 2열 중 두번째(오른쪽)
-                
-    # 인구수 막대그래프
-    ax1.bar(df_인구.index, df_인구['인구수'], color='green')
-    ax1.set_title('서울시 인구분포')
-    ax1.set_xticklabels(df_인구.index, rotation=45)
-    
-    # 식당수 꺽은선그래프
-    ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
-    ax2.set_title('서울시 식당분포')
-    ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
-    
-    plt.show()''')
-        
+fig = plt.figure(figsize=(20,5))
+
+ax1 = fig.add_subplot(1,2,1)  # 1행 2열 중 첫번째(왼쪽)
+ax2 = fig.add_subplot(1,2,2)  # 1행 2열 중 두번째(오른쪽)
+            
+# 인구수 막대그래프
+ax1.bar(df_인구.index, df_인구['인구수'], color='green')
+ax1.set_title('서울시 인구분포')
+ax1.set_xticklabels(df_인구.index, rotation=45)
+
+# 식당수 꺽은선그래프
+ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
+ax2.set_title('서울시 식당분포')
+ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
+
+plt.show()''', line_numbers=True)
+
         # 서브 플롯
         fig = plt.figure(figsize=(20,5))
-    
+
         ax1 = fig.add_subplot(1,2,1)  # 1행 2열 중 첫번째(왼쪽)
         ax2 = fig.add_subplot(1,2,2)  # 1행 2열 중 두번째(오른쪽)
         # 인구수 막대그래프
         ax1.bar(df_인구.index, df_인구['인구수'], color='green')
         ax1.set_title('서울시 인구분포', fontproperties=prop)
         ax1.set_xticklabels(df_인구.index, rotation=45, fontproperties=prop)
-    
+
         # 식당수 꺽은선그래프
         ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
         ax2.set_title('서울시 식당분포', fontproperties=prop)
         ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45, fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.write('- 수직으로 2개의 그래프를 나타내보겠습니다.')
-    
+
         st.code('''# 서브 플롯
-    fig = plt.figure(figsize=(20,10))
-    
-    ax1 = fig.add_subplot(2,1,1)  # 2행 1열 중 첫번째(위쪽)
-    ax2 = fig.add_subplot(2,1,2)  # 2행 1열 중 두번째(아래쪽)
-    
-    # 인구수 막대그래프
-    ax1.bar(df_인구.index, df_인구['인구수'], color='green')
-    ax1.set_title('서울시 인구분포')
-    ax1.set_xticklabels(df_인구.index, rotation=45)
-    
-    # 식당수 꺽은선그래프
-    ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
-    ax2.set_title('서울시 식당분포')
-    ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
-    
-    plt.show()''')
-        
+fig = plt.figure(figsize=(20,10))
+
+ax1 = fig.add_subplot(2,1,1)  # 2행 1열 중 첫번째(위쪽)
+ax2 = fig.add_subplot(2,1,2)  # 2행 1열 중 두번째(아래쪽)
+
+# 인구수 막대그래프
+ax1.bar(df_인구.index, df_인구['인구수'], color='green')
+ax1.set_title('서울시 인구분포')
+ax1.set_xticklabels(df_인구.index, rotation=45)
+
+# 식당수 꺽은선그래프
+ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
+ax2.set_title('서울시 식당분포')
+ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45)
+
+plt.show()''', line_numbers=True)
+
         # 서브 플롯
         fig = plt.figure(figsize=(20,10))
-    
+
         ax1 = fig.add_subplot(2,1,1)  # 2행 1열 중 첫번째(위쪽)
         ax2 = fig.add_subplot(2,1,2)  # 2행 1열 중 두번째(아래쪽)
-    
+
         # 인구수 막대그래프
         ax1.bar(df_인구.index, df_인구['인구수'], color='green')
         ax1.set_title('서울시 인구분포', fontproperties=prop)
         ax1.set_xticklabels(df_인구.index, rotation=45, fontproperties=prop)
-    
+
         # 식당수 꺽은선그래프
         ax2.plot(df_seoul['SIGNGU_NM'], df_seoul['식당수'], 'ro-')
         ax2.set_title('서울시 식당분포', fontproperties=prop)
         ax2.set_xticklabels(df_seoul['SIGNGU_NM'], rotation=45, fontproperties=prop)
-    
+
         st.pyplot(plt)
-    
+
         st.divider()
-    
+
         st.subheader(f"{idx.getSubIdx()}심화 - 식당 비율 그래프")
         st.write('- 인구 100명당 **식당 수 비율**을 시각화 하고 싶습니다.')
         st.write('- 직관성을 높이기 위해 **서울시 인구수 막대 그래프**와 함께 나타내고 싶습니다.')
         st.write('- 각 그래프를 시각화 하고, **식당 수 비율**과 **인구수**를 함께 나타내보겠습니다.')
-    
+
         st.code('''# 인구 100명당 식당수 비율 칼럼 생성
-    df_seoul['식당비율'] = (df_seoul.식당수 / (df_seoul.인구수*0.01))
-    df_seoul.head()''')
+df_seoul['식당비율'] = (df_seoul.식당수 / (df_seoul.인구수*0.01))
+df_seoul.head()''', line_numbers=True)
         # 인구 100명당 식당수 비율 칼럼 생성
         df_seoul['식당비율'] = (df_seoul.식당수 / (df_seoul.인구수*0.01))
         st.write(df_seoul.head())
-    
+
         st.code('''# 식당비율 선그래프
-    
-    plt.figure(figsize=(8,4))
-    plt.title('인구 수 대비 식당수')
-    plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b+-.')
-    plt.xticks(rotation=45)
-    plt.show()''')
-    
+
+plt.figure(figsize=(8,4))
+plt.title('인구 수 대비 식당수')
+plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b+-.')
+plt.xticks(rotation=45)
+plt.show()''', line_numbers=True)
+
         plt.figure(figsize=(8,4))
         plt.title('인구 수 대비 식당수', fontproperties=prop)
         plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b+-.')
         plt.xticks(rotation=45, fontproperties=prop)
         st.pyplot(plt)
-    
+
         st.code('''# 식당 수 막대 그래프도 같이 그리기
-    
-    plt.figure(figsize=(12,8))
-    plt.title('서울시 구별 인구수 대비 식당수')
-    plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='pink')
-    plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b*-')
-    plt.xticks(rotation=45)
-    plt.show()''')
+
+plt.figure(figsize=(12,8))
+plt.title('서울시 구별 인구수 대비 식당수')
+plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='pink')
+plt.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, 'b*-')
+plt.xticks(rotation=45)
+plt.show()''', line_numbers=True)
     
         plt.figure(figsize=(12,8))
         plt.title('서울시 구별 인구수 대비 식당수', fontproperties=prop)
@@ -6077,17 +6151,17 @@ plt.show()'''
         st.pyplot(plt)
     
         st.code('''# twinx()함수로 2축 그래프 그리기
-    
-    plt.figure(figsize=(10,4))
-    plt.title('서울특별시')
-    plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='green', label='음식점수')
-    plt.legend(bbox_to_anchor=(0.15, 1.22))
-    plt.xticks(rotation=-45)
-    
-    y_right = plt.twinx()
-    y_right.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, color='purple', marker='o', label='인구 수 대비 음식점')
-    plt.legend(bbox_to_anchor=(0.23, 1.12))
-    plt.show()''')
+
+plt.figure(figsize=(10,4))
+plt.title('서울특별시')
+plt.bar(df_seoul.SIGNGU_NM, df_seoul.식당수, color='green', label='음식점수')
+plt.legend(bbox_to_anchor=(0.15, 1.22))
+plt.xticks(rotation=-45)
+
+y_right = plt.twinx()
+y_right.plot(df_seoul.SIGNGU_NM, df_seoul.식당비율, color='purple', marker='o', label='인구 수 대비 음식점')
+plt.legend(bbox_to_anchor=(0.23, 1.12))
+plt.show()''', line_numbers=True)
     
     
         plt.figure(figsize=(10,4))
@@ -6109,17 +6183,17 @@ plt.show()'''
     
     
         st.code('''#거주자순
-    df_거주자순 = df_seoul.sort_values('인구수', ascending=False, ignore_index=True)
-    df_거주자순''')
+df_거주자순 = df_seoul.sort_values('인구수', ascending=False, ignore_index=True)
+df_거주자순''', line_numbers=True)
         df_거주자순 = df_seoul.sort_values('인구수', ascending=False, ignore_index=True)
         st.write(df_거주자순)
     
         st.write('- 비율은 소수점 아래 한 자리까지 나타내도록 하여 원 그래프를 시각화합니다.')
     
         st.code('''#원그래프 그리기
-    plt.figure(figsize=(8,8), dpi=100)
-    df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow')
-    plt.show()''')
+plt.figure(figsize=(8,8), dpi=100)
+df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow')
+plt.show()''', line_numbers=True)
     
         plt.figure(figsize=(8,8), dpi=100)
         df_거주자순['인구수'].plot(kind='pie', label='', autopct='%.1f%%', startangle = 45, labels=df_거주자순['SIGNGU_NM'], cmap='rainbow', textprops={'font':prop})
@@ -6149,8 +6223,6 @@ plt.show()'''
         st.write('- 원 그래프(거주자)')
     
         st.write('이러한 시각화 자료를 통해 설득력을 더욱 높일 수 있습니다.')
-
-
 
     elif path == ("실습 프로젝트", "날씨별 공공자전거 수요 분석"):
         st.header(f"{idx.getHeadIdx()}날씨별 공공자전거 수요 분석")
@@ -6652,38 +6724,19 @@ plt.show()'''
                 - 습도, 풍속, 일조량도 이용건수에 **영향**을 미치는 것으로 보입니다.
                 ''')
         st.divider()
+        st.divider()
         
     else :
         st.error("Content Not Found !")
 
 def goback_btn() :
+    float_init()
     button_container = st.container()
     with button_container:
          st.button("돌아가기", on_click=update_session_state, args=('go_back',), type="primary")
     button_container.float(float_css_helper(width="2.2rem", right="5rem",bottom="1rem"))
 
-def wrap_text(text, max_width=14):
-    lines = []
-    current_line = ""
-    current_width = 0
-
-    for word in text.split():
-        word_width = sum(2 if '가' <= ch <= '힣' else 1 for ch in word)
-
-        if current_width + word_width > max_width:
-            lines.append(current_line.rstrip())
-            current_line = word + " "
-            current_width = word_width  # 띄어쓰기의 너비를 1로 계산
-        else:
-            current_line += word + " "
-            current_width += word_width  # 띄어쓰기의 너비를 1로 계산
-
-    if current_line:
-        lines.append(current_line.rstrip())
-
-    return "<br>".join(lines)
 def main() :
-    float_init()
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
@@ -6707,15 +6760,15 @@ def main() :
             }
         )
         st.markdown(
-                f"""
-                <div style="position: relative; height: 1rem;">
-                        <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                        today : {server_state.count}
-                        </div>
-                </div>
-                """,
-                unsafe_allow_html=True
-                )
+                    f"""
+                    <div style="position: relative; height: 1rem;">
+                            <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
+                            {format(server_state.views, ',')} views
+                            </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                    )
 
 if __name__ == "__main__":
     main()
