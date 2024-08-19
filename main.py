@@ -1421,7 +1421,7 @@ def show_chapter(topic, chapter):
         st.divider()
         st.subheader(f"{idx.getSubIdx()}패키지 호출하기")
         st.write('''
-                설치한 패키지를 사용하기 위해선 **import**를 통해 호출해 불러와주어야 합니다. **import**문은 코드의 가장 상단에 작성해줍니다.
+                설치한 패키지를 사용하기 위해선 **import**를 통해 호출해 불러와주어야 합니다. **import**문은 코드의 가장 상단에 작성해 줍니다.
 
                                 import 패키지명
                 ''')    
@@ -1436,7 +1436,7 @@ def show_chapter(topic, chapter):
 
         st.divider()
         st.subheader(f"{idx.getSubIdx()}기본 사용법")
-        st.write("아래 명령어를 사용하여 NumPy 패키지를 설치해줍니다.")
+        st.write("아래 명령어를 사용하여 NumPy 패키지를 설치해 줍니다.")
         st.code("pip install numpy")
 
         st.write("코드 가장 상단에 **import** 해주어 NumPy를 호출합니다.")
@@ -1473,7 +1473,7 @@ def show_chapter(topic, chapter):
                 #   [7 8]]]
                 ''',line_numbers=True)
         
-        st.write("이렇게 생성된 배열의 크기는 **shape**속성을 통해 확인할 수 있습니다.")
+        st.write("이렇게 생성된 배열의 크기는 **shape** 속성을 통해 확인할 수 있습니다.")
         st.code('''
                 print(a.shape)  # 출력 : (3,)
                 print(b.shape)  # 출력 : (2, 3)
