@@ -5670,11 +5670,16 @@ plt.show()'''
         with open('data/음식점소비트렌드/음식점소비트렌드데이터.csv', "rb") as template_file:
             template_csv = template_file.read()
 
+        
+
         st.download_button(label="download data",
                             type="primary",
                             data=template_csv,
                         file_name = "음식점소비트렌드데이터.csv"
         )
+
+        st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
+        
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
