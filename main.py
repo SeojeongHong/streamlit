@@ -5693,7 +5693,6 @@ plt.show()'''
                 ├─         ...
                 ''', language="text")
         st.divider()
-        st.divider()
 
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
         st.write('''
