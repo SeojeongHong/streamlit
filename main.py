@@ -5428,6 +5428,7 @@ plt.show()'''
         st.header(f"{idx.getHeadIdx()}서울시 종로구 대기오염")
         st.write("CSV 파일의 2022년 서울시 종로구 대기오염 측정정보를 사용하여 데이터 로드, 분석 및 시각화 결론도출까지 실습을 진행합니다.")
 
+        st.divider()
         st.subheader(f"{idx.getSubIdx()}데이터 준비")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
         col1, col2, col3 = st.columns(3)
@@ -5462,7 +5463,7 @@ plt.show()'''
                                 data=template_byte,
                             file_name = "Measurement_summary.csv"
             )
-
+        st.divider()
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
         st.write('''
                 CMD 창을 열고 아래의 패키지들을 설치해 줍니다. 
@@ -5662,16 +5663,7 @@ plt.show()'''
         st.write("지역별 음식점 소비 데이터를 활용하여 데이터 로드부터, 데이터 탐색 및 분석, 시각화, 결론 도출까지 실습 진행해보겠습니다.")
 
         st.divider()
-
-        st.subheader(f"{idx.getSubIdx()} 컬럼 설명")
-        st.write("- CTPRVN_NM : 시도명칭")
-        st.write("- SIGNGU_NM : 시군구 명칭")
-        st.write("- FOOD_FCLTY_NM : 음식점업 명칭")
-        st.write("- FOOD_FCLTY_CO : 식당수")
-        st.write("- POPLTN_CO : 인구수")
-        st.divider()
-
-        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        st.subheader(f"{idx.getSubIdx()}데이터 준비")
 
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
         
@@ -5683,13 +5675,39 @@ plt.show()'''
                             data=template_csv,
                         file_name = "음식점소비트렌드데이터.csv"
         )
+        st.divider()
 
-        st.code("import pandas as pd\n\ndf_map = pd.read_csv('음식점소비트렌드데이터.csv')", line_numbers=True)
+        st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
+        st.write('''
+                CMD 창을 열고 아래의 패키지를 설치해 줍니다. 
+                 ''')
+        
+        st.code('''
+                $ pip install pandas
+                ''', language="text")
+        
+        
+        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지를 호출해 줍니다.")
+        st.code('''
+                import pandas as pd
+                ''')
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        st.write("실습에 필요한 데이터를 불러오겠습니다.")
+        st.code("df_map = pd.read_csv('음식점소비트렌드데이터.csv')", line_numbers=True)
         import pandas as pd
         df_map = pd.read_csv('data/음식점소비트렌드/음식점소비트렌드데이터.csv')
 
         st.code('df_map', line_numbers=True)
         st.write(df_map)
+        st.divider()
+        st.subheader(f"{idx.getSubIdx()} 컬럼 설명")
+        st.write("- CTPRVN_NM : 시도명칭")
+        st.write("- SIGNGU_NM : 시군구 명칭")
+        st.write("- FOOD_FCLTY_NM : 음식점업 명칭")
+        st.write("- FOOD_FCLTY_CO : 식당수")
+        st.write("- POPLTN_CO : 인구수")
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}데이터 탐색하기(EDA)")
