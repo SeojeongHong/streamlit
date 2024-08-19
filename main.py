@@ -45,9 +45,11 @@ def load_contents() :
 CONTENTS , TOPICS = load_contents()
 
 def init_session_state() :
+    # global 변수
     if "views" not in server_state:
         server_state.views = 0
 
+    # 페이지 최초 로드(최초 세션 연결)시 views 증가
     if 'lock' not in st.session_state:
         st.session_state['lock'] = True
         server_state.views += 1
@@ -6250,9 +6252,6 @@ plt.show()''', line_numbers=True)
                 CMD 창을 열고 아래의 패키지들을 설치해 줍니다. 
                  ''')
         st.code('''
-                $ pip install numpy
-                ''', language="text")
-        st.code('''
                 $ pip install pandas
                 ''', language="text")
         st.code('''
@@ -6264,7 +6263,6 @@ plt.show()''', line_numbers=True)
         
         st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지들을 호출해 줍니다.")
         st.code('''
-                import numpy as np
                 import pandas as pd
                 import seaborn as sns
                 import matplotlib.pyplot as plt
@@ -6728,13 +6726,13 @@ plt.show()''', line_numbers=True)
         st.error("Content Not Found !")
 
 def goback_btn() :
+    float_init()
     button_container = st.container()
     with button_container:
          st.button("돌아가기", on_click=update_session_state, args=('go_back',), type="primary")
     button_container.float(float_css_helper(width="2.2rem", right="5rem",bottom="1rem"))
 
 def main() :
-    float_init()
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
