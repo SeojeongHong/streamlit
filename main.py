@@ -9,7 +9,7 @@ prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
 from streamlit_float import *
-from streamlit_server_state import server_state
+from streamlit_server_state import server_state, server_state_lock
 
 class IndexAllocator:
     def __init__(self):
