@@ -5679,27 +5679,33 @@ plt.show()'''
 
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
         st.write('''
-                CMD 창을 열고 아래의 패키지를 설치해 줍니다. 
+                CMD 창을 열고 아래의 패키지들을 설치해 줍니다. 
                  ''')
         
         st.code('''
                 $ pip install pandas
                 ''', language="text")
+        st.code('''
+                $ pip install matplotlib
+                ''', language="text")
         
-        
-        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지를 호출해 줍니다.")
+        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지들을 호출해 줍니다.")
         st.code('''
                 import pandas as pd
+                import matplotlib.pyplot as plt
                 ''')
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
         st.write("실습에 필요한 데이터를 불러오겠습니다.")
-        st.code("df_map = pd.read_csv('음식점소비트렌드데이터.csv')", line_numbers=True)
+        st.code('''
+                df_map = pd.read_csv('음식점소비트렌드데이터.csv')
+                
+                df_map    
+                ''', line_numbers=True)
         import pandas as pd
         df_map = pd.read_csv('data/음식점소비트렌드/음식점소비트렌드데이터.csv')
 
-        st.code('df_map', line_numbers=True)
         st.write(df_map)
         st.divider()
         st.subheader(f"{idx.getSubIdx()} 컬럼 설명")
