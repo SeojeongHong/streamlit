@@ -1444,7 +1444,7 @@ def show_chapter(topic, chapter):
         st.divider()
         st.subheader(f"{idx.getSubIdx()}패키지 호출하기")
         st.write('''
-                설치한 패키지를 사용하기 위해선 **import**를 통해 호출해 불러와주어야 합니다. **import**문은 코드의 가장 상단에 작성해줍니다.
+                설치한 패키지를 사용하기 위해선 **import**를 통해 호출해 불러와주어야 합니다. **import**문은 코드의 가장 상단에 작성해 줍니다.
 
                                 import 패키지명
                 ''')    
@@ -1680,35 +1680,53 @@ def show_chapter(topic, chapter):
         
         st.subheader(f"{idx.getSubIdx()}list 통한 생성")
         st.markdown("**list 를 통해 생성**할 수 있습니다. DataFrame을 만들 때는 **2차원 list를 대입**합니다.")
-        with st.echo():
-            import pandas as pd
-            df = pd.DataFrame([[1,2,3],
-                        [4,5,6],
-                        [7,8,9]])
-            df
+        st.code('''
+import pandas as pd
+df = pd.DataFrame([[1,2,3],
+            [4,5,6],
+            [7,8,9]])
+df''', line_numbers=True)
+        import pandas as pd
+        df = pd.DataFrame([[1,2,3],
+                    [4,5,6],
+                    [7,8,9]])
+        st.write(df)
 
         st.divider()
         st.markdown("**columns를 지정**하면, DataFrame의 각 열에 대한 컬럼명이 붙습니다.")
-        with st.echo():
-            import pandas as pd
-            df = pd.DataFrame([[1, 2, 3], 
-                            [4, 5, 6], 
-                            [7, 8, 9]], columns=['가', '나', '다'])
-            df
+        st.code('''
+import pandas as pd
+df = pd.DataFrame([[1, 2, 3], 
+                [4, 5, 6], 
+                [7, 8, 9]], columns=['가', '나', '다'])
+df''', line_numbers=True)
+        import pandas as pd
+        df = pd.DataFrame([[1, 2, 3], 
+                        [4, 5, 6], 
+                        [7, 8, 9]], columns=['가', '나', '다'])
+        st.write(df)
 
         st.divider()
         st.subheader(f"{idx.getSubIdx()}dictionary 통한 생성")
         st.markdown('**dictionary를 통한 생성**도 가능합니다.\n'
                     'dictionary의 **key 값이 자동으로 column 명으로 지정**되어 편리합니다.')
-        with st.echo():
-            import pandas as pd
-            data = {
-                'name': ['Kim', 'Lee', 'Park'], 
-                'age': [24, 27, 34], 
-                'children': [2, 1, 3]
-            }
-            df = pd.DataFrame(data)
-            df
+        st.code('''
+import pandas as pd
+data = {
+    'name': ['Kim', 'Lee', 'Park'], 
+    'age': [24, 27, 34], 
+    'children': [2, 1, 3]
+}
+df = pd.DataFrame(data)
+df''', line_numbers=True)
+        import pandas as pd
+        data = {
+            'name': ['Kim', 'Lee', 'Park'], 
+            'age': [24, 27, 34], 
+            'children': [2, 1, 3]
+        }
+        df = pd.DataFrame(data)
+        st.write(df)
 
 
         st.divider()
@@ -1721,39 +1739,50 @@ def show_chapter(topic, chapter):
                     '- **values**: numpy array 형식의 데이터 값\n'
                     '- **dtypes**: column 별 데이터 타입\n')
 
-        with st.echo():
-            import pandas as pd
-            data = {
-                'name': ['Kim', 'Lee', 'Park'], 
-                'age': [24, 27, 34], 
-                'children': [2, 1, 3]
-            }
-            df = pd.DataFrame(data)
+        st.code('''
+import pandas as pd
+data = {
+    'name': ['Kim', 'Lee', 'Park'], 
+    'age': [24, 27, 34], 
+    'children': [2, 1, 3]
+}
+df = pd.DataFrame(data)''', line_numbers=True)
+        import pandas as pd
+        data = {
+            'name': ['Kim', 'Lee', 'Park'], 
+            'age': [24, 27, 34], 
+            'children': [2, 1, 3]
+        }
+        df = pd.DataFrame(data)
 
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}df.index")
         st.write('''데이터프레임의''', '**인덱스(행)**','''을 출력합니다.''')
-        with st.echo():
-            df.index
+        st.code('''df.index''', line_numbers=True)
+        st.write(df.index)
+            
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}df.columns")
         st.write("데이터프레임의", "**컬럼(열)**", "을 출력합니다.")
-        with st.echo():
-            df.columns
+        st.code('''df.columns''', line_numbers=True)
+        st.write(df.columns)
+            
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}df.values")
         st.write("데이터프레임의 **데이터 값** 을 출력합니다.")
-        with st.echo():
-            df.values
+        st.code('''df.values''', line_numbers=True)
+        st.write(df.values)
+            
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}df.dtypes")
         st.write("데이터프레임의 **데이터 타입** 을 출력합니다.")
-        with st.echo():
-            df.dtypes
+        st.code('''df.dtypes''', line_numbers=True)
+        st.write(df.dtypes)
+    
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}데이터프레임 조회") ## 소단원03
@@ -1772,28 +1801,25 @@ def show_chapter(topic, chapter):
         import seaborn as sns
         df = sns.load_dataset('titanic')
         import io
-        st.code('''df.head()''')
+        st.code('''df.head()''', line_numbers=True)
         st.write(df.head())
         
-        st.code('''df.tail()''')
-        
+        st.code('''df.tail()''', line_numbers=True)
         st.write(df.tail())
         st.divider()
 
-        with st.echo():
-            df.head(3)
-
+        st.code('''df.head(3)''', line_numbers=True)
         st.write(df.head(3))
         st.divider()
 
-        st.code('''df.tail(7)''')
+        st.code('''df.tail(7)''', line_numbers=True)
         st.write(df.tail(7))
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}info()")
         st.write('- 컬럼별 정보(information)를 보여줍니다.')
         st.write('- 데이터의 갯수, 그리고 데이터 타입(dtype)을 확인할 때 사용합니다.')
-        st.code('''df.info()''')
+        st.code('''df.info()''', line_numbers=True)
         buffer = io.StringIO()
         df.info(buf=buffer)
         s = buffer.getvalue()
@@ -1807,8 +1833,7 @@ def show_chapter(topic, chapter):
         st.write('- column 별 **값의 분포를 확인**할 때 사용합니다.')
         st.write('- **남자, 여자, 아이의 데이터 분포를 확인**하고 싶다면 다음과 같이 실행합니다.')
 
-        with st.echo():
-            df['who'].value_counts()
+        st.code('''df['who'].value_counts()''', line_numbers=True)
         st.write(df['who'].value_counts())
         st.divider()
 
@@ -1819,28 +1844,28 @@ def show_chapter(topic, chapter):
         st.divider()
 
         st.write('**차원**을 나타냅니다. DataFrame은 2가 출력됩니다.')
-        with st.echo():
-            df.ndim
+        st.code('''df.ndim''', line_numbers=True)
+        st.write(df.ndim)
         st.divider()
 
         st.write('**(행, 열)** 순서로 출력됩니다.')
-        with st.echo():
-            df.shape
+        st.code('''df.shape''', line_numbers=True)
+        st.write(df.shape)
         st.divider()
 
         st.write('index는 기본 설정된 **RangeIndex**가 출력됩니다.')
-        with st.echo():
-            df.head().index
+        st.code('''df.head().index''')
+        st.write(df.head().index)
         st.divider()
 
         st.write('columns **열**을 출력합니다.')
-        with st.echo():
-            df.columns
+        st.code('''df.columns''')
+        st.write(df.columns)
         st.divider()
 
         st.write('values는 모든 값을 출력하며, **numpy array 형식**으로 출력됩니다.')
-        with st.echo():
-            df.head().values
+        st.code('''df.head().values''')
+        st.write(df.head().values)
 
         st.header(f"{idx.getHeadIdx()}데이터프레임 정렬") ## 소단원04
 
@@ -1858,11 +1883,11 @@ def show_chapter(topic, chapter):
         import seaborn as sns
         df = sns.load_dataset('titanic')
 
-        st.code('''df.sort_index().head(5)''')
+        st.code('''df.sort_index().head(5)''', line_numbers=True)
         st.write(df.sort_index().head(5))
         st.divider()
 
-        st.code('''df.sort_index(ascending=False).head(5)''')
+        st.code('''df.sort_index(ascending=False).head(5)''', line_numbers=True)
         st.write(df.sort_index(ascending=False).head(5))
         st.divider()
 
@@ -1871,27 +1896,27 @@ def show_chapter(topic, chapter):
         st.write('- by에 기준이 되는 행을 설정합니다.')
         st.write('- by에 2개 이상의 컬럼을 지정하여 정렬할 수 있습니다.')
         st.write('- 오름차순/내림차순을 컬럼 별로 지정할 수 있습니다.')
-        st.code('''df.sort_values(by='age').head()''')
+        st.code('''df.sort_values(by='age').head()''', line_numbers=True)
         st.write(df.sort_values(by='age').head())
         st.divider()
 
         st.write('내림차순 정렬: :blue-background[ascending=False]')
-        st.code('''df.sort_values(by='age', ascending=False).head()''')
+        st.code('''df.sort_values(by='age', ascending=False).head()''', line_numbers=True)
         st.write(df.sort_values(by='age', ascending=False).head())
         st.divider()
 
         st.write('**문자열 컬럼도 오름차순/내림차순 정렬이 가능**하며 알파벳 순서로 정렬됩니다.')
-        st.code('''df.sort_values(by='class', ascending=False).head()''')
+        st.code('''df.sort_values(by='class', ascending=False).head()''', line_numbers=True)
         st.write(df.sort_values(by='class', ascending=False).head())    
         st.divider()
 
         st.write('**2개 이상의 컬럼**을 기준으로 값 정렬 할 수 있습니다.')
-        st.code('''df.sort_values(by=['fare', 'age']).head()''')
+        st.code('''df.sort_values(by=['fare', 'age']).head()''', line_numbers=True)
         st.write(df.sort_values(by=['fare', 'age']).head())
         st.divider()
 
         st.write('오름차순/내림차순 정렬도 컬럼 **각각에 지정**해 줄 수 있습니다.')
-        st.code('''df.sort_values(by=['fare', 'age'], ascending=[False, True]).head()''')
+        st.code('''df.sort_values(by=['fare', 'age'], ascending=[False, True]).head()''', line_numbers=True)
         st.write(df.sort_values(by=['fare', 'age'], ascending=[False, True]).head())
         st.divider()
 
@@ -1912,112 +1937,118 @@ def show_chapter(topic, chapter):
         st.write('- slicing은 [**시작(포함): 끝(포함)**] 규칙에 유의합니다. 둘 다 포함 합니다.')
 
         st.write('**01. indexing 예시**')
-        st.code('''df.loc[5, 'class']''')
+        st.code('''df.loc[5, 'class']''', line_numbers=True)
         st.write(df.loc[5, 'class'])
         st.divider()
 
         st.write('**02. fancy indexing 예시**')
-        st.code('''df.loc[2:5, ['age', 'fare', 'who']]''')
+        st.code('''df.loc[2:5, ['age', 'fare', 'who']]''', line_numbers=True)
         st.write(df.loc[2:5, ['age', 'fare', 'who']])
         st.divider()
 
         st.write('**03. slicing 예시**')
-        st.code('''df.loc[2:5, 'class':'deck'].head()''')
+        st.code('''df.loc[2:5, 'class':'deck'].head()''', line_numbers=True)
         st.write(df.loc[2:5, 'class':'deck'].head())
 
-        st.code('''df.loc[:6, 'class':'deck']''')
+        st.code('''df.loc[:6, 'class':'deck']''', line_numbers=True)
         st.write(df.loc[:6, 'class':'deck'])
         st.divider()
 
         st.write('**04. loc - 조건 필터**')
         st.write('boolean index을 만들어 조건에 맞는 데이터만 추출해 낼 수 있습니다.')
-        st.code('''cond = (df['age'] >= 70)\ncond''')
+        st.code('''cond = (df['age'] >= 70)\ncond''', line_numbers=True)
         cond = (df['age'] >= 70)
         st.write(cond.head())
         st.divider()
-        st.code('''df.loc[cond]''')
+        st.code('''df.loc[cond]''', line_numbers=True)
         st.write(df.loc[cond])
         st.divider()
 
         st.write('**05. loc - 다중조건**')
         st.write('다중 조건은 먼저 condition(조건)을 정의하고 **&** 와 **|** 연산자로 **복합 조건을 생성**합니다.')
         st.code(
-            '''# 조건1 정의\ncond1 = (df['fare'] > 30)\n# 조건2 정의\ncond2 = (df['who'] == 'woman')''')
+            '''# 조건1 정의\ncond1 = (df['fare'] > 30)\n# 조건2 정의\ncond2 = (df['who'] == 'woman')''', line_numbers=True)
         cond1 = (df['fare'] > 30)
         cond2 = (df['who'] == 'woman')
-        st.code('''df.loc[cond1 & cond2]''')
+        st.code('''df.loc[cond1 & cond2]''', line_numbers=True)
         st.write(df.head().loc[cond1 & cond2])
         st.divider()
 
-        st.code('''df.loc[cond1 | cond2]''')
+        st.code('''df.loc[cond1 | cond2]''', line_numbers=True)
         st.write(df.head().loc[cond1 | cond2])
         st.divider()
 
         st.write('**06. 조건 필터 후 데이터 대입**')
-        st.code('''cond = (df['age'] >= 70)\ncond''')
+        st.code('''cond = (df['age'] >= 70)\ncond''', line_numbers=True)
         cond = (df['age'] >= 70)
         st.write(cond.head())
         st.divider()
-        st.code('''#조건 필터\ndf.loc[cond]''')
+        st.code('''#조건 필터\ndf.loc[cond]''', line_numbers=True)
         st.write(df.loc[cond])
         st.divider()
 
         st.write('**07. 나이 컬럼**만 가져옵니다.')
-        with st.echo():
-            df.loc[cond, 'age']
+        st.code('''df.loc[cond, 'age']''', line_numbers=True)
+        st.write(df.loc[cond, 'age'])
         st.divider()
 
         st.write('**조건 필터** 후 원하는 값을 대입할 수 있습니다. (단일 컬럼 선택에 유의)')
-        with st.echo():
-            df.loc[cond, 'age'] = -1
-        with st.echo():
-            df.loc[cond]
+        st.code('''df.loc[cond, 'age'] = -1''', line_numbers=True)
+        df.loc[cond, 'age'] = -1
+        st.code('''df.loc[cond]''', line_numbers=True)
+        st.write(df.loc[cond])
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}iloc")
         st.write('- :blue-background[loc]와 유사하지만, index만 허용합니다.')
         st.write('loc와 마찬가지고, indexing / slicing 모두 가능합니다.')
-        st.code('''df.head()''')
+        st.code('''df.head()''', line_numbers=True)
         st.write(df.head())
         st.divider()
 
         st.write('**01. indexing**')
-        st.code('''df.iloc[1, 3]''')
+        st.code('''df.iloc[1, 3]''', line_numbers=True)
         st.write(df.iloc[1, 3])
         st.divider()
 
         st.write('**02. Fancy Indexing**')
-        st.code('''df.iloc[[0, 3, 4], [0, 1, 5, 6]]''')
+        st.code('''df.iloc[[0, 3, 4], [0, 1, 5, 6]]''', line_numbers=True)
         st.write(df.iloc[[0, 3, 4], [0, 1, 5, 6]])
         st.divider()
 
         st.write('**03. Slicing**')
-        st.code('''df.iloc[:3, :5]''')
+        st.code('''df.iloc[:3, :5]''', line_numbers=True)
         st.write(df.iloc[:3, :5])
         st.divider()
 
         st.write('**04. isin**')
         st.write('특정 값의 포함 여부는 isin 함수를 통해 비교가 가능합니다. (파이썬의 in 키워드는 사용 불가 합니다.)')
-        with st.echo():
-            import pandas as pd
-            sample = pd.DataFrame({'name': ['kim', 'lee', 'park', 'choi'], 
-                                'age': [24, 27, 34, 19]
-                            })
-            sample
+        st.code('''    
+import pandas as pd
+sample = pd.DataFrame({'name': ['kim', 'lee', 'park', 'choi'], 
+                    'age': [24, 27, 34, 19]
+                })
+sample''', line_numbers=True)
+        import pandas as pd
+        sample = pd.DataFrame({'name': ['kim', 'lee', 'park', 'choi'], 
+                            'age': [24, 27, 34, 19]})
+        st.write(sample)
+        
         st.divider()
-        st.code('''sample['name'].isin(['kim', 'lee'])''')
+        st.code('''sample['name'].isin(['kim', 'lee'])''', line_numbers=True)
         st.write(sample['name'].isin(['kim', 'lee']))
 
         st.divider()
-        st.code('''sample.isin(['kim', 'lee'])''')
+        st.code('''sample.isin(['kim', 'lee'])''', line_numbers=True)
         st.write(sample.isin(['kim', 'lee']))
         st.divider()
 
         st.write(':blue-background[loc] 를 활용한 **조건 필터링**으로도 찰떡궁합입니다.')
-        with st.echo():
-            condition = sample['name'].isin(['kim', 'lee'])
-        with st.echo():
-            sample.loc[condition]
+        st.code('''condition = sample['name'].isin(['kim', 'lee'])''')
+        condition = sample['name'].isin(['kim', 'lee'])
+        st.code('''sample.loc[condition]''', line_numbers=True)
+        st.write(sample.loc[condition])
+            
             
     ## Excel/CSV        
 
@@ -2051,7 +2082,7 @@ def show_chapter(topic, chapter):
             excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name='철도', engine='openpyxl')
             excel.head()
-            ''')
+            ''', line_numbers=True)
         
         import pandas as pd
         excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
@@ -2067,7 +2098,7 @@ def show_chapter(topic, chapter):
             excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
             excel.head()
-            ''')
+            ''', line_numbers=True)
         excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
         st.write(excel.head())
@@ -2080,15 +2111,14 @@ def show_chapter(topic, chapter):
             excel = pd.read_excel('seoul_transportation.xlsx', 
                                 sheet_name=None, engine='openpyxl')
             excel
-            ''')
+            ''', line_numbers=True)
         excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name=None, engine='openpyxl')
         st.write(excel)
 
         st.divider()
         st.markdown(':blue-background[keys()]를 통해 엑셀이 포함하고 있는 시트를 조회할 수 있습니다.')
-        with st.echo():
-            excel.keys()
+        st.code('''excel.keys()''', line_numbers=True)
         st.write(excel.keys())
         st.divider()
 
@@ -2104,7 +2134,7 @@ def show_chapter(topic, chapter):
             import pandas as pd
             excel = pd.read_excel('seoul_transportation.xlsx', sheet_name='철도', engine='openpyxl')
             excel.head()
-            ''')
+            ''', line_numbers=True)
         excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
                                 sheet_name='버스', engine='openpyxl')
         st.write(excel.head())
@@ -2114,14 +2144,14 @@ def show_chapter(topic, chapter):
 
         st.write('**시트명 없이 저장**')
         code = '''excel.to_excel('sample.xlsx', index=True)'''
-        st.code(code, language="python")
+        st.code(code, language="python", line_numbers=True)
         st.write('현재 디렉터리에서 sample.xlsx가 저장된 것을 확인할 수 있습니다.')
         st.divider()
         
         st.write('**시트명 지정하여 저장**')
         code = '''excel.to_excel('sample1.xlsx', index=False, sheet_name='샘플')'''
         st.write('현재 디렉터리에서 sample1.xlsx가 저장된 것을 확인할 수 있습니다.')
-        st.code(code, language="python")
+        st.code(code, language="python", line_numbers=True)
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}CSV") ## 소단원02
@@ -2146,7 +2176,7 @@ def show_chapter(topic, chapter):
             import pandas as pd
             df = pd.read_csv('seoul_population.csv')
             df
-            ''')
+            ''', line_numbers=True)
         df = pd.read_csv('data/서울시주민등록인구/seoul_population.csv')
         st.write(df.head())
         st.divider()
@@ -2159,13 +2189,13 @@ def show_chapter(topic, chapter):
             import pandas as pd
             df = pd.read_csv('seoul_population.csv')
             df
-            ''')
+            ''', line_numbers=True)
         df = pd.read_csv('data/서울시주민등록인구/seoul_population.csv')
         st.divider()
 
         st.write(''':blue-background[to_csv()]로 csv 파일형식으로 저장할 수 있습니다.''')
         code='''df.to_csv('sample.csv', index=False)'''
-        st.code(code, language="python")
+        st.code(code, language="python", line_numbers=True)
         st.write('현재 디렉터리에서 sample.csv가 저장된 것을 확인할 수 있습니다.')
         st.divider()
 
@@ -2173,11 +2203,11 @@ def show_chapter(topic, chapter):
         st.code('''
             import pandas as pd
             excel = pd.read_excel('seoul_transportation.xlsx', sheet_name='버스')
-                ''')
+                ''', line_numbers=True)
         # excel = pd.read_excel('data/서울시대중교통/seoul_transportation.xlsx', 
         #                         sheet_name='버스')
         code = '''excel.to_csv('sample1.csv', index=False)'''
-        st.code(code, language="python")
+        st.code(code, language="python", line_numbers=True)
         st.write('현재 디렉터리에서 sample1.csv가 저장된 것을 확인할 수 있습니다.')
         st.divider()
     
@@ -2185,6 +2215,8 @@ def show_chapter(topic, chapter):
         st.header(f"{idx.getHeadIdx()}데이터 복사") ## 소단원01
         
         st.write('Pandas DataFrame의 **복사(Copy), 결측치 처리**, 그리고 row, column의 **추가, 삭제, 컬럼간 연산, 타입의 변환**을 다뤄보겠습니다.')
+        st.code('''# 필요한 라이브러리 로드
+import pandas as pd''')
         st.divider()
 
         pandas_dataset()
@@ -2194,32 +2226,32 @@ def show_chapter(topic, chapter):
 
         st.write('DataFrame을 **복제**합니다. 복제한 DataFrame을 수정해도 **원본에는 영향을 미치지 않습니다.**')
         code = '''df.head()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df.head())
         st.divider()
 
         st.write(':blue-background[copy()]로 DataFrame을 복제합니다.')
         code = '''df_copy = df.copy()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         code = '''df_copy.head()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df_copy = df.copy()
         st.write(df_copy.head())
         st.divider()
 
         st.write(':blue-background[df_copy]의 :blue-background[age]를 99999로 임의 수정하도록 하겠습니다.')
         code = '''df_copy.loc[0, 'age'] = 99999'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df_copy.loc[0, 'age'] = 99999
         st.write('수정사항이 반영된 것을 확인할 수 있습니다.')
         code = '''df_copy.head()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df_copy.head())
         st.divider()
 
         st.write('하지만, 원본 DataFrame의 **데이터는 변경되지 않고 그대로 남아** 있습니다.')
         code = 'df.head()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df.head())
         st.divider()
 
@@ -2245,27 +2277,27 @@ def show_chapter(topic, chapter):
         st.write('**isnull()**')
         
         code = 'df.isnull().sum()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df.isnull().sum())
         st.divider()
 
         st.write('**isna()**')
         st.write('isnull() 과 동작이 완전 같습니다. 편한 것으로 써주세요. (심지어 도큐먼트도 같습니다)')
         code ='df.isna().sum()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df.isna().sum())
         st.divider()
 
         st.write('DataFrame 전체 결측 데이터의 갯수를 합산하기 위해서는 :blue-background[sum()]을 두 번 사용하면 됩니다.')
         code = 'df.isnull().sum().sum()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df.isnull().sum().sum())    
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}결측치가 아닌 데이터 확인 - notnull()")
         st.write(':blue-background[notnull()]은 :blue-background[isnull()]과 정확히 **반대** 개념입니다.')
         code = 'df.notnull().sum()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df.notnull().sum())
         st.divider()
 
@@ -2274,95 +2306,95 @@ def show_chapter(topic, chapter):
         st.write(':blue-background[isnull()] 함수가 결측 데이터를 찾는 **boolean index** 입니다.')
         st.write('즉, :blue-background[loc]에 적용하여 조건 필터링을 걸 수 있습니다.')
         code = '''df.loc[df['age'].isnull()]'''
-        st.code(code)
-        st.write(df.head().loc[df['age'].isnull()])
+        st.code(code, line_numbers=True)
+        st.write(df.loc[df['age'].isnull()])
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}결측치 채우기 - fillna()")
         st.write(':blue-background[fillna()]를 활용하면 결측치에 대하여 일괄적으로 값을 채울 수 있습니다.')
         code = ''' # 다시 원본 DataFrame 로드\ndf = sns.load_dataset('titanic')'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df = sns.load_dataset('titanic')
         code = '''# 원본을 copy하여 df1 변수에\ndf1 = df.copy()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df1 = df.copy()    
         code = '''df1.tail()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.tail())
         st.divider()
 
         st.write('888번 index의 **결측치가 700으로 채워**진 것을 확인할 수 있습니다.')
         code = '''df1['age'].fillna(700).tail()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1['age'].fillna(700).tail())
         st.divider()
 
         st.write('df1에 **결측치를 700**으로 채우고 저장합니다.')
         code = '''df1['age'] = df1['age'].fillna(700)'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df1['age'] = df1['age'].fillna(700)
         code = 'df1.tail()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.tail())    
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}통계값으로 채우기")
         code = '''df1 = df.copy()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df1 = df.copy()
         code = 'df1.tail()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.tail())
         st.divider()
 
-        st.write('**05-1. 평균으로 채우기**')
+        st.write('**평균**으로 채우기')
         code = '''df1['age'].fillna(df1['age'].mean()).tail()'''
-        st.code(code)
-        st.code(df1['age'].fillna(df1['age'].mean()).tail())
+        st.code(code, line_numbers=True)
+        st.write(df1['age'].fillna(df1['age'].mean()).tail())
         st.divider()
 
-        st.write('**05-2. 최빈값으로 채우기**')
+        st.write('**최빈값**으로 채우기')
         code = '''df1['deck'].mode()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1['deck'].mode())
         st.divider()
 
         st.write('''최빈값(mode)으로 채울 때에는 반드시 **0번째 index 지정**하여 값을 추출한 후 채워야 합니다.''')
         code = '''df1['deck'].mode()[0]'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1['deck'].mode()[0])
         st.divider()
                     
         code = '''df1['deck'].fillna(df1['deck'].mode()[0]).tail()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1['deck'].fillna(df1['deck'].mode()[0]).tail())
         
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}NaN 값이 있는 데이터 제거하기 (dropna)")
-        code = '''df1 = df.copy()
-            df1.tail()'''
-        st.code(code)
+        code = '''df1 = df.copy()\ndf1.tail()'''
+        st.code(code, line_numbers=True)
         df1 = df.copy()
         st.write(df1.tail())
 
         code = 'df1.tail()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.tail())
         st.divider()
 
         st.write(''':blue-background[dropna()]로 **1개 라도 NaN 값이 있는 행**은 제거할 수 있습니다. :blue-background[(how='any')]''')
-        code = '''df1.dropna()'''
+        st.code('''df1.dropna()''', line_numbers=True)
         df1.dropna()
+        st.code('''df.head()''', line_numbers=True)
         st.write(df1.head())
         st.divider()
 
-        st.write('기본 옵션 값은 :blue-background[how=any]로 설정되어 있으며, 다음과 같이 변경할 수 있습니다.')
+        st.write('''기본 옵션 값은 :blue-background[how='any']로 설정되어 있으며, 다음과 같이 변경할 수 있습니다.''')
         st.write('- **any**: 1개 라도 NaN값이 존재시 drop')
 
         st.write('- **all**: 모두 NaN값이 존재시 drop')
         code = '''df1.dropna(how='all')'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df1.dropna(how='all')
         st.write(df1.head())
 
@@ -2375,30 +2407,30 @@ def show_chapter(topic, chapter):
         import numpy as np
 
         code = '''df1 = df.copy()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df1 = df.copy()
         code = '''df1.head()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.head())
         st.divider()
 
         st.write('임의의 값을 대입하여 새로운 컬럼을 추가할 수 있습니다.')
         code = '''df1['VIP'] = True'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         df1['VIP'] = True
         code = '''df1.head()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.head())
         st.divider()
 
         st.write('중간에 컬럼을 추가하고 싶은 경우 :blue-background[insert()]를 활용할 수 있습니다.')
         st.write(':blue-background[insert(컬럼인덱스, 컬럼명, 값)]')
-        st.code('''df1.insert(5, 'RICH', df1['fare'] > 100)''')
+        st.code('''df1.insert(5, 'RICH', df1['fare'] > 100)''', line_numbers=True)
         st.write('- 5번째 위치에 RICH 컬럼을 추가')
         st.write('- fare 컬럼이 100보다 크면 True, 작으면 False 값을 채웁니다.')
         df1.insert(5, 'RICH', df1['fare'] > 100)
         code = '''df1.head()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.head())
         st.divider()
 
@@ -2408,51 +2440,59 @@ def show_chapter(topic, chapter):
         df1 = df.copy()
         import numpy as np
 
+        
         st.write('삭제는 **행(row) 삭제와 열(column) 삭제**로 구분할 수 있습니다.')
+        st.write('df.drop()은 기본 값이 df.drop(axis=0)으로 설정되어 있습니다.')
+        st.write(':blue-background[axis=0]일 경우 **행(row) 삭제**, :blue-background[axis=1]일 경우 **열(columns) 삭제**입니다.')
+        
+        st.code('''# 필요한 라이브러리 로드
+import numpy as np''', line_numbers=True)
+        
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}행 (row) 삭제")
         st.write('행 삭제시 **index를 지정하여 삭제**합니다.')
         
         code = 'df1.drop(1)'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.drop(1))
         
         st.divider()
         st.write('행 삭제시 **범위를 지정하여 삭제**할 수 있습니다.')
         code = 'df1.drop(np.arange(10))'
-        st.code(code)
+        st.code('df1.drop(np.arange(10))', line_numbers=True)
         st.write(df1.drop(np.arange(10)).head())
 
         st.write('**fancy indexing**을 활용하여 삭제할 수 있습니다.')
         code = 'df1.drop([1, 3, 5, 7, 9])'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df1.drop([1, 3, 5, 7, 9]))
             
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}열 (column) 삭제")
-        st.code('df1')
+        st.code('df1', line_numbers=True)
         st.write(df1.head())
         st.divider()
 
         st.write('열 삭제시 **반드시** :blue-background[axis=1] **옵션을 지정**해야 합니다. 2번째 위치에 지정시 :blue-background[axis=]을 생략할 수 있습니다.')
-        st.code('''df1.drop('class', axis=1).head()''')
+        st.code('''df1.drop('class', axis=1).head()''', line_numbers=True)
         st.write(df1.drop('class', axis=1).head())
         st.divider()
 
         st.write('**다수의 컬럼(column) 삭제**도 가능합니다.')
-        st.code('''df1.drop(['who', 'deck', 'alive'], axis=1)''')
+        st.code('''df1.drop(['who', 'deck', 'alive'], axis=1)''', line_numbers=True)
         st.write(df1.drop(['who', 'deck', 'alive'], axis=1))
         st.divider()
 
         st.write('삭제된 내용을 바로 적용하려면')
         st.write('1. :blue-background[inplace=True]를 지정합니다.')
         st.write('2. 변수에 **재대입** 하여 결과를 반영합니다.')
-        st.code('''df1.drop(['who', 'deck', 'alive'], axis=1, inplace=True)''')
+        st.code('''df1.drop(['who', 'deck', 'alive'], axis=1, inplace=True)''', line_numbers=True)
         df1.drop(['who', 'deck', 'alive'], axis=1, inplace=True)
-        st.code('df1.head()')
+        st.code('df1.head()', line_numbers=True)
         st.write(df1.head())
+        st.divider()
 
         st.header(f"{idx.getHeadIdx()}column 연산")
 
@@ -2462,25 +2502,25 @@ def show_chapter(topic, chapter):
         df = sns.load_dataset('titanic')
         df1 = df.copy()
 
-        st.code('''# 데이터프레임 복제\ndf1 = df.copy()''')
+        st.code('''# 데이터프레임 복제\ndf1 = df.copy()''', line_numbers=True)
         st.write('**family(가족)**','의 총합은 **sibsp**컬럼과 **parch**의 합산으로 구할 수 있습니다.')
 
-        st.code('''df1['family'] = df1['sibsp'] + df1['parch']''')
+        st.code('''df1['family'] = df1['sibsp'] + df1['parch']''', line_numbers=True)
         df1['family'] = df1['sibsp'] + df1['parch']
-        st.code('df1.head()')
+        st.code('df1.head()', line_numbers=True)
         st.write(df1.head())
         st.divider()
 
         st.write('컬럼간 연산시 :blue-background[round()]를 사용하여 소수점 자릿수를 지정할 수 있습니다.')
         st.write('**round(숫자, 소수 몇 째자리)**')
-        st.code('''df1['round'] = round(df1['fare'] / df1['age'], 2)''')
+        st.code('''df1['round'] = round(df1['fare'] / df1['age'], 2)''', line_numbers=True)
         df1['round'] = round(df1['fare'] / df1['age'], 2)
-        st.code('df1.head()')
+        st.code('df1.head()', line_numbers=True)
         st.write(df1.head())
         st.divider()
 
         st.write('연산시 1개의 컬럼이라도 **NaN 값을 포함하고 있다면 결과는 NaN** 이 됩니다.')
-        st.code('''df1.loc[df1['age'].isnull(), 'deck':].head()''')
+        st.code('''df1.loc[df1['age'].isnull(), 'deck':].head()''', line_numbers=True)
         st.write(df1.loc[df1['age'].isnull(), 'deck':].head())
         st.divider()
     
@@ -2495,11 +2535,11 @@ def show_chapter(topic, chapter):
 
         st.subheader(f"{idx.getSubIdx()}category 타입")
         
-        st.code('''df1 = df.copy()\ndf1.head(2)''')
+        st.code('''df1 = df.copy()\ndf1.head(2)''', line_numbers=True)
         df1 = df.copy()
         st.write(df1.head(2))
         st.divider()
-        st.code('df1.info()')
+        st.code('df1.info()', line_numbers=True)
         buffer = io.StringIO()
         df1.info(buf=buffer)
         s = buffer.getvalue()
@@ -2508,17 +2548,17 @@ def show_chapter(topic, chapter):
 
         st.subheader(f"{idx.getSubIdx()}category로 변경")
         st.write(':blue-background[category]로 변경시에는 Categories가 같이 출력됩니다.')
-        st.code('''df1['who'].astype('category').head()''')
+        st.code('''df1['who'].astype('category').head()''', line_numbers=True)
         st.write(df1['who'].astype('category').head())
         st.divider()
 
         st.write('변경사항을 적용합니다.')
-        st.code('''df1['who'] = df1['who'].astype('category')''')
+        st.code('''df1['who'] = df1['who'].astype('category')''', line_numbers=True)
         df1['who'] = df1['who'].astype('category')
         st.divider()
         
         st.write(':blue-background[category]로 변경시 사용하는 메모리도 감소합니다.')
-        st.code('df1.info()')
+        st.code('df1.info()', line_numbers=True)
         buffer = io.StringIO()
         df1.info(buf=buffer)
         s = buffer.getvalue()
@@ -2555,24 +2595,27 @@ def show_chapter(topic, chapter):
                            file_name = "gas_second_2019.csv"
             )
         st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
-
+        st.divider()
+        st.code('''# 필요한 라이브러리 로드
+import pandas as pd
+''', line_numbers=True)
 
         st.divider()
 
         st.write('**1월부터 6월까지 상반기** 데이터 로드')
         code = '''gas1 = pd.read_csv('gas_first_2019.csv', encoding='euc-kr')'''
-        st.code(code)
-        st.code('print(gas1.shape)\ngas1.head()')
+        st.code(code, line_numbers=True)
+        st.code('print(gas1.shape)\ngas1.head()', line_numbers=True)
         gas1 = pd.read_csv('data/유가정보/gas_first_2019.csv', encoding='euc-kr')
         st.write(gas1.shape)
         st.write(gas1.head())
         
         st.write('**7월 부터 12월 까지 하반기** 데이터 로드')
         code =  '''gas2 = pd.read_csv('gas_second_2019.csv', encoding='euc-kr')'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         gas2 = pd.read_csv('data/유가정보/gas_second_2019.csv', encoding='euc-kr')
         code = '''print(gas2.shape)\ngas2.head()'''
-        st.code(code)    
+        st.code(code, line_numbers=True)    
         st.write(gas2.shape)
         st.write(gas2.head())
 
@@ -2586,54 +2629,56 @@ def show_chapter(topic, chapter):
         st.write('기본 값인 :blue-background[axis=0]이 지정되어 있고, 행 방향으로 연결합니다.')
         st.write('또한, 같은 column을 알아서 찾아서 데이터를 연결합니다.')
 
-        st.code('pd.concat([gas1, gas2])')
+        st.code('pd.concat([gas1, gas2])', line_numbers=True)
         st.write(pd.concat([gas1, gas2]))
         st.divider()
 
         st.write('연결시 위와 같이 index가 초기화가 되지 않아 **전체 DataFrame의 개수와 index가 맞지 않는** 모습입니다.')
-        st.code('''pd.concat([gas1, gas2]).iloc[90588:90593]''')
+        st.code('''pd.concat([gas1, gas2]).iloc[90588:90593]''', line_numbers=True)
         st.write(pd.concat([gas1, gas2]).iloc[90588:90593])
         st.divider()
 
         st.write('연결 하면서 **index를 무시하고 연결** 할 수 있습니다.')
-        st.code('''gas = pd.concat([gas1, gas2], ignore_index=True)\ngas''')
+        st.code('''gas = pd.concat([gas1, gas2], ignore_index=True)\ngas''', line_numbers=True)
         gas = pd.concat([gas1, gas2], ignore_index=True)
-        st.code('gas')
+        st.code('gas', line_numbers=True)
         st.write(gas)
         st.divider()
 
         st.write('합치고자 하는 데이터프레임의 **일부 컬럼이 누락되거나 순서가 바뀌어도** 알아서 같은 컬럼끼리 병합합니다.')
         code = '''gas11 = gas1[['지역', '주소', '상호', '상표', '휘발유']]\ngas22 = gas2[['상표', '번호', '지역', '상호', '주소', '경유', '휘발유']]'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         gas11 = gas1[['지역', '주소', '상호', '상표', '휘발유']]
         gas22 = gas2[['상표', '번호', '지역', '상호', '주소', '경유', '휘발유']]
-        st.code('gas11.head()')
+        st.code('gas11.head()', line_numbers=True)
         st.write(gas11.head())
 
-        st.code('gas22.head()')
+        st.code('gas22.head()', line_numbers=True)
         st.write(gas22.head())
         st.divider()
-        st.code('pd.concat([gas11, gas22], ignore_index=True)')
+        st.code('pd.concat([gas11, gas22], ignore_index=True)', line_numbers=True)
         st.write(pd.concat([gas11, gas22], ignore_index=True))
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}열 방향으로 연결")
         st.write('열(column) 방향으로 연결 가능하며, :blue-background[axis=1]로 지정합니다.')
-        code='''# 실습을 위한 DataFrame 임의 분할\n +
-            gas1 = gas.iloc[:, :5]\n +
-            gas2 = gas.iloc[:, 5:]'''
+        code='''# 실습을 위한 DataFrame 임의 분할
+gas1 = gas.iloc[:, :5]
+gas2 = gas.iloc[:, 5:]'''
+        st.code(code, line_numbers=True)
         gas1 = gas.iloc[:, :5]
         gas2 = gas.iloc[:, 5:]
-        st.code('gas1.head()')
+        st.code('gas1.head()', line_numbers=True)
         st.write(gas1.head())
-        st.divider()
-        st.code('gas2.head()')
+
+        st.code('gas2.head()', line_numbers=True)
         st.write(gas2.head())
         st.divider()
 
         st.write('같은 index 행끼리 연결됩니다.')
-        st.code('pd.concat([gas1, gas2], axis=1)')
+        st.code('pd.concat([gas1, gas2], axis=1)', line_numbers=True)
         st.write(pd.concat([gas1, gas2], axis=1))
+        st.divider()
         
         st.header(f"{idx.getHeadIdx()}데이터 병합") ## 소단원02
         import pandas as pd
@@ -2642,22 +2687,31 @@ def show_chapter(topic, chapter):
         st.write('- :blue-background[merge()]는 2개의 DataFrame을 특정 key를 기준으로 병합할 때 활용하는 메서드입니다.')
 
         st.write('서로 **다른 구성의 DataFrame이지만, 공통된 key값(컬럼)을 가지고 있다면 병합**할 수 있습니다.')
-        with st.echo():
-            df1 = pd.DataFrame({
-            '고객명': ['박세리', '이대호', '손흥민', '김연아', '마이클조던'],
-            '생년월일': ['1980-01-02', '1982-02-22', '1993-06-12', '1988-10-16', '1970-03-03'],
-            '성별': ['여자', '남자', '남자', '여자', '남자']})
-            df1
-        
-
-        with st.echo():
-            df2 = pd.DataFrame({
-            '고객명': ['김연아', '박세리', '손흥민', '이대호', '타이거우즈'],
-            '연봉': ['2000원', '3000원', '1500원', '2500원', '3500원']})
-            df2
         st.divider()
-        with st.echo():
-            pd.merge(df1, df2)
+        st.code('''
+df1 = pd.DataFrame({
+'고객명': ['박세리', '이대호', '손흥민', '김연아', '마이클조던'],
+'생년월일': ['1980-01-02', '1982-02-22', '1993-06-12', '1988-10-16', '1970-03-03'],
+'성별': ['여자', '남자', '남자', '여자', '남자']})
+df1''', line_numbers=True)
+        df1 = pd.DataFrame({
+        '고객명': ['박세리', '이대호', '손흥민', '김연아', '마이클조던'],
+        '생년월일': ['1980-01-02', '1982-02-22', '1993-06-12', '1988-10-16', '1970-03-03'],
+        '성별': ['여자', '남자', '남자', '여자', '남자']})
+        st.write(df1)
+        
+        st.code('''
+df2 = pd.DataFrame({
+'고객명': ['김연아', '박세리', '손흥민', '이대호', '타이거우즈'],
+'연봉': ['2000원', '3000원', '1500원', '2500원', '3500원']})
+df2''', line_numbers=True)
+        df2 = pd.DataFrame({
+        '고객명': ['김연아', '박세리', '손흥민', '이대호', '타이거우즈'],
+        '연봉': ['2000원', '3000원', '1500원', '2500원', '3500원']})
+        st.write(df2)
+        st.divider()
+
+        st.code('''pd.merge(df1, df2)''', line_numbers=True)
         st.write(pd.merge(df1, df2))
         
         st.divider()
@@ -2667,42 +2721,51 @@ def show_chapter(topic, chapter):
         st.write(':blue-background[how] 옵션 값을 지정하여 4가지 방식으로 병합을 할 수 있으며, 각기 다른 결과를 냅니다.')
         st.write('''- **how** : '{':blue-background[left], :blue-background[right], :blue-background[outer], :blue-background[inner]'}',''')
         st.write('- **default**로 설정된 값은 :blue-background[inner] 입니다.')
-        st.code('''# how='inner' 입니다.\npd.merge(df1, df2)''')
+        st.code('''# how='inner' 입니다.\npd.merge(df1, df2)''', line_numbers=True)
         st.write(pd.merge(df1, df2))
         st.divider()
 
-        st.code('''pd.merge(df1, df2, how='left')''')
+        st.code('''pd.merge(df1, df2, how='left')''', line_numbers=True)
         st.write(pd.merge(df1, df2, how='left'))
         st.divider()
 
-        st.code('''pd.merge(df1, df2, how='right')''')
+        st.code('''pd.merge(df1, df2, how='right')''', line_numbers=True)
         st.write(pd.merge(df1, df2, how='right'))
         st.divider()
 
-        st.code('''pd.merge(df1, df2, how='outer')''')
+        st.code('''pd.merge(df1, df2, how='outer')''', line_numbers=True)
         st.write(pd.merge(df1, df2, how='outer'))
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}병합하려는 컬럼의 이름이 다른 경우")
-        with st.echo():
-            df1 = pd.DataFrame({
-            '이름': ['박세리', '이대호', '손흥민', '김연아', '마이클조던'],
-            '생년월일': ['1980-01-02', '1982-02-22', '1993-06-12', '1988-10-16', '1970-03-03'],
-            '성별': ['여자', '남자', '남자', '여자', '남자']})
-            df1
+        st.code('''
+df1 = pd.DataFrame({
+'이름': ['박세리', '이대호', '손흥민', '김연아', '마이클조던'],
+'생년월일': ['1980-01-02', '1982-02-22', '1993-06-12', '1988-10-16', '1970-03-03'],
+'성별': ['여자', '남자', '남자', '여자', '남자']})
+df1''', line_numbers=True)
+        df1 = pd.DataFrame({
+        '이름': ['박세리', '이대호', '손흥민', '김연아', '마이클조던'],
+        '생년월일': ['1980-01-02', '1982-02-22', '1993-06-12', '1988-10-16', '1970-03-03'],
+        '성별': ['여자', '남자', '남자', '여자', '남자']})
+        st.write(df1)
         st.divider()
 
-        with st.echo():
-            df2 = pd.DataFrame({
-            '고객명': ['김연아', '박세리', '손흥민', '이대호', '타이거우즈'],
-            '연봉': ['2000원', '3000원', '1500원', '2500원', '3500원']})
-            df2
+        st.code('''
+df2 = pd.DataFrame({
+'고객명': ['김연아', '박세리', '손흥민', '이대호', '타이거우즈'],
+'연봉': ['2000원', '3000원', '1500원', '2500원', '3500원']})
+df2''', line_numbers=True)
+        df2 = pd.DataFrame({
+        '고객명': ['김연아', '박세리', '손흥민', '이대호', '타이거우즈'],
+        '연봉': ['2000원', '3000원', '1500원', '2500원', '3500원']})
+        st.write(df2)
         st.divider()
 
         st.write(':blue-background[left_on]과 :blue-background[right_on]을 지정합니다.')
         st.write('이름과 고객명 컬럼이 모두 drop되지 않고 살아 있음을 확인할 수 있습니다.')
         code = '''pd.merge(df1, df2, left_on='이름', right_on='고객명')'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(pd.merge(df1, df2, left_on='이름', right_on='고객명'))
 
     elif path == ("Pandas 기초", "Static"):
@@ -2732,7 +2795,7 @@ def show_chapter(topic, chapter):
         st.write('- **max**: 최대값')
 
         code = 'df.describe()'
-        st.code(code)
+        st.code(code, line_numbers=True)
         st.write(df.describe())
         st.divider()
 
@@ -2744,7 +2807,7 @@ def show_chapter(topic, chapter):
 
         ## warning 문 뜸
         # st.header('문자열 칼럼에 대한 요약통계')
-        st.code('''df.describe(include='object')''')
+        st.code('''df.describe(include='object')''', line_numbers=True)
         st.write(df.describe(include='object'))
         st.divider()
 
@@ -2761,11 +2824,11 @@ def show_chapter(topic, chapter):
         st.write('데이터의 개수')
         st.write('DataFrame 전체의 개수를 구하는 경우')
 
-        st.code('df.count()')
+        st.code('df.count()', line_numbers=True)
         st.write(df.count())
 
         st.write('단일 column의 데이터 개수를 구하는 경우')
-        st.code('''df['age'].count()''')
+        st.code('''df['age'].count()''', line_numbers=True)
         st.write(df['age'].count())
 
         st.divider()
@@ -2775,11 +2838,11 @@ def show_chapter(topic, chapter):
         st.write('데이터의 **평균**')
         st.write('DataFrame 평균')
 
-        st.code('df')
+        st.code('df', line_numbers=True)
         st.write(df)
 
         st.write(':blue-background[age] 컬럼에 대한 평균')
-        st.code('''df['age'].mean()''')
+        st.code('''df['age'].mean()''', line_numbers=True)
         st.write(df['age'].mean())
 
         st.divider()
@@ -2787,7 +2850,7 @@ def show_chapter(topic, chapter):
         st.subheader(f"{idx.getSubIdx()}mean - 조건별 평균")
         st.write('성인 남성의 나이의 평균 구하기')
         code = '''condition = (df['adult_male'] == True)\ndf.loc[condition, 'age'].mean()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         condition = (df['adult_male'] == True)
         st.write(df.loc[condition, 'age'].mean()    )
 
@@ -2797,24 +2860,26 @@ def show_chapter(topic, chapter):
         st.write('데이터의 중앙 값을 출력 합니다. 데이터를 **오름차순 정렬하여 중앙에 위치한 값**입니다.')
         st.write('이상치(outlier)가 존재하는 경우, mean()보다 median()을 대표값으로 더 선호합니다.')
 
-        st.code('pd.Series([1, 2, 3, 4, 5]).median()')
+        st.code('pd.Series([1, 2, 3, 4, 5]).median()', line_numbers=True)
         st.write(pd.Series([1, 2, 3, 4, 5]).median())
         
-        st.code('pd.Series([4, 5, 1, 2, 3]).median()')
+        st.code('pd.Series([4, 5, 1, 2, 3]).median()', line_numbers=True)
         st.write(pd.Series([4, 5, 1, 2, 3]).median())
 
-        st.code('pd.Series([1, 2, 3, 4, 5, 6]).median()')
+        st.code('pd.Series([1, 2, 3, 4, 5, 6]).median()', line_numbers=True)
         st.write(pd.Series([1, 2, 3, 4, 5, 6]).median())
 
         st.write('**짝수** 개의 데이터가 있는 경우에는 **가운데 2개 중앙 데이터의 평균 값을 출력** 합니다.')
-        st.code('pd.Series([1, 2, 3, 4, 5, 6]).median()')
+        st.code('pd.Series([1, 2, 3, 4, 5, 6]).median()', line_numbers=True)
         st.write(pd.Series([1, 2, 3, 4, 5, 6]).median())
         st.divider()
 
         st.write('나이의 평균(mean)과 중앙값(median)은 약간의 **차이가 있음**을 확인할 수 있습니다.')
 
-        code='''print(f"나이 평균: {df['age'].mean():.5f}\n\t나이 중앙값: {df['age'].median()}\n\t차이: {df['age'].mean() - df['age'].median():.5f}")'''
-        st.code(code)
+        code='''print(f"나이 평균: {df['age'].mean():.5f}
+나이 중앙값: {df['age'].median()}
+차이: {df['age'].mean() - df['age'].median():.5f}")'''
+        st.code(code, line_numbers=True)
         st.write((f"나이 평균: {df['age'].mean():.5f}\n\t나이 중앙값: {df['age'].median()}\n\t차이: {df['age'].mean() - df['age'].median():.5f}"))
 
         st.divider()
@@ -2822,11 +2887,11 @@ def show_chapter(topic, chapter):
         st.subheader(f"{idx.getSubIdx()}sum() - 합계")
 
         st.write('데이터의 **합계**입니다. 문자열 column은 모든 데이터가 붙어서 출력될 수 있습니다.')
-        st.code('''df.loc[:, ['age', 'fare']].sum()''')
+        st.code('''df.loc[:, ['age', 'fare']].sum()''', line_numbers=True)
         st.write(df.loc[:, ['age', 'fare']].sum())
 
         st.write('단일 column에 대한 **합계 출력**')
-        st.code('''df['fare'].sum()''')
+        st.code('''df['fare'].sum()''', line_numbers=True)
         st.write(df['fare'].sum())   
 
         st.divider()
@@ -2838,11 +2903,11 @@ def show_chapter(topic, chapter):
         ''')
 
         st.code('''
-            # 평균
-            fare_mean = df['fare'].values.mean()
-            # 분산
-            my_var = ((df['fare'].values - fare_mean) ** 2).sum() / (df['fare'].count() - 1)
-            my_var''')
+# 평균
+fare_mean = df['fare'].values.mean()
+# 분산
+my_var = ((df['fare'].values - fare_mean) ** 2).sum() / (df['fare'].count() - 1)
+my_var''', line_numbers=True)
         fare_mean = df['fare'].values.mean()
         my_var = ((df['fare'].values - fare_mean) ** 2).sum() / (df['fare'].count() - 1)
         st.write(my_var)
@@ -2853,30 +2918,30 @@ def show_chapter(topic, chapter):
                 ''')
         st.write('분산(var)의 제곱근')
         st.code(
-            '''import numpy as np\nnp.sqrt(df['fare'].var())''')
+            '''import numpy as np\nnp.sqrt(df['fare'].var())''', line_numbers=True)
         import numpy as np
         st.write(np.sqrt(df['fare'].var()))
-        st.code('''df['fare'].std()''')
+        st.code('''df['fare'].std()''', line_numbers=True)
         st.write(df['fare'].std())
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}min() - 최소값, max() - 최대값")
         st.code(
-         '''# 최소값
-            df['age'].min()
-            # 최대값
-            df['age'].max()''')
+'''# 최소값
+df['age'].min()
+# 최대값
+df['age'].max()''', line_numbers=True)
         st.write(df['age'].min())
         st.write(df['age'].max())
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}mode() - 최빈값")
         st.write('최빈값은 **가장 많이 출현한 데이터**를 의미합니다.')
-        st.code('''df['who'].mode()''')
+        st.code('''df['who'].mode()''', line_numbers=True)
         st.write(df['who'].mode())   
 
         st.write('카테고리형 데이터에도 적용 가능합니다.')
-        st.code('''df['deck'].mode()''')
+        st.code('''df['deck'].mode()''', line_numbers=True)
         st.write(df['deck'].mode())
         st.divider()
         
@@ -2892,11 +2957,11 @@ def show_chapter(topic, chapter):
         
         st.subheader(f"{idx.getSubIdx()}agg - aggregation: 통합 통계 적용 (복수의 통계 함수 적용)")
         st.write('단일 컬럼에 agg 적용')
-        st.code('''df['age'].agg(['min', 'max', 'count','mean'])''')
+        st.code('''df['age'].agg(['min', 'max', 'count','mean'])''', line_numbers=True)
         st.write(df['age'].agg(['min', 'max', 'count','mean']))       
 
         st.write('복수의 컬럼에 agg 적용')
-        st.code('''df[['age', 'fare']].agg(['min', 'max', 'count', 'mean'])''')
+        st.code('''df[['age', 'fare']].agg(['min', 'max', 'count', 'mean'])''', line_numbers=True)
         st.write(df[['age', 'fare']].agg(['min', 'max', 'count', 'mean']))
     
         st.divider()
@@ -2904,11 +2969,11 @@ def show_chapter(topic, chapter):
         st.subheader(f"{idx.getSubIdx()}quantile() - 분위")
         st.write('**Quantile이란 주어진 데이터를 동등한 크기로 분할하는 지점**Quantile이란 주어진 데이터를 동등한 크기로 분할하는 지점을 말합니다.')
         st.write('10%의 경우 0.1을, 80%의 경우 0.8을 대입하여 값을 구합니다.')
-        st.code('''# 10% quantile\ndf['age'].quantile(0.1)''')
+        st.code('''# 10% quantile\ndf['age'].quantile(0.1)''', line_numbers=True)
         st.write(df['age'].quantile(0.1))
         st.divider()
         
-        st.code('''# 80% quantile\ndf['age'].quantile(0.8)''')
+        st.code('''# 80% quantile\ndf['age'].quantile(0.8)''', line_numbers=True)
         st.write(df['age'].quantile(0.8))
 
         st.divider()
@@ -2917,24 +2982,24 @@ def show_chapter(topic, chapter):
         st.write('고유값과 고유값의 개수를 구하고자 할 때 사용합니다.')
 
         st.write('**unique()**')
-        st.code('''df['who'].unique()''')
+        st.code('''df['who'].unique()''', line_numbers=True)
         st.write(df['who'].unique())   
         st.divider()
         st.write('**nonique()**: 고유값의 개수를 출력합니다.')
-        st.code('''df['who'].nunique()''')
+        st.code('''df['who'].nunique()''', line_numbers=True)
         st.write(df['who'].nunique())
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}cumsum() - 누적합, cumprod() - 누적곱")
 
         st.write('누적되는 합계를 구할 수 있습니다.')
-        st.code('''df['age'].cumsum()''')
+        st.code('''df['age'].cumsum()''', line_numbers=True)
         st.write(df['age'].cumsum())
         st.divider()
 
         st.write('누적되는 곱도 구할 수 있으나, 일반적으로 **값이 너무 커지므로 잘 활용하지는 않습니다.**')
 
-        st.code('''df['age'].cumprod()''')
+        st.code('''df['age'].cumprod()''', line_numbers=True)
         st.write(df['age'].cumprod())
         st.divider()
 
@@ -2946,13 +3011,13 @@ def show_chapter(topic, chapter):
         code = '''
             numeric_df = df[['survived','age', 'pclass','sibsp', 'parch','fare']]
             numeric_df.corr()'''
-        st.code(code)
+        st.code(code, line_numbers=True)
         numeric_df = df[['survived','age', 'pclass','sibsp', 'parch','fare']]
         st.write(numeric_df.corr())
 
         st.divider()
         st.write('**특정 컬럼에 대한 상관관계**를 확인할 수 있습니다.')
-        st.code('''numeric_df.corr()['survived']''')
+        st.code('''numeric_df.corr()['survived']''', line_numbers=True)
         st.write(numeric_df.corr()['survived']) 
         st.divider()
     
@@ -6467,7 +6532,7 @@ plt.show()''', line_numbers=True)
         weather_df['전운량'] = weather_df['전운량'].ffill()
         weather_df['지면온도'] = weather_df['지면온도'].ffill()
         
-        st.write("결측치를 제거한 결과를 확인해보겠습니다.")
+        st.write("결측치를 제거한 결과를 확인해 보겠습니다.")
         st.code('''
                 #결측치 제거 확인
                 weather_df.isnull().sum()
