@@ -5427,15 +5427,6 @@ plt.show()'''
         import matplotlib.pyplot as plt
         st.header(f"{idx.getHeadIdx()}서울시 종로구 대기오염")
         st.write("CSV 파일의 2022년 서울시 종로구 대기오염 측정정보를 사용하여 데이터 로드, 분석 및 시각화 결론도출까지 실습을 진행합니다.")
-        st.subheader(f"{idx.getSubIdx()}라이브러리 설치하기")
-        code = '''pip install numpy'''
-        st.code(code, language='python')
-        code = '''pip install pandas'''
-        st.code(code, language='python')
-        code = '''pip install seaborn'''
-        st.code(code, language='python')
-        code = '''pip install matplotlib'''
-        st.code(code, language='python')
 
         st.subheader(f"{idx.getSubIdx()}데이터 준비")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
