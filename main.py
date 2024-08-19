@@ -5437,7 +5437,7 @@ plt.show()'''
         code = '''pip install matplotlib'''
         st.code(code, language='python')
 
-        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        st.subheader(f"{idx.getSubIdx()}데이터 준비")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
         col1, col2, col3 = st.columns(3)
 
@@ -5471,12 +5471,35 @@ plt.show()'''
                                 data=template_byte,
                             file_name = "Measurement_summary.csv"
             )
-        code = '''
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
+        st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
+        st.write('''
+                CMD 창을 열고 아래의 패키지들을 설치해 줍니다. 
+                 ''')
+        st.code('''
+                $ pip install numpy
+                ''', language="text")
+        st.code('''
+                $ pip install pandas
+                ''', language="text")
+        st.code('''
+                $ pip install seaborn
+                ''', language="text")
+        st.code('''
+                $ pip install matplotlib
+                ''', language="text")
+        
+        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지들을 호출해 줍니다.")
+        st.code('''
+                import numpy as np
+                import pandas as pd
+                import seaborn as sns
+                import matplotlib.pyplot as plt
+                ''')
+        st.divider()
+
+        st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
+        code = '''
 # 데이터 불러오기
 df_summary = pd.read_csv('data/서울시대기오염측정정보/Measurement_summary.csv')
 df_item = pd.read_csv('data/서울시대기오염측정정보/Measurement_item_info.csv')
