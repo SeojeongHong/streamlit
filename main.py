@@ -45,12 +45,12 @@ def load_contents() :
 CONTENTS , TOPICS = load_contents()
 
 def init_session_state() :
-    if "count" not in server_state:
-        server_state.count = 0
+    if "views" not in server_state:
+        server_state.views = 0
 
-    if 'init' not in st.session_state:
-        st.session_state['init'] = True
-        server_state.count += 1
+    if 'lock' not in st.session_state:
+        st.session_state['lock'] = True
+        server_state.views += 1
     
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
@@ -6718,7 +6718,7 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {format(server_state.count, ',')} views
+                            {format(server_state.views, ',')} views
                             </div>
                     </div>
                     """,
