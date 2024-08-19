@@ -5463,6 +5463,15 @@ plt.show()'''
                                 data=template_byte,
                             file_name = "Measurement_summary.csv"
             )
+        st.write('해당 파일들을 :blue-background[./data/**서울시대기오염측정정보**/]경로로 옮겨주세요.')
+        st.code('''
+                .
+                ├─ 현재작업파일.ipynb
+                ├─ 📁data
+                │   └─📁서울시대기오염측정정보
+                │       ├─ Measurement_item_info.csv
+                │       ├─         ...
+                ''', language="text")
         st.divider()
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
         st.write('''
@@ -5677,6 +5686,13 @@ plt.show()'''
         )
 
         st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
+        st.code('''
+                .
+                ├─ 현재작업파일.ipynb
+                ├─ 음식점소비트렌드데이터.csv
+                ├─         ...
+                ''', language="text")
+        st.divider()
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
