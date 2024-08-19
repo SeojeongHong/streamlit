@@ -439,7 +439,7 @@ def show_chapter(topic, chapter):
                  ''')
         st.divider()
         st.subheader(f"{idx.getSubIdx()}불 자료형 사용법")
-        st.write("불 자료형은 조건문의 리턴값으로도 사용됩니다.")
+        st.write("불 자료형은 조건문의 리턴 값으로도 사용됩니다.")
         st.code('''
                 a = 5 > 3
                 print(a)
@@ -471,7 +471,7 @@ def show_chapter(topic, chapter):
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}리스트")
-        st.write("리스트는 데이터들을 편리하게 관리하기 위해 묶어서 관리하는 자료형 중의 하나 입니다. 리스트 안에는 어떠한 자료형도 포함할 수 있습니다.")
+        st.write("리스트는 데이터들을 편리하게 관리하기 위해 묶어서 관리하는 자료형 중의 하나입니다. 리스트 안에는 어떠한 자료형도 포함할 수 있습니다.")
         st.code('''
                 a = []  #값이 없는 리스트
                 print(a)
@@ -715,7 +715,7 @@ def show_chapter(topic, chapter):
         
         st.header(f"{idx.getHeadIdx()}튜플")
         st.write('''
-                튜플(Tuple)은 몇 가지 점을 재외하곤 리스트와 거의 비슷하며 리스트와 다른 점은 다음과 같습니다.
+                튜플(Tuple)은 몇 가지 점을 제외하곤 리스트와 거의 비슷하며 리스트와 다른 점은 다음과 같습니다.
                 
                 - 리스트는 [], 튜플은 ()으로 둘러싼다.
                 - 리스트는 요솟값의 생성, 삭제, 수정이 가능하지만, 튜플은 요솟값을 바꿀 수 없다.
@@ -6155,15 +6155,15 @@ plt.show()'''
     elif path == ("실습 프로젝트", "날씨별 공공자전거 수요 분석"):
         st.header(f"{idx.getHeadIdx()}날씨별 공공자전거 수요 분석")
         st.write('''
-                자전거 대여소는 계절과 날씨에 따라 대여 건수의 변동이 심해, 운영 비용에 큰 영향을 미치고 있습니다. 따라서 날씨예보정보를 활용해 대여건수를 사전에 예측하고, 
+                자전거 대여소는 계절과 날씨에 따라 대여 건수의 변동이 심해, 운영 비용에 큰 영향을 미치고 있습니다. 따라서 날씨 예보 정보를 활용해 대여 건수를 사전에 예측하고, 
                  운영 비용을 조정하기 위한 데이터 분석 및 시각화 실습을 진행합니다.
                  ''')
         st.divider()
 
 
         st.subheader(f"{idx.getSubIdx()}데이터 준비")
-        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드 해주세요')
-        st.write('해당 파일을 압축 해제해 **실습03** 폴더를 :blue-background[data/실습03/]경로로 이동해주세요.')
+        st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드해 주세요')
+        st.write('해당 파일을 압축 해제해 **실습03** 폴더를 :blue-background[data/실습03/]경로로 이동해 주세요.')
         with open('data/실습03.zip', "rb") as template_file:
             template_zip = template_file.read()
 
@@ -6177,7 +6177,7 @@ plt.show()'''
 
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
         st.write('''
-                CMD창을 열고 아래의 패키지들을 설치해줍니다. 
+                CMD 창을 열고 아래의 패키지들을 설치해 줍니다. 
                  ''')
         st.code('''
                 $ pip install numpy
@@ -6192,7 +6192,7 @@ plt.show()'''
                 $ pip install matplotlib
                 ''', language="text")
         
-        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지들을 호출해줍니다.")
+        st.write("다시 작업 파일(.ipynb)로 돌아와서, 설치한 패키지들을 호출해 줍니다.")
         st.code('''
                 import numpy as np
                 import pandas as pd
@@ -6254,7 +6254,7 @@ plt.show()'''
 
         st.header(f"{idx.getHeadIdx()}공공자전거 데이터 전처리")
         st.subheader(f"{idx.getSubIdx()}집계 데이터 생성")
-        st.write('''날씨 정보와의 결합에 필요한 데이터(**이용건수**)를 생성하기 위해 **대여일자**, **대여시간**으로 집계해줍니다.''')
+        st.write('''날씨 정보와의 결합에 필요한 데이터(**이용건수**)를 생성하기 위해 **대여일자**, **대여시간**으로 집계해 줍니다.''')
         st.code('''
                 #공공자전거 집계 데이터 생성
                 bike_df2 = bike_info.groupby(['대여일자', '대여시간'])['이용건수'].sum()
@@ -6343,7 +6343,7 @@ plt.show()'''
                 ''',line_numbers=True)
         st.write(weather_df.isnull().sum())
         st.write('''
-                **강수량, 적설, 일조, 일사**와 같이 NaN값이 0인 경우는 0으로 fill 해줍니다. **전운량, 기온, 지면온도, 풍향, 풍속**은 같은 일자의 이전시간대의 데이터로 대체합니다.
+                **강수량, 적설, 일조, 일사**와 같이 NaN값이 0인 경우는 0으로 fill 해줍니다. **전운량, 기온, 지면온도, 풍향, 풍속**은 같은 일자의 이전 시간대의 데이터로 대체합니다.
                 ''')
         
         st.write('''
@@ -6412,7 +6412,7 @@ plt.show()'''
                             right_on = ['날짜', '시간']) #default = inner 
         st.write(bike_mg.head())
 
-        st.write("**대여일자, 날짜, 시간** 데이터가 중복되는 것을 확인할 수 있습니다. 중복되는 데이터를 제거해보겠습니다.")
+        st.write("**대여일자, 날짜, 시간** 데이터가 중복되는 것을 확인할 수 있습니다. 중복되는 데이터를 제거해 보겠습니다.")
         st.code('''
                 #중복데이터 제거
                 bike_mg = bike_mg.drop(['대여일자', '날짜', '시간'], axis = 1)
@@ -6442,7 +6442,7 @@ plt.show()'''
 
 
         st.subheader(f"{idx.getSubIdx()}데이터 요약 통계")
-        st.write("데이터의 요약 통계를 확인해 정상적인 값인지 확인해보겠습니다.")
+        st.write("데이터의 요약 통계를 확인해 정상적인 값인지 확인해 보겠습니다.")
         st.code('''
                 #데이터 요약 통계
                 desc_df = data.describe().T
@@ -6589,7 +6589,7 @@ plt.show()'''
         st.pyplot(fig)
         plt.close(fig)
         st.write('''평일과 공휴일에는 완전히 다른 이용 현황을 보이는 것을 확인할 수 있습니다.
-                 평일의 경우 오전 8시, 오후 6시에 이용건수 피크를 보이는데, 출퇴근으로 인한 영향으로 추측해볼 수 있겠습니다.
+                 평일의 경우 오전 8시, 오후 6시에 이용건수 피크를 보이는데, 출퇴근으로 인한 영향으로 추측해 볼 수 있겠습니다.
                  ''')
         st.divider()
 
@@ -6636,7 +6636,7 @@ plt.show()'''
         
         
         st.header(f"{idx.getHeadIdx()}결론 도출")
-        st.subheader(f"{idx.getSubIdx()}시간대 및 공휴일여부에 따른 특성")
+        st.subheader(f"{idx.getSubIdx()}시간대 및 공휴일 여부에 따른 특성")
         st.write('''
                 - 공공자전거 이용이 가장 많은 시간대는 **평일 오후 6시**입니다.
                 - 두 번째로 이용이 많은 시간대는 **평일 오전 8시**입니다.
