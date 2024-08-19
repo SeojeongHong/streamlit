@@ -1312,8 +1312,6 @@ def show_chapter(topic, chapter):
                 # 9 E
                 ''',line_numbers=True)
         
-        
-    
     elif path == ("파이썬 기초", "고급") :
         st.header(f"{idx.getHeadIdx()}함수")
         st.write("코드의 반복을 줄이거나 어떠한 용도를 위해 특정 코드들을 모아둔 것입니다. 한 번 작성해두면 해당 코드가 필요할 때 함수를 호출해서 쉽게 재사용 할 수 있고, 용도에 따라 분리가 가능해 가독성이 좋습니다.")
@@ -5672,8 +5670,6 @@ plt.show()'''
         with open('data/음식점소비트렌드/음식점소비트렌드데이터.csv', "rb") as template_file:
             template_csv = template_file.read()
 
-        
-
         st.download_button(label="download data",
                             type="primary",
                             data=template_csv,
@@ -5681,7 +5677,15 @@ plt.show()'''
         )
 
         st.write('다운 받은 데이터를 현재 작업 중인 jupyter 디렉터리로 이동해주세요')
-        
+        st.code('''
+                .
+                ├─ 현재작업파일.ipynb
+                ├─ 📁data
+                │   └─📁실습03
+                │       ├─ 공공자전거이용정보0.csv
+                │       ├─ 공공자전거이용정보1.csv
+                │       ├─         ...
+                ''', language="text")
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}패키지 설치 및 호출")
@@ -6235,15 +6239,22 @@ plt.show()''', line_numbers=True)
 
         st.subheader(f"{idx.getSubIdx()}데이터 준비")
         st.write('- 실습을 위해 **아래의 버튼**을 클릭하여 데이터를 다운로드해 주세요')
-        st.write('해당 파일을 압축 해제해 **실습03** 폴더를 :blue-background[data/실습03/]경로로 이동해 주세요.')
         with open('data/실습03.zip', "rb") as template_file:
             template_zip = template_file.read()
-
         st.download_button(label="download data",
                             type="primary",
                             data=template_zip,
                            file_name = "실습03.zip"
         )
+        st.write('해당 파일의 압축을 풀고, **실습03** 폴더를 :blue-background[./data/**실습03**/]경로로 옮겨주세요.')
+        st.code('''
+                .
+                ├─ 현재작업파일.ipynb
+                ├─ 📁data
+                │   └─📁실습03
+                │       ├─ 공공자전거이용정보0.csv
+                │       ├─         ...
+                ''', language="text")
         st.divider()
 
 
