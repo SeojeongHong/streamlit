@@ -88,7 +88,8 @@ def show_topic(topic):
 matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을 만들고, 몇 개의 선을 표현하고, 레이블로 꾸미는 등 간편하게 그래프를 만들고 변화를 줄 수 있습니다.''',
             "실습 프로젝트" : "데이터 분석 및 시각화 실습 코드를 제공합니다.",
     }
-    st.info(info_txt[topic])
+    with st.container():
+        st.info(info_txt[topic])
     
     table = [st.columns(3)] * ((len(chapters) + 2) // 3)
     for i, title in enumerate(chapters):
