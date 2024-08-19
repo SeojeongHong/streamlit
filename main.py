@@ -1527,7 +1527,6 @@ def show_chapter(topic, chapter):
         st.code('''
                 a = np.array([1, 2, 3])
 
-                # 합계
                 b = np.sum(a)
                 print(b)  # 출력 6
                 ''',line_numbers=True)
@@ -1597,7 +1596,7 @@ def show_chapter(topic, chapter):
                 print(e)  # 출력 [2, 5]
 
                 f = a[:, :2]   
-                print(f)  # 출력 [[1, 2], [4, 5]]
+                print(f)  # 출력 [[1, 2] [4, 5]]
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}NumPy 배열 병합과 분리")
@@ -1617,7 +1616,7 @@ def show_chapter(topic, chapter):
 
                 # 배열 병합
                 c = np.concatenate((a, b), axis=0)  
-                print(c)    # 출력 [[1, 2], [3, 4], [5, 6]]
+                print(c)    # 출력 [[1, 2] [3, 4] [5, 6]]
                 ''',line_numbers=True)
         st.write("**split()** 함수를 사용해 다차원 배열을 분리할 수 있습니다. split() 함수는 분리할 배열과 분리할 인덱스를 전달하며, 분리할 인덱스는 분리될 배열의 첫 번째 차원을 따라 지정합니다.")
         st.code('''
@@ -1625,7 +1624,7 @@ def show_chapter(topic, chapter):
 
                 # 배열 분리
                 b, c = np.split(a, [3])  
-                print(b, c)    # 출력 [1, 2, 3], [4, 5, 6])
+                print(b, c)    # 출력 [1, 2, 3] [4, 5, 6])
                 ''',line_numbers=True)
         st.write("**axis=0**은 첫 번째 차원을 따라 배열을 분리한다는 의미입니다. 아래 코드의 경우 a의 첫 번째 행을 기준으로 배열을 분리합니다.")
         st.code('''
@@ -1633,7 +1632,7 @@ def show_chapter(topic, chapter):
 
                 # 배열 분리
                 b, c = np.split(a, [1], axis=0)  
-                print(b, c)    # 출력 [[1, 2, 3]], [[4, 5, 6]]
+                print(b, c)    # 출력 [[1, 2, 3]] [[4, 5, 6]]
                 ''',line_numbers=True)
         st.divider()
         st.subheader(f"{idx.getSubIdx()}NumPy 관련 함수")
