@@ -464,7 +464,7 @@ def show_chapter(topic, chapter):
         st.divider()
         
         st.header(f"{idx.getHeadIdx()}리스트")
-        st.write("리스트는 데이터들을 편리하게 관리하기 위해 묶어서 관리하는 자료형 중의 하나 입니다. 리스트 안에는 어떠한 자료형도 포함할 수 있습니다.")
+        st.write("리스트는 데이터들을 편리하게 관리하기 위해 묶어서 관리하는 자료형 중의 하나입니다. 리스트 안에는 어떠한 자료형도 포함할 수 있습니다.")
         st.code('''
                 a = []  #값이 없는 리스트
                 print(a)
@@ -708,7 +708,7 @@ def show_chapter(topic, chapter):
         
         st.header(f"{idx.getHeadIdx()}튜플")
         st.write('''
-                튜플(Tuple)은 몇 가지 점을 재외하곤 리스트와 거의 비슷하며 리스트와 다른 점은 다음과 같습니다.
+                튜플(Tuple)은 몇 가지 점을 제외하곤 리스트와 거의 비슷하며 리스트와 다른 점은 다음과 같습니다.
                 
                 - 리스트는 [], 튜플은 ()으로 둘러싼다.
                 - 리스트는 요솟값의 생성, 삭제, 수정이 가능하지만, 튜플은 요솟값을 바꿀 수 없다.
@@ -1432,13 +1432,13 @@ def show_chapter(topic, chapter):
                                 import 패키지명
                 ''')    
         st.write('''
-                패키지명이 너무 길면 **as** 를 사용하여 짧은 패키지 별명을 사용할 수 있습니다.
+                패키지명이 너무 길면 **as**를 사용하여 짧은 패키지 별명을 사용할 수 있습니다.
                 ''')    
         st.code('''import pandas as pd''')
         st.divider()
 
         st.header(f"{idx.getHeadIdx()}NumPy")
-        st.write("**NumPy**는 대규모 다차원 배열과 행렬 연산에 필요한 다양한 함수와 메소드를 제공합니다. 데이터 분석, 데이터 처리, 선형 대수, 머신 러닝 등 다양한 분야에서 널리 사용되고 있습니다.")
+        st.write("**NumPy**는 대규모 다차원 배열과 행렬 연산에 필요한 다양한 함수와 메서드를 제공합니다. 데이터 분석, 데이터 처리, 선형 대수, 머신 러닝 등 다양한 분야에서 널리 사용되고 있습니다.")
 
         st.divider()
         st.subheader(f"{idx.getSubIdx()}기본 사용법")
@@ -1479,7 +1479,7 @@ def show_chapter(topic, chapter):
                 #   [7 8]]]
                 ''',line_numbers=True)
         
-        st.write("이렇게 생성된 배열의 크기는 **shape**속성을 통해 확인할 수 있습니다.")
+        st.write("이렇게 생성된 배열의 크기는 **shape** 속성을 통해 확인할 수 있습니다.")
         st.code('''
                 print(a.shape)  # 출력 : (3,)
                 print(b.shape)  # 출력 : (2, 3)
