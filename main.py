@@ -1654,7 +1654,7 @@ def show_chapter(topic, chapter):
                 ''',line_numbers=True)
     
     ### Pandas 컨텐츠 작성
-    elif path == ("Pandas 기초", "DataFrame") :
+     elif path == ("Pandas 기초", "DataFrame") :
         st.header(f"{idx.getHeadIdx()}데이터프레임 생성") ## 소단원01
 
         st.markdown('- 2차원 데이터 구조 (Excel 데이터 시트와 비슷합니다.) \n'
