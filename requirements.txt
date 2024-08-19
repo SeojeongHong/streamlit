@@ -1,9 +1,9 @@
 streamlit
 streamlit-option-menu
 streamlit_float
+streamlit_server_state
 matplotlib
 numpy
 pandas
 seaborn
 openpyxl
-streamlit_server_state
