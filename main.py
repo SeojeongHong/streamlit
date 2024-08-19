@@ -6706,16 +6706,16 @@ def main() :
                 "nav-link-selected": {"background-color": "#RGB(255,99,99)"}
             }
         )
-    st.markdown(
-                f"""
-                <div style="position: relative; height: 1rem;">
-                        <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                        {server_state.count} views
-                        </div>
-                </div>
-                """,
-                unsafe_allow_html=True
-                )
+        st.markdown(
+                    f"""
+                    <div style="position: relative; height: 1rem;">
+                            <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
+                            {server_state.count} views
+                            </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                    )
 
 if __name__ == "__main__":
     main()
