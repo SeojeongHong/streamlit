@@ -6874,7 +6874,8 @@ def main() :
         cur.execute('SELECT COUNT(*) FROM USER')
         con.commit()
         st.write(cur)
-con.close()
 if __name__ == "__main__":
     main()
+
+con.close()
     
