@@ -10,7 +10,7 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
-import socket
+import uuid
 
 class IndexAllocator:
     def __init__(self):
@@ -44,13 +44,13 @@ def load_contents() :
     topics = list(contents.keys())
     return contents, topics
 CONTENTS , TOPICS = load_contents()
+def get_uuid():
+    user_id = st.query_params.get("user_id", None)
+    if user_id is None:
+        user_id = str(uuid.uuid4())  # 새로운 user_id 생성
+        st.query_params["user_id"] = user_id
+    return user_id
 
-def get_ip() :
-    hostname = socket.gethostname()
-    local_ip = socket.gethostbyname(hostname)
-
-    return local_ip
-    
 def init_session_state() :
     # # global 변수
     # with server_state_lock["views"]:
@@ -62,18 +62,14 @@ def init_session_state() :
     #     st.session_state['lock'] = True
     #     with server_state_lock['views'] :
     #         server_state.views += 1
-
-    
     with server_state_lock["visitors"]:
         if "visitors" not in server_state:
                 server_state.visitors = []
-
     # 페이지 최초 로드(최초 세션 연결)시 views 증가
     if 'lock' not in st.session_state:
         st.session_state['lock'] = True
         with server_state_lock['visitors'] :
-            server_state.visitors.append(get_ip())
-
+            server_state.visitors.append(get_uuid())
     
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
@@ -6866,8 +6862,7 @@ def main() :
                     """,
                     unsafe_allow_html=True
                     )
-        
-        st.write(list(set(server_state.visitors)))
+        st.write(set(server_state.visitors))
 
 if __name__ == "__main__":
     main()
