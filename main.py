@@ -6875,6 +6875,8 @@ def main() :
                     """,
                     unsafe_allow_html=True
                     )
+        # 파일의 전체 내용 출력
+        st.write("\n".join(existing_lines))
 
 if __name__ == "__main__":
     main()
