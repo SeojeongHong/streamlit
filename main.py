@@ -14,11 +14,7 @@ import sqlite3
 import socket
 
 def get_ip():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect(("pwnbit.kr", 443))
-
-    return sock.getsockname()[0]
-
+    return socket.gethostbyname(socket.gethostname())
 
 def db_init() :
     con = sqlite3.connect('./user_info.db')
