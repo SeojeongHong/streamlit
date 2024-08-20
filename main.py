@@ -6864,7 +6864,7 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {cur[0][0]} views
+                            {cur.fetchall()[0]} views
                             </div>
                     </div>
                     """,
