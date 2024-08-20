@@ -7,3 +7,4 @@ pandas
 seaborn
 openpyxl
 streamlit_server_state
+requests
