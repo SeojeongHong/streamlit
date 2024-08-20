@@ -11,10 +11,13 @@ import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
 import sqlite3
-import public_ip
+import socket
+
 def get_ip():
-    ip = public_ip.get()
-    return ip
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect(("pwnbit.kr", 443))
+
+    return sock.getsockname()[0]
 
 
 def db_init() :
