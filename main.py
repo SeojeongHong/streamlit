@@ -6870,9 +6870,11 @@ def main() :
                     """,
                     unsafe_allow_html=True
                     )
-        st.write(set(server_state.visitors))
+
         cur.execute('SELECT COUNT(*) FROM USER')
         con.commit()
+        st.write(cur)
+        
         st.write(cur)
 if __name__ == "__main__":
     main()
