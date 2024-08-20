@@ -14,7 +14,10 @@ import sqlite3
 import socket
 
 def get_ip():
-    return socket.gethostbyname(socket.gethostname())
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 0))
+    ip = s.getsockname()[0]
+    return ip
 
 def db_init() :
     con = sqlite3.connect('./user_info.db')
