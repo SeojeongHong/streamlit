@@ -10,6 +10,28 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state
+import uuid
+user_id = st.query_params.get("user_id", None)
+if user_id is None:
+
+    user_id = str(uuid.uuid4())
+    st.query_params["user_id"] = user_id
+text_file_path = './user.txt'
+# 기존 파일의 내용 읽기
+try:
+    with open(text_file_path, 'r') as f:
+        existing_lines = f.readlines()
+except FileNotFoundError:
+    existing_lines = []  # 파일이 없는 경우 빈 리스트로 초기화
+
+# 새로운 유저 정보를 파일에 추가
+with open(text_file_path, 'a') as f:
+    f.write(user_id + '\n')
+
+data = open(text_file_path, 'r', encoding="UTF8")
+# read함수는 전체 내용 전체를 문자열로 불러온다.
+contents = data.read()
+st.write(contents)
 
 class IndexAllocator:
     def __init__(self):
