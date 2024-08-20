@@ -10,15 +10,16 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
-import uuid
+import requests
 
-# Query parameters에서 user_id 가져오기
-user_id = st.query_params.get("user_id", None)
-if user_id is None:
-    user_id = str(uuid.uuid4())  # 새로운 user_id 생성
-    st.query_params["user_id"] = user_id
-
-text_file_path = './user.txt'
+def get_ip():
+    try:
+        response = requests.get('https://api.ipify.org?format=json', timeout=5)
+        response.raise_for_status()
+        ip_info = response.json()
+        return ip_info.get('ip', 'Unable to retrieve IP address')
+    except requests.RequestException as e:
+        return f"Error: {str(e)}"
 
 class IndexAllocator:
     def __init__(self):
@@ -6824,6 +6825,11 @@ def goback_btn() :
     button_container.float(float_css_helper(width="2.2rem", right="5rem",bottom="1rem"))
 
 def main() :
+    user_ip = get_ip()
+
+    # user_id를 사용하여 작업 수행
+    text_file_path = './user.txt'
+    
     # 기존 파일의 내용 읽기
     try:
         with open(text_file_path, 'r') as f:
@@ -6836,7 +6842,7 @@ def main() :
         existing_lines.append(user_id)  # 리스트에 추가
         with open(text_file_path, 'w') as f:  # 파일을 새로 열고 리스트를 저장
             f.write('\n'.join(existing_lines) + '\n')
-
+            
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
