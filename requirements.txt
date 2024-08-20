@@ -8,4 +8,3 @@ seaborn
 openpyxl
 streamlit_server_state
 requests
-sqlite3
