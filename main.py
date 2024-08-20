@@ -66,13 +66,13 @@ def init_session_state() :
     
     with server_state_lock["visitors"]:
         if "visitors" not in server_state:
-                server_state.visitors = set()
+                server_state.visitors = []
 
     # 페이지 최초 로드(최초 세션 연결)시 views 증가
     if 'lock' not in st.session_state:
         st.session_state['lock'] = True
         with server_state_lock['visitors'] :
-            server_state.visitors.add(get_ip())
+            server_state.visitors.append(get_ip())
 
     
     if 'page' not in st.session_state:
@@ -6860,14 +6860,14 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {format(len(server_state.visitors), ',')} views
+                            {format(len(list(set(server_state.visitors))), ',')} views
                             </div>
                     </div>
                     """,
                     unsafe_allow_html=True
                     )
         
-        st.write(server_state.visitors)
+        st.write(list(set(server_state.visitors)))
 
 if __name__ == "__main__":
     main()
