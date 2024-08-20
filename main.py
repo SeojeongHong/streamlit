@@ -10,16 +10,7 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
-import requests
-
-def get_ip():
-    try:
-        response = requests.get('https://api.ipify.org?format=json', timeout=5)
-        response.raise_for_status()
-        ip_info = response.json()
-        return ip_info.get('ip', 'Unable to retrieve IP address')
-    except requests.RequestException as e:
-        return f"Error: {str(e)}"
+import socket
 
 class IndexAllocator:
     def __init__(self):
@@ -54,6 +45,12 @@ def load_contents() :
     return contents, topics
 CONTENTS , TOPICS = load_contents()
 
+def get_ip() :
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+
+    return local_ip
+    
 def init_session_state() :
     # # global 변수
     # with server_state_lock["views"]:
@@ -65,6 +62,18 @@ def init_session_state() :
     #     st.session_state['lock'] = True
     #     with server_state_lock['views'] :
     #         server_state.views += 1
+
+    
+    with server_state_lock["visitors"]:
+        if "visitors" not in server_state:
+                server_state.views = []
+
+    # 페이지 최초 로드(최초 세션 연결)시 views 증가
+    if 'lock' not in st.session_state:
+        st.session_state['lock'] = True
+        with server_state_lock['visitors'] :
+            server_state.visitors.append(get_ip())
+
     
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
@@ -6825,24 +6834,6 @@ def goback_btn() :
     button_container.float(float_css_helper(width="2.2rem", right="5rem",bottom="1rem"))
 
 def main() :
-    user_ip = get_ip()
-
-    # user_id를 사용하여 작업 수행
-    text_file_path = './user.txt'
-    
-    # 기존 파일의 내용 읽기
-    try:
-        with open(text_file_path, 'r') as f:
-            existing_lines = f.read().splitlines()  # 파일 내용을 줄 단위로 읽어 리스트로 반환
-    except FileNotFoundError:
-        existing_lines = []  # 파일이 없는 경우 빈 리스트로 초기화
-    
-    # 새로운 유저 ID가 기존에 없는 경우에만 추가
-    if user_ip not in existing_lines:
-        existing_lines.append(user_ip)  # 리스트에 추가
-        with open(text_file_path, 'w') as f:  # 파일을 새로 열고 리스트를 저장
-            f.write('\n'.join(existing_lines) + '\n')
-            
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
@@ -6869,14 +6860,14 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {format(len(existing_lines), ',')} views
+                            {format(len(server_state.visitors), ',')} views
                             </div>
                     </div>
                     """,
                     unsafe_allow_html=True
                     )
-        # 파일의 전체 내용 출력
-        st.write("\n".join(existing_lines))
+        
+        st.write(server_state.visitors)
 
 if __name__ == "__main__":
     main()
