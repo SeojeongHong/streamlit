@@ -11,7 +11,10 @@ import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
 import sqlite3
-import uuid
+import public_ip
+def get_ip():
+    ip = public_ip.get()
+    return ip
 
 
 def db_init() :
@@ -21,7 +24,7 @@ def db_init() :
     con.commit()
 
     try:
-        cur.execute('INSERT INTO USER VALUES(?);', ((uid),))
+        cur.execute('INSERT INTO USER VALUES(?);', ((get_ip()),))
         con.commit()
     except:
         pass
@@ -31,13 +34,7 @@ def db_init() :
     con.close()
     return user_count
 
-def get_uuid():
-    user_id = st.query_params.get("user_id", None)
-    if user_id is None:
-        user_id = str(uuid.uuid4())  # 새로운 user_id 생성
-        st.query_params["user_id"] = user_id
-    return user_id
-uid = get_uuid()
+
 
 
 class IndexAllocator:
@@ -1523,6 +1520,7 @@ def main() :
                     """,
                     unsafe_allow_html=True
                     )
+        st.write(get_ip())
 if __name__ == "__main__":
     main()
     
