@@ -10,7 +10,7 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
-import uuid
+import requests
 
 class IndexAllocator:
     def __init__(self):
@@ -44,12 +44,15 @@ def load_contents() :
     topics = list(contents.keys())
     return contents, topics
 CONTENTS , TOPICS = load_contents()
-def get_uuid():
-    user_id = st.query_params.get("user_id", None)
-    if user_id is None:
-        user_id = str(uuid.uuid4())  # 새로운 user_id 생성
-        st.query_params["user_id"] = user_id
-    return user_id
+
+def get_ip():
+    try:
+        response = requests.get('https://api.ipify.org?format=json', timeout=5)
+        response.raise_for_status()
+        ip_info = response.json()
+        return ip_info.get('ip', 'Unable to retrieve IP address')
+    except requests.RequestException as e:
+        return f"Error: {str(e)}"
 
 def init_session_state() :
     # # global 변수
@@ -69,7 +72,7 @@ def init_session_state() :
     if 'lock' not in st.session_state:
         st.session_state['lock'] = True
         with server_state_lock['visitors'] :
-            server_state.visitors.append(get_uuid())
+            server_state.visitors.append(get_ip())
     
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
