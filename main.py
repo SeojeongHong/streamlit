@@ -47,7 +47,7 @@ CONTENTS , TOPICS = load_contents()
 
 def get_ip():
     try:
-        response = requests.get('https://api.ipify.org?format=json', timeout=5)
+        response = requests.get('https://jsonip.com?format=json', timeout=5)
         response.raise_for_status()
         ip_info = response.json()
         return ip_info.get('ip', 'Unable to retrieve IP address')
