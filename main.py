@@ -18,13 +18,6 @@ cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS USER(IP text PRIMARY KEY);")
 con.commit()
 
-try:
-    cur.execute('INSERT INTO USER VALUES(?);', ((uid),))
-    con.commit()
-except:
-    pass
-# st.write(cur)
-
 def get_uuid():
     user_id = st.query_params.get("user_id", None)
     if user_id is None:
@@ -32,6 +25,14 @@ def get_uuid():
         st.query_params["user_id"] = user_id
     return user_id
 uid = get_uuid()
+
+try:
+    cur.execute('INSERT INTO USER VALUES(?);', ((uid),))
+    con.commit()
+except:
+    pass
+# st.write(cur)
+
 
 class IndexAllocator:
     def __init__(self):
