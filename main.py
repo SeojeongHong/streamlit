@@ -6866,6 +6866,7 @@ def main() :
                     unsafe_allow_html=True
                     )
         st.write(set(server_state.visitors))
+        st.write(get_ip())
 
 if __name__ == "__main__":
     main()
