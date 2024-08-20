@@ -6845,7 +6845,7 @@ def main() :
         goback_btn()
         show_chapter(topic, chapter)
 
-    cur.execute('SELECT COUNT * FROM USER')
+    cur.execute('SELECT COUNT (*) FROM USER')
     con.commit()
     with st.sidebar:
         option_menu(
@@ -6871,7 +6871,7 @@ def main() :
                     unsafe_allow_html=True
                     )
 
-        cur.execute('SELECT COUNT(*) FROM USER')
+        cur.execute('SELECT * FROM USER')
         con.commit()
         st.write(cur)
         
