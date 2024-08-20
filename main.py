@@ -6838,8 +6838,8 @@ def main() :
         existing_lines = []  # 파일이 없는 경우 빈 리스트로 초기화
     
     # 새로운 유저 ID가 기존에 없는 경우에만 추가
-    if user_id not in existing_lines:
-        existing_lines.append(user_id)  # 리스트에 추가
+    if user_ip not in existing_lines:
+        existing_lines.append(user_ip)  # 리스트에 추가
         with open(text_file_path, 'w') as f:  # 파일을 새로 열고 리스트를 저장
             f.write('\n'.join(existing_lines) + '\n')
             
