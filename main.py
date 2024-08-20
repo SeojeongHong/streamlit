@@ -23,7 +23,7 @@ try:
     con.commit()
 except:
     pass
-
+# st.write(cur)
 
 def get_uuid():
     user_id = st.query_params.get("user_id", None)
@@ -6845,7 +6845,7 @@ def main() :
         goback_btn()
         show_chapter(topic, chapter)
 
-    cur.execute('SELECT COUNT* FROM USER')
+    cur.execute('SELECT COUNT * FROM USER')
     con.commit()
     with st.sidebar:
         option_menu(
