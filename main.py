@@ -11,35 +11,6 @@ import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state
 
-import uuid
-
-# Query parameters에서 user_id 가져오기
-user_id = st.query_params.get("user_id", None)
-if user_id is None:
-    user_id = str(uuid.uuid4())  # 새로운 user_id 생성
-    st.query_params["user_id"] = user_id
-
-text_file_path = './user.txt'
-
-# 기존 파일의 내용 읽기
-try:
-    with open(text_file_path, 'r') as f:
-        existing_lines = f.read().splitlines()  # 파일 내용을 줄 단위로 읽어 리스트로 반환
-except FileNotFoundError:
-    existing_lines = []  # 파일이 없는 경우 빈 리스트로 초기화
-
-# 새로운 유저 ID가 기존에 없는 경우에만 추가
-if user_id not in existing_lines:
-    existing_lines.append(user_id)  # 리스트에 추가
-    with open(text_file_path, 'w') as f:  # 파일을 새로 열고 리스트를 저장
-        f.write('\n'.join(existing_lines) + '\n')
-
-# 파일의 전체 내용 출력
-st.write("\n".join(existing_lines))
-
-# 총 유저 ID 개수 출력
-st.write(f"Total user IDs: {len(existing_lines)}")
-
 
 class IndexAllocator:
     def __init__(self):
