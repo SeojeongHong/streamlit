@@ -10,7 +10,28 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
-import requests
+import sqlite3
+import uuid
+
+con = sqlite3.connect('./user_info.db')
+cur = con.cursor()
+cur.execute("CREATE TABLE IF NOT EXISTS USER(IP text PRIMARY KEY);")
+con.commit()
+
+try:
+    cur.execute('INSERT INTO USER VALUES(?);', ((uid),))
+    con.commit()
+except:
+    pass
+
+
+def get_uuid():
+    user_id = st.query_params.get("user_id", None)
+    if user_id is None:
+        user_id = str(uuid.uuid4())  # 새로운 user_id 생성
+        st.query_params["user_id"] = user_id
+    return user_id
+uid = get_uuid()
 
 class IndexAllocator:
     def __init__(self):
@@ -6840,8 +6861,9 @@ def main() :
     elif page == 'page_chapter':
         goback_btn()
         show_chapter(topic, chapter)
-        
-    
+
+    cur.execute('SELECT COUNT(*) FROM USER')
+    con.commit()
     with st.sidebar:
         option_menu(
             "데이터 분석 역량 강화", 
@@ -6859,14 +6881,17 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {format(len(list(set(server_state.visitors))), ',')} views
+                            {format(cur[0][0]), ',')} views
                             </div>
                     </div>
                     """,
                     unsafe_allow_html=True
                     )
         st.write(set(server_state.visitors))
-        st.write(get_ip())
-
+        cur.execute('SELECT COUNT(*) FROM USER')
+        con.commit()
+        st.write(cur)
+con.close()
 if __name__ == "__main__":
     main()
+    
