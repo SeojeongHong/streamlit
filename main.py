@@ -66,15 +66,6 @@ def load_contents() :
     return contents, topics
 CONTENTS , TOPICS = load_contents()
 
-def get_ip():
-    try:
-        response = requests.get('https://jsonip.com?format=json', timeout=5)
-        response.raise_for_status()
-        ip_info = response.json()
-        return ip_info.get('ip', 'Unable to retrieve IP address')
-    except requests.RequestException as e:
-        return f"Error: {str(e)}"
-
 def init_session_state() :
     # # global 변수
     # with server_state_lock["views"]:
@@ -86,14 +77,6 @@ def init_session_state() :
     #     st.session_state['lock'] = True
     #     with server_state_lock['views'] :
     #         server_state.views += 1
-    with server_state_lock["visitors"]:
-        if "visitors" not in server_state:
-                server_state.visitors = []
-    # 페이지 최초 로드(최초 세션 연결)시 views 증가
-    if 'lock' not in st.session_state:
-        st.session_state['lock'] = True
-        with server_state_lock['visitors'] :
-            server_state.visitors.append(get_ip())
     
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
