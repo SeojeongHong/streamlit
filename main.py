@@ -66,13 +66,13 @@ def init_session_state() :
     
     with server_state_lock["visitors"]:
         if "visitors" not in server_state:
-                server_state.visitors = []
+                server_state.visitors = set()
 
     # 페이지 최초 로드(최초 세션 연결)시 views 증가
     if 'lock' not in st.session_state:
         st.session_state['lock'] = True
         with server_state_lock['visitors'] :
-            server_state.visitors.append(get_ip())
+            server_state.visitors.add(get_ip())
 
     
     if 'page' not in st.session_state:
