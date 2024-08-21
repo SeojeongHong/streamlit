@@ -9,45 +9,58 @@ prop = fm.FontProperties(fname=fpath)
 import numpy as np
 import seaborn as sns
 from streamlit_float import *
-from streamlit_server_state import server_state, server_state_lock
 import sqlite3
+from streamlit.web.server.websocket_headers import _get_websocket_headers
 
 
 def get_forwarded_ip():
-    headers = dict(st.context.headers)
-    return headers['X-Forwarded-For'].split(',')[0]
+    headers = _get_websocket_headers()
+    # return headers['X-Forwarded-For'].split(',')[0]
+    return headers['X-Forwarded-For']
 
-def db_init() :
-    con = sqlite3.connect('./user_info.db')
-    cur = con.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS USER(IP text PRIMARY KEY);")
-    con.commit()
-
-    try:
-        cur.execute('INSERT INTO USER VALUES(?);', ((get_forwarded_ip()),))
-        con.commit()
-    except:
-        pass
+class DBManager:
+    def __init__(self):
+        self.db_path = './user_info.db'
+        self.connection = None
+    
+    def connect(self):
+        if self.connection is None:
+            self.connection = sqlite3.connect(self.db_path)
+    
+    def close(self):
+        if self.connection:
+            self.connection.close()
+            self.connection = None
+    
+    def create_UserTable(self):
+        self.connect()
+        with self.connection:
+            self.connection.execute("CREATE TABLE IF NOT EXISTS USER(IP text PRIMARY KEY);")
+    
+    def insert_user(self, ip_address):
+        self.connect()
+        try:
+            with self.connection:
+                self.connection.execute('INSERT INTO USER VALUES(?);', (ip_address,))
+        except sqlite3.IntegrityError:
+            # 기본키 중복 예외 처리
+            pass
+    
+    def get_Visitors_Count(self):
+        self.connect()
+        with self.connection:
+            cur = self.connection.execute('SELECT COUNT(*) FROM USER')
+            return cur.fetchone()[0]
+    
+    def get_Visitors_List(self):
+        self.connect()
+        with self.connection:
+            cur = self.connection.execute('SELECT * FROM USER')
+            st.write("[접속 유저 리스트]")
+            for row in cur.fetchall():
+                st.write(", ".join([str(c) for c in row]))
 
     
-    cur.execute('SELECT COUNT(*) FROM USER')
-    user_count = cur.fetchone()[0]
-    con.commit()
-    con.close()
-    return user_count
-
-def db_print() :
-    con = sqlite3.connect('./user_info.db')
-    cur = con.cursor()
-    cur.execute('SELECT * FROM USER')
-    row = cur.fetchone()
-    con.commit()
-    st.write("[접속 유저 리스트]")
-    while row is not None:
-        st.write(", ".join([str(c) for c in row]))
-        row = cur.fetchone()
-    con.close()
-
 class IndexAllocator:
     def __init__(self):
         self.parentIdx = 0
@@ -1498,7 +1511,9 @@ def goback_btn() :
     button_container.float(float_css_helper(width="2.2rem", right="5rem",bottom="1rem"))
 
 def main() :
-    visitors = db_init()
+    db = DBManager()
+    db.create_UserTable()
+    db.insert_user(get_forwarded_ip())
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
@@ -1524,14 +1539,14 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {visitors} visitors
+                            {db.get_Visitors_Count()} visitors
                             </div>
                     </div>
                     """,
                     unsafe_allow_html=True
                     )
         st.markdown(f"my_ip : {get_forwarded_ip()}")
-        db_print()
+        st.write(db.get_Visitors_List())
 if __name__ == "__main__":
     main()
     
