@@ -15,7 +15,7 @@ import sqlite3
 
 def get_forwarded_ip():
     headers = dict(st.context.headers)
-    return headers['X-Forwarded-For']
+    return headers['X-Forwarded-For'].split(',')[0]
 
 def db_init() :
     con = sqlite3.connect('./user_info.db')
@@ -24,7 +24,7 @@ def db_init() :
     con.commit()
 
     try:
-        cur.execute('INSERT INTO USER VALUES(?);', ((get_ip()),))
+        cur.execute('INSERT INTO USER VALUES(?);', ((get_forwarded_ip()),))
         con.commit()
     except:
         pass
