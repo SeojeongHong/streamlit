@@ -32,16 +32,17 @@ def db_init() :
     
     cur.execute('SELECT COUNT(*) FROM USER')
     user_count = cur.fetchone()[0]
+    con.commit()
+    
+    return user_count
+
+def db_print() :
     cur.execute('SELECT * FROM USER')
     row = cur.fetchone()
     con.commit()
     while row is not None:
         st.write(", ".join([str(c) for c in row]))
         row = cur.fetchone()
-    con.close()
-    return user_count
-
-
 
 
 class IndexAllocator:
@@ -1502,7 +1503,7 @@ def main() :
     elif page == 'page_chapter':
         goback_btn()
         show_chapter(topic, chapter)
-
+    db_print()
     with st.sidebar:
         option_menu(
             "데이터 분석 역량 강화", 
@@ -1528,6 +1529,7 @@ def main() :
                     unsafe_allow_html=True
                     )
         st.markdown(f"{get_forwarded_ip()}")
+    con.close()
 if __name__ == "__main__":
     main()
     
