@@ -16,10 +16,10 @@ from streamlit import runtime
 
 
 def get_forwarded_ip():
-    headers = st.context.headers
+    headers = dict(st.context.headers)
 
     
-    return dict(headers)
+    return headers['X-Forwarded-For'].split(',')[0]
 
 
 def get_ip():
