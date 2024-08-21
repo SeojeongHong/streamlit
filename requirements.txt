@@ -7,3 +7,5 @@ pandas
 seaborn
 openpyxl
 streamlit_server_state
+streamlit.runtime.scriptrunner
+streamlit.web.server.websocket_headers
