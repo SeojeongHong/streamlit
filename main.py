@@ -36,7 +36,7 @@ def db_init() :
     row = cur.fetchone()
     con.commit()
     while row is not None:
-        print ", ".join([str(c) for c in row])
+        st.write(", ".join([str(c) for c in row])
         row = cur.fetchone()
     con.close()
     return user_count
