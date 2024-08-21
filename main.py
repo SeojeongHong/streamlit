@@ -32,7 +32,7 @@ def get_remote_ip():
 
 def get_forwarded_ip():
     headers = _get_websocket_headers()
-    return headers['Cookie']
+    return headers
 
 
 def get_ip():
