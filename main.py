@@ -11,11 +11,11 @@ import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
 import sqlite3
-from streamlit.web.server.websocket_headers import _get_websocket_headers
+
 
 def get_forwarded_ip():
-    headers = _get_websocket_headers()['X-Forwarded-For']
-    return headers.split(',')[0]
+    headers = dict(st.context.headers)
+    return headers['X-Forwarded-For'].split(',')[0]
 
 def db_init() :
     con = sqlite3.connect('./user_info.db')
