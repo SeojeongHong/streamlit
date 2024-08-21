@@ -16,7 +16,7 @@ from streamlit.web.server.websocket_headers import _get_websocket_headers
 def get_forwarded_ip():
     headers = _get_websocket_headers()
     # return headers['X-Forwarded-For'].split(',')[0]
-    return headers['X-Forwarded-For']
+    return headers['X-Forwarded-For'].split(',')[0]
 
 class DBManager:
     def __init__(self):
@@ -43,7 +43,7 @@ class DBManager:
             with self.connection:
                 self.connection.execute('INSERT INTO USER VALUES(?);', (ip_address,))
         except sqlite3.IntegrityError:
-            # 기본키 중복 예외 처리
+            # 기본키 중복
             pass
     
     def get_Visitors_Count(self):
@@ -1546,7 +1546,8 @@ def main() :
                     unsafe_allow_html=True
                     )
         st.markdown(f"my_ip : {get_forwarded_ip()}")
-        st.write(db.get_Visitors_List())
+        db.get_Visitors_List()
+        db.close()
 if __name__ == "__main__":
     main()
     
