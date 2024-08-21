@@ -15,7 +15,7 @@ import sqlite3
 
 def get_forwarded_ip():
     headers = dict(st.context.headers)
-    return headers
+    return headers['X-Forwarded-For']
 
 def db_init() :
     con = sqlite3.connect('./user_info.db')
