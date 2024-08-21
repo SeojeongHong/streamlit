@@ -12,6 +12,28 @@ from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
 import sqlite3
 import socket
+from streamlit import runtime
+from streamlit.runtime.scriptrunner import get_script_run_ctx
+from streamlit.web.server.websocket_headers import _get_websocket_headers
+
+def get_remote_ip():
+    try:
+        ctx = get_script_run_ctx()
+        if ctx is None:
+            return None
+
+        session_info = runtime.get_instance().get_client(ctx.session_id)
+        if session_info is None:
+            return None
+    except Exception as e:
+        return None
+
+    return session_info.request.remote_ip
+
+def get_forwarded_ip():
+    headers = _get_websocket_headers()
+    return headers['Cookie']
+
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -1523,6 +1545,8 @@ def main() :
                     unsafe_allow_html=True
                     )
         st.write(get_ip())
+        st.markdown(f"remote {get_remote_ip()}")
+        st.markdown(f"forwarded {get_remote_ip()}")
 if __name__ == "__main__":
     main()
     
