@@ -32,7 +32,7 @@ def db_init() :
     
     cur.execute('SELECT COUNT(*) FROM USER')
     user_count = cur.fetchone()[0]
-    cur.execute('SELECT COUNT * FROM USER')
+    cur.execute('SELECT * FROM USER')
     row = cur.fetchone()
     con.commit()
     while row is not None:
