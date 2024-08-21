@@ -8,5 +8,3 @@ seaborn
 openpyxl
 streamlit_server_state
 get_script_run_ctx
-get_websocket_headers
-
