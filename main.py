@@ -1527,7 +1527,7 @@ def main() :
                     """,
                     unsafe_allow_html=True
                     )
-        st.markdown(f"forwarded {get_forwarded_ip()}")
+        st.markdown(f"{get_forwarded_ip()}")
 if __name__ == "__main__":
     main()
     
