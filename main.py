@@ -17,7 +17,7 @@ from streamlit import runtime
 
 def get_forwarded_ip():
     headers = dict(st.context.headers)
-    return headers['X-Forwarded-For']
+    return headers
 
 
 def get_ip():
