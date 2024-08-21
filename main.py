@@ -30,8 +30,8 @@ def db_init() :
         pass
 
     
-    # cur.execute('SELECT COUNT(*) FROM USER')
-    # user_count = cur.fetchone()[0]
+    cur.execute('SELECT COUNT(*) FROM USER')
+    user_count = cur.fetchone()[0]
     cur.execute('SELECT COUNT* FROM USER')
     row = cur.fetchone()
     con.commit()
