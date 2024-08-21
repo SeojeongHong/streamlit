@@ -11,22 +11,11 @@ import seaborn as sns
 from streamlit_float import *
 from streamlit_server_state import server_state, server_state_lock
 import sqlite3
-import socket
-from streamlit import runtime
 from streamlit.web.server.websocket_headers import _get_websocket_headers
 
-headers = _get_websocket_headers()
-st.write(headers)
 def get_forwarded_ip():
-    h = dict(st.context.headers)
-    return h['X-Forwarded-For'].split(',')[0]
-
-
-def get_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(('8.8.8.8', 0))
-    ip = s.getsockname()[0]
-    return ip
+    headers = _get_websocket_headers()
+    return headers['X-Forwarded-For'].split(',')[0]
 
 def db_init() :
     con = sqlite3.connect('./user_info.db')
@@ -39,9 +28,16 @@ def db_init() :
         con.commit()
     except:
         pass
+
     
-    cur.execute('SELECT COUNT(*) FROM USER')
-    user_count = cur.fetchone()[0]
+    # cur.execute('SELECT COUNT(*) FROM USER')
+    # user_count = cur.fetchone()[0]
+    cur.execute('SELECT COUNT* FROM USER')
+    row = cur.fetchone()
+    con.commit()
+    while row is not None:
+        print ", ".join([str(c) for c in row])
+        row = cur.fetchone()
     con.close()
     return user_count
 
@@ -1531,8 +1527,6 @@ def main() :
                     """,
                     unsafe_allow_html=True
                     )
-        st.write(get_ip())
-        # st.markdown(f"remote {get_remote_ip()}")
         st.markdown(f"forwarded {get_forwarded_ip()}")
 if __name__ == "__main__":
     main()
