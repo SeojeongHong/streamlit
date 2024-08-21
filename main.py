@@ -13,13 +13,13 @@ from streamlit_server_state import server_state, server_state_lock
 import sqlite3
 import socket
 from streamlit import runtime
+from streamlit.web.server.websocket_headers import _get_websocket_headers
 
-
+headers = _get_websocket_headers()
+st.write(headers)
 def get_forwarded_ip():
-    headers = dict(st.context.headers)
-
-    
-    return headers['X-Forwarded-For'].split(',')[0]
+    h = dict(st.context.headers)
+    return h['X-Forwarded-For'].split(',')[0]
 
 
 def get_ip():
