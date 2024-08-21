@@ -31,7 +31,7 @@ def get_remote_ip():
     return session_info.request.remote_ip
 
 def get_forwarded_ip():
-    headers = _get_websocket_headers()
+    headers = st.context.headers()
     return headers
 
 
