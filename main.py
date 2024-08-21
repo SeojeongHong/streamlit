@@ -16,7 +16,7 @@ from streamlit import runtime
 
 
 def get_forwarded_ip():
-    headers = st.context.headers['__hssrc']
+    headers = st.context.cookies['__hssrc']
 
     
     return headers
