@@ -19,7 +19,7 @@ def get_forwarded_ip():
     headers = st.experimental_get_query_params
 
     
-    return headers
+    return dict(headers)
 
 
 def get_ip():
