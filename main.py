@@ -42,6 +42,7 @@ def db_print() :
     cur.execute('SELECT * FROM USER')
     row = cur.fetchone()
     con.commit()
+    st.write("[접속 유저 리스트]")
     while row is not None:
         st.write(", ".join([str(c) for c in row]))
         row = cur.fetchone()
@@ -1505,7 +1506,6 @@ def main() :
     elif page == 'page_chapter':
         goback_btn()
         show_chapter(topic, chapter)
-    db_print()
     with st.sidebar:
         option_menu(
             "데이터 분석 역량 강화", 
@@ -1524,13 +1524,14 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {visitors} views
+                            {visitors} visitors
                             </div>
                     </div>
                     """,
                     unsafe_allow_html=True
                     )
-        st.markdown(f"{get_forwarded_ip()}")
+        st.markdown(f"my_ip : {get_forwarded_ip()}")
+        db_print()
 if __name__ == "__main__":
     main()
     
