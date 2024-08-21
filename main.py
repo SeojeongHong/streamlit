@@ -33,17 +33,19 @@ def db_init() :
     cur.execute('SELECT COUNT(*) FROM USER')
     user_count = cur.fetchone()[0]
     con.commit()
-    
+    con.close()
     return user_count
 
 def db_print() :
+    con = sqlite3.connect('./user_info.db')
+    cur = con.cursor()
     cur.execute('SELECT * FROM USER')
     row = cur.fetchone()
     con.commit()
     while row is not None:
         st.write(", ".join([str(c) for c in row]))
         row = cur.fetchone()
-
+    con.close()
 
 class IndexAllocator:
     def __init__(self):
@@ -1529,7 +1531,6 @@ def main() :
                     unsafe_allow_html=True
                     )
         st.markdown(f"{get_forwarded_ip()}")
-    con.close()
 if __name__ == "__main__":
     main()
     
