@@ -1546,7 +1546,7 @@ def main() :
                     )
         st.write(get_ip())
         st.markdown(f"remote {get_remote_ip()}")
-        st.markdown(f"forwarded {get_remote_ip()}")
+        st.markdown(f"forwarded {get_forwarded_ip()}")
 if __name__ == "__main__":
     main()
     
