@@ -1547,7 +1547,7 @@ def main() :
                     unsafe_allow_html=True
                     )
         ############test
-        st.write("**[ test ]**)
+        st.write("**[ test ]**")
         st.write(f"ip : {get_ip()}")
         db.getList()
         db.close()
