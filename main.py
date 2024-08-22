@@ -94,16 +94,6 @@ def load_contents() :
 CONTENTS , TOPICS = load_contents()
 
 def init_session_state() :
-    # global 변수
-    with server_state_lock["views"]:
-        if "views" not in server_state:
-                server_state.views = 0
-
-    # 페이지 최초 로드(최초 세션 연결)시 views 증가
-    if 'lock' not in st.session_state:
-        st.session_state['lock'] = True
-        with server_state_lock['views'] :
-            server_state.views += 1
     
     if 'page' not in st.session_state:
         st.session_state['page'] = 'page_topic'
@@ -6893,7 +6883,7 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {format({db.getCount()}, ',')} views
+                            {format({db.getCount()}, ',')} visitors
                             </div>
                     </div>
                     """,
