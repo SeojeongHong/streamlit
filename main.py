@@ -1546,7 +1546,8 @@ def main() :
                     """,
                     unsafe_allow_html=True
                     )
-        st.markdown(f"my_ip : {get_forwarded_ip()}")
+        ############test
+        st.markdown(f"test : {get_ip()}")
         db.getList()
         db.close()
 if __name__ == "__main__":
