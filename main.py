@@ -13,9 +13,9 @@ import sqlite3
 from streamlit.web.server.websocket_headers import _get_websocket_headers
 
 
-def get_forwarded_ip():
-    headers = _get_websocket_headers()
-    # return headers['X-Forwarded-For'].split(',')[0]
+def get_ip():
+    # headers = _get_websocket_headers()
+    headers = dict(st.context.headers)
     return headers['X-Forwarded-For'].split(',')[0]
 
 class DBManager:
@@ -46,17 +46,18 @@ class DBManager:
             # 기본키 중복
             pass
     
-    def get_Visitors_Count(self):
+    def getCount(self):
         self.connect()
         with self.connection:
             cur = self.connection.execute('SELECT COUNT(*) FROM USER')
             return cur.fetchone()[0]
-    
-    def get_Visitors_List(self):
+
+    #test
+    def getList(self):
         self.connect()
         with self.connection:
             cur = self.connection.execute('SELECT * FROM USER')
-            st.write("[접속 유저 리스트]")
+            st.write("[userdata]")
             for row in cur.fetchall():
                 st.write(", ".join([str(c) for c in row]))
 
@@ -1513,7 +1514,7 @@ def goback_btn() :
 def main() :
     db = DBManager()
     db.create_UserTable()
-    db.insert_user(get_forwarded_ip())
+    db.insert_user(get_ip())
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
@@ -1539,14 +1540,14 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {db.get_Visitors_Count()} visitors
+                            {db.getCount()} visitors
                             </div>
                     </div>
                     """,
                     unsafe_allow_html=True
                     )
         st.markdown(f"my_ip : {get_forwarded_ip()}")
-        db.get_Visitors_List()
+        db.getList()
         db.close()
 if __name__ == "__main__":
     main()
