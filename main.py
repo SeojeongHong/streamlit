@@ -57,7 +57,7 @@ class DBManager:
         self.connect()
         with self.connection:
             cur = self.connection.execute('SELECT * FROM USER')
-            st.write("[userdata]")
+            st.write("[db_data]")
             for row in cur.fetchall():
                 st.write(", ".join([str(c) for c in row]))
 
@@ -1547,7 +1547,8 @@ def main() :
                     unsafe_allow_html=True
                     )
         ############test
-        st.markdown(f"test : {get_ip()}")
+        st.write("**[ test ]**)
+        st.write(f"ip : {get_ip()}")
         db.getList()
         db.close()
 if __name__ == "__main__":
