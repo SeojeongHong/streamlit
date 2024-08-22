@@ -4880,7 +4880,19 @@ from matplotlib import cm
 
 cmaps = plt.colormaps()
 for cm in cmaps:
-    print(cm)'''
+    print(cm)
+# 출력
+# magma
+# inferno
+# plasma
+#   ...
+# winter
+#   ...
+# winter_r
+#   ...
+# flare_r
+# crest
+# crest_r'''
         st.code(code, language='python', line_numbers=True)
         st.write("pyplot 모듈의 **colormaps()** 함수를 사용해서 Matplotlib에서 사용할 수 있는 모든 컬러맵의 이름을 얻을 수 있습니다.")
         st.write("예를 들어, **winter** 와 **winter_r** 은 순서가 앞뒤로 뒤집어진 컬러맵입니다.")
@@ -5753,6 +5765,11 @@ df_seoul.head()
                 _class = 3
             df_seoul.loc[indx, 'PM10_class'] = _class
         st.write(df_seoul.head())
+        st.write('범위 값(category)으로 나눈 PM10 농도를 막대 그래프로 도출합니다.')
+        st.code('''
+df_seoul['PM10_class'].value_counts().plot(kind="bar")
+plt.show()''', line_numbers=True)
+        
         df_seoul['PM10_class'].value_counts().plot(kind="bar")
         st.pyplot(plt)
         plt.close()
@@ -5768,7 +5785,8 @@ plt.show()'''
         sns.jointplot(x=df_seoul["CO"], y=df_seoul["NO2"], kind='kde', xlim=(0,1),ylim=(0,0.13), color='g')
         st.pyplot(plt)
         plt.close()
-
+        st.divider()
+        
         st.header(f"{idx.getHeadIdx()}결론 도출")
         st.subheader(f"{idx.getSubIdx()}대기 오염 데이터 분석 결과")
         st.write("- 시계열 그래프를 통해 일별 평균 대기오염 수치를 시각화하며, 특정 대기오염 물질이 시간에 따라 어떻게 변하는지를 보여줍니다.")
