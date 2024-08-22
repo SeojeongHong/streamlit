@@ -1,9 +1,9 @@
 streamlit
 streamlit-option-menu
 streamlit_float
-sqlite3
 matplotlib
 numpy
 pandas
 seaborn
 openpyxl
+sqlite3
