@@ -1,7 +1,7 @@
 streamlit
 streamlit-option-menu
 streamlit_float
-streamlit_server_state
+sqlite3
 matplotlib
 numpy
 pandas
