@@ -167,10 +167,14 @@ matplotlib.pyplot 모듈의 각각의 함수를 사용해서 그래프 영역을
 ### pandas에서 사용할 타이타닉 데이터셋
 def pandas_dataset():
         st.subheader(f"{idx.getSubIdx()}실습에 사용할 데이터셋")
-        with st.echo():
-            import seaborn as sns
-            df = sns.load_dataset('titanic')
-            df.head()
+        st.code('''
+import seaborn as sns
+df = sns.load_dataset('titanic')
+df.head()
+''', line_numbers=True)
+        import seaborn as sns
+        df = sns.load_dataset('titanic')
+        st.write(df.head())
 
         st.subheader(f"{idx.getSubIdx()}컬럼(columns) 설명")
         st.markdown('- survived: 생존여부 (1: 생존, 0: 사망)\n'
@@ -1366,7 +1370,7 @@ def show_chapter(topic, chapter):
                     수행할_문장2
                     ...
                     return 결과값
-                 ''',language="text", line_numbers=True)
+                 ''',language="text")
         
         st.write("다음의 함수명은 add이고 입력으로 a, b 2개의 값을 받으며 리턴값(출력값)은 2개의 입력값을 더한 값입니다.")
         st.code('''
@@ -1895,17 +1899,17 @@ df = pd.DataFrame(data)''', line_numbers=True)
         st.divider()
 
         st.write('index는 기본 설정된 **RangeIndex**가 출력됩니다.')
-        st.code('''df.head().index''')
+        st.code('''df.head().index''', line_numbers=True)
         st.write(df.head().index)
         st.divider()
 
         st.write('columns **열**을 출력합니다.')
-        st.code('''df.columns''')
+        st.code('''df.columns''', line_numbers=True)
         st.write(df.columns)
         st.divider()
 
         st.write('values는 모든 값을 출력하며, **numpy array 형식**으로 출력됩니다.')
-        st.code('''df.head().values''')
+        st.code('''df.head().values''', line_numbers=True)
         st.write(df.head().values)
 
         st.header(f"{idx.getHeadIdx()}데이터프레임 정렬") ## 소단원04
@@ -2085,7 +2089,7 @@ sample''', line_numbers=True)
         st.divider()
 
         st.write(':blue-background[loc] 를 활용한 **조건 필터링**으로도 찰떡궁합입니다.')
-        st.code('''condition = sample['name'].isin(['kim', 'lee'])''')
+        st.code('''condition = sample['name'].isin(['kim', 'lee'])''', line_numbers=True)
         condition = sample['name'].isin(['kim', 'lee'])
         st.code('''sample.loc[condition]''', line_numbers=True)
         st.write(sample.loc[condition])
@@ -2257,7 +2261,7 @@ sample''', line_numbers=True)
         
         st.write('Pandas DataFrame의 **복사(Copy), 결측치 처리**, 그리고 row, column의 **추가, 삭제, 컬럼간 연산, 타입의 변환**을 다뤄보겠습니다.')
         st.code('''# 필요한 라이브러리 로드
-import pandas as pd''')
+import pandas as pd''', line_numbers=True)
         st.divider()
 
         pandas_dataset()
@@ -2969,10 +2973,10 @@ my_var''', line_numbers=True)
         st.subheader(f"{idx.getSubIdx()}min() - 최소값, max() - 최대값")
         st.code(
 '''# 최소값
-df['age'].min()
-# 최대값
-df['age'].max()''', line_numbers=True)
+df['age'].min()''', line_numbers=True)
         st.write(df['age'].min())
+        st.code('''# 최대값
+df['age'].max()''', line_numbers=True)
         st.write(df['age'].max())
         st.divider()
 
@@ -4476,7 +4480,7 @@ plt.show()'''
         st.write("이 함수를 사용하여 그래프에서 중요한 정보를 강조하거나 설명하는 데 활용할 수 있습니다.")
         st.subheader(f"{idx.getSubIdx()}기본 사용")
         code  = '''plt.annotate(s, xy, xytext, arrowprops, **kwargs)'''
-        st.code(code, language='python')
+        st.code(code, language='python', line_numbers=True)
         st.write("- s : 주석으로 표시할 텍스트 내용입니다. string으로 값을 넣어야 합니다.")
         st.write("- xy : 주석을 추가할 데이터 포인트의 위치 입니다. 튜플 형태의 (x,y)좌표 입니다.")
         st.write("- arrowprops : 화살표 스타일과 속성을 설정은 인자로 사전(dictionary) 타입의 값이 들어갑니다.")
@@ -4633,7 +4637,7 @@ plt.show()'''
         code='''
 y = np.random.randint(low=5, high=10, size=20)
 y'''
-        st.code(code, language="python")
+        st.code(code, language="python", line_numbers=True)
         st.write("**[ 출력 ]**")
         code='''array([9, 8, 9, 5, 7, 6, 8, 7, 6, 5, 6, 6, 9, 7, 7, 5, 7, 8, 5, 7])'''
         st.code(code, language='python', line_numbers=True)
@@ -5601,7 +5605,7 @@ plt.show()'''
                 import pandas as pd
                 import seaborn as sns
                 import matplotlib.pyplot as plt
-                ''',line_numbers=True)
+                ''', line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
@@ -5815,7 +5819,7 @@ plt.show()'''
         st.code('''
                 import pandas as pd
                 import matplotlib.pyplot as plt
-                ''',line_numbers=True)
+                ''', line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
@@ -6109,6 +6113,7 @@ plt.show()''', line_numbers=True)
         df_인구.plot(kind='bar', figsize=(10,5), color='orange')
         plt.xticks(rotation=60, fontproperties=prop)
         plt.xlabel('') # xlabel 이름을 지우기
+        plt.legend(prop=prop)
         st.pyplot(plt)
 
         st.code('''# 수평 막대그래프 그리기 barh
@@ -6122,6 +6127,7 @@ plt.show()''', line_numbers=True)
         # plt.xticks(rotation=60)
         plt.yticks(fontproperties=prop)
         plt.ylabel('')
+        plt.legend(prop=prop)
         st.pyplot(plt)
 
         st.divider()
@@ -6388,7 +6394,7 @@ plt.show()''', line_numbers=True)
                 import pandas as pd
                 import seaborn as sns
                 import matplotlib.pyplot as plt
-                ''',line_numbers=True)
+                ''', line_numbers=True)
         st.divider()
 
 
