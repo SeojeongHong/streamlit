@@ -6,4 +6,3 @@ numpy
 pandas
 seaborn
 openpyxl
-sqlite3
