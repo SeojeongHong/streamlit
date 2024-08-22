@@ -4879,6 +4879,13 @@ cmaps = plt.colormaps()
 for cm in cmaps:
     print(cm)'''
         st.code(code, language='python', line_numbers=True)
+
+        import matplotlib.pyplot as plt
+        from matplotlib import cm
+        
+        cmaps = plt.colormaps()
+        for cm in cmaps:
+            st.write(cm)
         st.write("pyplot 모듈의 **colormaps()** 함수를 사용해서 Matplotlib에서 사용할 수 있는 모든 컬러맵의 이름을 얻을 수 있습니다.")
         st.write("예를 들어, **winter** 와 **winter_r** 은 순서가 앞뒤로 뒤집어진 컬러맵입니다.")
 
