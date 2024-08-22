@@ -6883,7 +6883,7 @@ def main() :
                     f"""
                     <div style="position: relative; height: 1rem;">
                             <div style="position: absolute; right: 0rem; bottom: 0rem; color: gray;">
-                            {format({db.getCount()}, ',')} visitors
+                            {db.getCount()} visitors
                             </div>
                     </div>
                     """,
