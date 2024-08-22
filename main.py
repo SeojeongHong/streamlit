@@ -5601,7 +5601,7 @@ plt.show()'''
                 import pandas as pd
                 import seaborn as sns
                 import matplotlib.pyplot as plt
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
@@ -5815,7 +5815,7 @@ plt.show()'''
         st.code('''
                 import pandas as pd
                 import matplotlib.pyplot as plt
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
         st.subheader(f"{idx.getSubIdx()}데이터 불러오기")
@@ -6388,7 +6388,7 @@ plt.show()''', line_numbers=True)
                 import pandas as pd
                 import seaborn as sns
                 import matplotlib.pyplot as plt
-                ''')
+                ''',line_numbers=True)
         st.divider()
 
 
