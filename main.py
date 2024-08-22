@@ -1356,6 +1356,7 @@ def show_chapter(topic, chapter):
                 # 8 D
                 # 9 E
                 ''',line_numbers=True)
+        st.divider()
         
     elif path == ("파이썬 기초", "고급") :
         st.header(f"{idx.getHeadIdx()}함수")
@@ -1713,7 +1714,8 @@ def show_chapter(topic, chapter):
                 arr = np.random.randn(2, 2)  #크기 지정(2*4)
                 print(arr)    # 출력 [[-1.09887802  2.13154382] [-0.96512407 -0.37879234]]
                 ''',line_numbers=True)
-    
+        st.divider()
+        
     ### Pandas 컨텐츠 작성
     elif path == ("Pandas 기초", "DataFrame") :
         st.header(f"{idx.getHeadIdx()}데이터프레임 생성") ## 소단원01
@@ -1911,7 +1913,8 @@ df = pd.DataFrame(data)''', line_numbers=True)
         st.write('values는 모든 값을 출력하며, **numpy array 형식**으로 출력됩니다.')
         st.code('''df.head().values''', line_numbers=True)
         st.write(df.head().values)
-
+        st.divider()
+        
         st.header(f"{idx.getHeadIdx()}데이터프레임 정렬") ## 소단원04
 
         st.write('데이터프레임(DataFrame)에서 가장 많이 사용하는 **조회, 정렬 그리고 조건필터**에 대해 알아보겠습니다.')
