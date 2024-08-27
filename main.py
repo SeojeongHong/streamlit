@@ -10,12 +10,26 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 import sqlite3
-from streamlit.web.server.websocket_headers import _get_websocket_headers
+from streamlit import runtime
+from streamlit.runtime.scriptrunner import get_script_run_ctx
 
-def get_ip():
-    # headers = _get_websocket_headers()
-    headers = dict(st.context.headers)
-    return headers['X-Forwarded-For'].split(',')[0]
+
+def get_remote_ip() -> str:
+    """Get remote ip."""
+
+    try:
+        ctx = get_script_run_ctx()
+        if ctx is None:
+            return None
+
+        session_info = runtime.get_instance().get_client(ctx.session_id)
+        if session_info is None:
+            return None
+    except Exception as e:
+        return None
+
+    return session_info.request.remote_ip
+
 
 class DBManager:
     def __init__(self):
@@ -38,6 +52,8 @@ class DBManager:
     
     def insert_user(self, ip_address):
         self.connect()
+        if ip_address == "::1" :
+            return 0
         try:
             with self.connection:
                 self.connection.execute('INSERT INTO USER VALUES(?);', (ip_address,))
@@ -6883,7 +6899,7 @@ def goback_btn() :
 def main() :
     db = DBManager()
     db.create_UserTable()
-    db.insert_user(get_ip())
+    db.insert_user(get_remote_ip())
     page, topic, chapter = init_session_state()
     
     if page == 'page_topic':
@@ -6918,7 +6934,7 @@ def main() :
                     )
         ############test
         st.write("------- **test** -------")
-        st.write(f"ip : {get_ip()}")
+        st.write(f"ip : {get_remote_ip()}")
         db.getList()
         db.close()
 
