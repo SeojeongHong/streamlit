@@ -11,7 +11,6 @@ import seaborn as sns
 from streamlit_float import *
 import sqlite3
 from streamlit.web.server.websocket_headers import _get_websocket_headers
-import request
 
 def get_ip():
     # headers = _get_websocket_headers()
