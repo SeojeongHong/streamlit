@@ -17,8 +17,8 @@ def get_ip():
     # headers = _get_websocket_headers()
     headers = dict(st.context.headers)
 
-    #headers['X-Forwarded-For'].split(',')[0]
-    return request.headers.get('user-agent')
+    headers['X-Forwarded-For'].split(',')[0]
+    return headers['X-Forwarded-For'].split(',')[0]
 
 class DBManager:
     def __init__(self):
@@ -6882,7 +6882,7 @@ def main() :
     db.create_UserTable()
     db.insert_user(get_ip())
     page, topic, chapter = init_session_state()
-    
+    st.write(st.context.headers)
     if page == 'page_topic':
         show_topic(topic)
     elif page == 'page_chapter':
