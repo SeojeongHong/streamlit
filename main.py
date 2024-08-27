@@ -17,7 +17,6 @@ def get_ip():
     # headers = _get_websocket_headers()
     headers = dict(st.context.headers)
 
-    headers['X-Forwarded-For'].split(',')[0]
     return headers['X-Forwarded-For'].split(',')[0]
 
 class DBManager:
