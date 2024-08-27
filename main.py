@@ -10,14 +10,9 @@ import numpy as np
 import seaborn as sns
 from streamlit_float import *
 import sqlite3
-from streamlit.web.server.websocket_headers import _get_websocket_headers
 from streamlit import runtime
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 
-def get_ip():
-    # headers = _get_websocket_headers()
-    headers = dict(st.context.headers)
-    return headers['X-Forwarded-For'].split(',')[0]
 
 def get_remote_ip() -> str:
     """Get remote ip."""
@@ -57,6 +52,8 @@ class DBManager:
     
     def insert_user(self, ip_address):
         self.connect()
+        if ip_address == "::1" :
+            return 0
         try:
             with self.connection:
                 self.connection.execute('INSERT INTO USER VALUES(?);', (ip_address,))
