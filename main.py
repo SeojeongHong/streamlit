@@ -11,12 +11,30 @@ import seaborn as sns
 from streamlit_float import *
 import sqlite3
 from streamlit.web.server.websocket_headers import _get_websocket_headers
+from streamlit import runtime
+from streamlit.runtime.scriptrunner import get_script_run_ctx
 
 def get_ip():
     # headers = _get_websocket_headers()
     headers = dict(st.context.headers)
-
     return headers['X-Forwarded-For'].split(',')[0]
+
+def get_remote_ip() -> str:
+    """Get remote ip."""
+
+    try:
+        ctx = get_script_run_ctx()
+        if ctx is None:
+            return None
+
+        session_info = runtime.get_instance().get_client(ctx.session_id)
+        if session_info is None:
+            return None
+    except Exception as e:
+        return None
+
+    return session_info.request.remote_ip
+
 
 class DBManager:
     def __init__(self):
@@ -1357,6 +1375,7 @@ def show_chapter(topic, chapter):
                 # 8 D
                 # 9 E
                 ''',line_numbers=True)
+        st.divider()
         
     elif path == ("파이썬 기초", "고급") :
         st.header(f"{idx.getHeadIdx()}함수")
@@ -1714,7 +1733,8 @@ def show_chapter(topic, chapter):
                 arr = np.random.randn(2, 2)  #크기 지정(2*4)
                 print(arr)    # 출력 [[-1.09887802  2.13154382] [-0.96512407 -0.37879234]]
                 ''',line_numbers=True)
-    
+        st.divider()
+        
     ### Pandas 컨텐츠 작성
     elif path == ("Pandas 기초", "DataFrame") :
         st.header(f"{idx.getHeadIdx()}데이터프레임 생성") ## 소단원01
@@ -1912,7 +1932,8 @@ df = pd.DataFrame(data)''', line_numbers=True)
         st.write('values는 모든 값을 출력하며, **numpy array 형식**으로 출력됩니다.')
         st.code('''df.head().values''', line_numbers=True)
         st.write(df.head().values)
-
+        st.divider()
+        
         st.header(f"{idx.getHeadIdx()}데이터프레임 정렬") ## 소단원04
 
         st.write('데이터프레임(DataFrame)에서 가장 많이 사용하는 **조회, 정렬 그리고 조건필터**에 대해 알아보겠습니다.')
@@ -4890,11 +4911,8 @@ for cm in cmaps:
 #   ...
 # flare_r
 # crest
-# crest_r
-'''
+# crest_r'''
         st.code(code, language='python', line_numbers=True)
-
-       
         st.write("pyplot 모듈의 **colormaps()** 함수를 사용해서 Matplotlib에서 사용할 수 있는 모든 컬러맵의 이름을 얻을 수 있습니다.")
         st.write("예를 들어, **winter** 와 **winter_r** 은 순서가 앞뒤로 뒤집어진 컬러맵입니다.")
 
@@ -5766,6 +5784,11 @@ df_seoul.head()
                 _class = 3
             df_seoul.loc[indx, 'PM10_class'] = _class
         st.write(df_seoul.head())
+        st.write('범위 값(category)으로 나눈 PM10 농도를 막대 그래프로 도출합니다.')
+        st.code('''
+df_seoul['PM10_class'].value_counts().plot(kind="bar")
+plt.show()''', line_numbers=True)
+        
         df_seoul['PM10_class'].value_counts().plot(kind="bar")
         st.pyplot(plt)
         plt.close()
@@ -5781,7 +5804,8 @@ plt.show()'''
         sns.jointplot(x=df_seoul["CO"], y=df_seoul["NO2"], kind='kde', xlim=(0,1),ylim=(0,0.13), color='g')
         st.pyplot(plt)
         plt.close()
-
+        st.divider()
+        
         st.header(f"{idx.getHeadIdx()}결론 도출")
         st.subheader(f"{idx.getSubIdx()}대기 오염 데이터 분석 결과")
         st.write("- 시계열 그래프를 통해 일별 평균 대기오염 수치를 시각화하며, 특정 대기오염 물질이 시간에 따라 어떻게 변하는지를 보여줍니다.")
@@ -6878,9 +6902,9 @@ def goback_btn() :
 def main() :
     db = DBManager()
     db.create_UserTable()
-    db.insert_user(get_ip())
+    db.insert_user(get_remote_ip())
     page, topic, chapter = init_session_state()
-    st.write(st.context.headers)
+    
     if page == 'page_topic':
         show_topic(topic)
     elif page == 'page_chapter':
@@ -6913,7 +6937,7 @@ def main() :
                     )
         ############test
         st.write("------- **test** -------")
-        st.write(f"ip : {get_ip()}")
+        st.write(f"ip : {get_remote_ip()}")
         db.getList()
         db.close()
 
